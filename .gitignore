@@ -1,0 +1,59 @@
+# =========================
+# Node/Express Backend
+# =========================
+# Node modules
+/backend/node_modules/
+
+# Logs
+/backend/logs
+/backend/*.log
+/backend/npm-debug.log*
+/backend/yarn-debug.log*
+/backend/yarn-error.log*
+
+# Runtime data
+/backend/pids
+/backend*.pid
+/backend*.seed
+/backend*.pid.lock
+
+# Environment variables
+/backend/.env
+
+# Build outputs
+/backend/dist
+/backend/build
+
+# =========================
+# Flutter Frontend
+# =========================
+# Flutter/Dart/Pub
+/frontend/.dart_tool/
+frontend/.flutter-plugins
+/frontend/.flutter-plugins-dependencies
+/frontend/.packages
+/frontend/pubspec.lock
+
+# iOS
+/frontend/ios/Flutter/Flutter.framework
+/frontend/ios/Flutter/Flutter.podspec
+/frontend/ios/Pods/
+frontend/ios/Runner.xcworkspace
+/frontend/ios/Flutter/App.framework
+/frontend/ios/Flutter/Flutter.podspec
+/frontend/ios/Flutter/FlutterPluginRegistrant.*
+
+# Android
+/frontend/android/.gradle/
+frontend/android/app/build/
+frontend/android/build/
+frontend/android/local.properties
+frontend/android/.idea/
+
+# VSCode & IDEs
+/.vscode/
+/.idea/
+/*.iml
+
+# Other
+frontend/build/
