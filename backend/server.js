@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path');
+const { errorHandler } = require('./middleware/errorHandler');
 const connectDB = require('./config/database');
 
 dotenv.config();
@@ -47,14 +48,13 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Mind Bloom API is running' });
 });
 
-// Error handler
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ 
-    message: err.message || 'Something went wrong!',
-    error: process.env.NODE_ENV === 'development' ? err : {}
-  });
+// 404 handler
+app.use((req, res, next) => {
+  res.status(404).json({ message: 'Route not found' });
 });
+
+// Error handler (MUST be last)
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 

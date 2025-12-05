@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class SettingsProvider with ChangeNotifier {
+  ThemeMode _themeMode = ThemeMode.light;
+  Locale _locale = const Locale('ar'); // Par défaut : arabe derja
+
+  ThemeMode get themeMode => _themeMode;
+  Locale get locale => _locale;
+
+  void toggleTheme(bool isDark) async {
+    _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isDark', isDark);
+  }
+
+  void changeLanguage(String langCode) async {
+    _locale = Locale(langCode);
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('language', langCode);
+  }
+
+  Future<void> loadSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isDark = prefs.getBool('isDark') ?? false;
+    final langCode = prefs.getString('language') ?? 'ar';
+    _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+    _locale = Locale(langCode);
+    notifyListeners();
+  }
+}

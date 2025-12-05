@@ -13,6 +13,7 @@ class CaseModel {
   final String status;
   final Diagnosis? diagnosis;
   final AdditionalTestRequest? additionalTestRequest;
+  final AdditionalTestResponse? additionalTestResponse;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -31,6 +32,7 @@ class CaseModel {
     required this.status,
     this.diagnosis,
     this.additionalTestRequest,
+    this.additionalTestResponse,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -43,33 +45,52 @@ class CaseModel {
       childSex: json['childSex'] ?? '',
       childAge: json['childAge'] ?? 0,
       scholarYear: json['scholarYear'] ?? '',
-      parentId: json['parentId'] is String ? json['parentId'] : json['parentId']['_id'] ?? '',
+      parentId: json['parentId'] is String
+          ? json['parentId']
+          : json['parentId']['_id'] ?? '',
       doctorId: json['doctorId'],
-      screeningAnswers: (json['screeningAnswers'] as List?)
-          ?.map((e) => ScreeningAnswer.fromJson(e))
-          .toList() ?? [],
+      screeningAnswers:
+          (json['screeningAnswers'] as List?)
+              ?.map((e) => ScreeningAnswer.fromJson(e))
+              .toList() ??
+          [],
       gravityScore: json['gravityScore'] ?? 'low',
       videoUrl: json['videoUrl'],
       status: json['status'] ?? 'waiting_for_doctor',
-      diagnosis: json['diagnosis'] != null ? Diagnosis.fromJson(json['diagnosis']) : null,
-      additionalTestRequest: json['additionalTestRequest'] != null 
-          ? AdditionalTestRequest.fromJson(json['additionalTestRequest']) 
+      diagnosis: json['diagnosis'] != null
+          ? Diagnosis.fromJson(json['diagnosis'])
           : null,
-      createdAt: DateTime.parse(json['createdAt'] ?? DateTime.now().toIso8601String()),
-      updatedAt: DateTime.parse(json['updatedAt'] ?? DateTime.now().toIso8601String()),
+      additionalTestRequest: json['additionalTestRequest'] != null
+          ? AdditionalTestRequest.fromJson(json['additionalTestRequest'])
+          : null,
+      additionalTestResponse: json['additionalTestResponse'] != null
+          ? AdditionalTestResponse.fromJson(json['additionalTestResponse'])
+          : null,
+      createdAt: DateTime.parse(
+        json['createdAt'] ?? DateTime.now().toIso8601String(),
+      ),
+      updatedAt: DateTime.parse(
+        json['updatedAt'] ?? DateTime.now().toIso8601String(),
+      ),
     );
   }
 
   String get childFullName => '$childFirstName $childLastName';
-  
+
   String get statusDisplay {
     switch (status) {
-      case 'waiting_for_doctor': return 'Waiting for Doctor';
-      case 'additional_test_required': return 'Additional Test Required';
-      case 'waiting_for_reply': return 'Waiting for Reply';
-      case 'completed': return 'Completed';
-      case 'diagnosis_ready': return 'Diagnosis Ready';
-      default: return status;
+      case 'waiting_for_doctor':
+        return 'Waiting for Doctor';
+      case 'additional_test_required':
+        return 'Additional Test Required';
+      case 'waiting_for_reply':
+        return 'Waiting for Reply';
+      case 'completed':
+        return 'Completed';
+      case 'diagnosis_ready':
+        return 'Diagnosis Ready';
+      default:
+        return status;
     }
   }
 }
@@ -88,10 +109,7 @@ class ScreeningAnswer {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'question': question,
-      'answer': answer,
-    };
+    return {'question': question, 'answer': answer};
   }
 }
 
@@ -116,7 +134,9 @@ class Diagnosis {
       advice: json['advice'] ?? '',
       recommendation: json['recommendation'] ?? '',
       doctorName: json['doctorName'] ?? '',
-      completedAt: DateTime.parse(json['completedAt'] ?? DateTime.now().toIso8601String()),
+      completedAt: DateTime.parse(
+        json['completedAt'] ?? DateTime.now().toIso8601String(),
+      ),
     );
   }
 }
@@ -136,7 +156,33 @@ class AdditionalTestRequest {
     return AdditionalTestRequest(
       testType: json['testType'] ?? '',
       instructions: json['instructions'] ?? '',
-      requestedAt: DateTime.parse(json['requestedAt'] ?? DateTime.now().toIso8601String()),
+      requestedAt: DateTime.parse(
+        json['requestedAt'] ?? DateTime.now().toIso8601String(),
+      ),
+    );
+  }
+}
+
+class AdditionalTestResponse {
+  final String? videoUrl;
+  final List<ScreeningAnswer>? answers;
+  final DateTime submittedAt;
+
+  AdditionalTestResponse({
+    this.videoUrl,
+    this.answers,
+    required this.submittedAt,
+  });
+
+  factory AdditionalTestResponse.fromJson(Map<String, dynamic> json) {
+    return AdditionalTestResponse(
+      videoUrl: json['videoUrl'],
+      answers: (json['answers'] as List?)
+          ?.map((e) => ScreeningAnswer.fromJson(e))
+          .toList(),
+      submittedAt: DateTime.parse(
+        json['submittedAt'] ?? DateTime.now().toIso8601String(),
+      ),
     );
   }
 }

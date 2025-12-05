@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import '../constants/app_constants.dart';
 import '../models/user_model.dart';
 import '../models/case_model.dart';
+import '../models/notification_model.dart';
 
 class ApiService {
   static String? _token;
@@ -211,6 +212,73 @@ class ApiService {
       return CaseModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to submit test response');
+    }
+  }
+
+  // NOTIFICATION ENDPOINTS
+  static Future<List<NotificationModel>> getNotifications(bool unreadOnly) async {
+    final response = await http.get(
+      Uri.parse('${AppConstants.baseUrl}/notifications?unreadOnly=$unreadOnly'),
+      headers: _getHeaders(),
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = jsonDecode(response.body);
+      return data.map((json) => NotificationModel.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to get notifications');
+    }
+  }
+
+  static Future<int> getUnreadNotificationCount() async {
+    final response = await http.get(
+      Uri.parse('${AppConstants.baseUrl}/notifications/unread-count'),
+      headers: _getHeaders(),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['count'] ?? 0;
+    } else {
+      throw Exception('Failed to get unread count');
+    }
+  }
+
+  static Future<NotificationModel> markNotificationAsRead(String notificationId) async {
+    final response = await http.put(
+      Uri.parse('${AppConstants.baseUrl}/notifications/$notificationId/read'),
+      headers: _getHeaders(),
+    );
+
+    if (response.statusCode == 200) {
+      return NotificationModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to mark notification as read');
+    }
+  }
+
+  static Future<void> markAllNotificationsAsRead() async {
+    final response = await http.put(
+      Uri.parse('${AppConstants.baseUrl}/notifications/read-all'),
+      headers: _getHeaders(),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to mark all notifications as read');
+    }
+  }
+
+  // REPORT ENDPOINTS
+  static Future<Map<String, dynamic>> getReportUrl(String caseId) async {
+    final response = await http.get(
+      Uri.parse('${AppConstants.baseUrl}/reports/$caseId/url'),
+      headers: _getHeaders(),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to get report URL');
     }
   }
 }

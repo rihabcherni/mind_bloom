@@ -5,38 +5,37 @@ const protect = async (req, res, next) => {
   let token;
 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+
     try {
-      // Get token from header
-      token = req.headers.authorization.split(' ')[1];
-
-      // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const user = await User.findById(decoded.id).select('-password');
 
-      // Get user from token
-      req.user = await User.findById(decoded.id).select('-password');
-
-      if (!req.user) {
-        return res.status(401).json({ message: 'User not found' });
+      if (!user) {
+        res.status(401).json({ message: 'User not found' });
+        return; // Stop further execution
       }
 
-      next();
+      req.user = user;
+      next(); // ✅ Appel direct, ne pas faire return
     } catch (error) {
-      console.error(error);
-      return res.status(401).json({ message: 'Not authorized, token failed' });
+      console.error('Auth middleware error:', error);
+      res.status(401).json({ message: 'Not authorized, token failed' });
     }
-  }
-
-  if (!token) {
-    return res.status(401).json({ message: 'Not authorized, no token' });
+  } else {
+    res.status(401).json({ message: 'Not authorized, no token' });
   }
 };
 
 const restrictTo = (...userTypes) => {
   return (req, res, next) => {
+    if (!req.user) {
+      res.status(401).json({ message: 'User not found' });
+      return;
+    }
     if (!userTypes.includes(req.user.userType)) {
-      return res.status(403).json({ 
-        message: 'You do not have permission to perform this action' 
-      });
+      res.status(403).json({ message: 'No permission' });
+      return;
     }
     next();
   };

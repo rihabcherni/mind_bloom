@@ -1,111 +1,114 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const { asyncHandler } = require('../middleware/errorHandler');
 
 // Generate JWT Token
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '30d'
-  });
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
 // @desc    Register new user
 // @route   POST /api/auth/register
 // @access  Public
-const register = async (req, res) => {
-  try {
-    const { 
-      firstName, 
-      lastName, 
-      email, 
-      password, 
-      userType, 
-      dateOfBirth, 
-      sex,
-      medicalLicenseNumber,
-      relationToChild
-    } = req.body;
+const register = asyncHandler(async (req, res) => {
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    userType,
+    dateOfBirth,
+    sex,
+    medicalLicenseNumber,
+    relationToChild
+  } = req.body;
 
-    // Check if user exists
-    const userExists = await User.findOne({ email });
-    if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
-
-    // Create user
-    const userData = {
-      firstName,
-      lastName,
-      email,
-      password,
-      userType,
-      dateOfBirth,
-      sex
-    };
-
-    // Add type-specific fields
-    if (userType === 'doctor') {
-      userData.medicalLicenseNumber = medicalLicenseNumber;
-    } else if (userType === 'parent') {
-      userData.relationToChild = relationToChild;
-    }
-
-    const user = await User.create(userData);
-
-    if (user) {
-      res.status(201).json({
-        _id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        userType: user.userType,
-        token: generateToken(user._id)
-      });
-    } else {
-      res.status(400).json({ message: 'Invalid user data' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  if (!firstName || !lastName || !email || !password || !userType) {
+    res.status(400);
+    throw new Error('Please provide all required fields');
   }
-};
+
+  // Check if user exists
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    res.status(400);
+    throw new Error('User already exists');
+  }
+
+  // Create user object
+  const userData = { firstName, lastName, email, password, userType, dateOfBirth, sex };
+
+  // Add type-specific fields
+  if (userType === 'doctor') {
+    if (!medicalLicenseNumber) {
+      res.status(400);
+      throw new Error('Medical license number is required for doctors');
+    }
+    userData.medicalLicenseNumber = medicalLicenseNumber;
+  } else if (userType === 'parent') {
+    if (!relationToChild) {
+      res.status(400);
+      throw new Error('Relation to child is required for parents');
+    }
+    userData.relationToChild = relationToChild;
+  }
+
+  const user = await User.create(userData);
+
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      userType: user.userType,
+      token: generateToken(user._id)
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid user data');
+  }
+});
 
 // @desc    Login user
 // @route   POST /api/auth/login
 // @access  Public
-const login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+const login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
 
-    // Check for user
-    const user = await User.findOne({ email });
-
-    if (user && (await user.comparePassword(password))) {
-      res.json({
-        _id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        userType: user.userType,
-        token: generateToken(user._id)
-      });
-    } else {
-      res.status(401).json({ message: 'Invalid email or password' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  if (!email || !password) {
+    res.status(400);
+    throw new Error('Please provide email and password');
   }
-};
+
+  const user = await User.findOne({ email });
+
+  if (user && (await user.comparePassword(password))) {
+    res.json({
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      userType: user.userType,
+      token: generateToken(user._id)
+    });
+  } else {
+    res.status(401);
+    throw new Error('Invalid email or password');
+  }
+});
 
 // @desc    Get current user
 // @route   GET /api/auth/me
 // @access  Private
-const getMe = async (req, res) => {
-  try {
-    const user = await User.findById(req.user._id).select('-password');
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+const getMe = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).select('-password');
+  if (!user) {
+    res.status(404);
+    throw new Error('User not found');
   }
-};
+  res.json(user);
+});
 
 module.exports = {
   register,

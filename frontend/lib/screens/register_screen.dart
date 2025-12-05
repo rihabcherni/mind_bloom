@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/settings_screen.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
 import '../providers/auth_provider.dart';
+import 'package:frontend/generated/l10n.dart';
 
 class RegisterScreen extends StatefulWidget {
   final String userType;
-  
+
   const RegisterScreen({super.key, required this.userType});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends State<RegisterScreen>
+    with SingleTickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
@@ -20,10 +23,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _medicalLicenseController = TextEditingController();
-  
+
   DateTime? _selectedDate;
   String _selectedSex = 'male';
   String _selectedRelation = 'mother';
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
+
+  late AnimationController _animationController;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
+    _animationController.forward();
+  }
 
   @override
   void dispose() {
@@ -33,15 +54,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     _medicalLicenseController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
   Future<void> _selectDate(BuildContext context) async {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime(1990),
       firstDate: DateTime(1940),
       lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: AppConstants.primaryViolet,
+              onPrimary: Colors.white,
+              surface: isDark ? const Color(0xFF252545) : Colors.white,
+              onSurface: isDark ? Colors.white : Colors.black,
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
     if (picked != null && picked != _selectedDate) {
       setState(() {
@@ -53,16 +89,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _handleRegister() async {
     if (_formKey.currentState!.validate()) {
       if (_selectedDate == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please select your date of birth')),
-        );
+        _showSnackBar(S.of(context).pleaseSelectDateOfBirth, isError: true);
         return;
       }
 
       if (_passwordController.text != _confirmPasswordController.text) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Passwords do not match')),
-        );
+        _showSnackBar(S.of(context).passwordsDoNotMatch, isError: true);
         return;
       }
 
@@ -92,165 +124,677 @@ class _RegisterScreenState extends State<RegisterScreen> {
         );
       } else if (mounted) {
         final error = context.read<AuthProvider>().error;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(error ?? 'Registration failed')),
-        );
+        _showSnackBar(error ?? S.of(context).registrationFailed, isError: true);
       }
     }
   }
 
+  void _showSnackBar(String message, {bool isError = false}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: isError ? Colors.red[400] : AppConstants.primaryViolet,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final isDoctor = widget.userType == 'doctor';
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(isDoctor ? 'Doctor Registration' : 'Parent Registration'),
-        backgroundColor: AppConstants.white,
-        foregroundColor: AppConstants.primaryViolet,
-        elevation: 0,
-      ),
-      backgroundColor: AppConstants.white,
       body: Consumer<AuthProvider>(
         builder: (context, authProvider, _) {
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(AppConstants.paddingLarge),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildTextField('First Name', _firstNameController),
-                  const SizedBox(height: AppConstants.paddingMedium),
-                  
-                  _buildTextField('Last Name', _lastNameController),
-                  const SizedBox(height: AppConstants.paddingMedium),
-                  
-                  // Date of Birth
-                  InkWell(
-                    onTap: () => _selectDate(context),
-                    child: InputDecorator(
-                      decoration: const InputDecoration(
-                        labelText: 'Date of Birth',
-                        border: OutlineInputBorder(),
-                      ),
-                      child: Text(
-                        _selectedDate == null
-                            ? 'Select Date'
-                            : '${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: AppConstants.paddingMedium),
-                  
-                  // Sex
-                  DropdownButtonFormField<String>(
-                    value: _selectedSex,
-                    decoration: const InputDecoration(
-                      labelText: 'Sex',
-                      border: OutlineInputBorder(),
-                    ),
-                    items: const [
-                      DropdownMenuItem(value: 'male', child: Text('Male')),
-                      DropdownMenuItem(value: 'female', child: Text('Female')),
-                      DropdownMenuItem(value: 'other', child: Text('Other')),
-                    ],
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedSex = value!;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: AppConstants.paddingMedium),
-                  
-                  // Doctor-specific: Medical License
-                  if (isDoctor) ...[
-                    _buildTextField('Medical License Number', _medicalLicenseController),
-                    const SizedBox(height: AppConstants.paddingMedium),
-                  ],
-                  
-                  // Parent-specific: Relation
-                  if (!isDoctor) ...[
-                    DropdownButtonFormField<String>(
-                      value: _selectedRelation,
-                      decoration: const InputDecoration(
-                        labelText: 'Relation to Child',
-                        border: OutlineInputBorder(),
-                      ),
-                      items: const [
-                        DropdownMenuItem(value: 'mother', child: Text('Mother')),
-                        DropdownMenuItem(value: 'father', child: Text('Father')),
-                        DropdownMenuItem(value: 'teacher', child: Text('Teacher')),
-                        DropdownMenuItem(value: 'other', child: Text('Other')),
+          return Stack(
+            children: [
+              Positioned(
+                top: -100,
+                right: -100,
+                child: Container(
+                  width: 300,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: RadialGradient(
+                      colors: [
+                        AppConstants.primaryViolet.withOpacity(0.3),
+                        AppConstants.primaryViolet.withOpacity(0.0),
                       ],
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedRelation = value!;
-                        });
-                      },
                     ),
-                    const SizedBox(height: AppConstants.paddingMedium),
-                  ],
-                  
-                  _buildTextField('Email', _emailController, keyboardType: TextInputType.emailAddress),
-                  const SizedBox(height: AppConstants.paddingMedium),
-                  
-                  _buildTextField('Password', _passwordController, isPassword: true),
-                  const SizedBox(height: AppConstants.paddingMedium),
-                  
-                  _buildTextField('Confirm Password', _confirmPasswordController, isPassword: true),
-                  const SizedBox(height: AppConstants.paddingLarge),
-                  
-                  // Register Button
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: authProvider.isLoading ? null : _handleRegister,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppConstants.primaryViolet,
-                        foregroundColor: AppConstants.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppConstants.borderRadiusMedium),
+                  ),
+                ),
+              ),
+              SafeArea(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? const Color(0xFF252545)
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.arrow_back_ios_new_rounded,
+                                color: isDark
+                                    ? Colors.white
+                                    : AppConstants.darkViolet,
+                              ),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            S.of(context).createAccount,
+                            style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: isDark
+                                  ? Colors.white
+                                  : AppConstants.darkViolet,
+                              letterSpacing: -1,
+                            ),
+                          ),
+                          const Spacer(),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? const Color(0xFF252545)
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.settings_rounded,
+                                color: isDark
+                                    ? Colors.white
+                                    : AppConstants.darkViolet,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const SettingsScreen(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsets.all(
+                          AppConstants.paddingLarge,
+                        ),
+                        child: FadeTransition(
+                          opacity: _fadeAnimation,
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  isDoctor
+                                      ? S.of(context).doctorRegistration
+                                      : S.of(context).parentRegistration,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: isDark
+                                        ? Colors.white60
+                                        : Colors.grey[600],
+                                  ),
+                                ),
+                                const SizedBox(height: 7),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: _buildModernTextField(
+                                        controller: _firstNameController,
+                                        label: S.of(context).firstName,
+                                        hint: S.of(context).firstName,
+                                        icon: Icons.person_outline_rounded,
+                                        isDark: isDark,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Expanded(
+                                      child: _buildModernTextField(
+                                        controller: _lastNameController,
+                                        label: S.of(context).lastName,
+                                        hint: S.of(context).lastName,
+                                        icon: Icons.person_outline_rounded,
+                                        isDark: isDark,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 7),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: _buildDatePicker(isDark),
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Expanded(
+                                      flex: 1,
+                                      child: _buildSexSelector(isDark),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 7),
+                                if (isDoctor) ...[
+                                  _buildModernTextField(
+                                    controller: _medicalLicenseController,
+                                    label: S.of(context).medicalLicenseNumber,
+                                    hint: 'ML123456',
+                                    icon: Icons.medical_services_rounded,
+                                    isDark: isDark,
+                                  ),
+                                  const SizedBox(height: 7),
+                                ],
+                                if (!isDoctor) ...[
+                                  _buildRelationSelector(isDark),
+                                  const SizedBox(height: 7),
+                                ],
+                                _buildModernTextField(
+                                  controller: _emailController,
+                                  label: S.of(context).email,
+                                  hint: 'exemple@email.com',
+                                  icon: Icons.email_rounded,
+                                  keyboardType: TextInputType.emailAddress,
+                                  isDark: isDark,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return S.of(context).enterEmail;
+                                    }
+                                    if (!value.contains('@')) {
+                                      return S.of(context).invalidEmail;
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(height: 7),
+                                _buildModernTextField(
+                                  controller: _passwordController,
+                                  label: S.of(context).password,
+                                  hint: '••••••••',
+                                  icon: Icons.lock_rounded,
+                                  obscureText: _obscurePassword,
+                                  isDark: isDark,
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _obscurePassword
+                                          ? Icons.visibility_off_rounded
+                                          : Icons.visibility_rounded,
+                                      color: AppConstants.primaryViolet,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscurePassword = !_obscurePassword;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(height: 7),
+                                _buildModernTextField(
+                                  controller: _confirmPasswordController,
+                                  label: S.of(context).confirmPassword,
+                                  hint: '••••••••',
+                                  icon: Icons.lock_rounded,
+                                  obscureText: _obscureConfirmPassword,
+                                  isDark: isDark,
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _obscureConfirmPassword
+                                          ? Icons.visibility_off_rounded
+                                          : Icons.visibility_rounded,
+                                      color: AppConstants.primaryViolet,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscureConfirmPassword =
+                                            !_obscureConfirmPassword;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(height: 7),
+                                SizedBox(
+                                  width: double.infinity,
+                                  height: 56,
+                                  child: ElevatedButton(
+                                    onPressed: authProvider.isLoading
+                                        ? null
+                                        : _handleRegister,
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
+                                      padding: EdgeInsets.zero,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                    ),
+                                    child: Ink(
+                                      decoration: BoxDecoration(
+                                        gradient: const LinearGradient(
+                                          colors: [
+                                            AppConstants.primaryViolet,
+                                            AppConstants.lightViolet,
+                                          ],
+                                          begin: Alignment.centerLeft,
+                                          end: Alignment.centerRight,
+                                        ),
+                                        borderRadius: BorderRadius.circular(16),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: AppConstants.primaryViolet
+                                                .withOpacity(0.4),
+                                            blurRadius: 15,
+                                            offset: const Offset(0, 8),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        child: authProvider.isLoading
+                                            ? const SizedBox(
+                                                width: 24,
+                                                height: 24,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                      color: Colors.white,
+                                                      strokeWidth: 2.5,
+                                                    ),
+                                              )
+                                            : Text(
+                                                S.of(context).register,
+                                                style: const TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                  letterSpacing: 0.5,
+                                                ),
+                                              ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 7),
+                                Center(
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: RichText(
+                                      text: TextSpan(
+                                        text:
+                                            "${S.of(context).alreadyHaveAccount} ",
+                                        style: TextStyle(
+                                          color: isDark
+                                              ? Colors.white60
+                                              : Colors.grey[600],
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: S.of(context).loginLink,
+                                            style: TextStyle(
+                                              color: AppConstants.primaryViolet,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
-                      child: authProvider.isLoading
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          : Text(
-                              'Create ${isDoctor ? "Doctor" : "Parent"} Account',
-                              style: AppConstants.buttonTextStyle,
-                            ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+            ],
           );
         },
       ),
     );
   }
 
-  Widget _buildTextField(
-    String label,
-    TextEditingController controller, {
-    bool isPassword = false,
+  Widget _buildModernTextField({
+    required TextEditingController controller,
+    required String label,
+    required String hint,
+    required IconData icon,
+    required bool isDark,
+    bool obscureText = false,
     TextInputType keyboardType = TextInputType.text,
+    Widget? suffixIcon,
+    String? Function(String?)? validator,
   }) {
-    return TextFormField(
-      controller: controller,
-      obscureText: isPassword,
-      keyboardType: keyboardType,
-      decoration: InputDecoration(
-        labelText: label,
-        border: const OutlineInputBorder(),
-      ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter $label';
-        }
-        return null;
-      },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: isDark ? Colors.white : AppConstants.darkViolet,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          decoration: BoxDecoration(
+            color: isDark ? const Color(0xFF252545) : Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: isDark
+                    ? Colors.black.withOpacity(0.2)
+                    : Colors.grey.withOpacity(0.08),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: TextFormField(
+            controller: controller,
+            keyboardType: keyboardType,
+            obscureText: obscureText,
+            style: TextStyle(
+              color: isDark ? Colors.white : AppConstants.black,
+              fontSize: 15,
+            ),
+            decoration: InputDecoration(
+              hintText: hint,
+              hintStyle: TextStyle(
+                color: isDark ? Colors.white38 : Colors.grey[400],
+              ),
+              prefixIcon: Container(
+                margin: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppConstants.primaryViolet.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(icon, color: AppConstants.primaryViolet, size: 20),
+              ),
+              suffixIcon: suffixIcon,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: AppConstants.primaryViolet,
+                  width: 2,
+                ),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(color: Colors.red, width: 2),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(color: Colors.red, width: 2),
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 16,
+              ),
+            ),
+            validator:
+                validator ??
+                (value) {
+                  if (value == null || value.isEmpty) {
+                    return S.of(context).requiredField;
+                  }
+                  return null;
+                },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDatePicker(bool isDark) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          S.of(context).dateOfBirth,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: isDark ? Colors.white : AppConstants.darkViolet,
+          ),
+        ),
+        const SizedBox(height: 8),
+        InkWell(
+          onTap: () => _selectDate(context),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: isDark ? const Color(0xFF252545) : Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: isDark
+                      ? Colors.black.withOpacity(0.2)
+                      : Colors.grey.withOpacity(0.08),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: AppConstants.primaryViolet.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(
+                    Icons.calendar_today_rounded,
+                    color: AppConstants.primaryViolet,
+                    size: 20,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    _selectedDate == null
+                        ? S.of(context).selectDate
+                        : '${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: _selectedDate == null
+                          ? (isDark ? Colors.white38 : Colors.grey[400])
+                          : (isDark ? Colors.white : AppConstants.black),
+                    ),
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
+                  color: isDark ? Colors.white38 : Colors.grey[400],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSexSelector(bool isDark) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          S.of(context).sexe,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: isDark ? Colors.white : AppConstants.darkViolet,
+          ),
+        ),
+        const SizedBox(height: 8),
+
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            color: isDark ? const Color(0xFF252545) : Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: isDark ? Colors.white24 : Colors.grey.shade300,
+            ),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              value: _selectedSex,
+              hint: Text(
+                S.of(context).sexe,
+                style: TextStyle(
+                  color: isDark ? Colors.white70 : Colors.grey,
+                  fontSize: 13,
+                ),
+              ),
+              icon: Icon(
+                Icons.arrow_drop_down,
+                color: isDark ? Colors.white : AppConstants.darkViolet,
+              ),
+              items: [
+                DropdownMenuItem(
+                  value: "male",
+                  child: Text(
+                    S.of(context).male,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: isDark ? Colors.white : Colors.black87,
+                    ),
+                  ),
+                ),
+                DropdownMenuItem(
+                  value: "female",
+                  child: Text(
+                    S.of(context).female,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: isDark ? Colors.white : Colors.black87,
+                    ),
+                  ),
+                ),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  _selectedSex = value!;
+                });
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRelationSelector(bool isDark) {
+    final relations = [
+      {'value': 'mother', 'label': S.of(context).mother},
+      {'value': 'father', 'label': S.of(context).father},
+      {'value': 'teacher', 'label': S.of(context).teacher},
+      {'value': 'other', 'label': S.of(context).other},
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          S.of(context).relationWithChild,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: isDark ? Colors.white : AppConstants.darkViolet,
+          ),
+        ),
+        const SizedBox(height: 8),
+
+        Container(
+          decoration: BoxDecoration(
+            color: isDark ? const Color(0xFF252545) : Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: isDark
+                    ? Colors.black.withOpacity(0.2)
+                    : Colors.grey.withOpacity(0.08),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: DropdownButtonFormField<String>(
+            value: _selectedRelation,
+            dropdownColor: isDark ? const Color(0xFF252545) : Colors.white,
+            decoration: const InputDecoration(border: InputBorder.none),
+            style: TextStyle(
+              color: isDark ? Colors.white : Colors.black,
+              fontSize: 15,
+            ),
+            icon: Icon(
+              Icons.keyboard_arrow_down,
+              color: isDark ? Colors.white70 : Colors.black54,
+            ),
+            items: relations.map((relation) {
+              return DropdownMenuItem<String>(
+                value: relation['value']!,
+                child: Text(relation['label']!),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                _selectedRelation = value!;
+              });
+            },
+          ),
+        ),
+      ],
     );
   }
 }

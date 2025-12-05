@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/settings_screen.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
 import '../providers/auth_provider.dart';
 import '../services/api_service.dart';
 import '../models/case_model.dart';
+import '../generated/l10n.dart';
 
 class ParentHomeScreen extends StatefulWidget {
   const ParentHomeScreen({super.key});
@@ -33,40 +35,62 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
     } catch (e) {
       setState(() => _isLoading = false);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${e.toString()}')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));
       }
     }
   }
 
-  Color _getStatusColor(String status) {
+  Color _getStatusColor(String status, ThemeData theme) {
     switch (status) {
-      case 'waiting_for_doctor': return Colors.orange;
-      case 'additional_test_required': return Colors.blue;
-      case 'waiting_for_reply': return Colors.purple;
-      case 'completed': return Colors.green;
-      case 'diagnosis_ready': return Colors.teal;
-      default: return Colors.grey;
+      case 'waiting_for_doctor':
+        return Colors.orange;
+      case 'additional_test_required':
+        return Colors.blue;
+      case 'waiting_for_reply':
+        return Colors.purple;
+      case 'completed':
+        return Colors.green;
+      case 'diagnosis_ready':
+        return Colors.teal;
+      default:
+        return theme.colorScheme.onSurface.withOpacity(0.3);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final user = context.watch<AuthProvider>().user;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome, ${user?.firstName ?? "Parent"}'),
-        backgroundColor: AppConstants.primaryViolet,
-        foregroundColor: AppConstants.white,
+        title: Text(S.of(context).welcomeParent(user?.firstName ?? '')),
+        backgroundColor:
+            theme.appBarTheme.backgroundColor ?? theme.colorScheme.primary,
+        foregroundColor:
+            theme.appBarTheme.foregroundColor ?? theme.colorScheme.onPrimary,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SettingsScreen()),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () async {
               await context.read<AuthProvider>().logout();
               if (mounted) {
-                Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/welcome',
+                  (route) => false,
+                );
               }
             },
           ),
@@ -75,7 +99,11 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
       body: RefreshIndicator(
         onRefresh: _loadCases,
         child: _isLoading
-            ? const Center(child: CircularProgressIndicator())
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: theme.colorScheme.primary,
+                ),
+              )
             : Column(
                 children: [
                   // Start New Case Button
@@ -90,92 +118,131 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                           _loadCases();
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppConstants.primaryViolet,
-                          foregroundColor: AppConstants.white,
+                          backgroundColor: theme.colorScheme.primary,
+                          foregroundColor: theme.colorScheme.onPrimary,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(AppConstants.borderRadiusMedium),
+                            borderRadius: BorderRadius.circular(
+                              AppConstants.borderRadiusMedium,
+                            ),
                           ),
                         ),
-                        child: const Text(
-                          'Start New Case',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        child: Text(
+                          S.of(context).startNewCase,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: theme.colorScheme.onPrimary,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  
+
                   // My Previous Cases
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: AppConstants.paddingLarge),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppConstants.paddingLarge,
+                    ),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'My Previous Cases',
-                        style: TextStyle(
-                          fontSize: 20,
+                        S.of(context).myPreviousCases,
+                        style: theme.textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: AppConstants.primaryViolet,
+                          color: theme.colorScheme.primary,
                         ),
                       ),
                     ),
                   ),
-                  
+
                   const SizedBox(height: AppConstants.paddingMedium),
-                  
+
                   // Cases List
                   Expanded(
                     child: _cases.isEmpty
-                        ? const Center(
+                        ? Center(
                             child: Text(
-                              'No cases yet. Start a new case!',
-                              style: TextStyle(color: Colors.grey, fontSize: 16),
+                              S.of(context).noCasesYet,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.textTheme.bodyMedium?.color
+                                    ?.withOpacity(0.6),
+                              ),
                             ),
                           )
                         : ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: AppConstants.paddingLarge),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppConstants.paddingLarge,
+                            ),
                             itemCount: _cases.length,
                             itemBuilder: (context, index) {
                               final caseItem = _cases[index];
                               return Card(
-                                margin: const EdgeInsets.only(bottom: AppConstants.paddingMedium),
+                                margin: const EdgeInsets.only(
+                                  bottom: AppConstants.paddingMedium,
+                                ),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(AppConstants.borderRadiusMedium),
+                                  borderRadius: BorderRadius.circular(
+                                    AppConstants.borderRadiusMedium,
+                                  ),
                                 ),
                                 child: ListTile(
-                                  contentPadding: const EdgeInsets.all(AppConstants.paddingMedium),
+                                  contentPadding: const EdgeInsets.all(
+                                    AppConstants.paddingMedium,
+                                  ),
                                   leading: CircleAvatar(
-                                    backgroundColor: AppConstants.primaryViolet,
+                                    backgroundColor: theme.colorScheme.primary,
                                     child: Text(
                                       caseItem.childFirstName[0].toUpperCase(),
-                                      style: const TextStyle(color: Colors.white),
+                                      style: theme.textTheme.bodyMedium
+                                          ?.copyWith(
+                                            color: theme.colorScheme.onPrimary,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
                                   ),
                                   title: Text(
                                     caseItem.childFullName,
-                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                                    style: theme.textTheme.bodyMedium?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                   subtitle: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text('Age: ${caseItem.childAge}'),
+                                      Text(
+                                        S.of(context).age(caseItem.childAge),
+                                        style: theme.textTheme.bodySmall,
+                                      ),
                                       const SizedBox(height: 4),
                                       Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 4,
+                                        ),
                                         decoration: BoxDecoration(
-                                          color: _getStatusColor(caseItem.status),
-                                          borderRadius: BorderRadius.circular(12),
+                                          color: _getStatusColor(
+                                            caseItem.status,
+                                            theme,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
                                         ),
                                         child: Text(
                                           caseItem.statusDisplay,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                          ),
+                                          style: theme.textTheme.bodySmall
+                                              ?.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  trailing: const Icon(Icons.arrow_forward_ios),
+                                  trailing: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: theme.iconTheme.color,
+                                  ),
                                   onTap: () async {
                                     await Navigator.pushNamed(
                                       context,

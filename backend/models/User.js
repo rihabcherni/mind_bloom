@@ -41,13 +41,13 @@ const userSchema = new mongoose.Schema({
   // Doctor-specific fields
   medicalLicenseNumber: {
     type: String,
-    required: function() { return this.userType === 'doctor'; }
+    required: function () { return this.userType === 'doctor'; }
   },
   // Parent-specific fields
   relationToChild: {
     type: String,
     enum: ['mother', 'father', 'teacher', 'other'],
-    required: function() { return this.userType === 'parent'; }
+    required: function () { return this.userType === 'parent'; }
   },
   createdAt: {
     type: Date,
@@ -56,14 +56,13 @@ const userSchema = new mongoose.Schema({
 });
 
 // Hash password before saving
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) return next();
+userSchema.pre('save', async function () {
+  if (!this.isModified('password')) return;
   this.password = await bcrypt.hash(this.password, 10);
-  next();
 });
 
 // Method to compare passwords
-userSchema.methods.comparePassword = async function(candidatePassword) {
+userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
