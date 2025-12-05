@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/header.dart';
 import 'package:provider/provider.dart';
 import '../providers/settings_provider.dart';
 import '../constants/app_constants.dart';
@@ -13,49 +15,56 @@ class SettingsScreen extends StatelessWidget {
     final isDark = settings.themeMode == ThemeMode.dark;
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: isDark ? AppConstants.white : AppConstants.darkViolet,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Text(
-          S.of(context).settings,
-          style: TextStyle(
-            color: isDark ? AppConstants.white : AppConstants.darkViolet,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppConstants.paddingMedium),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeaderSection(isDark, context),
-            const SizedBox(height: 32),
-            _buildSectionTitle(S.of(context).appearance, isDark),
-            const SizedBox(height: 12),
-            _buildModernCard(
-              isDark: isDark,
-              child: Column(
-                children: [_buildThemeToggle(settings, isDark, context)],
-              ),
+      body: Stack(
+        children: [
+          const BackgroundCircles(),
+          SafeArea(
+            child: Column(
+              children: [
+                HeaderWidget(
+                  title: S.of(context).settings,
+                  onBackPressed: () => Navigator.pop(context),
+                  showSettingsIcon: false,
+                  showBackIcon: true,
+                  textSize: 25,
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(AppConstants.paddingMedium),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildHeaderSection(isDark, context),
+                        const SizedBox(height: 32),
+                        _buildSectionTitle(S.of(context).appearance, isDark),
+                        const SizedBox(height: 12),
+                        _buildModernCard(
+                          isDark: isDark,
+                          child: Column(
+                            children: [
+                              _buildThemeToggle(settings, isDark, context),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        _buildSectionTitle(S.of(context).language, isDark),
+                        const SizedBox(height: 12),
+                        _buildModernCard(
+                          isDark: isDark,
+                          child: _buildLanguageSelector(
+                            settings,
+                            isDark,
+                            context,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 24),
-            _buildSectionTitle(S.of(context).language, isDark),
-            const SizedBox(height: 12),
-            _buildModernCard(
-              isDark: isDark,
-              child: _buildLanguageSelector(settings, isDark, context),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

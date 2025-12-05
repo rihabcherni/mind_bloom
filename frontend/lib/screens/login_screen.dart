@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
+import 'package:frontend/widgets/header.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
 import '../providers/auth_provider.dart';
@@ -87,199 +88,183 @@ class _LoginScreenState extends State<LoginScreen>
             children: [
               const BackgroundCircles(),
               SafeArea(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(AppConstants.paddingLarge),
-                  child: FadeTransition(
-                    opacity: _fadeAnimation,
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  Icons.settings_rounded,
-                                  color: isDark
-                                      ? AppConstants.white
-                                      : AppConstants.darkViolet,
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => const SettingsScreen(),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Center(
-                                child: Container(
-                                  padding: const EdgeInsets.all(20),
-                                  decoration: BoxDecoration(
-                                    gradient: const LinearGradient(
-                                      colors: [
-                                        AppConstants.primaryViolet,
-                                        AppConstants.white,
-                                        AppConstants.lightViolet,
-                                      ],
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                    ),
-                                    borderRadius: BorderRadius.circular(24),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppConstants.primaryViolet
-                                            .withOpacity(0.4),
-                                        blurRadius: 20,
-                                        offset: const Offset(0, 10),
+                child: Column(
+                  children: [
+                    HeaderWidget(
+                      title: S.of(context).login,
+                      onBackPressed: () => Navigator.pop(context),
+                      showSettingsIcon: true,
+                      showBackIcon: true,
+                      textSize: 25,
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsets.all(
+                          AppConstants.paddingLarge,
+                        ),
+                        child: FadeTransition(
+                          opacity: _fadeAnimation,
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Center(
+                                      child: Text(
+                                        S.of(context).loginWelcomeDescription,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: isDark
+                                              ? Colors.white60
+                                              : Colors.grey[600],
+                                        ),
                                       ),
-                                    ],
+                                    ),
+                                    Center(
+                                      child: Container(
+                                        padding: const EdgeInsets.all(20),
+                                        decoration: BoxDecoration(
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              AppConstants.primaryViolet,
+                                              AppConstants.white,
+                                              AppConstants.lightViolet,
+                                            ],
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            24,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: AppConstants.primaryViolet
+                                                  .withOpacity(0.4),
+                                              blurRadius: 20,
+                                              offset: const Offset(0, 10),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Image.asset(
+                                          'assets/images/logo-trans2.png',
+                                          width: 80,
+                                          height: 80,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 8),
+                                ModernTextField(
+                                  controller: _emailController,
+                                  label: S.of(context).loginEmailLabel,
+                                  hint: S.of(context).loginEmailHint,
+                                  icon: Icons.email_rounded,
+                                  keyboardType: TextInputType.emailAddress,
+                                  isDark: isDark,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return S.of(context).loginEmailEmpty;
+                                    }
+                                    if (!value.contains('@')) {
+                                      return S.of(context).loginEmailInvalid;
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(height: 8),
+                                ModernTextField(
+                                  controller: _passwordController,
+                                  label: S.of(context).loginPasswordLabel,
+                                  hint: '••••••••',
+                                  icon: Icons.lock_rounded,
+                                  obscureText: _obscurePassword,
+                                  isDark: isDark,
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _obscurePassword
+                                          ? Icons.visibility_off_rounded
+                                          : Icons.visibility_rounded,
+                                      color: AppConstants.primaryViolet,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscurePassword = !_obscurePassword;
+                                      });
+                                    },
                                   ),
-                                  child: Image.asset(
-                                    'assets/images/logo-trans2.png',
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.contain,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return S.of(context).loginPasswordEmpty;
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(height: 8),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      S.of(context).loginForgotPassword,
+                                      style: TextStyle(
+                                        color: AppConstants.primaryViolet,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                S.of(context).login,
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: isDark
-                                      ? Colors.white
-                                      : AppConstants.darkViolet,
-                                  letterSpacing: -1,
+                                const SizedBox(height: 8),
+                                ModernButton(
+                                  onPressed: _handleLogin,
+                                  isLoading: authProvider.isLoading,
+                                  text: S.of(context).loginButton,
                                 ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                S.of(context).loginWelcomeDescription,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: isDark
-                                      ? Colors.white60
-                                      : Colors.grey[600],
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          ModernTextField(
-                            controller: _emailController,
-                            label: S.of(context).loginEmailLabel,
-                            hint: S.of(context).loginEmailHint,
-                            icon: Icons.email_rounded,
-                            keyboardType: TextInputType.emailAddress,
-                            isDark: isDark,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return S.of(context).loginEmailEmpty;
-                              }
-                              if (!value.contains('@')) {
-                                return S.of(context).loginEmailInvalid;
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 8),
-                          ModernTextField(
-                            controller: _passwordController,
-                            label: S.of(context).loginPasswordLabel,
-                            hint: '••••••••',
-                            icon: Icons.lock_rounded,
-                            obscureText: _obscurePassword,
-                            isDark: isDark,
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _obscurePassword
-                                    ? Icons.visibility_off_rounded
-                                    : Icons.visibility_rounded,
-                                color: AppConstants.primaryViolet,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _obscurePassword = !_obscurePassword;
-                                });
-                              },
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return S.of(context).loginPasswordEmpty;
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 8),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                S.of(context).loginForgotPassword,
-                                style: TextStyle(
-                                  color: AppConstants.primaryViolet,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          ModernButton(
-                            onPressed: _handleLogin,
-                            isLoading: authProvider.isLoading,
-                            text: S.of(context).loginButton,
-                          ),
 
-                          const SizedBox(height: 8),
-                          DividerWithText(
-                            text: S.of(context).loginOr,
-                            isDark: isDark,
-                          ),
-                          const SizedBox(height: 8),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 56,
-                            child: OutlinedButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/register');
-                              },
-                              style: OutlinedButton.styleFrom(
-                                side: BorderSide(
-                                  color: AppConstants.primaryViolet,
-                                  width: 2,
+                                const SizedBox(height: 8),
+                                DividerWithText(
+                                  text: S.of(context).loginOr,
+                                  isDark: isDark,
                                 ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
+                                const SizedBox(height: 8),
+                                SizedBox(
+                                  width: double.infinity,
+                                  height: 56,
+                                  child: OutlinedButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/register');
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                      side: BorderSide(
+                                        color: AppConstants.primaryViolet,
+                                        width: 2,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      S.of(context).loginRegisterButton,
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppConstants.primaryViolet,
+                                        letterSpacing: 0.5,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              child: Text(
-                                S.of(context).loginRegisterButton,
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppConstants.primaryViolet,
-                                  letterSpacing: 0.5,
-                                ),
-                              ),
+                              ],
                             ),
                           ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ],

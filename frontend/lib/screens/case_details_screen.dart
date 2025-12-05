@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
+import 'package:frontend/widgets/background_circles.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../constants/app_constants.dart';
 import '../models/case_model.dart';
 import '../services/api_service.dart';
+import '../generated/l10n.dart';
 
 class CaseDetailsScreen extends StatefulWidget {
   final String caseId;
@@ -14,15 +16,42 @@ class CaseDetailsScreen extends StatefulWidget {
   State<CaseDetailsScreen> createState() => _CaseDetailsScreenState();
 }
 
-class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
+class _CaseDetailsScreenState extends State<CaseDetailsScreen>
+    with SingleTickerProviderStateMixin {
   CaseModel? _case;
   bool _isLoading = true;
   String? _error;
+  late AnimationController _animationController;
+  late Animation<double> _fadeAnimation;
+  late Animation<Offset> _slideAnimation;
 
   @override
   void initState() {
     super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
+      ),
+    );
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.2), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: const Interval(0.2, 1.0, curve: Curves.easeOutCubic),
+          ),
+        );
     _loadCaseDetails();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadCaseDetails() async {
@@ -37,6 +66,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
         _case = caseData;
         _isLoading = false;
       });
+      _animationController.forward();
     } catch (e) {
       setState(() {
         _error = e.toString();
@@ -48,6 +78,10 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
           SnackBar(
             content: Text('Error loading case: ${e.toString()}'),
             backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
         );
       }
@@ -70,6 +104,10 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
           SnackBar(
             content: Text('Error downloading report: ${e.toString()}'),
             backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
         );
       }
@@ -83,7 +121,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
       case 'additional_test_required':
         return Colors.blue;
       case 'waiting_for_reply':
-        return Colors.purple;
+        return AppConstants.primaryViolet;
       case 'completed':
         return Colors.green;
       case 'diagnosis_ready':
@@ -96,153 +134,292 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
   IconData _getStatusIcon(String status) {
     switch (status) {
       case 'waiting_for_doctor':
-        return Icons.hourglass_empty;
+        return Icons.hourglass_empty_rounded;
       case 'additional_test_required':
-        return Icons.assignment;
+        return Icons.assignment_rounded;
       case 'waiting_for_reply':
-        return Icons.pending;
+        return Icons.pending_rounded;
       case 'completed':
-        return Icons.check_circle;
+        return Icons.check_circle_rounded;
       case 'diagnosis_ready':
-        return Icons.medical_services;
+        return Icons.medical_services_rounded;
       default:
-        return Icons.info;
+        return Icons.info_rounded;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Case Details'),
-        backgroundColor: theme.colorScheme.primary,
-        foregroundColor: AppConstants.white,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const SettingsScreen()),
-              );
-            },
-          ),
-          if (_case != null)
-            IconButton(
-              icon: const Icon(Icons.refresh),
-              onPressed: _loadCaseDetails,
-            ),
-        ],
-      ),
-      body: _isLoading
-          ? const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(height: 16),
-                  Text('Loading case details...'),
-                ],
-              ),
-            )
-          : _error != null
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.error_outline, size: 64, color: Colors.red),
-                  const SizedBox(height: 16),
-                  const Text('Failed to load case'),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: _loadCaseDetails,
-                    child: const Text('Retry'),
-                  ),
-                ],
-              ),
-            )
-          : RefreshIndicator(
-              onRefresh: _loadCaseDetails,
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: const EdgeInsets.all(AppConstants.paddingLarge),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildStatusHeader(),
-
-                    const SizedBox(height: AppConstants.paddingLarge),
-                    _buildSection('Child Information', Icons.child_care, [
-                      _buildInfoRow('Name', _case!.childFullName),
-                      _buildInfoRow('Age', '${_case!.childAge} years old'),
-                      _buildInfoRow(
-                        'Sex',
-                        _case!.childSex == 'male' ? 'Male' : 'Female',
-                      ),
-                      _buildInfoRow('Grade', _case!.scholarYear),
-                    ]),
-
-                    const SizedBox(height: AppConstants.paddingLarge),
-                    _buildSection('Screening Results', Icons.assessment, [
-                      _buildSeverityBadge(),
-                      const SizedBox(height: 16),
-                      const Text(
-                        'Questionnaire Answers:',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
+      body: Stack(
+        children: [
+          const BackgroundCircles(),
+          SafeArea(
+            child: Column(
+              children: [
+                // Header
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                            color: isDark
+                                ? Colors.white
+                                : AppConstants.darkViolet,
+                          ),
+                          onPressed: () => Navigator.pop(context),
                         ),
                       ),
-                      const SizedBox(height: 12),
-                      ..._case!.screeningAnswers.asMap().entries.map((entry) {
-                        return _buildQuestionAnswer(
-                          entry.key + 1,
-                          entry.value.question,
-                          entry.value.answer,
-                        );
-                      }).toList(),
-                    ]),
-                    if (_case!.additionalTestRequest != null) ...[
-                      const SizedBox(height: AppConstants.paddingLarge),
-                      _buildAdditionalTestSection(),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          'Détails du Cas',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: isDark
+                                ? AppConstants.white
+                                : AppConstants.darkViolet,
+                          ),
+                        ),
+                      ),
+                      if (_case != null)
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.refresh_rounded,
+                              color: isDark
+                                  ? Colors.white
+                                  : AppConstants.darkViolet,
+                            ),
+                            onPressed: _loadCaseDetails,
+                          ),
+                        ),
+                      const SizedBox(width: 8),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.settings_rounded,
+                            color: isDark
+                                ? Colors.white
+                                : AppConstants.darkViolet,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const SettingsScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ],
-                    if (_case!.diagnosis != null) ...[
-                      const SizedBox(height: AppConstants.paddingLarge),
-                      _buildDiagnosisSection(),
-                    ],
-
-                    const SizedBox(height: AppConstants.paddingLarge),
-                  ],
+                  ),
                 ),
-              ),
+
+                // Content
+                Expanded(
+                  child: _isLoading
+                      ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(
+                                color: AppConstants.primaryViolet,
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                'Chargement...',
+                                style: TextStyle(
+                                  color: isDark
+                                      ? Colors.white60
+                                      : Colors.grey[600],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : _error != null
+                      ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(24),
+                                decoration: BoxDecoration(
+                                  color: Colors.red.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                child: Icon(
+                                  Icons.error_outline_rounded,
+                                  size: 64,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                'Échec du chargement',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: isDark
+                                      ? Colors.white
+                                      : AppConstants.darkViolet,
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              ElevatedButton.icon(
+                                onPressed: _loadCaseDetails,
+                                icon: const Icon(Icons.refresh_rounded),
+                                label: const Text('Réessayer'),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppConstants.primaryViolet,
+                                  foregroundColor: AppConstants.white,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 32,
+                                    vertical: 16,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : RefreshIndicator(
+                          onRefresh: _loadCaseDetails,
+                          color: AppConstants.primaryViolet,
+                          child: SingleChildScrollView(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            padding: const EdgeInsets.all(24),
+                            child: FadeTransition(
+                              opacity: _fadeAnimation,
+                              child: SlideTransition(
+                                position: _slideAnimation,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    _buildStatusHeader(isDark),
+                                    const SizedBox(height: 24),
+                                    _buildChildInfoSection(isDark),
+                                    const SizedBox(height: 20),
+                                    _buildScreeningSection(isDark),
+                                    if (_case!.additionalTestRequest !=
+                                        null) ...[
+                                      const SizedBox(height: 20),
+                                      _buildAdditionalTestSection(isDark),
+                                    ],
+                                    if (_case!.diagnosis != null) ...[
+                                      const SizedBox(height: 20),
+                                      _buildDiagnosisSection(isDark),
+                                    ],
+                                    const SizedBox(height: 24),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                ),
+              ],
             ),
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _buildStatusHeader() {
+  Widget _buildStatusHeader(bool isDark) {
+    final statusColor = _getStatusColor(_case!.status);
+
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: _getStatusColor(_case!.status).withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: _getStatusColor(_case!.status), width: 2),
+        gradient: LinearGradient(
+          colors: [statusColor.withOpacity(0.2), statusColor.withOpacity(0.1)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: statusColor.withOpacity(0.5), width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: statusColor.withOpacity(0.2),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: Row(
         children: [
-          Icon(
-            _getStatusIcon(_case!.status),
-            color: _getStatusColor(_case!.status),
-            size: 32,
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: statusColor,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: statusColor.withOpacity(0.4),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Icon(
+              _getStatusIcon(_case!.status),
+              color: AppConstants.white,
+              size: 32,
+            ),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Case Status',
-                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                Text(
+                  'Statut du Cas',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isDark ? Colors.white60 : Colors.grey[600],
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -250,7 +427,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: _getStatusColor(_case!.status),
+                    color: statusColor,
                   ),
                 ),
               ],
@@ -261,18 +438,276 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
     );
   }
 
-  Widget _buildSection(String title, IconData icon, List<Widget> children) {
+  Widget _buildChildInfoSection(bool isDark) {
+    return _buildModernSection(
+      'Informations de l\'Enfant',
+      Icons.child_care_rounded,
+      isDark,
+      [
+        _buildInfoRow('Nom', _case!.childFullName, isDark),
+        _buildInfoRow('Âge', '${_case!.childAge} ans', isDark),
+        _buildInfoRow(
+          'Sexe',
+          _case!.childSex == 'male' ? 'Garçon' : 'Fille',
+          isDark,
+        ),
+        _buildInfoRow('Classe', _case!.scholarYear, isDark),
+      ],
+    );
+  }
+
+  Widget _buildScreeningSection(bool isDark) {
+    return _buildModernSection(
+      'Résultats du Dépistage',
+      Icons.assessment_rounded,
+      isDark,
+      [
+        _buildSeverityBadge(),
+        const SizedBox(height: 20),
+        Text(
+          'Réponses au Questionnaire:',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+            color: isDark ? AppConstants.white : AppConstants.darkViolet,
+          ),
+        ),
+        const SizedBox(height: 12),
+        ..._case!.screeningAnswers.asMap().entries.map((entry) {
+          return _buildQuestionAnswer(
+            entry.key + 1,
+            entry.value.question,
+            entry.value.answer,
+            isDark,
+          );
+        }).toList(),
+      ],
+    );
+  }
+
+  Widget _buildAdditionalTestSection(bool isDark) {
+    return _buildModernSection(
+      'Test Supplémentaire',
+      Icons.assignment_rounded,
+      isDark,
+      [
+        _buildInfoRow(
+          'Type de test',
+          _case!.additionalTestRequest!.testType,
+          isDark,
+        ),
+        const SizedBox(height: 16),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.blue.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.blue.withOpacity(0.3)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.info_rounded, color: Colors.blue, size: 20),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Instructions:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                _case!.additionalTestRequest!.instructions,
+                style: TextStyle(
+                  height: 1.5,
+                  color: isDark ? Colors.white70 : Colors.grey[700],
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (_case!.status == 'additional_test_required') ...[
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: ElevatedButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: const Text('Fonctionnalité à venir'),
+                    behavior: SnackBarBehavior.floating,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              child: Ink(
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Colors.blue, Color(0xFF64B5F6)],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.upload_file_rounded,
+                        color: AppConstants.white,
+                      ),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'Soumettre la réponse',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: AppConstants.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildDiagnosisSection(bool isDark) {
+    return _buildModernSection(
+      'Diagnostic',
+      Icons.medical_services_rounded,
+      isDark,
+      [
+        _buildInfoRow('Médecin', _case!.diagnosis!.doctorName, isDark),
+        _buildInfoRow(
+          'Date',
+          '${_case!.diagnosis!.completedAt.day}/${_case!.diagnosis!.completedAt.month}/${_case!.diagnosis!.completedAt.year}',
+          isDark,
+        ),
+        const SizedBox(height: 16),
+        _buildDiagnosisBlock(
+          'Résumé',
+          _case!.diagnosis!.summary,
+          Icons.description_rounded,
+          Colors.blue,
+          isDark,
+        ),
+        const SizedBox(height: 12),
+        _buildDiagnosisBlock(
+          'Conseils',
+          _case!.diagnosis!.advice,
+          Icons.tips_and_updates_rounded,
+          Colors.orange,
+          isDark,
+        ),
+        const SizedBox(height: 12),
+        _buildDiagnosisBlock(
+          'Recommandation',
+          _case!.diagnosis!.recommendation,
+          Icons.recommend_rounded,
+          Colors.green,
+          isDark,
+        ),
+        const SizedBox(height: 20),
+        SizedBox(
+          width: double.infinity,
+          height: 50,
+          child: ElevatedButton(
+            onPressed: _downloadReport,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              padding: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+            ),
+            child: Ink(
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Colors.green, Color(0xFF66BB6A)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.green.withOpacity(0.4),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
+              ),
+              child: Container(
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.download_rounded,
+                      color: AppConstants.white,
+                    ),
+                    const SizedBox(width: 8),
+                    const Text(
+                      'Télécharger le Rapport (PDF)',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: AppConstants.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildModernSection(
+    String title,
+    IconData icon,
+    bool isDark,
+    List<Widget> children,
+  ) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppConstants.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppConstants.primaryViolet.withOpacity(0.3)),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: AppConstants.primaryViolet.withOpacity(0.3),
+          width: 2,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 4,
+            color: AppConstants.primaryViolet.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
           ),
         ],
       ),
@@ -281,45 +716,62 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
         children: [
           Row(
             children: [
-              Icon(icon, color: AppConstants.primaryViolet),
-              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [
+                      AppConstants.primaryViolet,
+                      AppConstants.lightViolet,
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(icon, color: AppConstants.white, size: 24),
+              ),
+              const SizedBox(width: 12),
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: AppConstants.primaryViolet,
+                  color: isDark ? AppConstants.white : AppConstants.darkViolet,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           ...children,
         ],
       ),
     );
   }
 
-  Widget _buildInfoRow(String label, String value) {
+  Widget _buildInfoRow(String label, String value, bool isDark) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 80,
+            width: 90,
             child: Text(
               '$label:',
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.w600,
-                color: Colors.grey,
+                fontSize: 13,
+                color: isDark ? Colors.white60 : Colors.grey[600],
               ),
             ),
           ),
           Expanded(
             child: Text(
               value,
-              style: const TextStyle(fontWeight: FontWeight.w500),
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+                color: isDark ? Colors.white : AppConstants.darkViolet,
+              ),
             ),
           ),
         ],
@@ -334,34 +786,41 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
     switch (_case!.gravityScore) {
       case 'high':
         color = AppConstants.highSeverityColor;
-        icon = Icons.error;
+        icon = Icons.error_rounded;
         break;
       case 'medium':
         color = AppConstants.mediumSeverityColor;
-        icon = Icons.warning;
+        icon = Icons.warning_rounded;
         break;
       default:
         color = AppConstants.lowSeverityColor;
-        icon = Icons.info;
+        icon = Icons.info_rounded;
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        color: color,
+        gradient: LinearGradient(colors: [color, color.withOpacity(0.8)]),
         borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: color.withOpacity(0.4),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: AppConstants.white, size: 18),
-          const SizedBox(width: 6),
+          Icon(icon, color: AppConstants.white, size: 20),
+          const SizedBox(width: 8),
           Text(
-            '${_case!.gravityScore.toUpperCase()} SEVERITY',
+            'GRAVITÉ ${_case!.gravityScore.toUpperCase()}',
             style: const TextStyle(
               color: AppConstants.white,
               fontWeight: FontWeight.bold,
-              fontSize: 12,
+              fontSize: 13,
             ),
           ),
         ],
@@ -369,140 +828,113 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
     );
   }
 
-  Widget _buildQuestionAnswer(int number, String question, String answer) {
+  Widget _buildQuestionAnswer(
+    int number,
+    String question,
+    String answer,
+    bool isDark,
+  ) {
     final isYes = answer == 'Yes';
+    final color = isYes ? Colors.red : Colors.green;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: (isYes ? Colors.red : Colors.green).withOpacity(0.05),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: (isYes ? Colors.red : Colors.green).withOpacity(0.3),
+        gradient: LinearGradient(
+          colors: [color.withOpacity(0.1), color.withOpacity(0.05)],
         ),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withOpacity(0.4), width: 1.5),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '$number. $question',
-            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
+              height: 1.4,
+              color: isDark ? Colors.white : AppConstants.darkViolet,
+            ),
           ),
-          const SizedBox(height: 6),
-          Row(
-            children: [
-              Icon(
-                isYes ? Icons.check_circle : Icons.cancel,
-                color: isYes ? Colors.red : Colors.green,
-                size: 16,
-              ),
-              const SizedBox(width: 6),
-              Text(
-                answer,
-                style: TextStyle(
-                  color: isYes ? Colors.red : Colors.green,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  isYes ? Icons.check_circle_rounded : Icons.cancel_rounded,
+                  color: AppConstants.white,
+                  size: 16,
                 ),
-              ),
-            ],
+                const SizedBox(width: 6),
+                Text(
+                  answer,
+                  style: const TextStyle(
+                    color: AppConstants.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildAdditionalTestSection() {
-    return _buildSection('Additional Test', Icons.assignment, [
-      _buildInfoRow('Test Type', _case!.additionalTestRequest!.testType),
-      const Divider(),
-      const Text(
-        'Instructions:',
-        style: TextStyle(fontWeight: FontWeight.bold),
+  Widget _buildDiagnosisBlock(
+    String title,
+    String content,
+    IconData icon,
+    Color color,
+    bool isDark,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [color.withOpacity(0.1), color.withOpacity(0.05)],
+        ),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withOpacity(0.3)),
       ),
-      const SizedBox(height: 8),
-      Text(_case!.additionalTestRequest!.instructions),
-
-      if (_case!.status == 'additional_test_required') ...[
-        const SizedBox(height: 16),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton.icon(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Test response feature coming soon'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, color: color, size: 20),
+              const SizedBox(width: 8),
+              Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: color,
                 ),
-              );
-            },
-            icon: const Icon(Icons.upload_file),
-            label: const Text('Submit Test Response'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppConstants.primaryViolet,
-              foregroundColor: AppConstants.white,
-              padding: const EdgeInsets.symmetric(vertical: 14),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            content,
+            style: TextStyle(
+              height: 1.5,
+              fontSize: 13,
+              color: isDark ? Colors.white70 : Colors.grey[700],
             ),
           ),
-        ),
-      ],
-    ]);
-  }
-
-  Widget _buildDiagnosisSection() {
-    return _buildSection('Diagnosis', Icons.medical_services, [
-      _buildInfoRow('Doctor', _case!.diagnosis!.doctorName),
-      _buildInfoRow(
-        'Date',
-        '${_case!.diagnosis!.completedAt.day}/${_case!.diagnosis!.completedAt.month}/${_case!.diagnosis!.completedAt.year}',
+        ],
       ),
-
-      const Divider(),
-      const SizedBox(height: 8),
-
-      const Text(
-        'Summary:',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-      ),
-      const SizedBox(height: 6),
-      Text(_case!.diagnosis!.summary, style: const TextStyle(height: 1.4)),
-
-      const SizedBox(height: 16),
-
-      const Text(
-        'Advice:',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-      ),
-      const SizedBox(height: 6),
-      Text(_case!.diagnosis!.advice, style: const TextStyle(height: 1.4)),
-
-      const SizedBox(height: 16),
-
-      const Text(
-        'Recommendation:',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-      ),
-      const SizedBox(height: 6),
-      Text(
-        _case!.diagnosis!.recommendation,
-        style: const TextStyle(height: 1.4),
-      ),
-
-      const SizedBox(height: 20),
-
-      SizedBox(
-        width: double.infinity,
-        child: ElevatedButton.icon(
-          onPressed: _downloadReport,
-          icon: const Icon(Icons.download),
-          label: const Text('Download Report (PDF)'),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
-            foregroundColor: AppConstants.white,
-            padding: const EdgeInsets.symmetric(vertical: 14),
-          ),
-        ),
-      ),
-    ]);
+    );
   }
 }

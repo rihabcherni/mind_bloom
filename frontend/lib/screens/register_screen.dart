@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/widgets/background_circles.dart';
 import 'package:frontend/widgets/header.dart';
 import 'package:provider/provider.dart';
@@ -169,6 +168,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                       title: S.of(context).createAccount,
                       onBackPressed: () => Navigator.pop(context),
                       showSettingsIcon: true,
+                      showBackIcon: true,
+                      textSize: 25,
                     ),
                     Expanded(
                       child: SingleChildScrollView(

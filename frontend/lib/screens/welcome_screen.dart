@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/header.dart';
 import '../constants/app_constants.dart';
 import '../generated/l10n.dart';
 
@@ -59,90 +60,104 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: Stack(
         children: [
           const BackgroundCircles(),
           SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(AppConstants.paddingLarge),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Spacer(),
-                  FadeTransition(
-                    opacity: _fadeAnimation,
-                    child: ScaleTransition(
-                      scale: _scaleAnimation,
-                      child: Container(
-                        padding: const EdgeInsets.all(32),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [
-                              AppConstants.primaryViolet,
-                              AppConstants.white,
-                              AppConstants.lightViolet,
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(32),
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppConstants.primaryViolet.withOpacity(
-                                0.4,
+            child: Column(
+              children: [
+                HeaderWidget(
+                  title: "",
+                  onBackPressed: () => Navigator.pop(context),
+                  showSettingsIcon: true,
+                  showBackIcon: false,
+                  textSize: 16,
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FadeTransition(
+                        opacity: _fadeAnimation,
+                        child: ScaleTransition(
+                          scale: _scaleAnimation,
+                          child: Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [
+                                  AppConstants.primaryViolet,
+                                  AppConstants.white,
+                                  AppConstants.lightViolet,
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
                               ),
-                              blurRadius: 30,
-                              offset: const Offset(0, 15),
+                              borderRadius: BorderRadius.circular(32),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppConstants.primaryViolet.withOpacity(
+                                    0.4,
+                                  ),
+                                  blurRadius: 30,
+                                  offset: const Offset(0, 15),
+                                ),
+                              ],
                             ),
-                          ],
+                            child: Image.asset(
+                              'assets/images/logo-trans.png',
+                              width: 140,
+                              height: 120,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
-                        child: Image.asset(
-                          'assets/images/logo-trans.png',
-                          width: 120,
-                          height: 120,
-                          fit: BoxFit.contain,
+                      ),
+                      const SizedBox(height: 20),
+                      FadeTransition(
+                        opacity: _fadeAnimation,
+                        child: Text(
+                          S.of(context).appTitle,
+                          style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                            color: isDark
+                                ? AppConstants.white
+                                : AppConstants.darkViolet,
+                            letterSpacing: -1.5,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 48),
-                  FadeTransition(
-                    opacity: _fadeAnimation,
-                    child: Text(
-                      S.of(context).appTitle,
-                      style: TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold,
-                        color: isDark
-                            ? AppConstants.white
-                            : AppConstants.darkViolet,
-                        letterSpacing: -1.5,
+                      const SizedBox(height: 10),
+                      FadeTransition(
+                        opacity: _fadeAnimation,
+                        child: Text(
+                          S.of(context).welcomeSubtitle,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: isDark ? Colors.white60 : Colors.grey[600],
+                            height: 1.5,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-                  FadeTransition(
+                ),
+                SlideTransition(
+                  position: _slideAnimation,
+                  child: FadeTransition(
                     opacity: _fadeAnimation,
-                    child: Text(
-                      S.of(context).welcomeSubtitle,
-                      style: TextStyle(
-                        fontSize: 17,
-                        color: isDark ? Colors.white60 : Colors.grey[600],
-                        height: 1.5,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  const Spacer(),
-                  SlideTransition(
-                    position: _slideAnimation,
-                    child: FadeTransition(
-                      opacity: _fadeAnimation,
-                      child: Column(
-                        children: [
-                          SizedBox(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24.0,
+                          ), 
+                          child: SizedBox(
                             width: double.infinity,
                             height: 56,
                             child: ElevatedButton(
@@ -192,8 +207,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                               ),
                             ),
                           ),
-                          const SizedBox(height: 16),
-                          SizedBox(
+                        ),
+                        const SizedBox(height: 16),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24.0,
+                          ), 
+                          child: SizedBox(
                             width: double.infinity,
                             height: 56,
                             child: OutlinedButton(
@@ -220,14 +240,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
+                ),
 
-                  const SizedBox(height: AppConstants.paddingLarge),
-                ],
-              ),
+                const SizedBox(height: AppConstants.paddingLarge),
+              ],
             ),
           ),
         ],
