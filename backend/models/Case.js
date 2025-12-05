@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const caseSchema = new mongoose.Schema({
-  // Child Information
   childFirstName: {
     type: String,
     required: true,
@@ -25,35 +24,25 @@ const caseSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-
-  // Parent Information
   parentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
-
-  // Assigned Doctor
   doctorId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     default: null
   },
-
-  // Chatbot Screening Answers
   screeningAnswers: [{
     question: String,
     answer: String
   }],
-
-  // Gravity Score (computed by chatbot)
   gravityScore: {
     type: String,
     enum: ['low', 'medium', 'high'],
     required: true
   },
-
-  // Video Upload
   videoUrl: {
     type: String,
     default: null
@@ -61,22 +50,16 @@ const caseSchema = new mongoose.Schema({
   videoUploadDate: {
     type: Date
   },
-
-  // Case Status
   status: {
     type: String,
     enum: ['waiting_for_doctor', 'additional_test_required', 'waiting_for_reply', 'completed', 'diagnosis_ready'],
     default: 'waiting_for_doctor'
   },
-
-  // Additional Test Request
   additionalTestRequest: {
     testType: String,
     instructions: String,
     requestedAt: Date
   },
-
-  // Additional Test Response
   additionalTestResponse: {
     videoUrl: String,
     answers: [{
@@ -85,8 +68,6 @@ const caseSchema = new mongoose.Schema({
     }],
     submittedAt: Date
   },
-
-  // Doctor's Diagnosis
   diagnosis: {
     summary: String,
     advice: String,
@@ -94,7 +75,6 @@ const caseSchema = new mongoose.Schema({
     doctorName: String,
     completedAt: Date
   },
-
   createdAt: {
     type: Date,
     default: Date.now
@@ -104,10 +84,7 @@ const caseSchema = new mongoose.Schema({
     default: Date.now
   }
 });
-
-// Update updatedAt on save
 caseSchema.pre('save', function (next) {
   this.updatedAt = Date.now();
 });
-
 module.exports = mongoose.model('Case', caseSchema);

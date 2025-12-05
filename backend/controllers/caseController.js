@@ -2,9 +2,6 @@ const Case = require('../models/Case');
 const User = require('../models/User');
 const NotificationService = require('../services/notificationService');
 
-// @desc    Create new case
-// @route   POST /api/cases
-// @access  Private (Parent only)
 const createCase = async (req, res) => {
   try {
     const {
@@ -28,8 +25,6 @@ const createCase = async (req, res) => {
       gravityScore,
       status: 'waiting_for_doctor'
     });
-
-    // ✅ NOUVEAU : Notifier tous les docteurs
     await NotificationService.notifyNewCase(
       newCase._id,
       `${childFirstName} ${childLastName}`,
@@ -41,10 +36,6 @@ const createCase = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// @desc    Upload video to case
-// @route   POST /api/cases/:id/video
-// @access  Private (Parent only)
 const uploadVideo = async (req, res) => {
   try {
     const caseItem = await Case.findById(req.params.id);
@@ -70,10 +61,6 @@ const uploadVideo = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// @desc    Get parent's cases
-// @route   GET /api/cases/my-cases
-// @access  Private (Parent only)
 const getMyCases = async (req, res) => {
   try {
     const cases = await Case.find({ parentId: req.user._id })
@@ -83,10 +70,6 @@ const getMyCases = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// @desc    Get all cases for doctor
-// @route   GET /api/cases/doctor-cases
-// @access  Private (Doctor only)
 const getDoctorCases = async (req, res) => {
   try {
     const cases = await Case.find()
@@ -106,10 +89,6 @@ const getDoctorCases = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// @desc    Get single case details
-// @route   GET /api/cases/:id
-// @access  Private
 const getCaseById = async (req, res) => {
   try {
     const caseItem = await Case.findById(req.params.id)
@@ -130,10 +109,6 @@ const getCaseById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// @desc    Doctor assigns themselves to case
-// @route   PUT /api/cases/:id/assign
-// @access  Private (Doctor only)
 const assignCase = async (req, res) => {
   try {
     const caseItem = await Case.findById(req.params.id);
@@ -150,10 +125,6 @@ const assignCase = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// @desc    Doctor submits diagnosis
-// @route   PUT /api/cases/:id/diagnosis
-// @access  Private (Doctor only)
 const submitDiagnosis = async (req, res) => {
   try {
     const { summary, advice, recommendation } = req.body;
@@ -174,8 +145,6 @@ const submitDiagnosis = async (req, res) => {
     };
     caseItem.status = 'diagnosis_ready';
     await caseItem.save();
-
-    // ✅ NOUVEAU : Notifier le parent
     await NotificationService.notifyDiagnosisReady(
       caseItem.parentId,
       caseItem._id,
@@ -187,10 +156,6 @@ const submitDiagnosis = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// @desc    Doctor requests additional test
-// @route   PUT /api/cases/:id/request-test
-// @access  Private (Doctor only)
 const requestAdditionalTest = async (req, res) => {
   try {
     const { testType, instructions } = req.body;
@@ -207,8 +172,6 @@ const requestAdditionalTest = async (req, res) => {
     };
     caseItem.status = 'additional_test_required';
     await caseItem.save();
-
-    // ✅ NOUVEAU : Notifier le parent
     await NotificationService.notifyAdditionalTestRequested(
       caseItem.parentId,
       caseItem._id,
@@ -221,10 +184,6 @@ const requestAdditionalTest = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// @desc    Parent submits additional test response
-// @route   PUT /api/cases/:id/test-response
-// @access  Private (Parent only)
 const submitTestResponse = async (req, res) => {
   try {
     const { answers } = req.body;
@@ -249,8 +208,6 @@ const submitTestResponse = async (req, res) => {
 
     caseItem.status = 'waiting_for_reply';
     await caseItem.save();
-
-    // ✅ NOUVEAU : Notifier le docteur assigné
     if (caseItem.doctorId) {
       await NotificationService.notifyTestResponseSubmitted(
         caseItem.doctorId,
@@ -264,7 +221,6 @@ const submitTestResponse = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 module.exports = {
   createCase,
   uploadVideo,

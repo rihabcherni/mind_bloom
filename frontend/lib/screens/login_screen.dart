@@ -7,6 +7,7 @@ import '../widgets/modern_text_field.dart';
 import '../widgets/modern_button.dart';
 import '../widgets/background_circles.dart';
 import '../widgets/divider_with_text.dart';
+import '../generated/l10n.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -62,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen>
         final error = context.read<AuthProvider>().error;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(error ?? 'Login failed'),
+            content: Text(error ?? S.of(context).loginFailed),
             backgroundColor: Colors.red[400],
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -127,6 +128,7 @@ class _LoginScreenState extends State<LoginScreen>
                                     gradient: const LinearGradient(
                                       colors: [
                                         AppConstants.primaryViolet,
+                                        AppConstants.white,
                                         AppConstants.lightViolet,
                                       ],
                                       begin: Alignment.topLeft,
@@ -142,16 +144,17 @@ class _LoginScreenState extends State<LoginScreen>
                                       ),
                                     ],
                                   ),
-                                  child: const Icon(
-                                    Icons.psychology_rounded,
-                                    size: 50,
-                                    color: Colors.white,
+                                  child: Image.asset(
+                                    'assets/images/logo-trans2.png',
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.contain,
                                   ),
                                 ),
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                'Bienvenue',
+                                S.of(context).login,
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
@@ -163,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen>
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                'Connectez-vous pour continuer',
+                                S.of(context).loginWelcomeDescription,
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: isDark
@@ -176,17 +179,17 @@ class _LoginScreenState extends State<LoginScreen>
                           const SizedBox(height: 8),
                           ModernTextField(
                             controller: _emailController,
-                            label: 'Email',
-                            hint: 'votre@email.com',
+                            label: S.of(context).loginEmailLabel,
+                            hint: S.of(context).loginEmailHint,
                             icon: Icons.email_rounded,
                             keyboardType: TextInputType.emailAddress,
                             isDark: isDark,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Veuillez entrer votre email';
+                                return S.of(context).loginEmailEmpty;
                               }
                               if (!value.contains('@')) {
-                                return 'Email invalide';
+                                return S.of(context).loginEmailInvalid;
                               }
                               return null;
                             },
@@ -194,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen>
                           const SizedBox(height: 8),
                           ModernTextField(
                             controller: _passwordController,
-                            label: 'Mot de passe',
+                            label: S.of(context).loginPasswordLabel,
                             hint: '••••••••',
                             icon: Icons.lock_rounded,
                             obscureText: _obscurePassword,
@@ -214,7 +217,7 @@ class _LoginScreenState extends State<LoginScreen>
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Veuillez entrer votre mot de passe';
+                                return S.of(context).loginPasswordEmpty;
                               }
                               return null;
                             },
@@ -224,8 +227,8 @@ class _LoginScreenState extends State<LoginScreen>
                             alignment: Alignment.centerRight,
                             child: TextButton(
                               onPressed: () {},
-                              child: const Text(
-                                'Mot de passe oublié ?',
+                              child: Text(
+                                S.of(context).loginForgotPassword,
                                 style: TextStyle(
                                   color: AppConstants.primaryViolet,
                                   fontWeight: FontWeight.w600,
@@ -237,11 +240,14 @@ class _LoginScreenState extends State<LoginScreen>
                           ModernButton(
                             onPressed: _handleLogin,
                             isLoading: authProvider.isLoading,
-                            text: 'Se connecter',
+                            text: S.of(context).loginButton,
                           ),
 
                           const SizedBox(height: 8),
-                          DividerWithText(text: 'OU', isDark: isDark),
+                          DividerWithText(
+                            text: S.of(context).loginOr,
+                            isDark: isDark,
+                          ),
                           const SizedBox(height: 8),
                           SizedBox(
                             width: double.infinity,
@@ -259,8 +265,8 @@ class _LoginScreenState extends State<LoginScreen>
                                   borderRadius: BorderRadius.circular(16),
                                 ),
                               ),
-                              child: const Text(
-                                'Créer un compte',
+                              child: Text(
+                                S.of(context).loginRegisterButton,
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,

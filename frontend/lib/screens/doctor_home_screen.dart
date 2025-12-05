@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
+import 'package:frontend/widgets/background_circles.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
 import '../providers/auth_provider.dart';
@@ -120,210 +121,205 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
         .length;
 
     return Scaffold(
-      backgroundColor: isDark
-          ? const Color(0xFF1A1A2E)
-          : const Color(0xFFF8F9FA),
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Custom Header
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [
-                    AppConstants.primaryViolet,
-                    AppConstants.lightViolet,
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppConstants.primaryViolet.withOpacity(0.3),
-                    blurRadius: 20,
-                    offset: const Offset(0, 10),
+      body: Stack(
+        children: [
+          const BackgroundCircles(),
+          SafeArea(
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [
+                        AppConstants.primaryViolet,
+                        AppConstants.lightViolet,
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppConstants.primaryViolet.withOpacity(0.3),
+                        blurRadius: 20,
+                        offset: const Offset(0, 10),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  // Top Bar
-                  Row(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Icons.medical_services_rounded,
+                              color: Colors.white,
+                              size: 28,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Tableau de bord',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  'Dr. ${user?.firstName ?? ''} ${user?.lastName ?? ''}',
+                                  style: const TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.notifications_rounded,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/notifications');
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.settings_rounded,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const SettingsScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.logout_rounded,
+                              color: Colors.white,
+                            ),
+                            onPressed: () async {
+                              await context.read<AuthProvider>().logout();
+                              if (mounted) {
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  '/welcome',
+                                  (route) => false,
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: _buildStatCard(
+                              'Cas totaux',
+                              _cases.length.toString(),
+                              Icons.folder_rounded,
+                              Colors.white,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: _buildStatCard(
+                              'Haute priorité',
+                              highPriority.toString(),
+                              Icons.priority_high_rounded,
+                              Colors.white,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: _buildStatCard(
+                              'En attente',
+                              pending.toString(),
+                              Icons.pending_rounded,
+                              Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(12),
+                          color: AppConstants.primaryViolet.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Icon(
-                          Icons.medical_services_rounded,
-                          color: Colors.white,
-                          size: 28,
+                          Icons.arrow_downward_rounded,
+                          color: AppConstants.primaryViolet,
+                          size: 16,
                         ),
                       ),
                       const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Tableau de bord',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'Dr. ${user?.firstName ?? ''} ${user?.lastName ?? ''}',
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.notifications_rounded,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/notifications');
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.settings_rounded,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const SettingsScreen(),
-                            ),
-                          );
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.logout_rounded,
-                          color: Colors.white,
-                        ),
-                        onPressed: () async {
-                          await context.read<AuthProvider>().logout();
-                          if (mounted) {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              '/welcome',
-                              (route) => false,
-                            );
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  // Stats Cards
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _buildStatCard(
-                          'Cas totaux',
-                          _cases.length.toString(),
-                          Icons.folder_rounded,
-                          Colors.white,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: _buildStatCard(
-                          'Haute priorité',
-                          highPriority.toString(),
-                          Icons.priority_high_rounded,
-                          Colors.white,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: _buildStatCard(
-                          'En attente',
-                          pending.toString(),
-                          Icons.pending_rounded,
-                          Colors.white,
+                      Text(
+                        'Cas triés par gravité',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: isDark
+                              ? Colors.white
+                              : AppConstants.darkViolet,
                         ),
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
-
-            // Section Header
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: AppConstants.primaryViolet.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(
-                      Icons.arrow_downward_rounded,
-                      color: AppConstants.primaryViolet,
-                      size: 16,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    'Cas triés par gravité',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: isDark ? Colors.white : AppConstants.darkViolet,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Cases List
-            Expanded(
-              child: _isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(
-                        color: AppConstants.primaryViolet,
-                        strokeWidth: 3,
-                      ),
-                    )
-                  : _cases.isEmpty
-                  ? _buildEmptyState(isDark)
-                  : RefreshIndicator(
-                      onRefresh: _loadCases,
-                      color: AppConstants.primaryViolet,
-                      child: FadeTransition(
-                        opacity: _fadeAnimation,
-                        child: ListView.builder(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                          itemCount: _cases.length,
-                          itemBuilder: (context, index) {
-                            final caseItem = _cases[index];
-                            return _buildCaseCard(caseItem, isDark, index);
-                          },
+                ),
+                Expanded(
+                  child: _isLoading
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: AppConstants.primaryViolet,
+                            strokeWidth: 3,
+                          ),
+                        )
+                      : _cases.isEmpty
+                      ? _buildEmptyState(isDark)
+                      : RefreshIndicator(
+                          onRefresh: _loadCases,
+                          color: AppConstants.primaryViolet,
+                          child: FadeTransition(
+                            opacity: _fadeAnimation,
+                            child: ListView.builder(
+                              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                              itemCount: _cases.length,
+                              itemBuilder: (context, index) {
+                                final caseItem = _cases[index];
+                                return _buildCaseCard(caseItem, isDark, index);
+                              },
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -449,7 +445,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
-                  // Severity Badge
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
@@ -473,10 +468,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                       size: 28,
                     ),
                   ),
-
                   const SizedBox(width: 16),
-
-                  // Content
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -530,7 +522,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                         const SizedBox(height: 10),
                         Row(
                           children: [
-                            // Severity Badge
                             Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 10,
@@ -550,7 +541,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                               ),
                             ),
                             const SizedBox(width: 8),
-                            // Status Badge
                             Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 10,
@@ -574,8 +564,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                       ],
                     ),
                   ),
-
-                  // Arrow Icon
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(

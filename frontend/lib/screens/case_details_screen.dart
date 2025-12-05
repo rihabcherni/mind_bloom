@@ -170,12 +170,9 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Status Header
                     _buildStatusHeader(),
 
                     const SizedBox(height: AppConstants.paddingLarge),
-
-                    // Child Information
                     _buildSection('Child Information', Icons.child_care, [
                       _buildInfoRow('Name', _case!.childFullName),
                       _buildInfoRow('Age', '${_case!.childAge} years old'),
@@ -187,8 +184,6 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
                     ]),
 
                     const SizedBox(height: AppConstants.paddingLarge),
-
-                    // Screening Results
                     _buildSection('Screening Results', Icons.assessment, [
                       _buildSeverityBadge(),
                       const SizedBox(height: 16),
@@ -208,14 +203,10 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
                         );
                       }).toList(),
                     ]),
-
-                    // Additional Test Request
                     if (_case!.additionalTestRequest != null) ...[
                       const SizedBox(height: AppConstants.paddingLarge),
                       _buildAdditionalTestSection(),
                     ],
-
-                    // Diagnosis
                     if (_case!.diagnosis != null) ...[
                       const SizedBox(height: AppConstants.paddingLarge),
                       _buildDiagnosisSection(),
@@ -439,7 +430,6 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
           width: double.infinity,
           child: ElevatedButton.icon(
             onPressed: () {
-              // TODO: Navigate to test response screen
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Test response feature coming soon'),

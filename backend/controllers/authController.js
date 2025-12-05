@@ -2,14 +2,9 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const { asyncHandler } = require('../middleware/errorHandler');
 
-// Generate JWT Token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
-
-// @desc    Register new user
-// @route   POST /api/auth/register
-// @access  Public
 const register = asyncHandler(async (req, res) => {
   const {
     firstName,
@@ -27,18 +22,12 @@ const register = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Please provide all required fields');
   }
-
-  // Check if user exists
   const userExists = await User.findOne({ email });
   if (userExists) {
     res.status(400);
     throw new Error('User already exists');
   }
-
-  // Create user object
   const userData = { firstName, lastName, email, password, userType, dateOfBirth, sex };
-
-  // Add type-specific fields
   if (userType === 'doctor') {
     if (!medicalLicenseNumber) {
       res.status(400);
@@ -52,9 +41,7 @@ const register = asyncHandler(async (req, res) => {
     }
     userData.relationToChild = relationToChild;
   }
-
   const user = await User.create(userData);
-
   if (user) {
     res.status(201).json({
       _id: user._id,
@@ -69,20 +56,13 @@ const register = asyncHandler(async (req, res) => {
     throw new Error('Invalid user data');
   }
 });
-
-// @desc    Login user
-// @route   POST /api/auth/login
-// @access  Public
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-
   if (!email || !password) {
     res.status(400);
     throw new Error('Please provide email and password');
   }
-
   const user = await User.findOne({ email });
-
   if (user && (await user.comparePassword(password))) {
     res.json({
       _id: user._id,
@@ -97,10 +77,6 @@ const login = asyncHandler(async (req, res) => {
     throw new Error('Invalid email or password');
   }
 });
-
-// @desc    Get current user
-// @route   GET /api/auth/me
-// @access  Private
 const getMe = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id).select('-password');
   if (!user) {
@@ -109,7 +85,6 @@ const getMe = asyncHandler(async (req, res) => {
   }
   res.json(user);
 });
-
 module.exports = {
   register,
   login,

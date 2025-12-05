@@ -2,7 +2,55 @@
   "@@locale": "fr",
   "appTitle": "Mind Bloom",
   "welcomeSubtitle": "Aider à mieux comprendre votre enfant",
+  "adhdAboutTitle": "À propos du TDAH",
+  
+  "adhdSymptomsTitle": "Symptômes du TDAH",
+  "adhdSymptomsDescription": "Signes observés chez l’enfant pouvant indiquer un TDAH",
+  "adhdCausesTitle": "Causes possibles",
+  "adhdCausesDescription": "Facteurs pouvant contribuer au développement du TDAH",
+  "adhdParentsTitle": "Conseils aux parents",
+  "adhdParentsDescription": "Comment aider un enfant atteint de TDAH au quotidien",
+
+  "adhdInattention": "Inattention : difficulté à se concentrer, oublis fréquents",
+  "adhdHyperactivity": "Hyperactivité : agitation, incapacité à rester assis",
+  "adhdImpulsivity": "Impulsivité : interruption des autres, réactions rapides",
+  "adhdSchoolProblems": "Difficultés scolaires et sociales",
+
+  "adhdGenetics": "Facteurs génétiques et héréditaires",
+  "adhdBrainChemistry": "Déséquilibre chimique dans le cerveau",
+  "adhdPrenatalExposure": "Exposition prénatale à certaines substances",
+  "adhdPregnancyComplications": "Complications durant la grossesse",
+
+  "adhdRoutine": "Créer une routine quotidienne stable",
+  "adhdActiveBreaks": "Encourager les pauses actives régulières",
+  "adhdRewardSystem": "Récompenser les comportements positifs",
+  "adhdSchoolCooperation": "Collaborer avec l’école et les spécialistes",
+
+  "goToHomeScreen": "Aller à l'accueil",
+  "aboutADHD": "À propos du TDAH",
+
+  "loginWelcome": "Bienvenue",
+  "loginWelcomeDescription": "Connectez-vous pour continuer",
+  
+  "loginEmailLabel": "Email",
+  "loginEmailHint": "votre@email.com",
+  "loginEmailEmpty": "Veuillez entrer votre email",
+  "loginEmailInvalid": "Email invalide",
+
+  "loginPasswordLabel": "Mot de passe",
+  "loginPasswordHint": "••••••••",
+  "loginPasswordEmpty": "Veuillez entrer votre mot de passe",
+  
+  "loginForgotPassword": "Mot de passe oublié ?",
+  "loginButton": "Se connecter",
+  "loginFailed": "Échec de la connexion",
+  
+  "loginOr": "OU",
+  "loginRegisterButton": "Créer un compte",
+
+
   "login": "Connexion",
+
   "createAccount": "Créer un compte",
   "chooseProfile": "Choisissez votre profil",
   "chooseAccountType": "Sélectionnez le type de compte que vous souhaitez créer",

@@ -2,6 +2,51 @@
   "@@locale": "en",
   "appTitle": "Mind Bloom",
   "welcomeSubtitle": "Helping You Understand Your Child Better",
+  
+  "adhdAboutTitle": "About ADHD",
+  "adhdSymptomsTitle": "ADHD Symptoms",
+  "adhdSymptomsDescription": "Signs that may indicate ADHD in a child",
+  "adhdCausesTitle": "Possible Causes",
+  "adhdCausesDescription": "Factors that may contribute to ADHD development",
+  "adhdParentsTitle": "Tips for Parents",
+  "adhdParentsDescription": "How to support a child with ADHD daily",
+
+  "adhdInattention": "Inattention: difficulty focusing, frequent forgetfulness",
+  "adhdHyperactivity": "Hyperactivity: restlessness, inability to stay seated",
+  "adhdImpulsivity": "Impulsivity: interrupting, acting without thinking",
+  "adhdSchoolProblems": "School and social challenges",
+
+  "adhdGenetics": "Genetic and hereditary factors",
+  "adhdBrainChemistry": "Chemical imbalance in the brain",
+  "adhdPrenatalExposure": "Prenatal exposure to substances",
+  "adhdPregnancyComplications": "Pregnancy complications",
+
+  "adhdRoutine": "Create a stable daily routine",
+  "adhdActiveBreaks": "Encourage regular active breaks",
+  "adhdRewardSystem": "Reward positive behavior",
+  "adhdSchoolCooperation": "Collaborate with school and specialists",
+
+  "goToHomeScreen": "Go to home",
+  "aboutADHD": "About ADHD",
+
+  "loginWelcome": "Welcome",
+  "loginWelcomeDescription": "Log in to continue",
+  
+  "loginEmailLabel": "Email",
+  "loginEmailHint": "your@email.com",
+  "loginEmailEmpty": "Please enter your email",
+  "loginEmailInvalid": "Invalid email",
+  "loginFailed": "Login failed",
+  "loginPasswordLabel": "Password",
+  "loginPasswordHint": "••••••••",
+  "loginPasswordEmpty": "Please enter your password",
+  
+  "loginForgotPassword": "Forgot password?",
+  "loginButton": "Log in",
+  
+  "loginOr": "OR",
+  "loginRegisterButton": "Create an account",
+
   "login": "Login",
   "createAccount": "Create Account",
 

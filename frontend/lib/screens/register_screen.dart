@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
+import 'package:frontend/widgets/background_circles.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
 import '../providers/auth_provider.dart';
@@ -150,23 +151,7 @@ class _RegisterScreenState extends State<RegisterScreen>
         builder: (context, authProvider, _) {
           return Stack(
             children: [
-              Positioned(
-                top: -100,
-                right: -100,
-                child: Container(
-                  width: 300,
-                  height: 300,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: RadialGradient(
-                      colors: [
-                        AppConstants.primaryViolet.withOpacity(0.3),
-                        AppConstants.primaryViolet.withOpacity(0.0),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              const BackgroundCircles(),
               SafeArea(
                 child: Column(
                   children: [

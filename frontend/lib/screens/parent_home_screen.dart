@@ -106,7 +106,6 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
               )
             : Column(
                 children: [
-                  // Start New Case Button
                   Padding(
                     padding: const EdgeInsets.all(AppConstants.paddingLarge),
                     child: SizedBox(
@@ -136,8 +135,6 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                       ),
                     ),
                   ),
-
-                  // My Previous Cases
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppConstants.paddingLarge,
@@ -153,10 +150,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: AppConstants.paddingMedium),
-
-                  // Cases List
                   Expanded(
                     child: _cases.isEmpty
                         ? Center(

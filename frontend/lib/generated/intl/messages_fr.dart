@@ -26,6 +26,60 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "aboutADHD": MessageLookupByLibrary.simpleMessage("À propos du TDAH"),
+    "adhdAboutTitle": MessageLookupByLibrary.simpleMessage("À propos du TDAH"),
+    "adhdActiveBreaks": MessageLookupByLibrary.simpleMessage(
+      "Encourager les pauses actives régulières",
+    ),
+    "adhdBrainChemistry": MessageLookupByLibrary.simpleMessage(
+      "Déséquilibre chimique dans le cerveau",
+    ),
+    "adhdCausesDescription": MessageLookupByLibrary.simpleMessage(
+      "Facteurs pouvant contribuer au développement du TDAH",
+    ),
+    "adhdCausesTitle": MessageLookupByLibrary.simpleMessage("Causes possibles"),
+    "adhdGenetics": MessageLookupByLibrary.simpleMessage(
+      "Facteurs génétiques et héréditaires",
+    ),
+    "adhdHyperactivity": MessageLookupByLibrary.simpleMessage(
+      "Hyperactivité : agitation, incapacité à rester assis",
+    ),
+    "adhdImpulsivity": MessageLookupByLibrary.simpleMessage(
+      "Impulsivité : interruption des autres, réactions rapides",
+    ),
+    "adhdInattention": MessageLookupByLibrary.simpleMessage(
+      "Inattention : difficulté à se concentrer, oublis fréquents",
+    ),
+    "adhdParentsDescription": MessageLookupByLibrary.simpleMessage(
+      "Comment aider un enfant atteint de TDAH au quotidien",
+    ),
+    "adhdParentsTitle": MessageLookupByLibrary.simpleMessage(
+      "Conseils aux parents",
+    ),
+    "adhdPregnancyComplications": MessageLookupByLibrary.simpleMessage(
+      "Complications durant la grossesse",
+    ),
+    "adhdPrenatalExposure": MessageLookupByLibrary.simpleMessage(
+      "Exposition prénatale à certaines substances",
+    ),
+    "adhdRewardSystem": MessageLookupByLibrary.simpleMessage(
+      "Récompenser les comportements positifs",
+    ),
+    "adhdRoutine": MessageLookupByLibrary.simpleMessage(
+      "Créer une routine quotidienne stable",
+    ),
+    "adhdSchoolCooperation": MessageLookupByLibrary.simpleMessage(
+      "Collaborer avec l’école et les spécialistes",
+    ),
+    "adhdSchoolProblems": MessageLookupByLibrary.simpleMessage(
+      "Difficultés scolaires et sociales",
+    ),
+    "adhdSymptomsDescription": MessageLookupByLibrary.simpleMessage(
+      "Signes observés chez l’enfant pouvant indiquer un TDAH",
+    ),
+    "adhdSymptomsTitle": MessageLookupByLibrary.simpleMessage(
+      "Symptômes du TDAH",
+    ),
     "adjustPreferences": MessageLookupByLibrary.simpleMessage(
       "Ajustez vos préférences",
     ),
@@ -66,11 +120,40 @@ class MessageLookup extends MessageLookupByLibrary {
     "female": MessageLookupByLibrary.simpleMessage("Femme"),
     "firstName": MessageLookupByLibrary.simpleMessage("Prénom"),
     "french": MessageLookupByLibrary.simpleMessage("Français"),
+    "goToHomeScreen": MessageLookupByLibrary.simpleMessage(
+      "Aller à l\'accueil",
+    ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage("Email invalide"),
     "language": MessageLookupByLibrary.simpleMessage("Langue"),
     "lastName": MessageLookupByLibrary.simpleMessage("Nom"),
     "login": MessageLookupByLibrary.simpleMessage("Se connecter"),
+    "loginButton": MessageLookupByLibrary.simpleMessage("Se connecter"),
+    "loginEmailEmpty": MessageLookupByLibrary.simpleMessage(
+      "Veuillez entrer votre email",
+    ),
+    "loginEmailHint": MessageLookupByLibrary.simpleMessage("votre@email.com"),
+    "loginEmailInvalid": MessageLookupByLibrary.simpleMessage("Email invalide"),
+    "loginEmailLabel": MessageLookupByLibrary.simpleMessage("Email"),
+    "loginFailed": MessageLookupByLibrary.simpleMessage(
+      "Échec de la connexion",
+    ),
+    "loginForgotPassword": MessageLookupByLibrary.simpleMessage(
+      "Mot de passe oublié ?",
+    ),
     "loginLink": MessageLookupByLibrary.simpleMessage("Se connecter"),
+    "loginOr": MessageLookupByLibrary.simpleMessage("OU"),
+    "loginPasswordEmpty": MessageLookupByLibrary.simpleMessage(
+      "Veuillez entrer votre mot de passe",
+    ),
+    "loginPasswordHint": MessageLookupByLibrary.simpleMessage("••••••••"),
+    "loginPasswordLabel": MessageLookupByLibrary.simpleMessage("Mot de passe"),
+    "loginRegisterButton": MessageLookupByLibrary.simpleMessage(
+      "Créer un compte",
+    ),
+    "loginWelcome": MessageLookupByLibrary.simpleMessage("Bienvenue"),
+    "loginWelcomeDescription": MessageLookupByLibrary.simpleMessage(
+      "Connectez-vous pour continuer",
+    ),
     "male": MessageLookupByLibrary.simpleMessage("Homme"),
     "medicalLicenseNumber": MessageLookupByLibrary.simpleMessage(
       "Numéro de licence médicale",

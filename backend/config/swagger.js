@@ -33,8 +33,6 @@ const options = {
             },
         ],
     },
-
-    // Swagger va lire les commentaires JSDoc dans les routes
     apis: ["./routes/*.js"],
 };
 

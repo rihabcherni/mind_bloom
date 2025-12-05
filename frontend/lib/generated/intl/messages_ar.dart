@@ -26,6 +26,54 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "aboutADHD": MessageLookupByLibrary.simpleMessage(
+      "حول اضطراب فرط الحركة وتشتت الانتباه",
+    ),
+    "adhdAboutTitle": MessageLookupByLibrary.simpleMessage("على خاطر ADHD"),
+    "adhdActiveBreaks": MessageLookupByLibrary.simpleMessage(
+      "خليه يعمل وقفات قصيرة باش يخرج الطاقة",
+    ),
+    "adhdBrainChemistry": MessageLookupByLibrary.simpleMessage(
+      "اختلال كيميائي في المخ",
+    ),
+    "adhdCausesDescription": MessageLookupByLibrary.simpleMessage(
+      "حاجات تنجّم تكون سبب في ظهور ADHD",
+    ),
+    "adhdCausesTitle": MessageLookupByLibrary.simpleMessage("أسباب محتملة"),
+    "adhdGenetics": MessageLookupByLibrary.simpleMessage("أسباب وراثية"),
+    "adhdHyperactivity": MessageLookupByLibrary.simpleMessage(
+      "فرط الحركة: ديما يتحرّك و ما يقعدش بلاصة",
+    ),
+    "adhdImpulsivity": MessageLookupByLibrary.simpleMessage(
+      "الاندفاع: يقاطع الناس و يجاوب قبل ما يفكّر",
+    ),
+    "adhdInattention": MessageLookupByLibrary.simpleMessage(
+      "قلة التركيز: يسر يتلهّى وينسى برشة",
+    ),
+    "adhdParentsDescription": MessageLookupByLibrary.simpleMessage(
+      "كيفاش تعاون ولدك لي عندو ADHD في النهار",
+    ),
+    "adhdParentsTitle": MessageLookupByLibrary.simpleMessage("نصائح للأولياء"),
+    "adhdPregnancyComplications": MessageLookupByLibrary.simpleMessage(
+      "مضاعفات أثناء الحمل",
+    ),
+    "adhdPrenatalExposure": MessageLookupByLibrary.simpleMessage(
+      "تأثير مواد أثناء الحمل",
+    ),
+    "adhdRewardSystem": MessageLookupByLibrary.simpleMessage(
+      "شجّع السلوكيات الباهية",
+    ),
+    "adhdRoutine": MessageLookupByLibrary.simpleMessage("اعمل روتين يومي ثابت"),
+    "adhdSchoolCooperation": MessageLookupByLibrary.simpleMessage(
+      "تعاون مع المدرسة و المختصين",
+    ),
+    "adhdSchoolProblems": MessageLookupByLibrary.simpleMessage(
+      "صعوبات في القراية و التعامل مع صحابو",
+    ),
+    "adhdSymptomsDescription": MessageLookupByLibrary.simpleMessage(
+      "علامات تنجّم تبين إلّي الطفل عندو ADHD",
+    ),
+    "adhdSymptomsTitle": MessageLookupByLibrary.simpleMessage("أعراض ADHD"),
     "adjustPreferences": MessageLookupByLibrary.simpleMessage(
       "بدّل الاختيارات متاعك",
     ),
@@ -56,11 +104,36 @@ class MessageLookup extends MessageLookupByLibrary {
     "female": MessageLookupByLibrary.simpleMessage("أنثى"),
     "firstName": MessageLookupByLibrary.simpleMessage("الاسم"),
     "french": MessageLookupByLibrary.simpleMessage("الفرنسية"),
+    "goToHomeScreen": MessageLookupByLibrary.simpleMessage("ابدأ"),
     "invalidEmail": MessageLookupByLibrary.simpleMessage("الإيميل غلط"),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "lastName": MessageLookupByLibrary.simpleMessage("اللقب"),
     "login": MessageLookupByLibrary.simpleMessage("دخول"),
+    "loginButton": MessageLookupByLibrary.simpleMessage("سجّل الدخول"),
+    "loginEmailEmpty": MessageLookupByLibrary.simpleMessage(
+      "رجاءً أدخل الإيميل متاعك",
+    ),
+    "loginEmailHint": MessageLookupByLibrary.simpleMessage("email@domain.com"),
+    "loginEmailInvalid": MessageLookupByLibrary.simpleMessage(
+      "الإيميل موش صحيح",
+    ),
+    "loginEmailLabel": MessageLookupByLibrary.simpleMessage("الإيميل"),
+    "loginFailed": MessageLookupByLibrary.simpleMessage("فشل تسجيل الدخول"),
+    "loginForgotPassword": MessageLookupByLibrary.simpleMessage(
+      "نسيت كلمة السر؟",
+    ),
     "loginLink": MessageLookupByLibrary.simpleMessage("دخول"),
+    "loginOr": MessageLookupByLibrary.simpleMessage("أو"),
+    "loginPasswordEmpty": MessageLookupByLibrary.simpleMessage(
+      "رجاءً أدخل كلمة السر متاعك",
+    ),
+    "loginPasswordHint": MessageLookupByLibrary.simpleMessage("••••••••"),
+    "loginPasswordLabel": MessageLookupByLibrary.simpleMessage("كلمة السر"),
+    "loginRegisterButton": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+    "loginWelcome": MessageLookupByLibrary.simpleMessage("مرحبا"),
+    "loginWelcomeDescription": MessageLookupByLibrary.simpleMessage(
+      "سجّل الدخول باش تكمل",
+    ),
     "male": MessageLookupByLibrary.simpleMessage("ذكر"),
     "medicalLicenseNumber": MessageLookupByLibrary.simpleMessage(
       "رقم الرخصة الطبية",

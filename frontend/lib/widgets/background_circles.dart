@@ -9,11 +9,11 @@ class BackgroundCircles extends StatelessWidget {
     return Stack(
       children: [
         Positioned(
-          top: -100,
-          right: -100,
+          top: -150,
+          right: -150,
           child: Container(
-            width: 300,
-            height: 300,
+            width: 400,
+            height: 400,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: RadialGradient(
@@ -26,8 +26,8 @@ class BackgroundCircles extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: -150,
-          left: -150,
+          bottom: -100,
+          left: -100,
           child: Container(
             width: 350,
             height: 350,
@@ -35,7 +35,7 @@ class BackgroundCircles extends StatelessWidget {
               shape: BoxShape.circle,
               gradient: RadialGradient(
                 colors: [
-                  AppConstants.lightViolet.withOpacity(0.2),
+                  AppConstants.lightViolet.withOpacity(0.25),
                   AppConstants.lightViolet.withOpacity(0.0),
                 ],
               ),

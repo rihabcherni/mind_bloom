@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/screens/welcome_screen.dart';
+import 'package:frontend/widgets/background_circles.dart';
 import '../constants/app_constants.dart';
 import '../generated/l10n.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
-
   @override
   State<AboutScreen> createState() => _AboutScreenState();
 }
@@ -16,10 +16,8 @@ class _AboutScreenState extends State<AboutScreen>
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
-
   final PageController _pageController = PageController();
   int _currentPage = 0;
-
   @override
   void initState() {
     super.initState();
@@ -27,14 +25,12 @@ class _AboutScreenState extends State<AboutScreen>
       vsync: this,
       duration: const Duration(milliseconds: 1200),
     );
-
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _animationController,
         curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
       ),
     );
-
     _slideAnimation =
         Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
           CurvedAnimation(
@@ -42,7 +38,6 @@ class _AboutScreenState extends State<AboutScreen>
             curve: const Interval(0.3, 1.0, curve: Curves.easeOutCubic),
           ),
         );
-
     _animationController.forward();
   }
 
@@ -54,44 +49,45 @@ class _AboutScreenState extends State<AboutScreen>
   }
 
   List<OnboardingItem> _getOnboardingItems(BuildContext context) {
+    final t = S.of(context);
     return [
       OnboardingItem(
         imagePath: 'assets/images/1.png',
         icon: Icons.psychology_rounded,
         color: AppConstants.primaryViolet,
-        title: 'Symptômes du TDAH',
-        description: 'Signes observés chez l\'enfant pouvant indiquer un TDAH',
+        title: t.adhdSymptomsTitle,
+        description: t.adhdSymptomsDescription,
         details: [
-          'Inattention : difficulté à se concentrer, oublis fréquents',
-          'Hyperactivité : agitation, incapacité à rester assis',
-          'Impulsivité : interrompre les autres, réactions rapides',
-          'Difficultés scolaires et sociales',
+          t.adhdInattention,
+          t.adhdHyperactivity,
+          t.adhdImpulsivity,
+          t.adhdSchoolProblems,
         ],
       ),
       OnboardingItem(
         imagePath: 'assets/images/2.jpg',
         icon: Icons.science_rounded,
         color: AppConstants.lightViolet,
-        title: 'Causes possibles',
-        description: 'Facteurs pouvant contribuer au développement du TDAH',
+        title: t.adhdCausesTitle,
+        description: t.adhdCausesDescription,
         details: [
-          'Facteurs génétiques et héréditaires',
-          'Déséquilibre chimique dans le cerveau',
-          'Exposition prénatale à certaines substances',
-          'Complications pendant la grossesse',
+          t.adhdGenetics,
+          t.adhdBrainChemistry,
+          t.adhdPrenatalExposure,
+          t.adhdPregnancyComplications,
         ],
       ),
       OnboardingItem(
         imagePath: 'assets/images/3.jpg',
         icon: Icons.family_restroom_rounded,
         color: AppConstants.darkViolet,
-        title: 'Conseils aux parents',
-        description: 'Comment aider votre enfant avec TDAH au quotidien',
+        title: t.adhdParentsTitle,
+        description: t.adhdParentsDescription,
         details: [
-          'Créer une routine quotidienne stable',
-          'Encourager les pauses actives régulières',
-          'Récompenser les comportements positifs',
-          'Collaborer avec l\'école et les spécialistes',
+          t.adhdRoutine,
+          t.adhdActiveBreaks,
+          t.adhdRewardSystem,
+          t.adhdSchoolCooperation,
         ],
       ),
     ];
@@ -101,54 +97,13 @@ class _AboutScreenState extends State<AboutScreen>
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final items = _getOnboardingItems(context);
-
     return Scaffold(
-      backgroundColor: isDark
-          ? const Color(0xFF1A1A2E)
-          : const Color(0xFFF8F9FA),
       body: Stack(
         children: [
-          // Background gradient circles
-          Positioned(
-            top: -150,
-            right: -150,
-            child: Container(
-              width: 400,
-              height: 400,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  colors: [
-                    AppConstants.primaryViolet.withOpacity(0.3),
-                    AppConstants.primaryViolet.withOpacity(0.0),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: -100,
-            left: -100,
-            child: Container(
-              width: 350,
-              height: 350,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  colors: [
-                    AppConstants.lightViolet.withOpacity(0.25),
-                    AppConstants.lightViolet.withOpacity(0.0),
-                  ],
-                ),
-              ),
-            ),
-          ),
-
-          // Main Content
+          const BackgroundCircles(),
           SafeArea(
             child: Column(
               children: [
-                // Custom AppBar
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
@@ -171,21 +126,21 @@ class _AboutScreenState extends State<AboutScreen>
                           icon: Icon(
                             Icons.arrow_back_ios_new_rounded,
                             color: isDark
-                                ? Colors.white
+                                ? AppConstants.white
                                 : AppConstants.darkViolet,
                           ),
                           onPressed: () => Navigator.pop(context),
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          'À propos du TDAH',
+                          S.of(context).aboutADHD,
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: isDark
-                                ? Colors.white
+                                ? AppConstants.white
                                 : AppConstants.darkViolet,
                           ),
                         ),
@@ -245,8 +200,6 @@ class _AboutScreenState extends State<AboutScreen>
                               },
                             ),
                           ),
-
-                          // Page Indicators
                           Padding(
                             padding: const EdgeInsets.all(20),
                             child: Row(
@@ -257,7 +210,6 @@ class _AboutScreenState extends State<AboutScreen>
                               ),
                             ),
                           ),
-                          // Ajoutez ce bouton juste après le Row des page indicators
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             child: ElevatedButton(
@@ -279,11 +231,11 @@ class _AboutScreenState extends State<AboutScreen>
                                   ),
                                 );
                               },
-                              child: const Text(
-                                'Passer à l\'écran d\'accueil',
+                              child: Text(
+                                S.of(context).goToHomeScreen,
                                 style: TextStyle(
                                   color: AppConstants.white,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -307,10 +259,9 @@ class _AboutScreenState extends State<AboutScreen>
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         children: [
-          // Image Container
           Container(
-            width: 240,
-            height: 240,
+            width: 180,
+            height: 180,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
               boxShadow: [
@@ -331,7 +282,6 @@ class _AboutScreenState extends State<AboutScreen>
                     width: 240,
                     height: 240,
                     errorBuilder: (context, error, stackTrace) {
-                      // Fallback if image doesn't exist
                       return Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -346,7 +296,6 @@ class _AboutScreenState extends State<AboutScreen>
                     },
                   ),
                 ),
-                // Icon badge
                 Positioned(
                   bottom: 12,
                   right: 12,
@@ -384,22 +333,17 @@ class _AboutScreenState extends State<AboutScreen>
             textAlign: TextAlign.center,
           ),
 
-          const SizedBox(height: 12),
-
-          // Description
+          const SizedBox(height: 6),
           Text(
             item.description,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 12,
               color: isDark ? Colors.white70 : Colors.grey[600],
               height: 1.5,
             ),
             textAlign: TextAlign.center,
           ),
-
-          const SizedBox(height: 24),
-
-          // Details Card
+          const SizedBox(height: 12),
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
@@ -437,7 +381,7 @@ class _AboutScreenState extends State<AboutScreen>
                         child: Text(
                           detail,
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 13,
                             color: isDark ? Colors.white : Colors.grey[800],
                             height: 1.5,
                           ),
@@ -450,7 +394,7 @@ class _AboutScreenState extends State<AboutScreen>
             ),
           ),
 
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
         ],
       ),
     );

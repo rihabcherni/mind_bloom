@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
+import 'package:frontend/widgets/background_circles.dart';
 import '../constants/app_constants.dart';
 import '../generated/l10n.dart';
 
@@ -49,54 +50,13 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
-      backgroundColor: isDark
-          ? const Color(0xFF1A1A2E)
-          : const Color(0xFFF8F9FA),
       body: Stack(
         children: [
-          // Background gradient circles
-          Positioned(
-            top: -150,
-            left: -150,
-            child: Container(
-              width: 400,
-              height: 400,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  colors: [
-                    AppConstants.primaryViolet.withOpacity(0.3),
-                    AppConstants.primaryViolet.withOpacity(0.0),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: -100,
-            right: -100,
-            child: Container(
-              width: 350,
-              height: 350,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  colors: [
-                    AppConstants.lightViolet.withOpacity(0.2),
-                    AppConstants.lightViolet.withOpacity(0.0),
-                  ],
-                ),
-              ),
-            ),
-          ),
-
-          // Main Content
+          const BackgroundCircles(),
           SafeArea(
             child: Column(
               children: [
-                // Custom AppBar
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
@@ -160,8 +120,6 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
                     ],
                   ),
                 ),
-
-                // Content
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(AppConstants.paddingLarge),
@@ -170,7 +128,6 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Logo/Icon
                           Container(
                             padding: const EdgeInsets.all(24),
                             decoration: BoxDecoration(
@@ -199,10 +156,7 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
                               color: Colors.white,
                             ),
                           ),
-
                           const SizedBox(height: 15),
-
-                          // Title
                           Text(
                             S.of(context).chooseProfile,
                             textAlign: TextAlign.center,
@@ -330,7 +284,6 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
           ),
           child: Row(
             children: [
-              // Icon Container
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -350,10 +303,7 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
                 ),
                 child: Icon(icon, size: 40, color: Colors.white),
               ),
-
               const SizedBox(width: 20),
-
-              // Text Content
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -377,8 +327,6 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
                   ],
                 ),
               ),
-
-              // Arrow Icon
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
+import 'package:frontend/widgets/background_circles.dart';
 import '../constants/app_constants.dart';
 import '../models/case_model.dart';
 import '../services/api_service.dart';
@@ -77,7 +78,6 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: isDark ? const Color(0xFF252545) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Row(
           children: [
@@ -167,7 +167,6 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: isDark ? const Color(0xFF252545) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Row(
           children: [
@@ -318,261 +317,264 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
         return Colors.grey;
     }
   }
-
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
-      backgroundColor: isDark
-          ? const Color(0xFF1A1A2E)
-          : const Color(0xFFF8F9FA),
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Custom AppBar
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: isDark ? const Color(0xFF252545) : Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
+      body: Stack(
+        children: [
+          const BackgroundCircles(),
+          SafeArea(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? const Color(0xFF252545)
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        color: isDark ? Colors.white : AppConstants.darkViolet,
-                      ),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      'Détails du cas',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? Colors.white : AppConstants.darkViolet,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: isDark ? const Color(0xFF252545) : Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.settings_rounded,
-                        color: isDark ? Colors.white : AppConstants.darkViolet,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const SettingsScreen(),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                            color: isDark
+                                ? Colors.white
+                                : AppConstants.darkViolet,
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Content
-            Expanded(
-              child: _isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(
-                        color: AppConstants.primaryViolet,
-                        strokeWidth: 3,
+                          onPressed: () => Navigator.pop(context),
+                        ),
                       ),
-                    )
-                  : _case == null
-                  ? _buildEmptyState(isDark)
-                  : FadeTransition(
-                      opacity: _fadeAnimation,
-                      child: SingleChildScrollView(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          children: [
-                            // Severity Badge
-                            _buildSeverityBadge(isDark),
-                            const SizedBox(height: 20),
-
-                            // Child Profile
-                            _buildModernSection(
-                              title: 'Profil de l\'enfant',
-                              icon: Icons.child_care_rounded,
-                              color: AppConstants.primaryViolet,
-                              isDark: isDark,
-                              children: [
-                                _buildInfoRow(
-                                  'Nom',
-                                  _case!.childFullName,
-                                  Icons.person_rounded,
-                                  isDark,
-                                ),
-                                _buildInfoRow(
-                                  'Âge',
-                                  '${_case!.childAge} ans',
-                                  Icons.cake_rounded,
-                                  isDark,
-                                ),
-                                _buildInfoRow(
-                                  'Sexe',
-                                  _case!.childSex,
-                                  Icons.wc_rounded,
-                                  isDark,
-                                ),
-                                _buildInfoRow(
-                                  'Niveau',
-                                  _case!.scholarYear,
-                                  Icons.school_rounded,
-                                  isDark,
-                                ),
-                              ],
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          'Détails du cas',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: isDark
+                                ? Colors.white
+                                : AppConstants.darkViolet,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? const Color(0xFF252545)
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
                             ),
-
-                            const SizedBox(height: 16),
-
-                            // Screening Answers
-                            _buildModernSection(
-                              title: 'Questionnaire TDAH',
-                              icon: Icons.quiz_rounded,
-                              color: AppConstants.lightViolet,
-                              isDark: isDark,
-                              children: _case!.screeningAnswers
-                                  .asMap()
-                                  .entries
-                                  .map((entry) {
-                                    return _buildQuestionAnswer(
-                                      entry.key + 1,
-                                      entry.value.question,
-                                      entry.value.answer,
+                          ],
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.settings_rounded,
+                            color: isDark
+                                ? Colors.white
+                                : AppConstants.darkViolet,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const SettingsScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: _isLoading
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: AppConstants.primaryViolet,
+                            strokeWidth: 3,
+                          ),
+                        )
+                      : _case == null
+                      ? _buildEmptyState(isDark)
+                      : FadeTransition(
+                          opacity: _fadeAnimation,
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              children: [
+                                _buildSeverityBadge(isDark),
+                                const SizedBox(height: 20),
+                                _buildModernSection(
+                                  title: 'Profil de l\'enfant',
+                                  icon: Icons.child_care_rounded,
+                                  color: AppConstants.primaryViolet,
+                                  isDark: isDark,
+                                  children: [
+                                    _buildInfoRow(
+                                      'Nom',
+                                      _case!.childFullName,
+                                      Icons.person_rounded,
                                       isDark,
-                                    );
-                                  })
-                                  .toList(),
-                            ),
-
-                            const SizedBox(height: 16),
-
-                            // Video Section
-                            _buildModernSection(
-                              title: 'Vidéo',
-                              icon: Icons.videocam_rounded,
-                              color: const Color(0xFF2196F3),
-                              isDark: isDark,
-                              children: [
-                                if (_case!.videoUrl != null)
-                                  ElevatedButton.icon(
-                                    onPressed: () {
-                                      // TODO: Play video
-                                    },
-                                    icon: const Icon(Icons.play_arrow_rounded),
-                                    label: const Text('Lire la vidéo'),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color(0xFF2196F3),
-                                      foregroundColor: Colors.white,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 24,
-                                        vertical: 12,
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
                                     ),
-                                  )
-                                else
-                                  Container(
-                                    padding: const EdgeInsets.all(16),
-                                    decoration: BoxDecoration(
-                                      color: Colors.orange.withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                        color: Colors.orange.withOpacity(0.3),
-                                      ),
+                                    _buildInfoRow(
+                                      'Âge',
+                                      '${_case!.childAge} ans',
+                                      Icons.cake_rounded,
+                                      isDark,
                                     ),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.info_rounded,
-                                          color: Colors.orange,
-                                          size: 20,
+                                    _buildInfoRow(
+                                      'Sexe',
+                                      _case!.childSex,
+                                      Icons.wc_rounded,
+                                      isDark,
+                                    ),
+                                    _buildInfoRow(
+                                      'Niveau',
+                                      _case!.scholarYear,
+                                      Icons.school_rounded,
+                                      isDark,
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 16),
+                                _buildModernSection(
+                                  title: 'Questionnaire TDAH',
+                                  icon: Icons.quiz_rounded,
+                                  color: AppConstants.lightViolet,
+                                  isDark: isDark,
+                                  children: _case!.screeningAnswers
+                                      .asMap()
+                                      .entries
+                                      .map((entry) {
+                                        return _buildQuestionAnswer(
+                                          entry.key + 1,
+                                          entry.value.question,
+                                          entry.value.answer,
+                                          isDark,
+                                        );
+                                      })
+                                      .toList(),
+                                ),
+
+                                const SizedBox(height: 16),
+                                _buildModernSection(
+                                  title: 'Vidéo',
+                                  icon: Icons.videocam_rounded,
+                                  color: const Color(0xFF2196F3),
+                                  isDark: isDark,
+                                  children: [
+                                    if (_case!.videoUrl != null)
+                                      ElevatedButton.icon(
+                                        onPressed: () {
+                                        },
+                                        icon: const Icon(
+                                          Icons.play_arrow_rounded,
                                         ),
-                                        const SizedBox(width: 12),
-                                        const Expanded(
-                                          child: Text(
-                                            'Aucune vidéo téléchargée',
-                                            style: TextStyle(
-                                              color: Colors.orange,
-                                              fontWeight: FontWeight.w600,
+                                        label: const Text('Lire la vidéo'),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: const Color(
+                                            0xFF2196F3,
+                                          ),
+                                          foregroundColor: Colors.white,
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 24,
+                                            vertical: 12,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              12,
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      )
+                                    else
+                                      Container(
+                                        padding: const EdgeInsets.all(16),
+                                        decoration: BoxDecoration(
+                                          color: Colors.orange.withOpacity(0.1),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                          border: Border.all(
+                                            color: Colors.orange.withOpacity(
+                                              0.3,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.info_rounded,
+                                              color: Colors.orange,
+                                              size: 20,
+                                            ),
+                                            const SizedBox(width: 12),
+                                            const Expanded(
+                                              child: Text(
+                                                'Aucune vidéo téléchargée',
+                                                style: TextStyle(
+                                                  color: Colors.orange,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                                if (_case!.additionalTestResponse != null) ...[
+                                  const SizedBox(height: 16),
+                                  _buildModernSection(
+                                    title: 'Réponse au test supplémentaire',
+                                    icon: Icons.assignment_turned_in_rounded,
+                                    color: Colors.purple,
+                                    isDark: isDark,
+                                    children:
+                                        _case!.additionalTestResponse!.answers
+                                            ?.map((answer) {
+                                              return _buildTestAnswer(
+                                                answer.question,
+                                                answer.answer,
+                                                isDark,
+                                              );
+                                            })
+                                            .toList() ??
+                                        [],
                                   ),
+                                ],
+                                const SizedBox(height: 24),
+                                if (_case!.diagnosis == null)
+                                  _buildActionButtons(isDark)
+                                else
+                                  _buildDiagnosisSubmitted(isDark),
+
+                                const SizedBox(height: 20),
                               ],
                             ),
-
-                            // Additional Test Response
-                            if (_case!.additionalTestResponse != null) ...[
-                              const SizedBox(height: 16),
-                              _buildModernSection(
-                                title: 'Réponse au test supplémentaire',
-                                icon: Icons.assignment_turned_in_rounded,
-                                color: Colors.purple,
-                                isDark: isDark,
-                                children:
-                                    _case!.additionalTestResponse!.answers?.map(
-                                      (answer) {
-                                        return _buildTestAnswer(
-                                          answer.question,
-                                          answer.answer,
-                                          isDark,
-                                        );
-                                      },
-                                    ).toList() ??
-                                    [],
-                              ),
-                            ],
-
-                            const SizedBox(height: 24),
-
-                            // Action Buttons
-                            if (_case!.diagnosis == null)
-                              _buildActionButtons(isDark)
-                            else
-                              _buildDiagnosisSubmitted(isDark),
-
-                            const SizedBox(height: 20),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

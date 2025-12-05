@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider with ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.light;
-  Locale _locale = const Locale('ar'); // Par défaut : arabe derja
+  Locale _locale = const Locale('ar'); 
 
   ThemeMode get themeMode => _themeMode;
   Locale get locale => _locale;

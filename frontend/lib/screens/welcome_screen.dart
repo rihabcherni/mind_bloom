@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/background_circles.dart';
 import '../constants/app_constants.dart';
 import '../generated/l10n.dart';
 
@@ -58,70 +59,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
-      backgroundColor: isDark
-          ? const Color(0xFF1A1A2E)
-          : const Color(0xFFF8F9FA),
       body: Stack(
         children: [
-          // Animated Background Circles
-          Positioned(
-            top: -200,
-            right: -150,
-            child: TweenAnimationBuilder<double>(
-              tween: Tween(begin: 0.0, end: 1.0),
-              duration: const Duration(milliseconds: 2000),
-              curve: Curves.easeOut,
-              builder: (context, value, child) {
-                return Transform.scale(
-                  scale: value,
-                  child: Container(
-                    width: 500,
-                    height: 500,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: RadialGradient(
-                        colors: [
-                          AppConstants.primaryViolet.withOpacity(0.3),
-                          AppConstants.primaryViolet.withOpacity(0.0),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          Positioned(
-            bottom: -150,
-            left: -150,
-            child: TweenAnimationBuilder<double>(
-              tween: Tween(begin: 0.0, end: 1.0),
-              duration: const Duration(milliseconds: 2000),
-              curve: Curves.easeOut,
-              builder: (context, value, child) {
-                return Transform.scale(
-                  scale: value,
-                  child: Container(
-                    width: 450,
-                    height: 450,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: RadialGradient(
-                        colors: [
-                          AppConstants.lightViolet.withOpacity(0.25),
-                          AppConstants.lightViolet.withOpacity(0.0),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-
-          // Main Content
+          const BackgroundCircles(),
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(AppConstants.paddingLarge),
@@ -139,6 +80,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                           gradient: const LinearGradient(
                             colors: [
                               AppConstants.primaryViolet,
+                              AppConstants.white,
                               AppConstants.lightViolet,
                             ],
                             begin: Alignment.topLeft,
@@ -157,8 +99,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ),
                         child: Image.asset(
                           'assets/images/logo-trans.png',
-                          width: 80,
-                          height: 80,
+                          width: 120,
+                          height: 120,
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -178,10 +120,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       textAlign: TextAlign.center,
                     ),
                   ),
-
                   const SizedBox(height: 16),
-
-                  // Subtitle
                   FadeTransition(
                     opacity: _fadeAnimation,
                     child: Text(
@@ -194,17 +133,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       textAlign: TextAlign.center,
                     ),
                   ),
-
                   const Spacer(),
-
-                  // Buttons Section
                   SlideTransition(
                     position: _slideAnimation,
                     child: FadeTransition(
                       opacity: _fadeAnimation,
                       child: Column(
                         children: [
-                          // Login Button with Gradient
                           SizedBox(
                             width: double.infinity,
                             height: 56,
@@ -255,10 +190,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                               ),
                             ),
                           ),
-
                           const SizedBox(height: 16),
-
-                          // Create Account Button
                           SizedBox(
                             width: double.infinity,
                             height: 56,
@@ -286,8 +218,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                               ),
                             ),
                           ),
-                          const SizedBox(height: 24),
-                          _buildFeaturesRow(isDark),
                         ],
                       ),
                     ),
@@ -296,61 +226,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   const SizedBox(height: AppConstants.paddingLarge),
                 ],
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFeaturesRow(bool isDark) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildFeatureChip(
-          icon: Icons.security_rounded,
-          label: 'Sécurisé',
-          isDark: isDark,
-        ),
-        const SizedBox(width: 12),
-        _buildFeatureChip(
-          icon: Icons.speed_rounded,
-          label: 'Rapide',
-          isDark: isDark,
-        ),
-        const SizedBox(width: 12),
-        _buildFeatureChip(
-          icon: Icons.psychology_rounded,
-          label: 'Intelligent',
-          isDark: isDark,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildFeatureChip({
-    required IconData icon,
-    required String label,
-    required bool isDark,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: AppConstants.primaryViolet.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppConstants.primaryViolet.withOpacity(0.2)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 16, color: AppConstants.primaryViolet),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: isDark ? Colors.white : AppConstants.darkViolet,
             ),
           ),
         ],

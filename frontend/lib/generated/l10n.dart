@@ -69,6 +69,331 @@ class S {
     );
   }
 
+  /// `About ADHD`
+  String get adhdAboutTitle {
+    return Intl.message(
+      'About ADHD',
+      name: 'adhdAboutTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ADHD Symptoms`
+  String get adhdSymptomsTitle {
+    return Intl.message(
+      'ADHD Symptoms',
+      name: 'adhdSymptomsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signs that may indicate ADHD in a child`
+  String get adhdSymptomsDescription {
+    return Intl.message(
+      'Signs that may indicate ADHD in a child',
+      name: 'adhdSymptomsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Possible Causes`
+  String get adhdCausesTitle {
+    return Intl.message(
+      'Possible Causes',
+      name: 'adhdCausesTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Factors that may contribute to ADHD development`
+  String get adhdCausesDescription {
+    return Intl.message(
+      'Factors that may contribute to ADHD development',
+      name: 'adhdCausesDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tips for Parents`
+  String get adhdParentsTitle {
+    return Intl.message(
+      'Tips for Parents',
+      name: 'adhdParentsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How to support a child with ADHD daily`
+  String get adhdParentsDescription {
+    return Intl.message(
+      'How to support a child with ADHD daily',
+      name: 'adhdParentsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inattention: difficulty focusing, frequent forgetfulness`
+  String get adhdInattention {
+    return Intl.message(
+      'Inattention: difficulty focusing, frequent forgetfulness',
+      name: 'adhdInattention',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hyperactivity: restlessness, inability to stay seated`
+  String get adhdHyperactivity {
+    return Intl.message(
+      'Hyperactivity: restlessness, inability to stay seated',
+      name: 'adhdHyperactivity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Impulsivity: interrupting, acting without thinking`
+  String get adhdImpulsivity {
+    return Intl.message(
+      'Impulsivity: interrupting, acting without thinking',
+      name: 'adhdImpulsivity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `School and social challenges`
+  String get adhdSchoolProblems {
+    return Intl.message(
+      'School and social challenges',
+      name: 'adhdSchoolProblems',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Genetic and hereditary factors`
+  String get adhdGenetics {
+    return Intl.message(
+      'Genetic and hereditary factors',
+      name: 'adhdGenetics',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chemical imbalance in the brain`
+  String get adhdBrainChemistry {
+    return Intl.message(
+      'Chemical imbalance in the brain',
+      name: 'adhdBrainChemistry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prenatal exposure to substances`
+  String get adhdPrenatalExposure {
+    return Intl.message(
+      'Prenatal exposure to substances',
+      name: 'adhdPrenatalExposure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pregnancy complications`
+  String get adhdPregnancyComplications {
+    return Intl.message(
+      'Pregnancy complications',
+      name: 'adhdPregnancyComplications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a stable daily routine`
+  String get adhdRoutine {
+    return Intl.message(
+      'Create a stable daily routine',
+      name: 'adhdRoutine',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Encourage regular active breaks`
+  String get adhdActiveBreaks {
+    return Intl.message(
+      'Encourage regular active breaks',
+      name: 'adhdActiveBreaks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reward positive behavior`
+  String get adhdRewardSystem {
+    return Intl.message(
+      'Reward positive behavior',
+      name: 'adhdRewardSystem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collaborate with school and specialists`
+  String get adhdSchoolCooperation {
+    return Intl.message(
+      'Collaborate with school and specialists',
+      name: 'adhdSchoolCooperation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to home`
+  String get goToHomeScreen {
+    return Intl.message(
+      'Go to home',
+      name: 'goToHomeScreen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About ADHD`
+  String get aboutADHD {
+    return Intl.message('About ADHD', name: 'aboutADHD', desc: '', args: []);
+  }
+
+  /// `Welcome`
+  String get loginWelcome {
+    return Intl.message('Welcome', name: 'loginWelcome', desc: '', args: []);
+  }
+
+  /// `Log in to continue`
+  String get loginWelcomeDescription {
+    return Intl.message(
+      'Log in to continue',
+      name: 'loginWelcomeDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get loginEmailLabel {
+    return Intl.message('Email', name: 'loginEmailLabel', desc: '', args: []);
+  }
+
+  /// `your@email.com`
+  String get loginEmailHint {
+    return Intl.message(
+      'your@email.com',
+      name: 'loginEmailHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email`
+  String get loginEmailEmpty {
+    return Intl.message(
+      'Please enter your email',
+      name: 'loginEmailEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid email`
+  String get loginEmailInvalid {
+    return Intl.message(
+      'Invalid email',
+      name: 'loginEmailInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login failed`
+  String get loginFailed {
+    return Intl.message(
+      'Login failed',
+      name: 'loginFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get loginPasswordLabel {
+    return Intl.message(
+      'Password',
+      name: 'loginPasswordLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `••••••••`
+  String get loginPasswordHint {
+    return Intl.message(
+      '••••••••',
+      name: 'loginPasswordHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your password`
+  String get loginPasswordEmpty {
+    return Intl.message(
+      'Please enter your password',
+      name: 'loginPasswordEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot password?`
+  String get loginForgotPassword {
+    return Intl.message(
+      'Forgot password?',
+      name: 'loginForgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in`
+  String get loginButton {
+    return Intl.message('Log in', name: 'loginButton', desc: '', args: []);
+  }
+
+  /// `OR`
+  String get loginOr {
+    return Intl.message('OR', name: 'loginOr', desc: '', args: []);
+  }
+
+  /// `Create an account`
+  String get loginRegisterButton {
+    return Intl.message(
+      'Create an account',
+      name: 'loginRegisterButton',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Login`
   String get login {
     return Intl.message('Login', name: 'login', desc: '', args: []);

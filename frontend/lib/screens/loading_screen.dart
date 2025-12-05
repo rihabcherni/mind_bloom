@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/background_circles.dart';
 import '../constants/app_constants.dart';
 import 'about_screen.dart';
 import '../generated/l10n.dart';
@@ -43,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _animationController.forward();
     _animationController.repeat(reverse: true);
-    Timer(const Duration(seconds: 125), () {
+    Timer(const Duration(seconds: 5), () {
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const AboutScreen()),
@@ -75,60 +76,7 @@ class _SplashScreenState extends State<SplashScreen>
         ),
         child: Stack(
           children: [
-            Positioned(
-              top: -100,
-              right: -100,
-              child: TweenAnimationBuilder<double>(
-                tween: Tween(begin: 0.0, end: 1.0),
-                duration: const Duration(milliseconds: 2000),
-                curve: Curves.easeOut,
-                builder: (context, value, child) {
-                  return Transform.scale(
-                    scale: value,
-                    child: Container(
-                      width: 400,
-                      height: 400,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: RadialGradient(
-                          colors: [
-                            Colors.white.withOpacity(0.1),
-                            Colors.white.withOpacity(0.0),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            Positioned(
-              bottom: -150,
-              left: -150,
-              child: TweenAnimationBuilder<double>(
-                tween: Tween(begin: 0.0, end: 1.0),
-                duration: const Duration(milliseconds: 2500),
-                curve: Curves.easeOut,
-                builder: (context, value, child) {
-                  return Transform.scale(
-                    scale: value,
-                    child: Container(
-                      width: 500,
-                      height: 500,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: RadialGradient(
-                          colors: [
-                            Colors.white.withOpacity(0.08),
-                            Colors.white.withOpacity(0.0),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            const BackgroundCircles(),
             Center(
               child: FadeTransition(
                 opacity: _fadeAnimation,
@@ -190,7 +138,7 @@ class _SplashScreenState extends State<SplashScreen>
                       child: Text(
                         S.of(context).appTitle,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppConstants.primaryViolet,
                           fontSize: 42,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2,
@@ -208,8 +156,8 @@ class _SplashScreenState extends State<SplashScreen>
                     const SizedBox(height: 12),
                     FadeTransition(
                       opacity: _fadeAnimation,
-                      child: const Text(
-                        'Diagnostic et suivi personnalisé',
+                      child: Text(
+                        S.of(context).welcomeSubtitle,
                         style: TextStyle(
                           color: Colors.white70,
                           fontSize: 16,
@@ -219,29 +167,19 @@ class _SplashScreenState extends State<SplashScreen>
                       ),
                     ),
 
-                    const SizedBox(height: 80),
+                    const SizedBox(height: 50),
                     FadeTransition(
                       opacity: _fadeAnimation,
                       child: Column(
                         children: [
                           SizedBox(
-                            width: 50,
-                            height: 50,
+                            width: 30,
+                            height: 30,
                             child: CircularProgressIndicator(
                               strokeWidth: 3,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                 Colors.white.withOpacity(0.9),
                               ),
-                            ),
-                          ),
-                          const SizedBox(height: 24),
-                          const Text(
-                            'Chargement...',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 1,
                             ),
                           ),
                         ],

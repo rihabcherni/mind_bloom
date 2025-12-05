@@ -48,8 +48,6 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-
-            // Language Section
             _buildSectionTitle(S.of(context).language, isDark),
             const SizedBox(height: 12),
             _buildModernCard(

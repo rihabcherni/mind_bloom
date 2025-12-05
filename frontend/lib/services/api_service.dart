@@ -22,8 +22,6 @@ class ApiService {
     }
     return headers;
   }
-
-  // AUTH ENDPOINTS
   static Future<User> register(Map<String, dynamic> userData) async {
     final response = await http.post(
       Uri.parse('${AppConstants.baseUrl}/auth/register'),
@@ -68,8 +66,6 @@ class ApiService {
       throw Exception('Failed to get user data');
     }
   }
-
-  // CASE ENDPOINTS
   static Future<CaseModel> createCase(Map<String, dynamic> caseData) async {
     final response = await http.post(
       Uri.parse('${AppConstants.baseUrl}/cases'),
@@ -214,8 +210,6 @@ class ApiService {
       throw Exception('Failed to submit test response');
     }
   }
-
-  // NOTIFICATION ENDPOINTS
   static Future<List<NotificationModel>> getNotifications(bool unreadOnly) async {
     final response = await http.get(
       Uri.parse('${AppConstants.baseUrl}/notifications?unreadOnly=$unreadOnly'),
@@ -267,8 +261,6 @@ class ApiService {
       throw Exception('Failed to mark all notifications as read');
     }
   }
-
-  // REPORT ENDPOINTS
   static Future<Map<String, dynamic>> getReportUrl(String caseId) async {
     final response = await http.get(
       Uri.parse('${AppConstants.baseUrl}/reports/$caseId/url'),

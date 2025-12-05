@@ -58,20 +58,15 @@ const {
 } = require('../controllers/caseController');
 const { protect, restrictTo } = require('../middleware/auth');
 const upload = require('../config/multer');
-
-// Parent routes
 router.post('/', protect, restrictTo('parent'), createCase);
 router.post('/:id/video', protect, restrictTo('parent'), upload.single('video'), uploadVideo);
 router.get('/my-cases', protect, restrictTo('parent'), getMyCases);
 router.put('/:id/test-response', protect, restrictTo('parent'), upload.single('video'), submitTestResponse);
 
-// Doctor routes
 router.get('/doctor-cases', protect, restrictTo('doctor'), getDoctorCases);
 router.put('/:id/assign', protect, restrictTo('doctor'), assignCase);
 router.put('/:id/diagnosis', protect, restrictTo('doctor'), submitDiagnosis);
 router.put('/:id/request-test', protect, restrictTo('doctor'), requestAdditionalTest);
-
-// Both can access
 router.get('/:id', protect, getCaseById);
 
 module.exports = router;

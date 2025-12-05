@@ -13,11 +13,11 @@ const protect = async (req, res, next) => {
 
       if (!user) {
         res.status(401).json({ message: 'User not found' });
-        return; // Stop further execution
+        return;
       }
 
       req.user = user;
-      next(); // ✅ Appel direct, ne pas faire return
+      next();
     } catch (error) {
       console.error('Auth middleware error:', error);
       res.status(401).json({ message: 'Not authorized, token failed' });

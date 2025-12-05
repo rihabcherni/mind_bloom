@@ -7,8 +7,6 @@ const {
   markAllAsRead
 } = require('../controllers/notificationController');
 const { protect } = require('../middleware/auth');
-
-// All routes are protected
 router.get('/', protect, getNotifications);
 router.get('/unread-count', protect, getUnreadCount);
 router.put('/:id/read', protect, markAsRead);

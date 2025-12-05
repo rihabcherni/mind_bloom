@@ -91,8 +91,6 @@ class _CreateCaseScreenState extends State<CreateCaseScreen> {
                 ),
               ),
               const SizedBox(height: AppConstants.paddingLarge),
-
-              // First Name
               TextFormField(
                 controller: _firstNameController,
                 textCapitalization: TextCapitalization.words,
@@ -115,8 +113,6 @@ class _CreateCaseScreenState extends State<CreateCaseScreen> {
                 },
               ),
               const SizedBox(height: AppConstants.paddingMedium),
-
-              // Last Name
               TextFormField(
                 controller: _lastNameController,
                 textCapitalization: TextCapitalization.words,
@@ -139,8 +135,6 @@ class _CreateCaseScreenState extends State<CreateCaseScreen> {
                 },
               ),
               const SizedBox(height: AppConstants.paddingMedium),
-
-              // Sex
               DropdownButtonFormField<String>(
                 value: _selectedSex,
                 decoration: InputDecoration(
@@ -161,8 +155,6 @@ class _CreateCaseScreenState extends State<CreateCaseScreen> {
                 },
               ),
               const SizedBox(height: AppConstants.paddingMedium),
-
-              // Age
               TextFormField(
                 controller: _ageController,
                 keyboardType: TextInputType.number,
@@ -190,8 +182,6 @@ class _CreateCaseScreenState extends State<CreateCaseScreen> {
                 },
               ),
               const SizedBox(height: AppConstants.paddingMedium),
-
-              // Scholar Year
               TextFormField(
                 controller: _scholarYearController,
                 textCapitalization: TextCapitalization.words,
@@ -211,8 +201,6 @@ class _CreateCaseScreenState extends State<CreateCaseScreen> {
                 },
               ),
               const SizedBox(height: AppConstants.paddingLarge * 2),
-
-              // Continue Button
               SizedBox(
                 width: double.infinity,
                 height: 56,
@@ -236,8 +224,6 @@ class _CreateCaseScreenState extends State<CreateCaseScreen> {
                 ),
               ),
               const SizedBox(height: AppConstants.paddingMedium),
-
-              // Info card
               Container(
                 padding: const EdgeInsets.all(AppConstants.paddingMedium),
                 decoration: BoxDecoration(

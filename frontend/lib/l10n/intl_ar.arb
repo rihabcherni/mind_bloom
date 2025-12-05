@@ -3,6 +3,50 @@
   "appTitle": "مايند بلوم",
   "welcomeSubtitle": "باش نفهموك على ولادك خير",
   "login": "دخول",
+
+  "adhdAboutTitle": "على خاطر ADHD",
+  "adhdSymptomsTitle": "أعراض ADHD",
+  "adhdSymptomsDescription": "علامات تنجّم تبين إلّي الطفل عندو ADHD",
+  "adhdCausesTitle": "أسباب محتملة",
+  "adhdCausesDescription": "حاجات تنجّم تكون سبب في ظهور ADHD",
+  "adhdParentsTitle": "نصائح للأولياء",
+  "adhdParentsDescription": "كيفاش تعاون ولدك لي عندو ADHD في النهار",
+
+  "adhdInattention": "قلة التركيز: يسر يتلهّى وينسى برشة",
+  "adhdHyperactivity": "فرط الحركة: ديما يتحرّك و ما يقعدش بلاصة",
+  "adhdImpulsivity": "الاندفاع: يقاطع الناس و يجاوب قبل ما يفكّر",
+  "adhdSchoolProblems": "صعوبات في القراية و التعامل مع صحابو",
+
+  "adhdGenetics": "أسباب وراثية",
+  "adhdBrainChemistry": "اختلال كيميائي في المخ",
+  "adhdPrenatalExposure": "تأثير مواد أثناء الحمل",
+  "adhdPregnancyComplications": "مضاعفات أثناء الحمل",
+
+  "adhdRoutine": "اعمل روتين يومي ثابت",
+  "adhdActiveBreaks": "خليه يعمل وقفات قصيرة باش يخرج الطاقة",
+  "adhdRewardSystem": "شجّع السلوكيات الباهية",
+  "adhdSchoolCooperation": "تعاون مع المدرسة و المختصين",
+  "goToHomeScreen": "ابدأ",
+  "aboutADHD": "حول اضطراب فرط الحركة وتشتت الانتباه",
+
+
+ "loginWelcome": "مرحبا",
+  "loginWelcomeDescription": "سجّل الدخول باش تكمل",
+  
+  "loginEmailLabel": "الإيميل",
+  "loginEmailHint": "email@domain.com",
+  "loginEmailEmpty": "رجاءً أدخل الإيميل متاعك",
+  "loginEmailInvalid": "الإيميل موش صحيح",
+ "loginFailed": "فشل تسجيل الدخول", 
+  "loginPasswordLabel": "كلمة السر",
+  "loginPasswordHint": "••••••••",
+  "loginPasswordEmpty": "رجاءً أدخل كلمة السر متاعك",
+  
+  "loginForgotPassword": "نسيت كلمة السر؟",
+  "loginButton": "سجّل الدخول",
+  
+  "loginOr": "أو",
+  "loginRegisterButton": "إنشاء حساب",
   "createAccount": "إنشاء حساب",
    "chooseProfile": "اختار الملف الشخصي",
   "chooseAccountType": "اختر نوع الحساب الذي تريد إنشاؤه",

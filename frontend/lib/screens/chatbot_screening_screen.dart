@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
+import 'package:frontend/widgets/background_circles.dart';
 import 'package:image_picker/image_picker.dart';
 import '../constants/app_constants.dart';
 import '../models/case_model.dart';
@@ -204,86 +205,97 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark
-          ? const Color(0xFF1A1A2E)
-          : const Color(0xFFF8F9FA),
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Custom AppBar
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: isDark ? const Color(0xFF252545) : Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
+      body: Stack(
+        children: [
+          const BackgroundCircles(),
+          SafeArea(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? const Color(0xFF252545)
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        color: isDark ? Colors.white : AppConstants.darkViolet,
-                      ),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      'Dépistage TDAH',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? Colors.white : AppConstants.darkViolet,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: isDark ? const Color(0xFF252545) : Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.settings_rounded,
-                        color: isDark ? Colors.white : AppConstants.darkViolet,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const SettingsScreen(),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                            color: isDark
+                                ? Colors.white
+                                : AppConstants.darkViolet,
                           ),
-                        );
-                      },
-                    ),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          'Dépistage TDAH',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: isDark
+                                ? Colors.white
+                                : AppConstants.darkViolet,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? const Color(0xFF252545)
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.settings_rounded,
+                            color: isDark
+                                ? Colors.white
+                                : AppConstants.darkViolet,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const SettingsScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
+                ),
 
-            Expanded(
-              child: _showVideoUpload
-                  ? _buildVideoUpload(isDark)
-                  : _buildChatbot(isDark),
+                Expanded(
+                  child: _showVideoUpload
+                      ? _buildVideoUpload(isDark)
+                      : _buildChatbot(isDark),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -293,7 +305,6 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
 
     return Column(
       children: [
-        // Progress Section
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Container(
@@ -354,14 +365,11 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
         ),
 
         const SizedBox(height: 24),
-
-        // Chat Messages
         Expanded(
           child: ListView(
             controller: _scrollController,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             children: [
-              // Welcome message
               _buildBotMessage(
                 'Bonjour ! Je vais vous poser quelques questions sur le comportement de ${widget.childInfo['childFirstName']}. Répondez honnêtement pour nous aider à fournir la meilleure évaluation.',
                 isDark,
@@ -552,7 +560,6 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-            // Success Icon
             Container(
               padding: const EdgeInsets.all(28),
               decoration: BoxDecoration(
@@ -641,8 +648,6 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
               ),
               const SizedBox(height: 24),
             ],
-
-            // Video action buttons
             Row(
               children: [
                 Expanded(
@@ -666,10 +671,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                 ),
               ],
             ),
-
             const SizedBox(height: 32),
-
-            // Submit button
             SizedBox(
               width: double.infinity,
               height: 56,
@@ -745,10 +747,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
-
-            // Info message
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
