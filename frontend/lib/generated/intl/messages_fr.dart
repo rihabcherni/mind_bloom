@@ -197,6 +197,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "startNewCase": MessageLookupByLibrary.simpleMessage(
       "Commencer un nouveau cas",
     ),
+    "statusAdditionalTestRequired": MessageLookupByLibrary.simpleMessage(
+      "Test supplémentaire requis",
+    ),
+    "statusCompleted": MessageLookupByLibrary.simpleMessage("Terminé"),
+    "statusDiagnosisReady": MessageLookupByLibrary.simpleMessage(
+      "Diagnostic prêt",
+    ),
+    "statusWaitingForDoctor": MessageLookupByLibrary.simpleMessage(
+      "En attente du médecin",
+    ),
+    "statusWaitingForReply": MessageLookupByLibrary.simpleMessage(
+      "En attente de réponse",
+    ),
     "teacher": MessageLookupByLibrary.simpleMessage("Enseignant"),
     "welcomeParent": m1,
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(

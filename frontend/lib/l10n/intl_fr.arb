@@ -103,5 +103,10 @@
   "startNewCase": "Commencer un nouveau cas",
   "myPreviousCases": "Mes cas précédents",
   "noCasesYet": "Aucun cas pour le moment. Commencez un nouveau cas !",
-  "age": "Âge : {age}"
+  "age": "Âge : {age}",
+  "statusWaitingForDoctor": "En attente du médecin",
+  "statusAdditionalTestRequired": "Test supplémentaire requis",
+  "statusWaitingForReply": "En attente de réponse",
+  "statusCompleted": "Terminé",
+  "statusDiagnosisReady": "Diagnostic prêt"
 }

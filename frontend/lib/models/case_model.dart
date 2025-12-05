@@ -1,3 +1,5 @@
+import 'package:frontend/generated/l10n.dart';
+
 class CaseModel {
   final String id;
   final String childFirstName;
@@ -80,15 +82,15 @@ class CaseModel {
   String get statusDisplay {
     switch (status) {
       case 'waiting_for_doctor':
-        return 'Waiting for Doctor';
+        return S.current.statusWaitingForDoctor;
       case 'additional_test_required':
-        return 'Additional Test Required';
+        return S.current.statusAdditionalTestRequired;
       case 'waiting_for_reply':
-        return 'Waiting for Reply';
+        return S.current.statusWaitingForReply;
       case 'completed':
-        return 'Completed';
+        return S.current.statusCompleted;
       case 'diagnosis_ready':
-        return 'Diagnosis Ready';
+        return S.current.statusDiagnosisReady;
       default:
         return status;
     }

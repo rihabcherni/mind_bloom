@@ -763,6 +763,56 @@ class S {
   String age(Object age) {
     return Intl.message('Age: $age', name: 'age', desc: '', args: [age]);
   }
+
+  /// `Waiting for Doctor`
+  String get statusWaitingForDoctor {
+    return Intl.message(
+      'Waiting for Doctor',
+      name: 'statusWaitingForDoctor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Additional Test Required`
+  String get statusAdditionalTestRequired {
+    return Intl.message(
+      'Additional Test Required',
+      name: 'statusAdditionalTestRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Waiting for Reply`
+  String get statusWaitingForReply {
+    return Intl.message(
+      'Waiting for Reply',
+      name: 'statusWaitingForReply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get statusCompleted {
+    return Intl.message(
+      'Completed',
+      name: 'statusCompleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Diagnosis Ready`
+  String get statusDiagnosisReady {
+    return Intl.message(
+      'Diagnosis Ready',
+      name: 'statusDiagnosisReady',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

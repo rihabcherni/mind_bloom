@@ -167,6 +167,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "sexe": MessageLookupByLibrary.simpleMessage("الجنس"),
     "startNewCase": MessageLookupByLibrary.simpleMessage("ابدا حالة جديدة"),
+    "statusAdditionalTestRequired": MessageLookupByLibrary.simpleMessage(
+      "يلزم تحاليل إضافية",
+    ),
+    "statusCompleted": MessageLookupByLibrary.simpleMessage("تكملت"),
+    "statusDiagnosisReady": MessageLookupByLibrary.simpleMessage(
+      "التشخيص جاهز",
+    ),
+    "statusWaitingForDoctor": MessageLookupByLibrary.simpleMessage(
+      "تستنى في الدكتور",
+    ),
+    "statusWaitingForReply": MessageLookupByLibrary.simpleMessage(
+      "تستنى في الرد",
+    ),
     "teacher": MessageLookupByLibrary.simpleMessage("أستاذ"),
     "welcomeParent": m1,
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(

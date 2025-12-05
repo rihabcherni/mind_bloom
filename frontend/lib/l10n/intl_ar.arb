@@ -103,5 +103,10 @@
   "startNewCase": "ابدا حالة جديدة",
   "myPreviousCases": "الحالات إلي عملتهم",
   "noCasesYet": "ما فماش حالات توّا. ابدا حالة جديدة!",
-  "age": "العمر: {age}"
+  "age": "العمر: {age}",
+  "statusWaitingForDoctor": "تستنى في الدكتور",
+  "statusAdditionalTestRequired": "يلزم تحاليل إضافية",
+  "statusWaitingForReply": "تستنى في الرد",
+  "statusCompleted": "تكملت",
+  "statusDiagnosisReady": "التشخيص جاهز"
 }

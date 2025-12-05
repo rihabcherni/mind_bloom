@@ -101,5 +101,11 @@
   "startNewCase": "Start New Case",
   "myPreviousCases": "My Previous Cases",
   "noCasesYet": "No cases yet. Start a new case!",
-  "age": "Age: {age}"
+  "age": "Age: {age}",
+
+  "statusWaitingForDoctor": "Waiting for Doctor",
+  "statusAdditionalTestRequired": "Additional Test Required",
+  "statusWaitingForReply": "Waiting for Reply",
+  "statusCompleted": "Completed",
+  "statusDiagnosisReady": "Diagnosis Ready"
 }
