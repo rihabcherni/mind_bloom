@@ -137,9 +137,6 @@ class _NotificationsScreenState extends State<NotificationsScreen>
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? const Color(0xFF252545)
-                              : Colors.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -189,9 +186,6 @@ class _NotificationsScreenState extends State<NotificationsScreen>
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? const Color(0xFF252545)
-                              : Colors.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -226,7 +220,6 @@ class _NotificationsScreenState extends State<NotificationsScreen>
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: isDark ? const Color(0xFF252545) : Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
@@ -259,7 +252,9 @@ class _NotificationsScreenState extends State<NotificationsScreen>
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
-                              color: isDark ? Colors.white : AppConstants.black,
+                              color: isDark
+                                  ? AppConstants.white
+                                  : AppConstants.black,
                             ),
                           ),
                         ),
@@ -360,7 +355,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: isDark ? Colors.white : AppConstants.darkViolet,
+              color: isDark ? AppConstants.white : AppConstants.darkViolet,
             ),
           ),
           const SizedBox(height: 8),
@@ -398,7 +393,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
           color: notification.isRead
-              ? (isDark ? const Color(0xFF252545) : Colors.white)
+              ? (isDark ? const Color(0xFF252545) : AppConstants.white)
               : (isDark
                     ? const Color(0xFF2A2A4A)
                     : AppConstants.primaryViolet.withOpacity(0.05)),
@@ -455,7 +450,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>
                         ),
                       ],
                     ),
-                    child: Icon(icon, color: Colors.white, size: 24),
+                    child: Icon(icon, color: AppConstants.white, size: 24),
                   ),
                   const SizedBox(width: 16),
                   Expanded(

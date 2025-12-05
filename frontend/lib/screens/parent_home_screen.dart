@@ -226,7 +226,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen> {
                                           caseItem.statusDisplay,
                                           style: theme.textTheme.bodySmall
                                               ?.copyWith(
-                                                color: Colors.white,
+                                                color: AppConstants.white,
                                                 fontSize: 12,
                                               ),
                                         ),

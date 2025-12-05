@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 icon: Icon(
                                   Icons.settings_rounded,
                                   color: isDark
-                                      ? Colors.white
+                                      ? AppConstants.white
                                       : AppConstants.darkViolet,
                                 ),
                                 onPressed: () {

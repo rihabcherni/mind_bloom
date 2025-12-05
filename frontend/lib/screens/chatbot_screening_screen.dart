@@ -217,9 +217,6 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? const Color(0xFF252545)
-                              : Colors.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -233,7 +230,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                           icon: Icon(
                             Icons.arrow_back_ios_new_rounded,
                             color: isDark
-                                ? Colors.white
+                                ? AppConstants.white
                                 : AppConstants.darkViolet,
                           ),
                           onPressed: () => Navigator.pop(context),
@@ -247,16 +244,13 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                             color: isDark
-                                ? Colors.white
+                                ? AppConstants.white
                                 : AppConstants.darkViolet,
                           ),
                         ),
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? const Color(0xFF252545)
-                              : Colors.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -270,7 +264,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                           icon: Icon(
                             Icons.settings_rounded,
                             color: isDark
-                                ? Colors.white
+                                ? AppConstants.white
                                 : AppConstants.darkViolet,
                           ),
                           onPressed: () {
@@ -332,7 +326,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                     Text(
                       'Question ${_currentQuestionIndex + 1}/${_questions.length}',
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppConstants.white,
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                       ),
@@ -340,7 +334,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                     Text(
                       '${(progress * 100).toInt()}%',
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppConstants.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -352,9 +346,9 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                   borderRadius: BorderRadius.circular(10),
                   child: LinearProgressIndicator(
                     value: progress,
-                    backgroundColor: Colors.white.withOpacity(0.3),
+                    backgroundColor: AppConstants.white.withOpacity(0.3),
                     valueColor: const AlwaysStoppedAnimation<Color>(
-                      Colors.white,
+                      AppConstants.white,
                     ),
                     minHeight: 8,
                   ),
@@ -437,7 +431,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
         onPressed: () => _handleAnswer(text),
         style: ElevatedButton.styleFrom(
           backgroundColor: isYes ? Colors.red : Colors.green,
-          foregroundColor: Colors.white,
+          foregroundColor: AppConstants.white,
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -486,12 +480,12 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
             Container(
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: AppConstants.white.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Icon(
                 Icons.smart_toy_rounded,
-                color: Colors.white,
+                color: AppConstants.white,
                 size: 18,
               ),
             ),
@@ -500,7 +494,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
               child: Text(
                 text,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: AppConstants.white,
                   fontSize: 15,
                   height: 1.4,
                 ),
@@ -522,7 +516,6 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
         ),
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
         decoration: BoxDecoration(
-          color: isDark ? const Color(0xFF252545) : Colors.white,
           border: Border.all(
             color: isYes ? Colors.red : Colors.green,
             width: 2,
@@ -581,7 +574,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
               child: const Icon(
                 Icons.videocam_rounded,
                 size: 60,
-                color: Colors.white,
+                color: AppConstants.white,
               ),
             ),
 
@@ -619,7 +612,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                       ),
                       child: const Icon(
                         Icons.check_rounded,
-                        color: Colors.white,
+                        color: AppConstants.white,
                         size: 40,
                       ),
                     ),
@@ -713,7 +706,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                                 width: 20,
                                 height: 20,
                                 child: CircularProgressIndicator(
-                                  color: Colors.white,
+                                  color: AppConstants.white,
                                   strokeWidth: 2.5,
                                 ),
                               ),
@@ -721,7 +714,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                               Text(
                                 'Envoi en cours...',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppConstants.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -734,13 +727,16 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                               Text(
                                 'Soumettre au médecin',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppConstants.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               SizedBox(width: 8),
-                              Icon(Icons.send_rounded, color: Colors.white),
+                              Icon(
+                                Icons.send_rounded,
+                                color: AppConstants.white,
+                              ),
                             ],
                           ),
                   ),
@@ -821,7 +817,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
         style: ElevatedButton.styleFrom(
           backgroundColor: isPrimary
               ? AppConstants.primaryViolet
-              : (isDark ? const Color(0xFF252545) : Colors.white),
+              : (isDark ? const Color(0xFF252545) : AppConstants.white),
           foregroundColor: isPrimary
               ? Colors.white
               : AppConstants.primaryViolet,

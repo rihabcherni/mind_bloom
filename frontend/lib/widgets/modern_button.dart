@@ -56,7 +56,7 @@ class ModernButton extends StatelessWidget {
                     width: 24,
                     height: 24,
                     child: CircularProgressIndicator(
-                      color: Colors.white,
+                      color: AppConstants.white,
                       strokeWidth: 2.5,
                     ),
                   )
@@ -65,7 +65,7 @@ class ModernButton extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: AppConstants.white,
                       letterSpacing: 0.5,
                     ),
                   ),

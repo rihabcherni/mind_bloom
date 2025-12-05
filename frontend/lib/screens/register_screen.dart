@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/header.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
 import '../providers/auth_provider.dart';
@@ -69,12 +70,21 @@ class _RegisterScreenState extends State<RegisterScreen>
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: AppConstants.primaryViolet,
-              onPrimary: Colors.white,
-              surface: isDark ? const Color(0xFF252545) : Colors.white,
-              onSurface: isDark ? Colors.white : Colors.black,
-            ),
+            colorScheme: isDark
+                ? ColorScheme.dark(
+                    primary: AppConstants.primaryViolet,
+                    onPrimary: AppConstants.white,
+                    surface: AppConstants.darkBackground,
+                    onSurface: AppConstants.white,
+                  )
+                : ColorScheme.light(
+                    primary: AppConstants.primaryViolet,
+                    onPrimary: AppConstants.white,
+                    onSurface: AppConstants.black,
+                  ),
+            dialogBackgroundColor: isDark
+                ? const Color(0xFF252545)
+                : Colors.white,
           ),
           child: child!,
         );
@@ -155,80 +165,10 @@ class _RegisterScreenState extends State<RegisterScreen>
               SafeArea(
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: isDark
-                                  ? const Color(0xFF252545)
-                                  : Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.arrow_back_ios_new_rounded,
-                                color: isDark
-                                    ? Colors.white
-                                    : AppConstants.darkViolet,
-                              ),
-                              onPressed: () => Navigator.pop(context),
-                            ),
-                          ),
-                          const Spacer(),
-                          Text(
-                            S.of(context).createAccount,
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: isDark
-                                  ? Colors.white
-                                  : AppConstants.darkViolet,
-                              letterSpacing: -1,
-                            ),
-                          ),
-                          const Spacer(),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: isDark
-                                  ? const Color(0xFF252545)
-                                  : Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.settings_rounded,
-                                color: isDark
-                                    ? Colors.white
-                                    : AppConstants.darkViolet,
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => const SettingsScreen(),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                    HeaderWidget(
+                      title: S.of(context).createAccount,
+                      onBackPressed: () => Navigator.pop(context),
+                      showSettingsIcon: true,
                     ),
                     Expanded(
                       child: SingleChildScrollView(
@@ -413,7 +353,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                                 height: 24,
                                                 child:
                                                     CircularProgressIndicator(
-                                                      color: Colors.white,
+                                                      color: AppConstants.white,
                                                       strokeWidth: 2.5,
                                                     ),
                                               )
@@ -422,7 +362,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                                 style: const TextStyle(
                                                   fontSize: 17,
                                                   fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
+                                                  color: AppConstants.white,
                                                   letterSpacing: 0.5,
                                                 ),
                                               ),
@@ -493,13 +433,12 @@ class _RegisterScreenState extends State<RegisterScreen>
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: isDark ? Colors.white : AppConstants.darkViolet,
+            color: isDark ? AppConstants.white : AppConstants.darkViolet,
           ),
         ),
         const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
-            color: isDark ? const Color(0xFF252545) : Colors.white,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
@@ -516,7 +455,7 @@ class _RegisterScreenState extends State<RegisterScreen>
             keyboardType: keyboardType,
             obscureText: obscureText,
             style: TextStyle(
-              color: isDark ? Colors.white : AppConstants.black,
+              color: isDark ? AppConstants.white : AppConstants.black,
               fontSize: 15,
             ),
             decoration: InputDecoration(
@@ -585,7 +524,7 @@ class _RegisterScreenState extends State<RegisterScreen>
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: isDark ? Colors.white : AppConstants.darkViolet,
+            color: isDark ? AppConstants.white : AppConstants.darkViolet,
           ),
         ),
         const SizedBox(height: 8),
@@ -595,6 +534,7 @@ class _RegisterScreenState extends State<RegisterScreen>
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: isDark ? const Color(0xFF252545) : Colors.white,
+
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
@@ -630,7 +570,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                       fontSize: 15,
                       color: _selectedDate == null
                           ? (isDark ? Colors.white38 : Colors.grey[400])
-                          : (isDark ? Colors.white : AppConstants.black),
+                          : (isDark ? AppConstants.white : AppConstants.black),
                     ),
                   ),
                 ),
@@ -656,7 +596,7 @@ class _RegisterScreenState extends State<RegisterScreen>
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: isDark ? Colors.white : AppConstants.darkViolet,
+            color: isDark ? AppConstants.white : AppConstants.darkViolet,
           ),
         ),
         const SizedBox(height: 8),
@@ -664,7 +604,6 @@ class _RegisterScreenState extends State<RegisterScreen>
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
-            color: isDark ? const Color(0xFF252545) : Colors.white,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: isDark ? Colors.white24 : Colors.grey.shade300,
@@ -682,7 +621,7 @@ class _RegisterScreenState extends State<RegisterScreen>
               ),
               icon: Icon(
                 Icons.arrow_drop_down,
-                color: isDark ? Colors.white : AppConstants.darkViolet,
+                color: isDark ? AppConstants.white : AppConstants.darkViolet,
               ),
               items: [
                 DropdownMenuItem(
@@ -691,7 +630,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                     S.of(context).male,
                     style: TextStyle(
                       fontSize: 13,
-                      color: isDark ? Colors.white : Colors.black87,
+                      color: isDark ? AppConstants.white : Colors.black87,
                     ),
                   ),
                 ),
@@ -701,7 +640,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                     S.of(context).female,
                     style: TextStyle(
                       fontSize: 13,
-                      color: isDark ? Colors.white : Colors.black87,
+                      color: isDark ? AppConstants.white : Colors.black87,
                     ),
                   ),
                 ),
@@ -734,14 +673,13 @@ class _RegisterScreenState extends State<RegisterScreen>
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: isDark ? Colors.white : AppConstants.darkViolet,
+            color: isDark ? AppConstants.white : AppConstants.darkViolet,
           ),
         ),
         const SizedBox(height: 8),
 
         Container(
           decoration: BoxDecoration(
-            color: isDark ? const Color(0xFF252545) : Colors.white,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
@@ -756,10 +694,9 @@ class _RegisterScreenState extends State<RegisterScreen>
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: DropdownButtonFormField<String>(
             value: _selectedRelation,
-            dropdownColor: isDark ? const Color(0xFF252545) : Colors.white,
             decoration: const InputDecoration(border: InputBorder.none),
             style: TextStyle(
-              color: isDark ? Colors.white : Colors.black,
+              color: isDark ? AppConstants.white : Colors.black,
               fontSize: 15,
             ),
             icon: Icon(

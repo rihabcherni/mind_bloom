@@ -114,7 +114,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       style: TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
-                        color: isDark ? Colors.white : AppConstants.darkViolet,
+                        color: isDark
+                            ? AppConstants.white
+                            : AppConstants.darkViolet,
                         letterSpacing: -1.5,
                       ),
                       textAlign: TextAlign.center,
@@ -182,7 +184,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                     style: const TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.white,
+                                      color: AppConstants.white,
                                       letterSpacing: 0.5,
                                     ),
                                   ),

@@ -110,9 +110,6 @@ class _AboutScreenState extends State<AboutScreen>
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? const Color(0xFF252545)
-                              : Colors.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -147,9 +144,6 @@ class _AboutScreenState extends State<AboutScreen>
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? const Color(0xFF252545)
-                              : Colors.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -163,7 +157,7 @@ class _AboutScreenState extends State<AboutScreen>
                           icon: Icon(
                             Icons.settings_rounded,
                             color: isDark
-                                ? Colors.white
+                                ? AppConstants.white
                                 : AppConstants.darkViolet,
                           ),
                           onPressed: () {
@@ -291,7 +285,11 @@ class _AboutScreenState extends State<AboutScreen>
                           ),
                           borderRadius: BorderRadius.circular(24),
                         ),
-                        child: Icon(item.icon, size: 100, color: Colors.white),
+                        child: Icon(
+                          item.icon,
+                          size: 100,
+                          color: AppConstants.white,
+                        ),
                       );
                     },
                   ),
@@ -314,7 +312,7 @@ class _AboutScreenState extends State<AboutScreen>
                         ),
                       ],
                     ),
-                    child: Icon(item.icon, color: Colors.white, size: 24),
+                    child: Icon(item.icon, color: AppConstants.white, size: 24),
                   ),
                 ),
               ],
@@ -327,7 +325,7 @@ class _AboutScreenState extends State<AboutScreen>
             style: TextStyle(
               fontSize: 26,
               fontWeight: FontWeight.bold,
-              color: isDark ? Colors.white : AppConstants.darkViolet,
+              color: isDark ? AppConstants.white : AppConstants.darkViolet,
               letterSpacing: -0.5,
             ),
             textAlign: TextAlign.center,
@@ -347,7 +345,6 @@ class _AboutScreenState extends State<AboutScreen>
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: isDark ? const Color(0xFF252545) : Colors.white,
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
@@ -382,7 +379,9 @@ class _AboutScreenState extends State<AboutScreen>
                           detail,
                           style: TextStyle(
                             fontSize: 13,
-                            color: isDark ? Colors.white : Colors.grey[800],
+                            color: isDark
+                                ? AppConstants.white
+                                : Colors.grey[800],
                             height: 1.5,
                           ),
                         ),

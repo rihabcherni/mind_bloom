@@ -63,9 +63,6 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? const Color(0xFF252545)
-                              : Colors.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -88,9 +85,6 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
                       const Spacer(),
                       Container(
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? const Color(0xFF252545)
-                              : Colors.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -153,7 +147,7 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
                             child: const Icon(
                               Icons.psychology_rounded,
                               size: 50,
-                              color: Colors.white,
+                              color: AppConstants.white,
                             ),
                           ),
                           const SizedBox(height: 15),
@@ -271,7 +265,6 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
           width: double.infinity,
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: isDark ? const Color(0xFF252545) : Colors.white,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: color.withOpacity(0.3), width: 2),
             boxShadow: [
@@ -301,7 +294,7 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
                     ),
                   ],
                 ),
-                child: Icon(icon, size: 40, color: Colors.white),
+                child: Icon(icon, size: 40, color: AppConstants.white),
               ),
               const SizedBox(width: 20),
               Expanded(
@@ -313,7 +306,9 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: isDark ? Colors.white : AppConstants.darkViolet,
+                        color: isDark
+                            ? AppConstants.white
+                            : AppConstants.darkViolet,
                       ),
                     ),
                     const SizedBox(height: 4),

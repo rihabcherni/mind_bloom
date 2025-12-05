@@ -265,7 +265,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppConstants.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: AppConstants.primaryViolet.withOpacity(0.3)),
         boxShadow: [
@@ -354,12 +354,12 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: Colors.white, size: 18),
+          Icon(icon, color: AppConstants.white, size: 18),
           const SizedBox(width: 6),
           Text(
             '${_case!.gravityScore.toUpperCase()} SEVERITY',
             style: const TextStyle(
-              color: Colors.white,
+              color: AppConstants.white,
               fontWeight: FontWeight.bold,
               fontSize: 12,
             ),
@@ -440,7 +440,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
             label: const Text('Submit Test Response'),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppConstants.primaryViolet,
-              foregroundColor: Colors.white,
+              foregroundColor: AppConstants.white,
               padding: const EdgeInsets.symmetric(vertical: 14),
             ),
           ),
@@ -498,7 +498,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen> {
           label: const Text('Download Report (PDF)'),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.green,
-            foregroundColor: Colors.white,
+            foregroundColor: AppConstants.white,
             padding: const EdgeInsets.symmetric(vertical: 14),
           ),
         ),

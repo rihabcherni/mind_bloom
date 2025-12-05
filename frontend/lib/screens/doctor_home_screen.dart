@@ -153,12 +153,12 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+                              color: AppConstants.white.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: const Icon(
                               Icons.medical_services_rounded,
-                              color: Colors.white,
+                              color: AppConstants.white,
                               size: 28,
                             ),
                           ),
@@ -170,7 +170,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                                 const Text(
                                   'Tableau de bord',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: AppConstants.white,
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -188,7 +188,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                           IconButton(
                             icon: const Icon(
                               Icons.notifications_rounded,
-                              color: Colors.white,
+                              color: AppConstants.white,
                             ),
                             onPressed: () {
                               Navigator.pushNamed(context, '/notifications');
@@ -197,7 +197,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                           IconButton(
                             icon: const Icon(
                               Icons.settings_rounded,
-                              color: Colors.white,
+                              color: AppConstants.white,
                             ),
                             onPressed: () {
                               Navigator.push(
@@ -211,7 +211,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                           IconButton(
                             icon: const Icon(
                               Icons.logout_rounded,
-                              color: Colors.white,
+                              color: AppConstants.white,
                             ),
                             onPressed: () async {
                               await context.read<AuthProvider>().logout();
@@ -234,7 +234,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                               'Cas totaux',
                               _cases.length.toString(),
                               Icons.folder_rounded,
-                              Colors.white,
+                              AppConstants.white,
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -243,7 +243,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                               'Haute priorité',
                               highPriority.toString(),
                               Icons.priority_high_rounded,
-                              Colors.white,
+                              AppConstants.white,
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -252,7 +252,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                               'En attente',
                               pending.toString(),
                               Icons.pending_rounded,
-                              Colors.white,
+                              AppConstants.white,
                             ),
                           ),
                         ],
@@ -333,9 +333,12 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
+        color: AppConstants.white.withOpacity(0.2),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+        border: Border.all(
+          color: AppConstants.white.withOpacity(0.3),
+          width: 1,
+        ),
       ),
       child: Column(
         children: [
@@ -385,7 +388,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: isDark ? Colors.white : AppConstants.darkViolet,
+              color: isDark ? AppConstants.white : AppConstants.darkViolet,
             ),
           ),
           const SizedBox(height: 8),
@@ -418,7 +421,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
         decoration: BoxDecoration(
-          color: isDark ? const Color(0xFF252545) : Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: severityColor.withOpacity(0.3), width: 2),
           boxShadow: [
@@ -464,7 +466,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                     ),
                     child: Icon(
                       _getSeverityIcon(caseItem.gravityScore),
-                      color: Colors.white,
+                      color: AppConstants.white,
                       size: 28,
                     ),
                   ),
@@ -534,7 +536,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                               child: Text(
                                 caseItem.gravityScore.toUpperCase(),
                                 style: const TextStyle(
-                                  color: Colors.white,
+                                  color: AppConstants.white,
                                   fontSize: 11,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -553,7 +555,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                               child: Text(
                                 caseItem.statusDisplay,
                                 style: const TextStyle(
-                                  color: Colors.white,
+                                  color: AppConstants.white,
                                   fontSize: 11,
                                   fontWeight: FontWeight.w600,
                                 ),

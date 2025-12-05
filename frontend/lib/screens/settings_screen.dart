@@ -83,12 +83,12 @@ class SettingsScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: AppConstants.white.withOpacity(0.2),
               borderRadius: BorderRadius.circular(12),
             ),
             child: const Icon(
               Icons.settings_rounded,
-              color: Colors.white,
+              color: AppConstants.white,
               size: 32,
             ),
           ),
@@ -100,7 +100,7 @@ class SettingsScreen extends StatelessWidget {
                 Text(
                   S.of(context).personalize,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppConstants.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
@@ -135,7 +135,6 @@ class SettingsScreen extends StatelessWidget {
   Widget _buildModernCard({required bool isDark, required Widget child}) {
     return Container(
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF252545) : AppConstants.white,
         borderRadius: BorderRadius.circular(AppConstants.borderRadiusLarge),
         boxShadow: [
           BoxShadow(

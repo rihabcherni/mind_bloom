@@ -148,7 +148,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
             label: const Text('Soumettre'),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green,
-              foregroundColor: Colors.white,
+              foregroundColor: AppConstants.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -225,7 +225,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
             label: const Text('Envoyer'),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue,
-              foregroundColor: Colors.white,
+              foregroundColor: AppConstants.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -247,7 +247,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
     return TextField(
       controller: controller,
       maxLines: maxLines,
-      style: TextStyle(color: isDark ? Colors.white : Colors.black),
+      style: TextStyle(color: isDark ? AppConstants.white : Colors.black),
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
@@ -317,6 +317,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
         return Colors.grey;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -333,9 +334,6 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? const Color(0xFF252545)
-                              : Colors.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -370,9 +368,6 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? const Color(0xFF252545)
-                              : Colors.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -481,8 +476,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                                   children: [
                                     if (_case!.videoUrl != null)
                                       ElevatedButton.icon(
-                                        onPressed: () {
-                                        },
+                                        onPressed: () {},
                                         icon: const Icon(
                                           Icons.play_arrow_rounded,
                                         ),
@@ -491,7 +485,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                                           backgroundColor: const Color(
                                             0xFF2196F3,
                                           ),
-                                          foregroundColor: Colors.white,
+                                          foregroundColor: AppConstants.white,
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 24,
                                             vertical: 12,
@@ -605,7 +599,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: AppConstants.white.withOpacity(0.2),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(
@@ -614,7 +608,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                   : severity == 'medium'
                   ? Icons.warning_rounded
                   : Icons.info_rounded,
-              color: Colors.white,
+              color: AppConstants.white,
               size: 28,
             ),
           ),
@@ -631,7 +625,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                 Text(
                   severity.toUpperCase(),
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: AppConstants.white,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
@@ -653,7 +647,6 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF252545) : Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -693,7 +686,9 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
-                    color: isDark ? Colors.white : AppConstants.darkViolet,
+                    color: isDark
+                        ? AppConstants.white
+                        : AppConstants.darkViolet,
                   ),
                 ),
               ],
@@ -733,7 +728,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
               value,
               style: TextStyle(
                 fontSize: 14,
-                color: isDark ? Colors.white : Colors.black87,
+                color: isDark ? AppConstants.white : Colors.black87,
               ),
             ),
           ),
@@ -767,7 +762,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: isDark ? Colors.white : Colors.black87,
+              color: isDark ? AppConstants.white : Colors.black87,
             ),
           ),
           const SizedBox(height: 6),
@@ -805,7 +800,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: isDark ? Colors.white : Colors.black87,
+              color: isDark ? AppConstants.white : Colors.black87,
             ),
           ),
           const SizedBox(height: 6),
@@ -836,7 +831,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green,
-              foregroundColor: Colors.white,
+              foregroundColor: AppConstants.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
@@ -888,12 +883,12 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: AppConstants.white.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
             child: const Icon(
               Icons.check_circle_rounded,
-              color: Colors.white,
+              color: AppConstants.white,
               size: 28,
             ),
           ),
@@ -902,7 +897,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
             child: Text(
               'Diagnostic soumis avec succès',
               style: TextStyle(
-                color: Colors.white,
+                color: AppConstants.white,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
@@ -936,7 +931,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: isDark ? Colors.white : AppConstants.darkViolet,
+              color: isDark ? AppConstants.white : AppConstants.darkViolet,
             ),
           ),
         ],

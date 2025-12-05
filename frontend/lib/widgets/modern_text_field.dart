@@ -35,13 +35,12 @@ class ModernTextField extends StatelessWidget {
           style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w600,
-            color: isDark ? Colors.white : AppConstants.darkViolet,
+            color: isDark ? AppConstants.white : AppConstants.darkViolet,
           ),
         ),
         const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
-            color: isDark ? const Color(0xFF252545) : Colors.white,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
@@ -58,7 +57,7 @@ class ModernTextField extends StatelessWidget {
             keyboardType: keyboardType,
             obscureText: obscureText,
             style: TextStyle(
-              color: isDark ? Colors.white : AppConstants.black,
+              color: isDark ? AppConstants.white : AppConstants.black,
               fontSize: 16,
             ),
             decoration: InputDecoration(
