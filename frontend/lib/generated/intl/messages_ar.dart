@@ -22,12 +22,39 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(age) => "العمر: ${age}";
 
-  static String m1(name) => "مرحبا، ${name}";
+  static String m1(age) => "${age} سنة";
+
+  static String m2(error) => "خطأ في الحالة: ${error}";
+
+  static String m3(error) => "خطأ في التقرير: ${error}";
+
+  static String m4(childName) =>
+      "مرحبا! باش نسألك شوية أسئلة على تصرّف ${childName}. جاوب بصراحة باش نعاونك باش نعطيوا تقييم أفضل.";
+
+  static String m5(childName) =>
+      "مزيان! تاو، يرجى تحميل فيديو قصير (5 دقايق كحد أقصى) لـ ${childName} وهو يعمل نشاط مثل الواجبات، اللعب، أو الرسم. هذا باش يساعد الطبيب باش يفهم التصرف أفضل.";
+
+  static String m6(name) => "مرحبا، ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "aboutADHD": MessageLookupByLibrary.simpleMessage(
       "حول اضطراب فرط الحركة وتشتت الانتباه",
+    ),
+    "additional_test_coming_soon": MessageLookupByLibrary.simpleMessage(
+      "خاصية قادمة",
+    ),
+    "additional_test_instructions": MessageLookupByLibrary.simpleMessage(
+      "تعليمات:",
+    ),
+    "additional_test_submit": MessageLookupByLibrary.simpleMessage(
+      "سجّل الإجابة",
+    ),
+    "additional_test_title": MessageLookupByLibrary.simpleMessage(
+      "اختبار إضافي",
+    ),
+    "additional_test_type": MessageLookupByLibrary.simpleMessage(
+      "نوع الاختبار",
     ),
     "adhdAboutTitle": MessageLookupByLibrary.simpleMessage("على خاطر ADHD"),
     "adhdActiveBreaks": MessageLookupByLibrary.simpleMessage(
@@ -79,11 +106,25 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "age": m0,
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
-      "عندك حساب قبل؟",
+      "هل لديك حساب بالفعل؟",
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("مايند بلوم"),
     "appearance": MessageLookupByLibrary.simpleMessage("المظهر"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+    "caseDetails_title": MessageLookupByLibrary.simpleMessage("تفاصيل الحالة"),
+    "case_review_info": MessageLookupByLibrary.simpleMessage(
+      "القضية متاعك باش يشوفها طبيب ويعطيك تشخيص.",
+    ),
+    "child_age": MessageLookupByLibrary.simpleMessage("العمر"),
+    "child_age_years": m1,
+    "child_class": MessageLookupByLibrary.simpleMessage("القسم"),
+    "child_gender": MessageLookupByLibrary.simpleMessage("الجنس"),
+    "child_gender_female": MessageLookupByLibrary.simpleMessage("أنثى"),
+    "child_gender_male": MessageLookupByLibrary.simpleMessage("ذكر"),
+    "child_info_title": MessageLookupByLibrary.simpleMessage(
+      "معلومات عن الطفل",
+    ),
+    "child_name": MessageLookupByLibrary.simpleMessage("الاسم"),
     "chooseAccountType": MessageLookupByLibrary.simpleMessage(
       "اختر نوع الحساب الذي تريد إنشاؤه",
     ),
@@ -92,28 +133,45 @@ class MessageLookup extends MessageLookupByLibrary {
     "createAccount": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "darkMode": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
     "dateOfBirth": MessageLookupByLibrary.simpleMessage("تاريخ الولادة"),
+    "diagnosis_advice": MessageLookupByLibrary.simpleMessage("نصيحة"),
+    "diagnosis_date": MessageLookupByLibrary.simpleMessage("التاريخ"),
+    "diagnosis_doctor": MessageLookupByLibrary.simpleMessage("الطبيب"),
+    "diagnosis_recommendation": MessageLookupByLibrary.simpleMessage("توصية"),
+    "diagnosis_summary": MessageLookupByLibrary.simpleMessage("ملخص"),
+    "diagnosis_title": MessageLookupByLibrary.simpleMessage("التشخيص"),
     "disabled": MessageLookupByLibrary.simpleMessage("موش مفعّل"),
     "doctor": MessageLookupByLibrary.simpleMessage("دكتور"),
     "doctorRegistration": MessageLookupByLibrary.simpleMessage("تسجيل كدكتور"),
     "doctorSubtitle": MessageLookupByLibrary.simpleMessage("مهني صحي"),
+    "download_report": MessageLookupByLibrary.simpleMessage("تحميل التقرير"),
+    "download_report_error": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ في التحميل",
+    ),
     "email": MessageLookupByLibrary.simpleMessage("الإيميل"),
     "enabled": MessageLookupByLibrary.simpleMessage("مفعّل"),
     "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
     "enterEmail": MessageLookupByLibrary.simpleMessage("حط الإيميل متاعك"),
+    "error_api_case": m2,
+    "error_api_report": m3,
+    "error_loading_case": MessageLookupByLibrary.simpleMessage(
+      "صارت غلطة في التحميل",
+    ),
     "father": MessageLookupByLibrary.simpleMessage("أب"),
     "female": MessageLookupByLibrary.simpleMessage("أنثى"),
     "firstName": MessageLookupByLibrary.simpleMessage("الاسم"),
     "french": MessageLookupByLibrary.simpleMessage("الفرنسية"),
     "goToHomeScreen": MessageLookupByLibrary.simpleMessage("ابدأ"),
+    "greeting": m4,
     "invalidEmail": MessageLookupByLibrary.simpleMessage("الإيميل غلط"),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "lastName": MessageLookupByLibrary.simpleMessage("اللقب"),
+    "loading": MessageLookupByLibrary.simpleMessage("جار التحميل..."),
     "login": MessageLookupByLibrary.simpleMessage("دخول"),
     "loginButton": MessageLookupByLibrary.simpleMessage("سجّل الدخول"),
     "loginEmailEmpty": MessageLookupByLibrary.simpleMessage(
       "رجاءً أدخل الإيميل متاعك",
     ),
-    "loginEmailHint": MessageLookupByLibrary.simpleMessage("email@domain.com"),
+    "loginEmailHint": MessageLookupByLibrary.simpleMessage("••••••••"),
     "loginEmailInvalid": MessageLookupByLibrary.simpleMessage(
       "الإيميل موش صحيح",
     ),
@@ -142,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "myPreviousCases": MessageLookupByLibrary.simpleMessage(
       "الحالات إلي عملتهم",
     ),
+    "no": MessageLookupByLibrary.simpleMessage("لا"),
     "noCasesYet": MessageLookupByLibrary.simpleMessage(
       "ما فماش حالات توّا. ابدا حالة جديدة!",
     ),
@@ -157,13 +216,43 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseSelectDateOfBirth": MessageLookupByLibrary.simpleMessage(
       "اختار تاريخ الولادة",
     ),
+    "question_1": MessageLookupByLibrary.simpleMessage(
+      "هل طفلك يلقا صعوبة في التركيز على المهام؟",
+    ),
+    "question_2": MessageLookupByLibrary.simpleMessage(
+      "هل يضيع حاجات متاعه برشا؟",
+    ),
+    "question_3": MessageLookupByLibrary.simpleMessage(
+      "هل يظهر عليه النشاط الزايد أو التصرف بدون تفكير؟",
+    ),
+    "question_4": MessageLookupByLibrary.simpleMessage(
+      "هل يقاطع الآخرين برشا؟",
+    ),
+    "question_5": MessageLookupByLibrary.simpleMessage(
+      "هل عنده مشاكل في الأداء المدرسي؟",
+    ),
+    "question_6": MessageLookupByLibrary.simpleMessage(
+      "هل التصرف موجود في أكثر من مكان (الدار والمدرسة)؟",
+    ),
     "register": MessageLookupByLibrary.simpleMessage("عمل حساب"),
     "registrationFailed": MessageLookupByLibrary.simpleMessage("فشل التسجيل"),
     "relationWithChild": MessageLookupByLibrary.simpleMessage("العلاقة بالطفل"),
     "requiredField": MessageLookupByLibrary.simpleMessage(
       "الخانة هذي لازم تتعمر",
     ),
+    "retry": MessageLookupByLibrary.simpleMessage("عاود"),
+    "screening_questionnaire_answers": MessageLookupByLibrary.simpleMessage(
+      "إجابات الاستبيان:",
+    ),
+    "screening_results_title": MessageLookupByLibrary.simpleMessage(
+      "نتائج الفحص",
+    ),
+    "screening_title": MessageLookupByLibrary.simpleMessage("تقييم ADHD"),
     "selectDate": MessageLookupByLibrary.simpleMessage("اختار التاريخ"),
+    "select_video_error": MessageLookupByLibrary.simpleMessage(
+      "يرجى تحميل فيديو قبل الإرسال",
+    ),
+    "sending": MessageLookupByLibrary.simpleMessage("جار الإرسال..."),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "sexe": MessageLookupByLibrary.simpleMessage("الجنس"),
     "startNewCase": MessageLookupByLibrary.simpleMessage("ابدا حالة جديدة"),
@@ -180,10 +269,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "statusWaitingForReply": MessageLookupByLibrary.simpleMessage(
       "تستنى في الرد",
     ),
+    "status_title": MessageLookupByLibrary.simpleMessage("حالة الحالة"),
+    "submit_video": MessageLookupByLibrary.simpleMessage("أرسل للطبيب"),
     "teacher": MessageLookupByLibrary.simpleMessage("أستاذ"),
-    "welcomeParent": m1,
+    "video_instructions": m5,
+    "video_selected": MessageLookupByLibrary.simpleMessage(
+      "تم اختيار الفيديو!",
+    ),
+    "welcomeParent": m6,
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
       "باش نفهموك على ولادك خير",
     ),
+    "yes": MessageLookupByLibrary.simpleMessage("إيه"),
   };
 }

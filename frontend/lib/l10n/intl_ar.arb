@@ -29,33 +29,31 @@
   "goToHomeScreen": "ابدأ",
   "aboutADHD": "حول اضطراب فرط الحركة وتشتت الانتباه",
 
-
- "loginWelcome": "مرحبا",
+  "loginWelcome": "مرحبا",
   "loginWelcomeDescription": "سجّل الدخول باش تكمل",
-  
+
   "loginEmailLabel": "الإيميل",
-  "loginEmailHint": "email@domain.com",
+  "loginEmailHint": "••••••••",
   "loginEmailEmpty": "رجاءً أدخل الإيميل متاعك",
   "loginEmailInvalid": "الإيميل موش صحيح",
- "loginFailed": "فشل تسجيل الدخول", 
+  "loginFailed": "فشل تسجيل الدخول",
   "loginPasswordLabel": "كلمة السر",
   "loginPasswordHint": "••••••••",
   "loginPasswordEmpty": "رجاءً أدخل كلمة السر متاعك",
-  
+
   "loginForgotPassword": "نسيت كلمة السر؟",
   "loginButton": "سجّل الدخول",
-  
+
   "loginOr": "أو",
   "loginRegisterButton": "إنشاء حساب",
   "createAccount": "إنشاء حساب",
-   "chooseProfile": "اختار الملف الشخصي",
+  "chooseProfile": "اختار الملف الشخصي",
   "chooseAccountType": "اختر نوع الحساب الذي تريد إنشاؤه",
   "doctor": "دكتور",
   "doctorSubtitle": "مهني صحي",
   "parent": "وليّ",
   "parentSubtitle": "ولي أو أستاذ",
   "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
-  "login": "دخول",
   "settings": "الإعدادات",
   "personalize": "خصّص",
   "adjustPreferences": "بدّل الاختيارات متاعك",
@@ -94,7 +92,6 @@
 
   "enterEmail": "حط الإيميل متاعك",
   "invalidEmail": "الإيميل غلط",
-  "alreadyHaveAccount": "عندك حساب قبل؟",
   "requiredField": "الخانة هذي لازم تتعمر",
   "registrationFailed": "فشل التسجيل",
   "sexe": "الجنس",
@@ -108,5 +105,59 @@
   "statusAdditionalTestRequired": "يلزم تحاليل إضافية",
   "statusWaitingForReply": "تستنى في الرد",
   "statusCompleted": "تكملت",
-  "statusDiagnosisReady": "التشخيص جاهز"
+  "statusDiagnosisReady": "التشخيص جاهز",
+  "caseDetails_title": "تفاصيل الحالة",
+  "loading": "جار التحميل...",
+  "error_loading_case": "صارت غلطة في التحميل",
+  "retry": "عاود",
+
+  "status_title": "حالة الحالة",
+
+  "child_info_title": "معلومات عن الطفل",
+  "child_name": "الاسم",
+  "child_age": "العمر",
+  "child_age_years": "{age} سنة",
+  "child_gender": "الجنس",
+  "child_gender_male": "ذكر",
+  "child_gender_female": "أنثى",
+  "child_class": "القسم",
+
+  "screening_results_title": "نتائج الفحص",
+  "screening_questionnaire_answers": "إجابات الاستبيان:",
+
+  "additional_test_title": "اختبار إضافي",
+  "additional_test_type": "نوع الاختبار",
+  "additional_test_instructions": "تعليمات:",
+  "additional_test_submit": "سجّل الإجابة",
+  "additional_test_coming_soon": "خاصية قادمة",
+
+  "diagnosis_title": "التشخيص",
+  "diagnosis_doctor": "الطبيب",
+  "diagnosis_date": "التاريخ",
+  "diagnosis_summary": "ملخص",
+  "diagnosis_advice": "نصيحة",
+  "diagnosis_recommendation": "توصية",
+
+  "download_report_error": "حدث خطأ في التحميل",
+  "download_report": "تحميل التقرير",
+
+  "error_api_case": "خطأ في الحالة: {error}",
+  "error_api_report": "خطأ في التقرير: {error}",
+
+    "screening_title": "تقييم ADHD",
+  "greeting": "مرحبا! باش نسألك شوية أسئلة على تصرّف {childName}. جاوب بصراحة باش نعاونك باش نعطيوا تقييم أفضل.",
+  "submit_video": "أرسل للطبيب",
+  "sending": "جار الإرسال...",
+  "select_video_error": "يرجى تحميل فيديو قبل الإرسال",
+  "video_selected": "تم اختيار الفيديو!",
+  "video_instructions": "مزيان! تاو، يرجى تحميل فيديو قصير (5 دقايق كحد أقصى) لـ {childName} وهو يعمل نشاط مثل الواجبات، اللعب، أو الرسم. هذا باش يساعد الطبيب باش يفهم التصرف أفضل.",
+  "case_review_info": "القضية متاعك باش يشوفها طبيب ويعطيك تشخيص.",
+  "yes": "إيه",
+  "no": "لا",
+  "question_1": "هل طفلك يلقا صعوبة في التركيز على المهام؟",
+  "question_2": "هل يضيع حاجات متاعه برشا؟",
+  "question_3": "هل يظهر عليه النشاط الزايد أو التصرف بدون تفكير؟",
+  "question_4": "هل يقاطع الآخرين برشا؟",
+  "question_5": "هل عنده مشاكل في الأداء المدرسي؟",
+  "question_6": "هل التصرف موجود في أكثر من مكان (الدار والمدرسة)؟"
 }

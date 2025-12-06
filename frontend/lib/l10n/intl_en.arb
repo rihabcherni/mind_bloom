@@ -107,5 +107,61 @@
   "statusAdditionalTestRequired": "Additional Test Required",
   "statusWaitingForReply": "Waiting for Reply",
   "statusCompleted": "Completed",
-  "statusDiagnosisReady": "Diagnosis Ready"
+  "statusDiagnosisReady": "Diagnosis Ready",
+
+   "caseDetails_title": "Case Details",
+  "loading": "Loading...",
+  "error_loading_case": "Failed to load",
+  "retry": "Retry",
+
+  "status_title": "Case Status",
+
+  "child_info_title": "Child Information",
+  "child_name": "Name",
+  "child_age": "Age",
+  "child_age_years": "{age} years",
+  "child_gender": "Gender",
+  "child_gender_male": "Boy",
+  "child_gender_female": "Girl",
+  "child_class": "Class",
+
+  "screening_results_title": "Screening Results",
+  "screening_questionnaire_answers": "Questionnaire Answers:",
+
+  "additional_test_title": "Additional Test",
+  "additional_test_type": "Test Type",
+  "additional_test_instructions": "Instructions:",
+  "additional_test_submit": "Submit Response",
+  "additional_test_coming_soon": "Feature coming soon",
+
+  "diagnosis_title": "Diagnosis",
+  "diagnosis_doctor": "Doctor",
+  "diagnosis_date": "Date",
+  "diagnosis_summary": "Summary",
+  "diagnosis_advice": "Advice",
+  "diagnosis_recommendation": "Recommendation",
+
+  "download_report_error": "Error downloading report",
+  "download_report": "Download Report",
+
+  "error_api_case": "Error loading case: {error}",
+  "error_api_report": "Error downloading report: {error}",
+
+
+    "screening_title": "ADHD Screening",
+  "greeting": "Hello! I will ask you some questions about {childName}'s behavior. Please answer honestly to help us provide the best assessment.",
+  "submit_video": "Submit to doctor",
+  "sending": "Sending...",
+  "select_video_error": "Please upload a video before submitting",
+  "video_selected": "Video selected!",
+  "video_instructions": "Great! Now please upload a short video (max 5 minutes) of {childName} doing an activity such as homework, playing, or drawing. This will help the doctor better understand the behavior.",
+  "case_review_info": "Your case will be reviewed by a doctor who will provide a diagnosis.",
+  "yes": "Yes",
+  "no": "No",
+  "question_1": "Does your child have trouble focusing on tasks?",
+  "question_2": "Does he/she frequently lose things?",
+  "question_3": "Does he/she show hyperactivity or impulsivity?",
+  "question_4": "Does he/she often interrupt others?",
+  "question_5": "Are there any school performance issues?",
+  "question_6": "Is the behavior present in more than one environment (home and school)?"
 }

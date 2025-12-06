@@ -108,5 +108,61 @@
   "statusAdditionalTestRequired": "Test supplémentaire requis",
   "statusWaitingForReply": "En attente de réponse",
   "statusCompleted": "Terminé",
-  "statusDiagnosisReady": "Diagnostic prêt"
+  "statusDiagnosisReady": "Diagnostic prêt",
+
+
+  "caseDetails_title": "Détails du Cas",
+  "loading": "Chargement...",
+  "error_loading_case": "Échec du chargement",
+  "retry": "Réessayer",
+
+  "status_title": "Statut du Cas",
+
+  "child_info_title": "Informations de l'Enfant",
+  "child_name": "Nom",
+  "child_age": "Âge",
+  "child_age_years": "{age} ans",
+  "child_gender": "Sexe",
+  "child_gender_male": "Garçon",
+  "child_gender_female": "Fille",
+  "child_class": "Classe",
+
+  "screening_results_title": "Résultats du Dépistage",
+  "screening_questionnaire_answers": "Réponses au Questionnaire:",
+
+  "additional_test_title": "Test Supplémentaire",
+  "additional_test_type": "Type de test",
+  "additional_test_instructions": "Instructions:",
+  "additional_test_submit": "Soumettre la réponse",
+  "additional_test_coming_soon": "Fonctionnalité à venir",
+
+  "diagnosis_title": "Diagnostic",
+  "diagnosis_doctor": "Médecin",
+  "diagnosis_date": "Date",
+  "diagnosis_summary": "Résumé",
+  "diagnosis_advice": "Conseils",
+  "diagnosis_recommendation": "Recommandation",
+
+  "download_report_error": "Erreur lors du téléchargement du rapport",
+  "download_report": "Télécharger le rapport",
+
+  "error_api_case": "Erreur lors du chargement du cas : {error}",
+  "error_api_report": "Erreur lors du téléchargement du rapport : {error}",
+
+  "screening_title": "Dépistage TDAH",
+  "greeting": "Bonjour ! Je vais vous poser quelques questions sur le comportement de {childName}. Répondez honnêtement pour nous aider à fournir la meilleure évaluation.",
+  "submit_video": "Soumettre au médecin",
+  "sending": "Envoi en cours...",
+  "select_video_error": "Veuillez télécharger une vidéo avant de soumettre",
+  "video_selected": "Vidéo sélectionnée !",
+  "video_instructions": "Parfait ! Maintenant, veuillez télécharger une courte vidéo (max 5 minutes) de {childName} faisant une activité comme les devoirs, jouer ou dessiner. Cela aidera le médecin à mieux comprendre le comportement.",
+  "case_review_info": "Votre cas sera examiné par un médecin qui fournira un diagnostic.",
+  "yes": "Oui",
+  "no": "Non",
+  "question_1": "Votre enfant a-t-il du mal à se concentrer sur les tâches ?",
+  "question_2": "Perd-il/elle des choses fréquemment ?",
+  "question_3": "Montre-t-il/elle de l'hyperactivité ou de l'impulsivité ?",
+  "question_4": "Interrompt-il/elle souvent les autres ?",
+  "question_5": "Y a-t-il des problèmes de performance scolaire ?",
+  "question_6": "Le comportement est-il présent dans plus d'un environnement (maison et école) ?"
 }

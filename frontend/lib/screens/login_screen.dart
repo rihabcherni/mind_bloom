@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/widgets/header.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
@@ -112,17 +111,6 @@ class _LoginScreenState extends State<LoginScreen>
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Center(
-                                      child: Text(
-                                        S.of(context).loginWelcomeDescription,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: isDark
-                                              ? Colors.white60
-                                              : Colors.grey[600],
-                                        ),
-                                      ),
-                                    ),
                                     Center(
                                       child: Container(
                                         padding: const EdgeInsets.all(20),

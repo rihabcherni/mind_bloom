@@ -64,9 +64,83 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
     } catch (e) {
       setState(() => _isLoading = false);
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: ${e.toString()}'),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _deleteCase(CaseModel caseItem) async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Row(
+          children: [
+            Icon(Icons.warning_rounded, color: Colors.red, size: 28),
+            const SizedBox(width: 12),
+            const Text('Confirmer la suppression'),
+          ],
+        ),
+        content: Text(
+          'Voulez-vous vraiment supprimer le cas de ${caseItem.childFullName} ?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Annuler'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: const Text('Supprimer'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm == true) {
+      try {
+        await ApiService.deleteCase(caseItem.id);
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('Cas supprimé avec succès'),
+              backgroundColor: Colors.green,
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          );
+          _loadCases();
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Erreur: ${e.toString()}'),
+              backgroundColor: Colors.red,
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          );
+        }
       }
     }
   }
@@ -88,6 +162,11 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
     }
   }
 
+  bool _canEditOrDelete(CaseModel caseItem) {
+    return caseItem.status != 'diagnosis_ready' &&
+        caseItem.status != 'completed';
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -100,7 +179,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
           SafeArea(
             child: Column(
               children: [
-                // Header personnalisé
+                // Header (identique)
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
@@ -225,7 +304,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                   ),
                 ),
 
-                // Bouton Nouveau Cas
+                // Bouton Nouveau Cas (identique)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: FadeTransition(
@@ -298,7 +377,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
 
                 const SizedBox(height: 32),
 
-                // Titre Section
+                // Titre Section (identique)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: FadeTransition(
@@ -426,6 +505,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
 
   Widget _buildCaseCard(CaseModel caseItem, bool isDark) {
     final statusColor = _getStatusColor(caseItem.status);
+    final canModify = _canEditOrDelete(caseItem);
 
     return Material(
       color: Colors.transparent,
@@ -453,91 +533,146 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
               ),
             ],
           ),
-          child: Row(
+          child: Column(
             children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [statusColor, statusColor.withOpacity(0.7)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: statusColor.withOpacity(0.4),
-                      blurRadius: 12,
-                      offset: const Offset(0, 6),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [statusColor, statusColor.withOpacity(0.7)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: statusColor.withOpacity(0.4),
+                          blurRadius: 12,
+                          offset: const Offset(0, 6),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: Text(
-                  caseItem.childFirstName[0].toUpperCase(),
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppConstants.white,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      caseItem.childFullName,
-                      style: TextStyle(
-                        fontSize: 16,
+                    child: Text(
+                      caseItem.childFirstName[0].toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: isDark
-                            ? AppConstants.white
-                            : AppConstants.darkViolet,
+                        color: AppConstants.white,
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      S.of(context).age(caseItem.childAge),
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: isDark ? Colors.white60 : Colors.grey[600],
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          caseItem.childFullName,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: isDark
+                                ? AppConstants.white
+                                : AppConstants.darkViolet,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          S.of(context).age(caseItem.childAge),
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: isDark ? Colors.white60 : Colors.grey[600],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: statusColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            caseItem.statusDisplay,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                              color: AppConstants.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: statusColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      Icons.arrow_forward_rounded,
+                      color: statusColor,
+                      size: 24,
+                    ),
+                  ),
+                ],
+              ),
+
+              // Boutons Edit/Delete
+              if (canModify) ...[
+                const SizedBox(height: 16),
+                const Divider(),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        onPressed: () async {
+                          await Navigator.pushNamed(
+                            context,
+                            '/edit-case',
+                            arguments: caseItem,
+                          );
+                          _loadCases();
+                        },
+                        icon: const Icon(Icons.edit_rounded, size: 18),
+                        label: const Text('Modifier'),
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: AppConstants.primaryViolet,
+                          side: BorderSide(
+                            color: AppConstants.primaryViolet.withOpacity(0.5),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: statusColor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        caseItem.statusDisplay,
-                        style: const TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.bold,
-                          color: AppConstants.white,
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        onPressed: () => _deleteCase(caseItem),
+                        icon: const Icon(Icons.delete_rounded, size: 18),
+                        label: const Text('Supprimer'),
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: Colors.red,
+                          side: BorderSide(color: Colors.red.withOpacity(0.5)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: statusColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(
-                  Icons.arrow_forward_rounded,
-                  color: statusColor,
-                  size: 24,
-                ),
-              ),
+              ],
             ],
           ),
         ),

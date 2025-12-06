@@ -12,10 +12,12 @@ import 'screens/register_screen.dart';
 import 'screens/parent_home_screen.dart';
 import 'screens/doctor_home_screen.dart';
 import 'screens/create_case_screen.dart';
+import 'screens/edit_case_screen.dart';
 import 'screens/chatbot_screening_screen.dart';
 import 'screens/case_details_screen.dart';
 import 'screens/doctor_case_details_screen.dart';
 import 'screens/notifications_screen.dart';
+import 'models/case_model.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'generated/l10n.dart';
 
@@ -116,6 +118,11 @@ class MyApp extends StatelessWidget {
                 final caseId = settings.arguments as String;
                 return MaterialPageRoute(
                   builder: (_) => CaseDetailsScreen(caseId: caseId),
+                );
+              case '/edit-case':
+                final caseItem = settings.arguments as CaseModel;
+                return MaterialPageRoute(
+                  builder: (_) => EditCaseScreen(caseItem: caseItem),
                 );
               case '/doctor-case-details':
                 final caseId = settings.arguments as String;

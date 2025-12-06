@@ -22,11 +22,39 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(age) => "Âge : ${age}";
 
-  static String m1(name) => "Bienvenue, ${name}";
+  static String m1(age) => "${age} ans";
+
+  static String m2(error) => "Erreur lors du chargement du cas : ${error}";
+
+  static String m3(error) =>
+      "Erreur lors du téléchargement du rapport : ${error}";
+
+  static String m4(childName) =>
+      "Bonjour ! Je vais vous poser quelques questions sur le comportement de ${childName}. Répondez honnêtement pour nous aider à fournir la meilleure évaluation.";
+
+  static String m5(childName) =>
+      "Parfait ! Maintenant, veuillez télécharger une courte vidéo (max 5 minutes) de ${childName} faisant une activité comme les devoirs, jouer ou dessiner. Cela aidera le médecin à mieux comprendre le comportement.";
+
+  static String m6(name) => "Bienvenue, ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "aboutADHD": MessageLookupByLibrary.simpleMessage("À propos du TDAH"),
+    "additional_test_coming_soon": MessageLookupByLibrary.simpleMessage(
+      "Fonctionnalité à venir",
+    ),
+    "additional_test_instructions": MessageLookupByLibrary.simpleMessage(
+      "Instructions:",
+    ),
+    "additional_test_submit": MessageLookupByLibrary.simpleMessage(
+      "Soumettre la réponse",
+    ),
+    "additional_test_title": MessageLookupByLibrary.simpleMessage(
+      "Test Supplémentaire",
+    ),
+    "additional_test_type": MessageLookupByLibrary.simpleMessage(
+      "Type de test",
+    ),
     "adhdAboutTitle": MessageLookupByLibrary.simpleMessage("À propos du TDAH"),
     "adhdActiveBreaks": MessageLookupByLibrary.simpleMessage(
       "Encourager les pauses actives régulières",
@@ -90,6 +118,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "appTitle": MessageLookupByLibrary.simpleMessage("Mind Bloom"),
     "appearance": MessageLookupByLibrary.simpleMessage("Apparence"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabe"),
+    "caseDetails_title": MessageLookupByLibrary.simpleMessage("Détails du Cas"),
+    "case_review_info": MessageLookupByLibrary.simpleMessage(
+      "Votre cas sera examiné par un médecin qui fournira un diagnostic.",
+    ),
+    "child_age": MessageLookupByLibrary.simpleMessage("Âge"),
+    "child_age_years": m1,
+    "child_class": MessageLookupByLibrary.simpleMessage("Classe"),
+    "child_gender": MessageLookupByLibrary.simpleMessage("Sexe"),
+    "child_gender_female": MessageLookupByLibrary.simpleMessage("Fille"),
+    "child_gender_male": MessageLookupByLibrary.simpleMessage("Garçon"),
+    "child_info_title": MessageLookupByLibrary.simpleMessage(
+      "Informations de l\'Enfant",
+    ),
+    "child_name": MessageLookupByLibrary.simpleMessage("Nom"),
     "chooseAccountType": MessageLookupByLibrary.simpleMessage(
       "Sélectionnez le type de compte que vous souhaitez créer",
     ),
@@ -102,6 +144,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "createAccount": MessageLookupByLibrary.simpleMessage("Créer un compte"),
     "darkMode": MessageLookupByLibrary.simpleMessage("Mode sombre"),
     "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date de naissance"),
+    "diagnosis_advice": MessageLookupByLibrary.simpleMessage("Conseils"),
+    "diagnosis_date": MessageLookupByLibrary.simpleMessage("Date"),
+    "diagnosis_doctor": MessageLookupByLibrary.simpleMessage("Médecin"),
+    "diagnosis_recommendation": MessageLookupByLibrary.simpleMessage(
+      "Recommandation",
+    ),
+    "diagnosis_summary": MessageLookupByLibrary.simpleMessage("Résumé"),
+    "diagnosis_title": MessageLookupByLibrary.simpleMessage("Diagnostic"),
     "disabled": MessageLookupByLibrary.simpleMessage("Désactivé"),
     "doctor": MessageLookupByLibrary.simpleMessage("Médecin"),
     "doctorRegistration": MessageLookupByLibrary.simpleMessage(
@@ -110,11 +160,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "doctorSubtitle": MessageLookupByLibrary.simpleMessage(
       "Professionnel de santé",
     ),
+    "download_report": MessageLookupByLibrary.simpleMessage(
+      "Télécharger le rapport",
+    ),
+    "download_report_error": MessageLookupByLibrary.simpleMessage(
+      "Erreur lors du téléchargement du rapport",
+    ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "enabled": MessageLookupByLibrary.simpleMessage("Activé"),
     "english": MessageLookupByLibrary.simpleMessage("Anglais"),
     "enterEmail": MessageLookupByLibrary.simpleMessage(
       "Veuillez entrer votre email",
+    ),
+    "error_api_case": m2,
+    "error_api_report": m3,
+    "error_loading_case": MessageLookupByLibrary.simpleMessage(
+      "Échec du chargement",
     ),
     "father": MessageLookupByLibrary.simpleMessage("Père"),
     "female": MessageLookupByLibrary.simpleMessage("Femme"),
@@ -123,9 +184,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "goToHomeScreen": MessageLookupByLibrary.simpleMessage(
       "Aller à l\'accueil",
     ),
+    "greeting": m4,
     "invalidEmail": MessageLookupByLibrary.simpleMessage("Email invalide"),
     "language": MessageLookupByLibrary.simpleMessage("Langue"),
     "lastName": MessageLookupByLibrary.simpleMessage("Nom"),
+    "loading": MessageLookupByLibrary.simpleMessage("Chargement..."),
     "login": MessageLookupByLibrary.simpleMessage("Se connecter"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Se connecter"),
     "loginEmailEmpty": MessageLookupByLibrary.simpleMessage(
@@ -162,6 +225,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "myPreviousCases": MessageLookupByLibrary.simpleMessage(
       "Mes cas précédents",
     ),
+    "no": MessageLookupByLibrary.simpleMessage("Non"),
     "noCasesYet": MessageLookupByLibrary.simpleMessage(
       "Aucun cas pour le moment. Commencez un nouveau cas !",
     ),
@@ -181,6 +245,24 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseSelectDateOfBirth": MessageLookupByLibrary.simpleMessage(
       "Veuillez sélectionner votre date de naissance",
     ),
+    "question_1": MessageLookupByLibrary.simpleMessage(
+      "Votre enfant a-t-il du mal à se concentrer sur les tâches ?",
+    ),
+    "question_2": MessageLookupByLibrary.simpleMessage(
+      "Perd-il/elle des choses fréquemment ?",
+    ),
+    "question_3": MessageLookupByLibrary.simpleMessage(
+      "Montre-t-il/elle de l\'hyperactivité ou de l\'impulsivité ?",
+    ),
+    "question_4": MessageLookupByLibrary.simpleMessage(
+      "Interrompt-il/elle souvent les autres ?",
+    ),
+    "question_5": MessageLookupByLibrary.simpleMessage(
+      "Y a-t-il des problèmes de performance scolaire ?",
+    ),
+    "question_6": MessageLookupByLibrary.simpleMessage(
+      "Le comportement est-il présent dans plus d\'un environnement (maison et école) ?",
+    ),
     "register": MessageLookupByLibrary.simpleMessage("Créer un compte"),
     "registrationFailed": MessageLookupByLibrary.simpleMessage(
       "Échec de l\'inscription",
@@ -191,7 +273,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "requiredField": MessageLookupByLibrary.simpleMessage(
       "Ce champ est requis",
     ),
+    "retry": MessageLookupByLibrary.simpleMessage("Réessayer"),
+    "screening_questionnaire_answers": MessageLookupByLibrary.simpleMessage(
+      "Réponses au Questionnaire:",
+    ),
+    "screening_results_title": MessageLookupByLibrary.simpleMessage(
+      "Résultats du Dépistage",
+    ),
+    "screening_title": MessageLookupByLibrary.simpleMessage("Dépistage TDAH"),
     "selectDate": MessageLookupByLibrary.simpleMessage("Sélectionner la date"),
+    "select_video_error": MessageLookupByLibrary.simpleMessage(
+      "Veuillez télécharger une vidéo avant de soumettre",
+    ),
+    "sending": MessageLookupByLibrary.simpleMessage("Envoi en cours..."),
     "settings": MessageLookupByLibrary.simpleMessage("Paramètres"),
     "sexe": MessageLookupByLibrary.simpleMessage("Sexe"),
     "startNewCase": MessageLookupByLibrary.simpleMessage(
@@ -210,10 +304,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "statusWaitingForReply": MessageLookupByLibrary.simpleMessage(
       "En attente de réponse",
     ),
+    "status_title": MessageLookupByLibrary.simpleMessage("Statut du Cas"),
+    "submit_video": MessageLookupByLibrary.simpleMessage(
+      "Soumettre au médecin",
+    ),
     "teacher": MessageLookupByLibrary.simpleMessage("Enseignant"),
-    "welcomeParent": m1,
+    "video_instructions": m5,
+    "video_selected": MessageLookupByLibrary.simpleMessage(
+      "Vidéo sélectionnée !",
+    ),
+    "welcomeParent": m6,
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
       "Aider à mieux comprendre votre enfant",
     ),
+    "yes": MessageLookupByLibrary.simpleMessage("Oui"),
   };
 }

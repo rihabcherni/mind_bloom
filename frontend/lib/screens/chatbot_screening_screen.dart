@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../constants/app_constants.dart';
 import '../models/case_model.dart';
 import '../services/api_service.dart';
+import '../generated/l10n.dart';
 
 class ChatbotScreeningScreen extends StatefulWidget {
   final Map<String, dynamic> childInfo;
@@ -19,38 +20,21 @@ class ChatbotScreeningScreen extends StatefulWidget {
 class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
     with SingleTickerProviderStateMixin {
   final ScrollController _scrollController = ScrollController();
-  final List<Map<String, dynamic>> _questions = [
-    {
-      'question': 'Votre enfant a-t-il du mal à se concentrer sur les tâches ?',
-      'answer': null,
-    },
-    {'question': 'Perd-il/elle des choses fréquemment ?', 'answer': null},
-    {
-      'question': 'Montre-t-il/elle de l\'hyperactivité ou de l\'impulsivité ?',
-      'answer': null,
-    },
-    {'question': 'Interrompt-il/elle souvent les autres ?', 'answer': null},
-    {
-      'question': 'Y a-t-il des problèmes de performance scolaire ?',
-      'answer': null,
-    },
-    {
-      'question':
-          'Le comportement est-il présent dans plus d\'un environnement (maison et école) ?',
-      'answer': null,
-    },
-  ];
-
   int _currentQuestionIndex = 0;
   bool _showVideoUpload = false;
   File? _videoFile;
   bool _isSubmitting = false;
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
+  late List<Map<String, dynamic>> _questions;
+  bool _questionsInitialized = false;
 
   @override
   void initState() {
     super.initState();
+    // Initialize questions list as empty - will be populated in didChangeDependencies
+    _questions = [];
+
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 600),
@@ -59,6 +43,24 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
       CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
     );
     _animationController.forward();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // Initialize questions only once when context is available
+    if (!_questionsInitialized) {
+      _questions = [
+        {'question': S.of(context).question_1, 'answer': null},
+        {'question': S.of(context).question_2, 'answer': null},
+        {'question': S.of(context).question_3, 'answer': null},
+        {'question': S.of(context).question_4, 'answer': null},
+        {'question': S.of(context).question_5, 'answer': null},
+        {'question': S.of(context).question_6, 'answer': null},
+      ];
+      _questionsInitialized = true;
+    }
   }
 
   @override
@@ -78,7 +80,9 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
   }
 
   String _calculateGravityScore() {
-    int yesCount = _questions.where((q) => q['answer'] == 'Oui').length;
+    int yesCount = _questions
+        .where((q) => q['answer'] == S.of(context).yes)
+        .length;
     if (yesCount >= 5) return 'high';
     if (yesCount >= 3) return 'medium';
     return 'low';
@@ -202,6 +206,11 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
 
   @override
   Widget build(BuildContext context) {
+    // Guard against rendering before questions are initialized
+    if (!_questionsInitialized) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -280,7 +289,6 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                     ],
                   ),
                 ),
-
                 Expanded(
                   child: _showVideoUpload
                       ? _buildVideoUpload(isDark)
@@ -357,7 +365,6 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
             ),
           ),
         ),
-
         const SizedBox(height: 24),
         Expanded(
           child: ListView(
@@ -365,13 +372,11 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
             padding: const EdgeInsets.symmetric(horizontal: 16),
             children: [
               _buildBotMessage(
-                'Bonjour ! Je vais vous poser quelques questions sur le comportement de ${widget.childInfo['childFirstName']}. Répondez honnêtement pour nous aider à fournir la meilleure évaluation.',
+                S.of(context).greeting(widget.childInfo['childFirstName']),
                 isDark,
               ),
               const SizedBox(height: 20),
-
               ..._buildPreviousMessages(isDark),
-
               if (_currentQuestionIndex < _questions.length)
                 FadeTransition(
                   opacity: _fadeAnimation,
@@ -404,9 +409,9 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            _buildAnswerButton('Non', false, isDark),
+            _buildAnswerButton(S.of(context).no, false, isDark),
             const SizedBox(width: 12),
-            _buildAnswerButton('Oui', true, isDark),
+            _buildAnswerButton(S.of(context).yes, true, isDark),
           ],
         ),
       ],
@@ -507,7 +512,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
   }
 
   Widget _buildUserMessage(String text, bool isDark) {
-    final isYes = text == 'Oui';
+    final isYes = text == S.of(context).yes;
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
@@ -577,16 +582,14 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                 color: AppConstants.white,
               ),
             ),
-
             const SizedBox(height: 32),
-
             _buildBotMessage(
-              'Parfait ! Maintenant, veuillez télécharger une courte vidéo (max 5 minutes) de ${widget.childInfo['childFirstName']} faisant une activité comme les devoirs, jouer ou dessiner. Cela aidera le médecin à mieux comprendre le comportement.',
+              S
+                  .of(context)
+                  .video_instructions(widget.childInfo['childFirstName']),
               isDark,
             ),
-
             const SizedBox(height: 32),
-
             if (_videoFile != null) ...[
               Container(
                 padding: const EdgeInsets.all(20),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/header.dart';
 import '../constants/app_constants.dart';
 import '../generated/l10n.dart';
 
@@ -57,62 +57,12 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
           SafeArea(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: isDark
-                                ? Colors.white
-                                : AppConstants.darkViolet,
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ),
-                      const Spacer(),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.settings_rounded,
-                            color: isDark
-                                ? Colors.white
-                                : AppConstants.darkViolet,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const SettingsScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                HeaderWidget(
+                  title: S.of(context).chooseProfile,
+                  onBackPressed: () => Navigator.pop(context),
+                  showSettingsIcon: true,
+                  showBackIcon: true,
+                  textSize: 18,
                 ),
                 Expanded(
                   child: Padding(
@@ -152,26 +102,18 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
                           ),
                           const SizedBox(height: 15),
                           Text(
-                            S.of(context).chooseProfile,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: isDark
-                                  ? Colors.white
-                                  : AppConstants.darkViolet,
-                              letterSpacing: -1,
-                            ),
-                          ),
-                          Text(
                             S.of(context).chooseAccountType,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 14,
-                              color: isDark ? Colors.white60 : Colors.grey[600],
-                              height: 1.5,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: isDark
+                                  ? Colors.white
+                                  : AppConstants.primaryViolet,
+                              letterSpacing: -1,
                             ),
                           ),
+
                           const SizedBox(height: 30),
                           SlideTransition(
                             position: _slideAnimation,

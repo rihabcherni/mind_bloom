@@ -221,6 +221,79 @@ const submitTestResponse = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+const updateCase = async (req, res) => {
+  try {
+    const {
+      childFirstName,
+      childLastName,
+      childSex,
+      childAge,
+      scholarYear
+    } = req.body;
+
+    const caseItem = await Case.findById(req.params.id);
+
+    if (!caseItem) {
+      return res.status(404).json({ message: 'Case not found' });
+    }
+
+    // Vérifier que c'est le parent propriétaire
+    if (caseItem.parentId.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Not authorized' });
+    }
+
+    // Empêcher la modification si le cas a déjà un diagnostic
+    if (caseItem.status === 'diagnosis_ready' || caseItem.status === 'completed') {
+      return res.status(400).json({ 
+        message: 'Cannot edit a case that has been diagnosed' 
+      });
+    }
+
+    // Mettre à jour les champs
+    if (childFirstName) caseItem.childFirstName = childFirstName;
+    if (childLastName) caseItem.childLastName = childLastName;
+    if (childSex) caseItem.childSex = childSex;
+    if (childAge) caseItem.childAge = childAge;
+    if (scholarYear) caseItem.scholarYear = scholarYear;
+
+    caseItem.updatedAt = Date.now();
+    await caseItem.save();
+
+    res.json(caseItem);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const deleteCase = async (req, res) => {
+  try {
+    const caseItem = await Case.findById(req.params.id);
+
+    if (!caseItem) {
+      return res.status(404).json({ message: 'Case not found' });
+    }
+
+    // Vérifier que c'est le parent propriétaire
+    if (caseItem.parentId.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Not authorized' });
+    }
+
+    // Empêcher la suppression si le cas a un diagnostic
+    if (caseItem.status === 'diagnosis_ready' || caseItem.status === 'completed') {
+      return res.status(400).json({ 
+        message: 'Cannot delete a case that has been diagnosed' 
+      });
+    }
+
+    await Case.findByIdAndDelete(req.params.id);
+
+    res.json({ message: 'Case deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createCase,
   uploadVideo,
@@ -230,5 +303,7 @@ module.exports = {
   assignCase,
   submitDiagnosis,
   requestAdditionalTest,
-  submitTestResponse
+  submitTestResponse,
+  updateCase,
+  deleteCase
 };

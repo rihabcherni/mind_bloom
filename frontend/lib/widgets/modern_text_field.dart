@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/app_constants.dart';
+import '../generated/l10n.dart';
 
 class ModernTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -33,7 +34,7 @@ class ModernTextField extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            fontSize: 15,
+            fontSize: 12,
             fontWeight: FontWeight.w600,
             color: isDark ? AppConstants.white : AppConstants.darkViolet,
           ),
@@ -58,7 +59,7 @@ class ModernTextField extends StatelessWidget {
             obscureText: obscureText,
             style: TextStyle(
               color: isDark ? AppConstants.white : AppConstants.black,
-              fontSize: 16,
+              fontSize: 15,
             ),
             decoration: InputDecoration(
               hintText: hint,
@@ -75,16 +76,55 @@ class ModernTextField extends StatelessWidget {
                 child: Icon(icon, color: AppConstants.primaryViolet, size: 20),
               ),
               suffixIcon: suffixIcon,
+
+              // 🔹 Bordure grise par défaut
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide.none,
+                borderSide: BorderSide(
+                  color: isDark ? Colors.white24 : Colors.grey.shade400,
+                  width: 1,
+                ),
               ),
+
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(
+                  color: isDark ? Colors.white24 : Colors.grey.shade400,
+                  width: 1,
+                ),
+              ),
+
+              // 🔹 Bordure lors du focus (violet)
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: AppConstants.primaryViolet,
+                  width: 2,
+                ),
+              ),
+
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(color: Colors.red, width: 2),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(color: Colors.red, width: 2),
+              ),
+
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 20,
-                vertical: 18,
+                vertical: 16,
               ),
             ),
-            validator: validator,
+            validator:
+                validator ??
+                (value) {
+                  if (value == null || value.isEmpty) {
+                    return S.of(context).requiredField;
+                  }
+                  return null;
+                },
           ),
         ),
       ],

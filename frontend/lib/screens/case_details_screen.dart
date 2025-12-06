@@ -102,7 +102,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error downloading report: ${e.toString()}'),
+            content: Text(S.of(context).error_api_report(e.toString())),
             backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -188,7 +188,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                       const SizedBox(width: 16),
                       Expanded(
                         child: Text(
-                          'Détails du Cas',
+                          S.of(context).caseDetails_title,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -265,7 +265,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                               ),
                               const SizedBox(height: 16),
                               Text(
-                                'Chargement...',
+                                S.of(context).loading,
                                 style: TextStyle(
                                   color: isDark
                                       ? Colors.white60
@@ -294,7 +294,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                               ),
                               const SizedBox(height: 16),
                               Text(
-                                'Échec du chargement',
+                                S.of(context).error_loading_case,
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -307,7 +307,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                               ElevatedButton.icon(
                                 onPressed: _loadCaseDetails,
                                 icon: const Icon(Icons.refresh_rounded),
-                                label: const Text('Réessayer'),
+                                label: Text(S.of(context).retry),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppConstants.primaryViolet,
                                   foregroundColor: AppConstants.white,
@@ -414,7 +414,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Statut du Cas',
+                  S.of(context).status_title,
                   style: TextStyle(
                     fontSize: 12,
                     color: isDark ? Colors.white60 : Colors.grey[600],
@@ -440,32 +440,38 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
 
   Widget _buildChildInfoSection(bool isDark) {
     return _buildModernSection(
-      'Informations de l\'Enfant',
+      S.of(context).child_info_title,
       Icons.child_care_rounded,
       isDark,
       [
-        _buildInfoRow('Nom', _case!.childFullName, isDark),
-        _buildInfoRow('Âge', '${_case!.childAge} ans', isDark),
+        _buildInfoRow(S.of(context).child_name, _case!.childFullName, isDark),
         _buildInfoRow(
-          'Sexe',
-          _case!.childSex == 'male' ? 'Garçon' : 'Fille',
+          S.of(context).child_age,
+          '${_case!.childAge} ans',
           isDark,
         ),
-        _buildInfoRow('Classe', _case!.scholarYear, isDark),
+        _buildInfoRow(
+          S.of(context).child_gender,
+          _case!.childSex == S.of(context).child_gender_male
+              ? S.of(context).child_gender_male
+              : S.of(context).child_gender_female,
+          isDark,
+        ),
+        _buildInfoRow(S.of(context).child_class, _case!.scholarYear, isDark),
       ],
     );
   }
 
   Widget _buildScreeningSection(bool isDark) {
     return _buildModernSection(
-      'Résultats du Dépistage',
+      S.of(context).screening_results_title,
       Icons.assessment_rounded,
       isDark,
       [
         _buildSeverityBadge(),
         const SizedBox(height: 20),
         Text(
-          'Réponses au Questionnaire:',
+          S.of(context).screening_questionnaire_answers,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 15,
@@ -487,12 +493,12 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
 
   Widget _buildAdditionalTestSection(bool isDark) {
     return _buildModernSection(
-      'Test Supplémentaire',
+      S.of(context).additional_test_title,
       Icons.assignment_rounded,
       isDark,
       [
         _buildInfoRow(
-          'Type de test',
+          S.of(context).additional_test_type,
           _case!.additionalTestRequest!.testType,
           isDark,
         ),
@@ -512,7 +518,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                   Icon(Icons.info_rounded, color: Colors.blue, size: 20),
                   const SizedBox(width: 8),
                   Text(
-                    'Instructions:',
+                    S.of(context).additional_test_instructions,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
@@ -541,7 +547,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: const Text('Fonctionnalité à venir'),
+                    content: Text(S.of(context).additional_test_coming_soon),
                     behavior: SnackBarBehavior.floating,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -576,8 +582,8 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                         color: AppConstants.white,
                       ),
                       const SizedBox(width: 8),
-                      const Text(
-                        'Soumettre la réponse',
+                      Text(
+                        S.of(context).additional_test_submit,
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -597,19 +603,23 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
 
   Widget _buildDiagnosisSection(bool isDark) {
     return _buildModernSection(
-      'Diagnostic',
+      S.of(context).diagnosis_title,
       Icons.medical_services_rounded,
       isDark,
       [
-        _buildInfoRow('Médecin', _case!.diagnosis!.doctorName, isDark),
         _buildInfoRow(
-          'Date',
+          S.of(context).diagnosis_doctor,
+          _case!.diagnosis!.doctorName,
+          isDark,
+        ),
+        _buildInfoRow(
+          S.of(context).diagnosis_date,
           '${_case!.diagnosis!.completedAt.day}/${_case!.diagnosis!.completedAt.month}/${_case!.diagnosis!.completedAt.year}',
           isDark,
         ),
         const SizedBox(height: 16),
         _buildDiagnosisBlock(
-          'Résumé',
+          S.of(context).diagnosis_summary,
           _case!.diagnosis!.summary,
           Icons.description_rounded,
           Colors.blue,
@@ -617,7 +627,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
         ),
         const SizedBox(height: 12),
         _buildDiagnosisBlock(
-          'Conseils',
+          S.of(context).diagnosis_advice,
           _case!.diagnosis!.advice,
           Icons.tips_and_updates_rounded,
           Colors.orange,
@@ -625,7 +635,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
         ),
         const SizedBox(height: 12),
         _buildDiagnosisBlock(
-          'Recommandation',
+          S.of(context).diagnosis_recommendation,
           _case!.diagnosis!.recommendation,
           Icons.recommend_rounded,
           Colors.green,
@@ -671,8 +681,8 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                       color: AppConstants.white,
                     ),
                     const SizedBox(width: 8),
-                    const Text(
-                      'Télécharger le Rapport (PDF)',
+                    Text(
+                      S.of(context).download_report,
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -834,8 +844,12 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
     String answer,
     bool isDark,
   ) {
-    final isYes = answer == 'Yes';
-    final color = isYes ? Colors.red : Colors.green;
+    final normalized = answer.trim().toLowerCase();
+
+    const yesWords = {'yes', 'oui', 'نعم', 'ايه'};
+
+    final isYes = yesWords.contains(normalized);
+    final color = isYes ? Colors.green : Colors.red;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),

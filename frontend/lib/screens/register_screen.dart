@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/background_circles.dart';
 import 'package:frontend/widgets/header.dart';
+import 'package:frontend/widgets/modern_text_field.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
 import '../providers/auth_provider.dart';
@@ -169,11 +170,14 @@ class _RegisterScreenState extends State<RegisterScreen>
                       onBackPressed: () => Navigator.pop(context),
                       showSettingsIcon: true,
                       showBackIcon: true,
-                      textSize: 25,
+                      textSize: 22,
                     ),
                     Expanded(
                       child: SingleChildScrollView(
-                        padding: const EdgeInsets.all(
+                        padding: const EdgeInsets.fromLTRB(
+                          AppConstants.paddingLarge,
+                          0,
+                          AppConstants.paddingLarge,
                           AppConstants.paddingLarge,
                         ),
                         child: FadeTransition(
@@ -188,18 +192,18 @@ class _RegisterScreenState extends State<RegisterScreen>
                                       ? S.of(context).doctorRegistration
                                       : S.of(context).parentRegistration,
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                     color: isDark
                                         ? Colors.white60
                                         : Colors.grey[600],
                                   ),
                                 ),
-                                const SizedBox(height: 7),
+                                const SizedBox(height: 8),
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: _buildModernTextField(
+                                      child: ModernTextField(
                                         controller: _firstNameController,
                                         label: S.of(context).firstName,
                                         hint: S.of(context).firstName,
@@ -209,7 +213,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                     ),
                                     const SizedBox(width: 12),
                                     Expanded(
-                                      child: _buildModernTextField(
+                                      child: ModernTextField(
                                         controller: _lastNameController,
                                         label: S.of(context).lastName,
                                         hint: S.of(context).lastName,
@@ -219,7 +223,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 7),
+                                const SizedBox(height: 5),
                                 Row(
                                   children: [
                                     Expanded(
@@ -233,22 +237,22 @@ class _RegisterScreenState extends State<RegisterScreen>
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 7),
+                                const SizedBox(height: 5),
                                 if (isDoctor) ...[
-                                  _buildModernTextField(
+                                  ModernTextField(
                                     controller: _medicalLicenseController,
                                     label: S.of(context).medicalLicenseNumber,
                                     hint: 'ML123456',
                                     icon: Icons.medical_services_rounded,
                                     isDark: isDark,
                                   ),
-                                  const SizedBox(height: 7),
+                                  const SizedBox(height: 5),
                                 ],
                                 if (!isDoctor) ...[
                                   _buildRelationSelector(isDark),
-                                  const SizedBox(height: 7),
+                                  const SizedBox(height: 5),
                                 ],
-                                _buildModernTextField(
+                                ModernTextField(
                                   controller: _emailController,
                                   label: S.of(context).email,
                                   hint: 'exemple@email.com',
@@ -265,8 +269,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                                     return null;
                                   },
                                 ),
-                                const SizedBox(height: 7),
-                                _buildModernTextField(
+                                const SizedBox(height: 5),
+                                ModernTextField(
                                   controller: _passwordController,
                                   label: S.of(context).password,
                                   hint: '••••••••',
@@ -287,8 +291,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                                     },
                                   ),
                                 ),
-                                const SizedBox(height: 7),
-                                _buildModernTextField(
+                                const SizedBox(height: 5),
+                                ModernTextField(
                                   controller: _confirmPasswordController,
                                   label: S.of(context).confirmPassword,
                                   hint: '••••••••',
@@ -310,7 +314,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                     },
                                   ),
                                 ),
-                                const SizedBox(height: 7),
+                                const SizedBox(height: 5),
                                 SizedBox(
                                   width: double.infinity,
                                   height: 56,
@@ -371,7 +375,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 7),
+                                const SizedBox(height: 5),
                                 Center(
                                   child: TextButton(
                                     onPressed: () {
@@ -415,107 +419,6 @@ class _RegisterScreenState extends State<RegisterScreen>
     );
   }
 
-  Widget _buildModernTextField({
-    required TextEditingController controller,
-    required String label,
-    required String hint,
-    required IconData icon,
-    required bool isDark,
-    bool obscureText = false,
-    TextInputType keyboardType = TextInputType.text,
-    Widget? suffixIcon,
-    String? Function(String?)? validator,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-            color: isDark ? AppConstants.white : AppConstants.darkViolet,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: isDark
-                    ? Colors.black.withOpacity(0.2)
-                    : Colors.grey.withOpacity(0.08),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: TextFormField(
-            controller: controller,
-            keyboardType: keyboardType,
-            obscureText: obscureText,
-            style: TextStyle(
-              color: isDark ? AppConstants.white : AppConstants.black,
-              fontSize: 15,
-            ),
-            decoration: InputDecoration(
-              hintText: hint,
-              hintStyle: TextStyle(
-                color: isDark ? Colors.white38 : Colors.grey[400],
-              ),
-              prefixIcon: Container(
-                margin: const EdgeInsets.all(12),
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: AppConstants.primaryViolet.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(icon, color: AppConstants.primaryViolet, size: 20),
-              ),
-              suffixIcon: suffixIcon,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide.none,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide.none,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: AppConstants.primaryViolet,
-                  width: 2,
-                ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(color: Colors.red, width: 2),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(color: Colors.red, width: 2),
-              ),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 16,
-              ),
-            ),
-            validator:
-                validator ??
-                (value) {
-                  if (value == null || value.isEmpty) {
-                    return S.of(context).requiredField;
-                  }
-                  return null;
-                },
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildDatePicker(bool isDark) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -534,13 +437,13 @@ class _RegisterScreenState extends State<RegisterScreen>
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: isDark ? const Color(0xFF252545) : Colors.white,
+              color: isDark ? const Color(0xFF252545) : AppConstants.white,
 
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
                   color: isDark
-                      ? Colors.black.withOpacity(0.2)
+                      ? AppConstants.black.withOpacity(0.2)
                       : Colors.grey.withOpacity(0.08),
                   blurRadius: 10,
                   offset: const Offset(0, 4),

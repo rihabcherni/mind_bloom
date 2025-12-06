@@ -14,14 +14,13 @@ class ApiService {
   }
 
   static Map<String, String> _getHeaders() {
-    final headers = {
-      'Content-Type': 'application/json',
-    };
+    final headers = {'Content-Type': 'application/json'};
     if (_token != null) {
       headers['Authorization'] = 'Bearer $_token';
     }
     return headers;
   }
+
   static Future<User> register(Map<String, dynamic> userData) async {
     final response = await http.post(
       Uri.parse('${AppConstants.baseUrl}/auth/register'),
@@ -34,7 +33,9 @@ class ApiService {
       _token = user.token;
       return user;
     } else {
-      throw Exception(jsonDecode(response.body)['message'] ?? 'Registration failed');
+      throw Exception(
+        jsonDecode(response.body)['message'] ?? 'Registration failed',
+      );
     }
   }
 
@@ -66,6 +67,7 @@ class ApiService {
       throw Exception('Failed to get user data');
     }
   }
+
   static Future<CaseModel> createCase(Map<String, dynamic> caseData) async {
     final response = await http.post(
       Uri.parse('${AppConstants.baseUrl}/cases'),
@@ -76,7 +78,9 @@ class ApiService {
     if (response.statusCode == 201) {
       return CaseModel.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception(jsonDecode(response.body)['message'] ?? 'Failed to create case');
+      throw Exception(
+        jsonDecode(response.body)['message'] ?? 'Failed to create case',
+      );
     }
   }
 
@@ -87,7 +91,9 @@ class ApiService {
     );
 
     request.headers['Authorization'] = 'Bearer $_token';
-    request.files.add(await http.MultipartFile.fromPath('video', videoFile.path));
+    request.files.add(
+      await http.MultipartFile.fromPath('video', videoFile.path),
+    );
 
     final streamedResponse = await request.send();
     final response = await http.Response.fromStream(streamedResponse);
@@ -95,7 +101,9 @@ class ApiService {
     if (response.statusCode == 200) {
       return CaseModel.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception(jsonDecode(response.body)['message'] ?? 'Failed to upload video');
+      throw Exception(
+        jsonDecode(response.body)['message'] ?? 'Failed to upload video',
+      );
     }
   }
 
@@ -171,10 +179,7 @@ class ApiService {
     final response = await http.put(
       Uri.parse('${AppConstants.baseUrl}/cases/$caseId/request-test'),
       headers: _getHeaders(),
-      body: jsonEncode({
-        'testType': testType,
-        'instructions': instructions,
-      }),
+      body: jsonEncode({'testType': testType, 'instructions': instructions}),
     );
 
     if (response.statusCode == 200) {
@@ -195,10 +200,14 @@ class ApiService {
     );
 
     request.headers['Authorization'] = 'Bearer $_token';
-    request.fields['answers'] = jsonEncode(answers.map((a) => a.toJson()).toList());
+    request.fields['answers'] = jsonEncode(
+      answers.map((a) => a.toJson()).toList(),
+    );
 
     if (videoFile != null) {
-      request.files.add(await http.MultipartFile.fromPath('video', videoFile.path));
+      request.files.add(
+        await http.MultipartFile.fromPath('video', videoFile.path),
+      );
     }
 
     final streamedResponse = await request.send();
@@ -210,7 +219,10 @@ class ApiService {
       throw Exception('Failed to submit test response');
     }
   }
-  static Future<List<NotificationModel>> getNotifications(bool unreadOnly) async {
+
+  static Future<List<NotificationModel>> getNotifications(
+    bool unreadOnly,
+  ) async {
     final response = await http.get(
       Uri.parse('${AppConstants.baseUrl}/notifications?unreadOnly=$unreadOnly'),
       headers: _getHeaders(),
@@ -238,7 +250,9 @@ class ApiService {
     }
   }
 
-  static Future<NotificationModel> markNotificationAsRead(String notificationId) async {
+  static Future<NotificationModel> markNotificationAsRead(
+    String notificationId,
+  ) async {
     final response = await http.put(
       Uri.parse('${AppConstants.baseUrl}/notifications/$notificationId/read'),
       headers: _getHeaders(),
@@ -261,6 +275,7 @@ class ApiService {
       throw Exception('Failed to mark all notifications as read');
     }
   }
+
   static Future<Map<String, dynamic>> getReportUrl(String caseId) async {
     final response = await http.get(
       Uri.parse('${AppConstants.baseUrl}/reports/$caseId/url'),
@@ -271,6 +286,38 @@ class ApiService {
       return jsonDecode(response.body);
     } else {
       throw Exception('Failed to get report URL');
+    }
+  }
+
+  static Future<CaseModel> updateCase(
+    String caseId,
+    Map<String, dynamic> caseData,
+  ) async {
+    final response = await http.put(
+      Uri.parse('${AppConstants.baseUrl}/cases/$caseId'),
+      headers: _getHeaders(),
+      body: jsonEncode(caseData),
+    );
+
+    if (response.statusCode == 200) {
+      return CaseModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception(
+        jsonDecode(response.body)['message'] ?? 'Failed to update case',
+      );
+    }
+  }
+
+  static Future<void> deleteCase(String caseId) async {
+    final response = await http.delete(
+      Uri.parse('${AppConstants.baseUrl}/cases/$caseId'),
+      headers: _getHeaders(),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception(
+        jsonDecode(response.body)['message'] ?? 'Failed to delete case',
+      );
     }
   }
 }

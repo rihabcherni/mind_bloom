@@ -813,6 +813,401 @@ class S {
       args: [],
     );
   }
+
+  /// `Case Details`
+  String get caseDetails_title {
+    return Intl.message(
+      'Case Details',
+      name: 'caseDetails_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading...`
+  String get loading {
+    return Intl.message('Loading...', name: 'loading', desc: '', args: []);
+  }
+
+  /// `Failed to load`
+  String get error_loading_case {
+    return Intl.message(
+      'Failed to load',
+      name: 'error_loading_case',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message('Retry', name: 'retry', desc: '', args: []);
+  }
+
+  /// `Case Status`
+  String get status_title {
+    return Intl.message(
+      'Case Status',
+      name: 'status_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Child Information`
+  String get child_info_title {
+    return Intl.message(
+      'Child Information',
+      name: 'child_info_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get child_name {
+    return Intl.message('Name', name: 'child_name', desc: '', args: []);
+  }
+
+  /// `Age`
+  String get child_age {
+    return Intl.message('Age', name: 'child_age', desc: '', args: []);
+  }
+
+  /// `{age} years`
+  String child_age_years(Object age) {
+    return Intl.message(
+      '$age years',
+      name: 'child_age_years',
+      desc: '',
+      args: [age],
+    );
+  }
+
+  /// `Gender`
+  String get child_gender {
+    return Intl.message('Gender', name: 'child_gender', desc: '', args: []);
+  }
+
+  /// `Boy`
+  String get child_gender_male {
+    return Intl.message('Boy', name: 'child_gender_male', desc: '', args: []);
+  }
+
+  /// `Girl`
+  String get child_gender_female {
+    return Intl.message(
+      'Girl',
+      name: 'child_gender_female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Class`
+  String get child_class {
+    return Intl.message('Class', name: 'child_class', desc: '', args: []);
+  }
+
+  /// `Screening Results`
+  String get screening_results_title {
+    return Intl.message(
+      'Screening Results',
+      name: 'screening_results_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Questionnaire Answers:`
+  String get screening_questionnaire_answers {
+    return Intl.message(
+      'Questionnaire Answers:',
+      name: 'screening_questionnaire_answers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Additional Test`
+  String get additional_test_title {
+    return Intl.message(
+      'Additional Test',
+      name: 'additional_test_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Test Type`
+  String get additional_test_type {
+    return Intl.message(
+      'Test Type',
+      name: 'additional_test_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Instructions:`
+  String get additional_test_instructions {
+    return Intl.message(
+      'Instructions:',
+      name: 'additional_test_instructions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit Response`
+  String get additional_test_submit {
+    return Intl.message(
+      'Submit Response',
+      name: 'additional_test_submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feature coming soon`
+  String get additional_test_coming_soon {
+    return Intl.message(
+      'Feature coming soon',
+      name: 'additional_test_coming_soon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Diagnosis`
+  String get diagnosis_title {
+    return Intl.message(
+      'Diagnosis',
+      name: 'diagnosis_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Doctor`
+  String get diagnosis_doctor {
+    return Intl.message('Doctor', name: 'diagnosis_doctor', desc: '', args: []);
+  }
+
+  /// `Date`
+  String get diagnosis_date {
+    return Intl.message('Date', name: 'diagnosis_date', desc: '', args: []);
+  }
+
+  /// `Summary`
+  String get diagnosis_summary {
+    return Intl.message(
+      'Summary',
+      name: 'diagnosis_summary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Advice`
+  String get diagnosis_advice {
+    return Intl.message('Advice', name: 'diagnosis_advice', desc: '', args: []);
+  }
+
+  /// `Recommendation`
+  String get diagnosis_recommendation {
+    return Intl.message(
+      'Recommendation',
+      name: 'diagnosis_recommendation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error downloading report`
+  String get download_report_error {
+    return Intl.message(
+      'Error downloading report',
+      name: 'download_report_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download Report`
+  String get download_report {
+    return Intl.message(
+      'Download Report',
+      name: 'download_report',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading case: {error}`
+  String error_api_case(Object error) {
+    return Intl.message(
+      'Error loading case: $error',
+      name: 'error_api_case',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Error downloading report: {error}`
+  String error_api_report(Object error) {
+    return Intl.message(
+      'Error downloading report: $error',
+      name: 'error_api_report',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `ADHD Screening`
+  String get screening_title {
+    return Intl.message(
+      'ADHD Screening',
+      name: 'screening_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hello! I will ask you some questions about {childName}'s behavior. Please answer honestly to help us provide the best assessment.`
+  String greeting(Object childName) {
+    return Intl.message(
+      'Hello! I will ask you some questions about $childName\'s behavior. Please answer honestly to help us provide the best assessment.',
+      name: 'greeting',
+      desc: '',
+      args: [childName],
+    );
+  }
+
+  /// `Submit to doctor`
+  String get submit_video {
+    return Intl.message(
+      'Submit to doctor',
+      name: 'submit_video',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sending...`
+  String get sending {
+    return Intl.message('Sending...', name: 'sending', desc: '', args: []);
+  }
+
+  /// `Please upload a video before submitting`
+  String get select_video_error {
+    return Intl.message(
+      'Please upload a video before submitting',
+      name: 'select_video_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video selected!`
+  String get video_selected {
+    return Intl.message(
+      'Video selected!',
+      name: 'video_selected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Great! Now please upload a short video (max 5 minutes) of {childName} doing an activity such as homework, playing, or drawing. This will help the doctor better understand the behavior.`
+  String video_instructions(Object childName) {
+    return Intl.message(
+      'Great! Now please upload a short video (max 5 minutes) of $childName doing an activity such as homework, playing, or drawing. This will help the doctor better understand the behavior.',
+      name: 'video_instructions',
+      desc: '',
+      args: [childName],
+    );
+  }
+
+  /// `Your case will be reviewed by a doctor who will provide a diagnosis.`
+  String get case_review_info {
+    return Intl.message(
+      'Your case will be reviewed by a doctor who will provide a diagnosis.',
+      name: 'case_review_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message('Yes', name: 'yes', desc: '', args: []);
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message('No', name: 'no', desc: '', args: []);
+  }
+
+  /// `Does your child have trouble focusing on tasks?`
+  String get question_1 {
+    return Intl.message(
+      'Does your child have trouble focusing on tasks?',
+      name: 'question_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Does he/she frequently lose things?`
+  String get question_2 {
+    return Intl.message(
+      'Does he/she frequently lose things?',
+      name: 'question_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Does he/she show hyperactivity or impulsivity?`
+  String get question_3 {
+    return Intl.message(
+      'Does he/she show hyperactivity or impulsivity?',
+      name: 'question_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Does he/she often interrupt others?`
+  String get question_4 {
+    return Intl.message(
+      'Does he/she often interrupt others?',
+      name: 'question_4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are there any school performance issues?`
+  String get question_5 {
+    return Intl.message(
+      'Are there any school performance issues?',
+      name: 'question_5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Is the behavior present in more than one environment (home and school)?`
+  String get question_6 {
+    return Intl.message(
+      'Is the behavior present in more than one environment (home and school)?',
+      name: 'question_6',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
