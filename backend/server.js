@@ -24,8 +24,8 @@ app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 app.use('/reports', express.static(path.join(__dirname, '../reports')));
 
 const fs = require('fs');
-const uploadsDir = path.join(__dirname, '../uploads/videos');
-const reportsDir = path.join(__dirname, '../reports');
+const uploadsDir = path.join(__dirname, 'uploads/videos');
+const reportsDir = path.join(__dirname, 'reports');
 
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
