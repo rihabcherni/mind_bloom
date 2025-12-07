@@ -1,6 +1,8 @@
 const Case = require('../models/Case');
 const User = require('../models/User');
 const NotificationService = require('../services/notificationService');
+const path = require('path');
+const fs = require('fs');
 
 const createCase = async (req, res) => {
   try {
@@ -41,23 +43,42 @@ const uploadVideo = async (req, res) => {
     const caseItem = await Case.findById(req.params.id);
 
     if (!caseItem) {
-      return res.status(404).json({ message: 'Case not found' });
+      return res.status(404).json({ message: 'Cas non trouvé' });
     }
 
     if (caseItem.parentId.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: 'Not authorized' });
+      return res.status(403).json({ message: 'Non autorisé' });
     }
 
     if (!req.file) {
-      return res.status(400).json({ message: 'No video file uploaded' });
+      return res.status(400).json({ message: 'Aucune vidéo uploadée' });
+    }
+
+    // Supprimer l'ancienne vidéo si elle existe
+    if (caseItem.videoUrl) {
+      const oldVideoPath = path.join(__dirname, '..', caseItem.videoUrl);
+      if (fs.existsSync(oldVideoPath)) {
+        fs.unlinkSync(oldVideoPath);
+      }
     }
 
     caseItem.videoUrl = `/uploads/videos/${req.file.filename}`;
     caseItem.videoUploadDate = Date.now();
     await caseItem.save();
 
-    res.json(caseItem);
+    res.json({
+      message: 'Vidéo uploadée avec succès',
+      videoUrl: caseItem.videoUrl,
+      case: caseItem
+    });
   } catch (error) {
+    // Supprimer le fichier en cas d'erreur
+    if (req.file) {
+      const filePath = path.join(__dirname, '../uploads/videos', req.file.filename);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+    }
     res.status(500).json({ message: error.message });
   }
 };
@@ -190,24 +211,30 @@ const submitTestResponse = async (req, res) => {
     const caseItem = await Case.findById(req.params.id);
 
     if (!caseItem) {
-      return res.status(404).json({ message: 'Case not found' });
+      return res.status(404).json({ message: 'Cas non trouvé' });
     }
 
     if (caseItem.parentId.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: 'Not authorized' });
+      return res.status(403).json({ message: 'Non autorisé' });
     }
 
+    // Parser les réponses si elles sont en string
+    const parsedAnswers = typeof answers === 'string' ? JSON.parse(answers) : answers;
+
     caseItem.additionalTestResponse = {
-      answers,
+      answers: parsedAnswers,
       submittedAt: Date.now()
     };
 
+    // Ajouter la vidéo si elle existe
     if (req.file) {
       caseItem.additionalTestResponse.videoUrl = `/uploads/videos/${req.file.filename}`;
     }
 
     caseItem.status = 'waiting_for_reply';
     await caseItem.save();
+
+    // Notifier le docteur
     if (caseItem.doctorId) {
       await NotificationService.notifyTestResponseSubmitted(
         caseItem.doctorId,
@@ -216,12 +243,20 @@ const submitTestResponse = async (req, res) => {
       );
     }
 
-    res.json(caseItem);
+    res.json({
+      message: 'Réponse au test soumise avec succès',
+      case: caseItem
+    });
   } catch (error) {
+    if (req.file) {
+      const filePath = path.join(__dirname, '../uploads/videos', req.file.filename);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+    }
     res.status(500).json({ message: error.message });
   }
 };
-
 const updateCase = async (req, res) => {
   try {
     const {
@@ -245,8 +280,8 @@ const updateCase = async (req, res) => {
 
     // Empêcher la modification si le cas a déjà un diagnostic
     if (caseItem.status === 'diagnosis_ready' || caseItem.status === 'completed') {
-      return res.status(400).json({ 
-        message: 'Cannot edit a case that has been diagnosed' 
+      return res.status(400).json({
+        message: 'Cannot edit a case that has been diagnosed'
       });
     }
 
@@ -265,7 +300,6 @@ const updateCase = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 const deleteCase = async (req, res) => {
   try {
     const caseItem = await Case.findById(req.params.id);
@@ -281,8 +315,8 @@ const deleteCase = async (req, res) => {
 
     // Empêcher la suppression si le cas a un diagnostic
     if (caseItem.status === 'diagnosis_ready' || caseItem.status === 'completed') {
-      return res.status(400).json({ 
-        message: 'Cannot delete a case that has been diagnosed' 
+      return res.status(400).json({
+        message: 'Cannot delete a case that has been diagnosed'
       });
     }
 
@@ -293,7 +327,6 @@ const deleteCase = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 module.exports = {
   createCase,
   uploadVideo,

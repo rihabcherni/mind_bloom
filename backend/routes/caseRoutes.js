@@ -64,6 +64,7 @@ router.post('/', protect, restrictTo('parent'), createCase);
 router.post('/:id/video', protect, restrictTo('parent'), upload.single('video'), uploadVideo);
 router.get('/my-cases', protect, restrictTo('parent'), getMyCases);
 router.put('/:id/test-response', protect, restrictTo('parent'), upload.single('video'), submitTestResponse);
+
 router.put('/:id', protect, restrictTo('parent'), updateCase);
 router.delete('/:id', protect, restrictTo('parent'), deleteCase);
 
