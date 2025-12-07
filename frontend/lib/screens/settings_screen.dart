@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/chatbot_fab.dart';
 import 'package:frontend/widgets/header.dart';
 import 'package:provider/provider.dart';
 import '../providers/settings_provider.dart';
@@ -15,6 +16,8 @@ class SettingsScreen extends StatelessWidget {
     final isDark = settings.themeMode == ThemeMode.dark;
 
     return Scaffold(
+      floatingActionButton: const ChatbotFAB(),
+
       body: Stack(
         children: [
           const BackgroundCircles(),

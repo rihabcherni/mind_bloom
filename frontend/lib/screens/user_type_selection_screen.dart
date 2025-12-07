@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/chatbot_fab.dart';
 import 'package:frontend/widgets/header.dart';
 import '../constants/app_constants.dart';
 import '../generated/l10n.dart';
@@ -51,6 +52,7 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
+      floatingActionButton: const ChatbotFAB(),
       body: Stack(
         children: [
           const BackgroundCircles(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/chatbot_fab.dart';
 import '../constants/app_constants.dart';
 import '../models/notification_model.dart';
 import '../services/api_service.dart';
@@ -125,6 +126,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final unreadCount = _notifications.where((n) => !n.isRead).length;
     return Scaffold(
+      floatingActionButton: const ChatbotFAB(),
       body: Stack(
         children: [
           const BackgroundCircles(),

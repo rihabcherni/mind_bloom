@@ -177,5 +177,14 @@
   "caseDeletedSuccessfully": "Case deleted successfully",
   "error": "Error: {error}",
   "age": "{age} years old",
-  "edit": "Edit"
+  "edit": "Edit",
+  "adhdChatbotGreeting": "Hello! I am your ADHD expert assistant. Ask me your questions about Attention Deficit Hyperactivity Disorder. How can I help you today?",
+  "adhdSendHint": "Ask your question about ADHD...",
+  "adhdSuggestedQuestionsTitle": "Suggested questions:",
+  "adhdErrorMessage": "Sorry, an error occurred. Please try again.",
+   "adhdSuggestedQuestion_1": "What are the symptoms of ADHD?",
+  "adhdSuggestedQuestion_2": "How is ADHD diagnosed?",
+  "adhdSuggestedQuestion_3": "What treatments are available?",
+  "adhdSuggestedQuestion_4": "Is ADHD hereditary?",
+  "adhdChatbotTitle": "Smart ADHD Assistant"
 }

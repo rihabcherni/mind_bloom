@@ -14,7 +14,7 @@
 
 ---
 
-## 🎯 About the App
+## About the App
 
 **Mind Bloom** is a mobile application designed to support early detection, diagnosis, and monitoring of ADHD in children.
 The platform connects parents with medical professionals, enabling:
@@ -36,7 +36,7 @@ The platform connects parents with medical professionals, enabling:
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 ### 👨‍👩‍👧 **For Parents**
 
@@ -60,7 +60,7 @@ The platform connects parents with medical professionals, enabling:
 * Write diagnosis & recommendations
 * Send final conclusions to parents
 
-### 🛠️ **Technical Features**
+### **Technical Features**
 
 * Secure authentication (JWT)
 * Dark/Light theme support
@@ -114,7 +114,7 @@ The platform connects parents with medical professionals, enabling:
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 mind-bloom/
@@ -145,19 +145,7 @@ mind-bloom/
 
 ---
 
-## 🚀 Installation & Setup
-
-### 📦 Prerequisites
-
-* Flutter **3.24+**
-* Node.js **18+**
-* MongoDB **6.0+**
-* VS Code or Android Studio
-* Git
-
----
-
-## 🛠️ Backend Setup (Node.js)
+## Backend Setup (Node.js)
 
 ```bash
 git clone https://github.com/yourusername/mind-bloom.git
@@ -188,7 +176,7 @@ npm run dev
 
 ---
 
-## 📱 Frontend Setup (Flutter)
+## Frontend Setup (Flutter)
 
 ```bash
 cd mind-bloom/frontend
@@ -212,7 +200,7 @@ flutter run
 
 ---
 
-## 🔐 Security
+## Security
 
 * JWT authentication
 * Bcrypt password hashing
@@ -222,22 +210,12 @@ flutter run
 
 ---
 
-## 👨‍💻 Authors
+## Authors
 
 * **IEEE ENSIT**
-
----
-
-## 🔮 Future Enhancements
-
-* [ ] Advanced AI-based video analysis
-* [ ] Community space for parents
 
 ---
 
 <div align="center">
   <strong>Made with ❤️ for children and families</strong>
 </div>
-
----
-

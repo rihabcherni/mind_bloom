@@ -320,4 +320,26 @@ class ApiService {
       );
     }
   }
+
+  static Future<String> askADHDChatbot(String question) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${AppConstants.baseUrl}/chatbot/adhd'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $_token',
+        },
+        body: jsonEncode({'question': question}),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data['answer'];
+      } else {
+        throw Exception('Failed to get response');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
 }

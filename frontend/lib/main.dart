@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/providers/settings_provider.dart';
+import 'package:frontend/screens/ADHD_chatbot_screen.dart';
 import 'package:frontend/screens/about_screen.dart';
 import 'package:frontend/screens/loading_screen.dart';
 import 'package:provider/provider.dart';
@@ -132,6 +133,10 @@ class MyApp extends StatelessWidget {
               case '/notifications':
                 return MaterialPageRoute(
                   builder: (_) => const NotificationsScreen(),
+                );
+              case '/chatbotADHD':
+                return MaterialPageRoute(
+                  builder: (_) => const ADHDChatbotScreen(),
                 );
               default:
                 return null;

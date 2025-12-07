@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/chatbot_fab.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
 import '../providers/auth_provider.dart';
@@ -168,13 +169,13 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
     final user = context.watch<AuthProvider>().user;
 
     return Scaffold(
+      floatingActionButton: const ChatbotFAB(),
       body: Stack(
         children: [
           const BackgroundCircles(),
           SafeArea(
             child: Column(
               children: [
-                // Header (identique)
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(

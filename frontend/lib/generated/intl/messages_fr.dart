@@ -71,6 +71,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Facteurs pouvant contribuer au développement du TDAH",
     ),
     "adhdCausesTitle": MessageLookupByLibrary.simpleMessage("Causes possibles"),
+    "adhdChatbotGreeting": MessageLookupByLibrary.simpleMessage(
+      "Bonjour ! Je suis votre assistant expert en TDAH. Posez-moi vos questions sur le Trouble du Déficit de l\'Attention avec ou sans Hyperactivité. Comment puis-je vous aider aujourd\'hui ?",
+    ),
+    "adhdChatbotTitle": MessageLookupByLibrary.simpleMessage(
+      "Assistant intelligent TDAH",
+    ),
+    "adhdErrorMessage": MessageLookupByLibrary.simpleMessage(
+      "Désolé, une erreur s\'est produite. Veuillez réessayer.",
+    ),
     "adhdGenetics": MessageLookupByLibrary.simpleMessage(
       "Facteurs génétiques et héréditaires",
     ),
@@ -106,6 +115,24 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "adhdSchoolProblems": MessageLookupByLibrary.simpleMessage(
       "Difficultés scolaires et sociales",
+    ),
+    "adhdSendHint": MessageLookupByLibrary.simpleMessage(
+      "Posez votre question sur le TDAH...",
+    ),
+    "adhdSuggestedQuestion_1": MessageLookupByLibrary.simpleMessage(
+      "Quels sont les symptômes du TDAH ?",
+    ),
+    "adhdSuggestedQuestion_2": MessageLookupByLibrary.simpleMessage(
+      "Comment diagnostiquer le TDAH ?",
+    ),
+    "adhdSuggestedQuestion_3": MessageLookupByLibrary.simpleMessage(
+      "Quels traitements existent ?",
+    ),
+    "adhdSuggestedQuestion_4": MessageLookupByLibrary.simpleMessage(
+      "Le TDAH est-il héréditaire ?",
+    ),
+    "adhdSuggestedQuestionsTitle": MessageLookupByLibrary.simpleMessage(
+      "Questions suggérées :",
     ),
     "adhdSymptomsDescription": MessageLookupByLibrary.simpleMessage(
       "Signes observés chez l’enfant pouvant indiquer un TDAH",

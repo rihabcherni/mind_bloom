@@ -71,6 +71,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "حاجات تنجّم تكون سبب في ظهور ADHD",
     ),
     "adhdCausesTitle": MessageLookupByLibrary.simpleMessage("أسباب محتملة"),
+    "adhdChatbotGreeting": MessageLookupByLibrary.simpleMessage(
+      "مرحبا! أنا المساعد الخبير متاع ADHD. اسألني على أسئلتك حول اضطراب فرط الحركة وتشتت الانتباه. كيفاش نجم نعاونك اليوم؟",
+    ),
+    "adhdChatbotTitle": MessageLookupByLibrary.simpleMessage(
+      "المساعد الذكي لـ ADHD",
+    ),
+    "adhdErrorMessage": MessageLookupByLibrary.simpleMessage(
+      "آسف، صار خطأ. حاول مرة أخرى.",
+    ),
     "adhdGenetics": MessageLookupByLibrary.simpleMessage("أسباب وراثية"),
     "adhdHyperactivity": MessageLookupByLibrary.simpleMessage(
       "فرط الحركة: ديما يتحرّك و ما يقعدش بلاصة",
@@ -100,6 +109,24 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "adhdSchoolProblems": MessageLookupByLibrary.simpleMessage(
       "صعوبات في القراية و التعامل مع صحابو",
+    ),
+    "adhdSendHint": MessageLookupByLibrary.simpleMessage(
+      "اسأل سؤالك حول ADHD...",
+    ),
+    "adhdSuggestedQuestion_1": MessageLookupByLibrary.simpleMessage(
+      "شنوّة أعراض ADHD؟",
+    ),
+    "adhdSuggestedQuestion_2": MessageLookupByLibrary.simpleMessage(
+      "كيفاش يتشخص ADHD؟",
+    ),
+    "adhdSuggestedQuestion_3": MessageLookupByLibrary.simpleMessage(
+      "شنوّة العلاجات المتوفرة؟",
+    ),
+    "adhdSuggestedQuestion_4": MessageLookupByLibrary.simpleMessage(
+      "هل ADHD وراثي؟",
+    ),
+    "adhdSuggestedQuestionsTitle": MessageLookupByLibrary.simpleMessage(
+      "أسئلة مقترحة:",
     ),
     "adhdSymptomsDescription": MessageLookupByLibrary.simpleMessage(
       "علامات تنجّم تبين إلّي الطفل عندو ADHD",

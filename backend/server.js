@@ -24,8 +24,8 @@ app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 app.use('/reports', express.static(path.join(__dirname, '../reports')));
 
 const fs = require('fs');
-const uploadsDir = path.join(__dirname, './uploads/videos');
-const reportsDir = path.join(__dirname, './reports');
+const uploadsDir = path.join(__dirname, '../uploads/videos');
+const reportsDir = path.join(__dirname, '../reports');
 
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
@@ -37,6 +37,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/cases', require('./routes/caseRoutes'));
 app.use('/api/notifications', require('./routes/notificationRoutes'));
 app.use('/api/reports', require('./routes/reportRoutes'));
+app.use('/api/chatbot', require('./routes/chatbotADHD'));
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Mind Bloom API is running' });

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/chatbot_fab.dart';
 import 'package:frontend/widgets/header.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_constants.dart';
@@ -81,6 +82,8 @@ class _LoginScreenState extends State<LoginScreen>
     final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
+      floatingActionButton: const ChatbotFAB(),
+
       body: Consumer<AuthProvider>(
         builder: (context, authProvider, _) {
           return Stack(

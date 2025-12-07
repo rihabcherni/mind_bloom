@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/chatbot_fab.dart';
 import 'package:image_picker/image_picker.dart';
 import '../constants/app_constants.dart';
 import '../models/case_model.dart';
@@ -214,6 +215,8 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
+      floatingActionButton: const ChatbotFAB(),
+
       body: Stack(
         children: [
           const BackgroundCircles(),

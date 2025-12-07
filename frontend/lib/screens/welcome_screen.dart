@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/chatbot_fab.dart';
 import 'package:frontend/widgets/header.dart';
 import '../constants/app_constants.dart';
 import '../generated/l10n.dart';
@@ -62,6 +63,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
+      floatingActionButton: const ChatbotFAB(),
       body: Stack(
         children: [
           const BackgroundCircles(),
@@ -154,9 +156,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24.0,
-                          ), 
+                          padding: const EdgeInsets.symmetric(horizontal: 24.0),
                           child: SizedBox(
                             width: double.infinity,
                             height: 56,
@@ -210,9 +210,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ),
                         const SizedBox(height: 16),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24.0,
-                          ), 
+                          padding: const EdgeInsets.symmetric(horizontal: 24.0),
                           child: SizedBox(
                             width: double.infinity,
                             height: 56,

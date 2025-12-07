@@ -179,5 +179,16 @@
   "caseDeletedSuccessfully": "Cas supprimé avec succès",
   "error": "Erreur: {error}",
   "age": "{age} ans",
-  "edit": "Modifier"
+  "edit": "Modifier",
+  
+  "adhdChatbotGreeting": "Bonjour ! Je suis votre assistant expert en TDAH. Posez-moi vos questions sur le Trouble du Déficit de l'Attention avec ou sans Hyperactivité. Comment puis-je vous aider aujourd'hui ?",
+  "adhdSuggestedQuestionsTitle": "Questions suggérées :",
+  "adhdSendHint": "Posez votre question sur le TDAH...",
+  "adhdErrorMessage": "Désolé, une erreur s'est produite. Veuillez réessayer.",
+
+  "adhdSuggestedQuestion_1": "Quels sont les symptômes du TDAH ?",
+  "adhdSuggestedQuestion_2": "Comment diagnostiquer le TDAH ?",
+  "adhdSuggestedQuestion_3": "Quels traitements existent ?",
+  "adhdSuggestedQuestion_4": "Le TDAH est-il héréditaire ?",
+  "adhdChatbotTitle": "Assistant intelligent TDAH"
 }

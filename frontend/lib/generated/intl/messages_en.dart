@@ -68,6 +68,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Factors that may contribute to ADHD development",
     ),
     "adhdCausesTitle": MessageLookupByLibrary.simpleMessage("Possible Causes"),
+    "adhdChatbotGreeting": MessageLookupByLibrary.simpleMessage(
+      "Hello! I am your ADHD expert assistant. Ask me your questions about Attention Deficit Hyperactivity Disorder. How can I help you today?",
+    ),
+    "adhdChatbotTitle": MessageLookupByLibrary.simpleMessage(
+      "Smart ADHD Assistant",
+    ),
+    "adhdErrorMessage": MessageLookupByLibrary.simpleMessage(
+      "Sorry, an error occurred. Please try again.",
+    ),
     "adhdGenetics": MessageLookupByLibrary.simpleMessage(
       "Genetic and hereditary factors",
     ),
@@ -103,6 +112,24 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "adhdSchoolProblems": MessageLookupByLibrary.simpleMessage(
       "School and social challenges",
+    ),
+    "adhdSendHint": MessageLookupByLibrary.simpleMessage(
+      "Ask your question about ADHD...",
+    ),
+    "adhdSuggestedQuestion_1": MessageLookupByLibrary.simpleMessage(
+      "What are the symptoms of ADHD?",
+    ),
+    "adhdSuggestedQuestion_2": MessageLookupByLibrary.simpleMessage(
+      "How is ADHD diagnosed?",
+    ),
+    "adhdSuggestedQuestion_3": MessageLookupByLibrary.simpleMessage(
+      "What treatments are available?",
+    ),
+    "adhdSuggestedQuestion_4": MessageLookupByLibrary.simpleMessage(
+      "Is ADHD hereditary?",
+    ),
+    "adhdSuggestedQuestionsTitle": MessageLookupByLibrary.simpleMessage(
+      "Suggested questions:",
     ),
     "adhdSymptomsDescription": MessageLookupByLibrary.simpleMessage(
       "Signs that may indicate ADHD in a child",

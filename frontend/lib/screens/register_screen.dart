@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/chatbot_fab.dart';
 import 'package:frontend/widgets/header.dart';
 import 'package:frontend/widgets/modern_text_field.dart';
 import 'package:provider/provider.dart';
@@ -157,6 +158,8 @@ class _RegisterScreenState extends State<RegisterScreen>
     final isDoctor = widget.userType == 'doctor';
 
     return Scaffold(
+      floatingActionButton: const ChatbotFAB(),
+
       body: Consumer<AuthProvider>(
         builder: (context, authProvider, _) {
           return Stack(

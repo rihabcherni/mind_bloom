@@ -1268,6 +1268,96 @@ class S {
   String get edit {
     return Intl.message('Edit', name: 'edit', desc: '', args: []);
   }
+
+  /// `Hello! I am your ADHD expert assistant. Ask me your questions about Attention Deficit Hyperactivity Disorder. How can I help you today?`
+  String get adhdChatbotGreeting {
+    return Intl.message(
+      'Hello! I am your ADHD expert assistant. Ask me your questions about Attention Deficit Hyperactivity Disorder. How can I help you today?',
+      name: 'adhdChatbotGreeting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ask your question about ADHD...`
+  String get adhdSendHint {
+    return Intl.message(
+      'Ask your question about ADHD...',
+      name: 'adhdSendHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suggested questions:`
+  String get adhdSuggestedQuestionsTitle {
+    return Intl.message(
+      'Suggested questions:',
+      name: 'adhdSuggestedQuestionsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorry, an error occurred. Please try again.`
+  String get adhdErrorMessage {
+    return Intl.message(
+      'Sorry, an error occurred. Please try again.',
+      name: 'adhdErrorMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What are the symptoms of ADHD?`
+  String get adhdSuggestedQuestion_1 {
+    return Intl.message(
+      'What are the symptoms of ADHD?',
+      name: 'adhdSuggestedQuestion_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How is ADHD diagnosed?`
+  String get adhdSuggestedQuestion_2 {
+    return Intl.message(
+      'How is ADHD diagnosed?',
+      name: 'adhdSuggestedQuestion_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What treatments are available?`
+  String get adhdSuggestedQuestion_3 {
+    return Intl.message(
+      'What treatments are available?',
+      name: 'adhdSuggestedQuestion_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Is ADHD hereditary?`
+  String get adhdSuggestedQuestion_4 {
+    return Intl.message(
+      'Is ADHD hereditary?',
+      name: 'adhdSuggestedQuestion_4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Smart ADHD Assistant`
+  String get adhdChatbotTitle {
+    return Intl.message(
+      'Smart ADHD Assistant',
+      name: 'adhdChatbotTitle',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

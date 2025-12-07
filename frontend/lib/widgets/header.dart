@@ -17,11 +17,9 @@ class HeaderWidget extends StatelessWidget {
     this.showBackIcon = true,
     this.textSize,
   });
-
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Row(
@@ -62,6 +60,7 @@ class HeaderWidget extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(width: 8),
           if (showSettingsIcon)
             Container(
               decoration: BoxDecoration(

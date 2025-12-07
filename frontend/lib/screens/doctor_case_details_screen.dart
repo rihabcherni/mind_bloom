@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/chatbot_fab.dart';
 import '../constants/app_constants.dart';
 import '../models/case_model.dart';
 import '../services/api_service.dart';
@@ -322,6 +323,8 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
+      floatingActionButton: const ChatbotFAB(),
+
       body: Stack(
         children: [
           const BackgroundCircles(),

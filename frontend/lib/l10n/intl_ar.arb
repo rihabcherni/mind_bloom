@@ -173,5 +173,15 @@
   "caseDeletedSuccessfully": "تم حذف الحالة بنجاح",
   "error": "خطأ: {error}",
   "age": "{age} سنة",
-  "edit": "تعديل"
+  "edit": "تعديل",
+
+   "adhdChatbotGreeting": "مرحبا! أنا المساعد الخبير متاع ADHD. اسألني على أسئلتك حول اضطراب فرط الحركة وتشتت الانتباه. كيفاش نجم نعاونك اليوم؟",
+  "adhdSuggestedQuestionsTitle": "أسئلة مقترحة:",
+  "adhdSendHint": "اسأل سؤالك حول ADHD...",
+  "adhdErrorMessage": "آسف، صار خطأ. حاول مرة أخرى.",
+"adhdSuggestedQuestion_1": "شنوّة أعراض ADHD؟",  
+  "adhdSuggestedQuestion_2": "كيفاش يتشخص ADHD؟",
+  "adhdSuggestedQuestion_3": "شنوّة العلاجات المتوفرة؟",
+  "adhdSuggestedQuestion_4": "هل ADHD وراثي؟",
+  "adhdChatbotTitle": "المساعد الذكي لـ ADHD"
 }

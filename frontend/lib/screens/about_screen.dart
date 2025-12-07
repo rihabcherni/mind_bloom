@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/welcome_screen.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/chatbot_fab.dart';
 import 'package:frontend/widgets/header.dart';
 import '../constants/app_constants.dart';
 import '../generated/l10n.dart';
@@ -98,6 +98,8 @@ class _AboutScreenState extends State<AboutScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final items = _getOnboardingItems(context);
     return Scaffold(
+      floatingActionButton: const ChatbotFAB(),
+
       body: Stack(
         children: [
           const BackgroundCircles(),
