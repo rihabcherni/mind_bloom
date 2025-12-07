@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Mind Bloom Logo](assets/images/logo.jpg)
+![Mind Bloom Logo](frontend/assets/images/logo.jpg)
 
 **Helping You Understand Your Child Better**
 
