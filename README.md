@@ -2,33 +2,15 @@
 
 <div align="center">
 
-![Mind Bloom Logo](assets/logo.jpg)
+![Mind Bloom Logo](assets/images/logo.jpg)
 
 **Helping You Understand Your Child Better**
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.24-02569B?logo=flutter)](https://flutter.dev/)
+[![Flutter](https://img.shields.io/badge/Flutter-3.9-02569B?logo=flutter)](https://flutter.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-18.x-339933?logo=node.js)](https://nodejs.org/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-6.0-47A248?logo=mongodb)](https://www.mongodb.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-[Features](#-features) • [Screenshots](#-screenshots) • [Tech Stack](#-tech-stack) • [Installation](#-installation) • [Architecture](#-architecture)
 
 </div>
-
----
-
-## 📋 Table of Contents
-
-- [About](#-about)
-- [Features](#-features)
-- [Screenshots](#-screenshots)
-- [Tech Stack](#-tech-stack)
-- [Architecture](#-architecture)
-- [Installation](#-installation)
-- [API Documentation](#-api-documentation)
-- [Database Schema](#-database-schema)
-- [Contributing](#-contributing)
-- [License](#-license)
 
 ---
 
@@ -193,37 +175,6 @@ Cloud Service: MongoDB Atlas (optional)
 
 ---
 
-## 🏗 Architecture
-
-### System Architecture
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Flutter Mobile App                    │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
-│  │   Parent     │  │    Doctor    │  │    Shared    │  │
-│  │   Screens    │  │   Screens    │  │  Components  │  │
-│  └──────────────┘  └──────────────┘  └──────────────┘  │
-│                          │                               │
-│                    Provider State                        │
-└──────────────────────────┼──────────────────────────────┘
-                           │ HTTP/REST
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│                  Express.js REST API                     │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
-│  │     Auth     │  │    Cases     │  │    Uploads   │  │
-│  │  Middleware  │  │   Routes     │  │   (Multer)   │  │
-│  └──────────────┘  └──────────────┘  └──────────────┘  │
-└──────────────────────────┼──────────────────────────────┘
-                           │ Mongoose ODM
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│                      MongoDB Atlas                       │
-│     Users  │  Cases  │  Notifications  │  Videos        │
-└─────────────────────────────────────────────────────────┘
-```
-
 ### Project Structure
 
 ```
@@ -238,18 +189,15 @@ mind-bloom/
 │   │   ├── widgets/         # Reusable widgets
 │   │   └── main.dart        # App entry point
 │   ├── assets/
-│   │   ├── images/          # Images & illustrations
-│   │   └── fonts/           # Custom fonts
+│   │   └── images/          # Images & illustrations
 │   └── pubspec.yaml         # Dependencies
 │
 ├── backend/                 # Node.js API
-│   ├── src/
-│   │   ├── models/          # Mongoose schemas
-│   │   ├── routes/          # API routes
-│   │   ├── controllers/     # Business logic
-│   │   ├── middleware/      # Auth & validation
-│   │   ├── config/          # Configuration
-│   │   └── utils/           # Helper functions
+│   ├── models/              # Mongoose schemas
+│   ├── routes/              # API routes
+│   ├── controllers/         # Business logic
+│   ├── middleware/          # Auth & validation
+│   ├── config/              # Configuration
 │   ├── uploads/             # Uploaded files
 │   ├── .env                 # Environment variables
 │   └── server.js            # Server entry point
@@ -257,7 +205,6 @@ mind-bloom/
 ├── screenshots/             # App screenshots
 └── README.md               # This file
 ```
-
 ---
 
 ## 🚀 Installation
@@ -501,114 +448,6 @@ Response:
 
 ---
 
-## 🗄 Database Schema
-
-### User Model
-```javascript
-{
-  _id: ObjectId,
-  firstName: String,
-  lastName: String,
-  email: String (unique),
-  password: String (hashed),
-  userType: String (enum: ['doctor', 'parent']),
-  dateOfBirth: Date,
-  sex: String (enum: ['male', 'female', 'other']),
-  
-  // Doctor specific
-  medicalLicenseNumber: String,
-  
-  // Parent specific
-  relationToChild: String (enum: ['mother', 'father', 'teacher', 'other']),
-  
-  createdAt: Date,
-  updatedAt: Date
-}
-```
-
-### Case Model
-```javascript
-{
-  _id: ObjectId,
-  parentId: ObjectId (ref: 'User'),
-  doctorId: ObjectId (ref: 'User'),
-  
-  // Child information
-  childFirstName: String,
-  childLastName: String,
-  childAge: Number,
-  childSex: String,
-  scholarYear: String,
-  
-  // Screening
-  screeningAnswers: [{
-    question: String,
-    answer: String
-  }],
-  gravityScore: String (enum: ['low', 'medium', 'high']),
-  
-  // Media
-  videoUrl: String,
-  
-  // Status
-  status: String (enum: [
-    'waiting_for_doctor',
-    'additional_test_required',
-    'waiting_for_reply',
-    'diagnosis_ready',
-    'completed'
-  ]),
-  
-  // Diagnosis
-  diagnosis: {
-    summary: String,
-    advice: String,
-    recommendation: String,
-    submittedAt: Date
-  },
-  
-  // Additional test
-  additionalTestRequest: {
-    testType: String,
-    instructions: String,
-    requestedAt: Date
-  },
-  
-  additionalTestResponse: {
-    answers: [{
-      question: String,
-      answer: String
-    }],
-    videoUrl: String,
-    submittedAt: Date
-  },
-  
-  createdAt: Date,
-  updatedAt: Date
-}
-```
-
-### Notification Model
-```javascript
-{
-  _id: ObjectId,
-  userId: ObjectId (ref: 'User'),
-  caseId: ObjectId (ref: 'Case'),
-  type: String (enum: [
-    'diagnosis_ready',
-    'additional_test_requested',
-    'new_case',
-    'test_response_submitted'
-  ]),
-  title: String,
-  message: String,
-  isRead: Boolean,
-  createdAt: Date
-}
-```
-
----
-
 ## 👥 Contributing
 
 We welcome contributions! Please follow these steps:
@@ -646,7 +485,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Authors
 
-- **Your Name** - *Initial work* - [YourGitHub](https://github.com/yourusername)
+- **IEEE ENSIT** - *Initial work* - [YourGitHub](https://github.com/yourusername)
 
 ---
 
@@ -656,12 +495,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - MongoDB team for the database
 - All contributors and testers
 - Medical professionals who provided insights
-
----
-
-## 📞 Support
-
-For support, email support@mindbloom.com or join our Slack channel.
 
 ---
 
