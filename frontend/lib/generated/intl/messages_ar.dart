@@ -20,21 +20,25 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(age) => "العمر: ${age}";
+  static String m0(age) => "${age} سنة";
 
   static String m1(age) => "${age} سنة";
 
-  static String m2(error) => "خطأ في الحالة: ${error}";
+  static String m2(childName) => "هل ترغب فعلاً في حذف حالة ${childName}؟";
 
-  static String m3(error) => "خطأ في التقرير: ${error}";
+  static String m3(error) => "خطأ: ${error}";
 
-  static String m4(childName) =>
+  static String m4(error) => "خطأ في الحالة: ${error}";
+
+  static String m5(error) => "خطأ في التقرير: ${error}";
+
+  static String m6(childName) =>
       "مرحبا! باش نسألك شوية أسئلة على تصرّف ${childName}. جاوب بصراحة باش نعاونك باش نعطيوا تقييم أفضل.";
 
-  static String m5(childName) =>
+  static String m7(childName) =>
       "مزيان! تاو، يرجى تحميل فيديو قصير (5 دقايق كحد أقصى) لـ ${childName} وهو يعمل نشاط مثل الواجبات، اللعب، أو الرسم. هذا باش يساعد الطبيب باش يفهم التصرف أفضل.";
 
-  static String m6(name) => "مرحبا، ${name}";
+  static String m8(name) => "مرحبا، ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -111,6 +115,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "appTitle": MessageLookupByLibrary.simpleMessage("مايند بلوم"),
     "appearance": MessageLookupByLibrary.simpleMessage("المظهر"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+    "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "caseDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم حذف الحالة بنجاح",
+    ),
     "caseDetails_title": MessageLookupByLibrary.simpleMessage("تفاصيل الحالة"),
     "case_review_info": MessageLookupByLibrary.simpleMessage(
       "القضية متاعك باش يشوفها طبيب ويعطيك تشخيص.",
@@ -129,10 +137,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "اختر نوع الحساب الذي تريد إنشاؤه",
     ),
     "chooseProfile": MessageLookupByLibrary.simpleMessage("اختار الملف الشخصي"),
+    "confirmDeleteCase": m2,
+    "confirmDeletion": MessageLookupByLibrary.simpleMessage("تأكيد الحذف"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("عاود كلمة السر"),
     "createAccount": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "darkMode": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
     "dateOfBirth": MessageLookupByLibrary.simpleMessage("تاريخ الولادة"),
+    "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "diagnosis_advice": MessageLookupByLibrary.simpleMessage("نصيحة"),
     "diagnosis_date": MessageLookupByLibrary.simpleMessage("التاريخ"),
     "diagnosis_doctor": MessageLookupByLibrary.simpleMessage("الطبيب"),
@@ -147,12 +158,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "download_report_error": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ في التحميل",
     ),
+    "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
     "email": MessageLookupByLibrary.simpleMessage("الإيميل"),
     "enabled": MessageLookupByLibrary.simpleMessage("مفعّل"),
     "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
     "enterEmail": MessageLookupByLibrary.simpleMessage("حط الإيميل متاعك"),
-    "error_api_case": m2,
-    "error_api_report": m3,
+    "error": m3,
+    "error_api_case": m4,
+    "error_api_report": m5,
     "error_loading_case": MessageLookupByLibrary.simpleMessage(
       "صارت غلطة في التحميل",
     ),
@@ -161,7 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "firstName": MessageLookupByLibrary.simpleMessage("الاسم"),
     "french": MessageLookupByLibrary.simpleMessage("الفرنسية"),
     "goToHomeScreen": MessageLookupByLibrary.simpleMessage("ابدأ"),
-    "greeting": m4,
+    "greeting": m6,
     "invalidEmail": MessageLookupByLibrary.simpleMessage("الإيميل غلط"),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "lastName": MessageLookupByLibrary.simpleMessage("اللقب"),
@@ -193,17 +206,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "سجّل الدخول باش تكمل",
     ),
     "male": MessageLookupByLibrary.simpleMessage("ذكر"),
+    "manageConsultations": MessageLookupByLibrary.simpleMessage(
+      "إدارة الاستشارات متاعك",
+    ),
     "medicalLicenseNumber": MessageLookupByLibrary.simpleMessage(
       "رقم الرخصة الطبية",
     ),
     "mother": MessageLookupByLibrary.simpleMessage("أم"),
-    "myPreviousCases": MessageLookupByLibrary.simpleMessage(
-      "الحالات إلي عملتهم",
-    ),
+    "myPreviousCases": MessageLookupByLibrary.simpleMessage("الحالات السابقة"),
     "no": MessageLookupByLibrary.simpleMessage("لا"),
-    "noCasesYet": MessageLookupByLibrary.simpleMessage(
-      "ما فماش حالات توّا. ابدا حالة جديدة!",
-    ),
+    "noCasesYet": MessageLookupByLibrary.simpleMessage("ما فماش حالات توّة"),
     "other": MessageLookupByLibrary.simpleMessage("آخر"),
     "parent": MessageLookupByLibrary.simpleMessage("وليّ"),
     "parentRegistration": MessageLookupByLibrary.simpleMessage("تسجيل كولي"),
@@ -255,7 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sending": MessageLookupByLibrary.simpleMessage("جار الإرسال..."),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "sexe": MessageLookupByLibrary.simpleMessage("الجنس"),
-    "startNewCase": MessageLookupByLibrary.simpleMessage("ابدا حالة جديدة"),
+    "startNewCase": MessageLookupByLibrary.simpleMessage("حالة جديدة"),
     "statusAdditionalTestRequired": MessageLookupByLibrary.simpleMessage(
       "يلزم تحاليل إضافية",
     ),
@@ -272,11 +284,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "status_title": MessageLookupByLibrary.simpleMessage("حالة الحالة"),
     "submit_video": MessageLookupByLibrary.simpleMessage("أرسل للطبيب"),
     "teacher": MessageLookupByLibrary.simpleMessage("أستاذ"),
-    "video_instructions": m5,
+    "video_instructions": m7,
     "video_selected": MessageLookupByLibrary.simpleMessage(
       "تم اختيار الفيديو!",
     ),
-    "welcomeParent": m6,
+    "welcomeParent": m8,
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
       "باش نفهموك على ولادك خير",
     ),

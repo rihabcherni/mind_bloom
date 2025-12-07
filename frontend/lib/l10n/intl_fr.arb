@@ -164,5 +164,20 @@
   "question_3": "Montre-t-il/elle de l'hyperactivité ou de l'impulsivité ?",
   "question_4": "Interrompt-il/elle souvent les autres ?",
   "question_5": "Y a-t-il des problèmes de performance scolaire ?",
-  "question_6": "Le comportement est-il présent dans plus d'un environnement (maison et école) ?"
+  "question_6": "Le comportement est-il présent dans plus d'un environnement (maison et école) ?",
+
+
+  "welcomeParent": "Bienvenue, {name}",
+  "manageConsultations": "Gérez vos consultations",
+  "startNewCase": "Nouveau cas",
+  "myPreviousCases": "Mes consultations précédentes",
+  "noCasesYet": "Aucun cas pour le moment",
+  "confirmDeletion": "Confirmer la suppression",
+  "confirmDeleteCase": "Voulez-vous vraiment supprimer le cas de {childName} ?",
+  "cancel": "Annuler",
+  "delete": "Supprimer",
+  "caseDeletedSuccessfully": "Cas supprimé avec succès",
+  "error": "Erreur: {error}",
+  "age": "{age} ans",
+  "edit": "Modifier"
 }

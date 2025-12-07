@@ -163,5 +163,19 @@
   "question_3": "Does he/she show hyperactivity or impulsivity?",
   "question_4": "Does he/she often interrupt others?",
   "question_5": "Are there any school performance issues?",
-  "question_6": "Is the behavior present in more than one environment (home and school)?"
+  "question_6": "Is the behavior present in more than one environment (home and school)?",
+
+  "welcomeParent": "Welcome, {name}",
+  "manageConsultations": "Manage your consultations",
+  "startNewCase": "Start New Case",
+  "myPreviousCases": "My Previous Cases",
+  "noCasesYet": "No cases yet",
+  "confirmDeletion": "Confirm Deletion",
+  "confirmDeleteCase": "Do you really want to delete {childName}'s case?",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "caseDeletedSuccessfully": "Case deleted successfully",
+  "error": "Error: {error}",
+  "age": "{age} years old",
+  "edit": "Edit"
 }

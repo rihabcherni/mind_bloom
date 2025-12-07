@@ -94,7 +94,7 @@ class _EditCaseScreenState extends State<EditCaseScreen>
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: const Text('Cas modifié avec succès'),
-              backgroundColor: Colors.green,
+              backgroundColor: AppConstants.green,
               behavior: SnackBarBehavior.floating,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),

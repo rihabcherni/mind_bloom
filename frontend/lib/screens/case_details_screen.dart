@@ -123,7 +123,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
       case 'waiting_for_reply':
         return AppConstants.primaryViolet;
       case 'completed':
-        return Colors.green;
+        return AppConstants.green;
       case 'diagnosis_ready':
         return Colors.teal;
       default:
@@ -638,7 +638,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
           S.of(context).diagnosis_recommendation,
           _case!.diagnosis!.recommendation,
           Icons.recommend_rounded,
-          Colors.green,
+          AppConstants.green,
           isDark,
         ),
         const SizedBox(height: 20),
@@ -658,14 +658,14 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
             child: Ink(
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [Colors.green, Color(0xFF66BB6A)],
+                  colors: [AppConstants.green, Color(0xFF66BB6A)],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.green.withOpacity(0.4),
+                    color: AppConstants.green.withOpacity(0.4),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
@@ -849,7 +849,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
     const yesWords = {'yes', 'oui', 'نعم', 'ايه'};
 
     final isYes = yesWords.contains(normalized);
-    final color = isYes ? Colors.green : Colors.red;
+    final color = isYes ? AppConstants.green : Colors.red;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),

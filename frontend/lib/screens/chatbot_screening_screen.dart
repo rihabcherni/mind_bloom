@@ -426,7 +426,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
           BoxShadow(
             color: isYes
                 ? Colors.red.withOpacity(0.3)
-                : Colors.green.withOpacity(0.3),
+                : AppConstants.green.withOpacity(0.3),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -435,7 +435,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
       child: ElevatedButton(
         onPressed: () => _handleAnswer(text),
         style: ElevatedButton.styleFrom(
-          backgroundColor: isYes ? Colors.red : Colors.green,
+          backgroundColor: isYes ? Colors.red : AppConstants.green,
           foregroundColor: AppConstants.white,
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
           shape: RoundedRectangleBorder(
@@ -522,7 +522,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
         decoration: BoxDecoration(
           border: Border.all(
-            color: isYes ? Colors.red : Colors.green,
+            color: isYes ? Colors.red : AppConstants.green,
             width: 2,
           ),
           borderRadius: const BorderRadius.only(
@@ -533,7 +533,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
           ),
           boxShadow: [
             BoxShadow(
-              color: (isYes ? Colors.red : Colors.green).withOpacity(0.2),
+              color: (isYes ? Colors.red : AppConstants.green).withOpacity(0.2),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -542,7 +542,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
         child: Text(
           text,
           style: TextStyle(
-            color: isYes ? Colors.red : Colors.green,
+            color: isYes ? Colors.red : AppConstants.green,
             fontWeight: FontWeight.bold,
             fontSize: 15,
           ),
@@ -594,12 +594,12 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
+                  color: AppConstants.green.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.green, width: 2),
+                  border: Border.all(color: AppConstants.green, width: 2),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.green.withOpacity(0.2),
+                      color: AppConstants.green.withOpacity(0.2),
                       blurRadius: 15,
                       offset: const Offset(0, 8),
                     ),
@@ -610,7 +610,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: const BoxDecoration(
-                        color: Colors.green,
+                        color: AppConstants.green,
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
@@ -625,7 +625,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                        color: AppConstants.green,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -686,14 +686,14 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                     gradient: LinearGradient(
                       colors: _isSubmitting
                           ? [Colors.grey, Colors.grey]
-                          : [Colors.green, Colors.green.shade600],
+                          : [AppConstants.green, Colors.green.shade600],
                     ),
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
                         color: _isSubmitting
                             ? Colors.grey.withOpacity(0.3)
-                            : Colors.green.withOpacity(0.4),
+                            : AppConstants.green.withOpacity(0.4),
                         blurRadius: 15,
                         offset: const Offset(0, 8),
                       ),

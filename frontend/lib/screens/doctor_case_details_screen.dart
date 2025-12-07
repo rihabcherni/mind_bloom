@@ -62,7 +62,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: isError ? Colors.red[400] : Colors.green,
+        backgroundColor: isError ? Colors.red[400] : AppConstants.green,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
@@ -84,12 +84,12 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.green.withOpacity(0.2),
+                color: AppConstants.green.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Icon(
                 Icons.medical_services_rounded,
-                color: Colors.green,
+                color: AppConstants.green,
                 size: 24,
               ),
             ),
@@ -147,7 +147,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
             icon: const Icon(Icons.send_rounded),
             label: const Text('Soumettre'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
+              backgroundColor: AppConstants.green,
               foregroundColor: AppConstants.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -748,10 +748,10 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: (isYes ? Colors.red : Colors.green).withOpacity(0.1),
+        color: (isYes ? Colors.red : AppConstants.green).withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: (isYes ? Colors.red : Colors.green).withOpacity(0.3),
+          color: (isYes ? Colors.red : AppConstants.green).withOpacity(0.3),
         ),
       ),
       child: Column(
@@ -771,7 +771,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
               Icon(
                 isYes ? Icons.close_rounded : Icons.check_rounded,
                 size: 16,
-                color: isYes ? Colors.red : Colors.green,
+                color: isYes ? Colors.red : AppConstants.green,
               ),
               const SizedBox(width: 6),
               Text(
@@ -779,7 +779,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: isYes ? Colors.red : Colors.green,
+                  color: isYes ? Colors.red : AppConstants.green,
                 ),
               ),
             ],
@@ -830,13 +830,13 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
+              backgroundColor: AppConstants.green,
               foregroundColor: AppConstants.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
               elevation: 0,
-              shadowColor: Colors.green.withOpacity(0.4),
+              shadowColor: AppConstants.green.withOpacity(0.4),
             ),
           ),
         ),
@@ -868,11 +868,13 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [Colors.green, Colors.green.shade600]),
+        gradient: LinearGradient(
+          colors: [AppConstants.green, Colors.green.shade600],
+        ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.green.withOpacity(0.4),
+            color: AppConstants.green.withOpacity(0.4),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),

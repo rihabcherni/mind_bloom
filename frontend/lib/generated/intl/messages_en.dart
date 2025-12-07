@@ -20,21 +20,26 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(age) => "Age: ${age}";
+  static String m0(age) => "${age} years old";
 
   static String m1(age) => "${age} years";
 
-  static String m2(error) => "Error loading case: ${error}";
+  static String m2(childName) =>
+      "Do you really want to delete ${childName}\'s case?";
 
-  static String m3(error) => "Error downloading report: ${error}";
+  static String m3(error) => "Error: ${error}";
 
-  static String m4(childName) =>
+  static String m4(error) => "Error loading case: ${error}";
+
+  static String m5(error) => "Error downloading report: ${error}";
+
+  static String m6(childName) =>
       "Hello! I will ask you some questions about ${childName}\'s behavior. Please answer honestly to help us provide the best assessment.";
 
-  static String m5(childName) =>
+  static String m7(childName) =>
       "Great! Now please upload a short video (max 5 minutes) of ${childName} doing an activity such as homework, playing, or drawing. This will help the doctor better understand the behavior.";
 
-  static String m6(name) => "Welcome, ${name}";
+  static String m8(name) => "Welcome, ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -113,6 +118,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "appTitle": MessageLookupByLibrary.simpleMessage("Mind Bloom"),
     "appearance": MessageLookupByLibrary.simpleMessage("Appearance"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "caseDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Case deleted successfully",
+    ),
     "caseDetails_title": MessageLookupByLibrary.simpleMessage("Case Details"),
     "case_review_info": MessageLookupByLibrary.simpleMessage(
       "Your case will be reviewed by a doctor who will provide a diagnosis.",
@@ -133,10 +142,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "chooseProfile": MessageLookupByLibrary.simpleMessage(
       "Choose your profile",
     ),
+    "confirmDeleteCase": m2,
+    "confirmDeletion": MessageLookupByLibrary.simpleMessage("Confirm Deletion"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "createAccount": MessageLookupByLibrary.simpleMessage("Create Account"),
     "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
+    "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "diagnosis_advice": MessageLookupByLibrary.simpleMessage("Advice"),
     "diagnosis_date": MessageLookupByLibrary.simpleMessage("Date"),
     "diagnosis_doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
@@ -157,14 +169,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "download_report_error": MessageLookupByLibrary.simpleMessage(
       "Error downloading report",
     ),
+    "edit": MessageLookupByLibrary.simpleMessage("Edit"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "enabled": MessageLookupByLibrary.simpleMessage("Enabled"),
     "english": MessageLookupByLibrary.simpleMessage("English"),
     "enterEmail": MessageLookupByLibrary.simpleMessage(
       "Please enter your email",
     ),
-    "error_api_case": m2,
-    "error_api_report": m3,
+    "error": m3,
+    "error_api_case": m4,
+    "error_api_report": m5,
     "error_loading_case": MessageLookupByLibrary.simpleMessage(
       "Failed to load",
     ),
@@ -173,7 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "firstName": MessageLookupByLibrary.simpleMessage("First Name"),
     "french": MessageLookupByLibrary.simpleMessage("French"),
     "goToHomeScreen": MessageLookupByLibrary.simpleMessage("Go to home"),
-    "greeting": m4,
+    "greeting": m6,
     "invalidEmail": MessageLookupByLibrary.simpleMessage("Invalid email"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "lastName": MessageLookupByLibrary.simpleMessage("Last Name"),
@@ -205,6 +219,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Log in to continue",
     ),
     "male": MessageLookupByLibrary.simpleMessage("Male"),
+    "manageConsultations": MessageLookupByLibrary.simpleMessage(
+      "Manage your consultations",
+    ),
     "medicalLicenseNumber": MessageLookupByLibrary.simpleMessage(
       "Medical License Number",
     ),
@@ -213,9 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "My Previous Cases",
     ),
     "no": MessageLookupByLibrary.simpleMessage("No"),
-    "noCasesYet": MessageLookupByLibrary.simpleMessage(
-      "No cases yet. Start a new case!",
-    ),
+    "noCasesYet": MessageLookupByLibrary.simpleMessage("No cases yet"),
     "other": MessageLookupByLibrary.simpleMessage("Other"),
     "parent": MessageLookupByLibrary.simpleMessage("Parent"),
     "parentRegistration": MessageLookupByLibrary.simpleMessage(
@@ -292,9 +307,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "status_title": MessageLookupByLibrary.simpleMessage("Case Status"),
     "submit_video": MessageLookupByLibrary.simpleMessage("Submit to doctor"),
     "teacher": MessageLookupByLibrary.simpleMessage("Teacher"),
-    "video_instructions": m5,
+    "video_instructions": m7,
     "video_selected": MessageLookupByLibrary.simpleMessage("Video selected!"),
-    "welcomeParent": m6,
+    "welcomeParent": m8,
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
       "Helping You Understand Your Child Better",
     ),

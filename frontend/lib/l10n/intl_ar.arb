@@ -159,5 +159,19 @@
   "question_3": "هل يظهر عليه النشاط الزايد أو التصرف بدون تفكير؟",
   "question_4": "هل يقاطع الآخرين برشا؟",
   "question_5": "هل عنده مشاكل في الأداء المدرسي؟",
-  "question_6": "هل التصرف موجود في أكثر من مكان (الدار والمدرسة)؟"
+  "question_6": "هل التصرف موجود في أكثر من مكان (الدار والمدرسة)؟",
+
+   "welcomeParent": "مرحبا، {name}",
+  "manageConsultations": "إدارة الاستشارات متاعك",
+  "startNewCase": "حالة جديدة",
+  "myPreviousCases": "الحالات السابقة",
+  "noCasesYet": "ما فماش حالات توّة",
+  "confirmDeletion": "تأكيد الحذف",
+  "confirmDeleteCase": "هل ترغب فعلاً في حذف حالة {childName}؟",
+  "cancel": "إلغاء",
+  "delete": "حذف",
+  "caseDeletedSuccessfully": "تم حذف الحالة بنجاح",
+  "error": "خطأ: {error}",
+  "age": "{age} سنة",
+  "edit": "تعديل"
 }

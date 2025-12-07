@@ -10,7 +10,6 @@ import '../generated/l10n.dart';
 
 class ParentHomeScreen extends StatefulWidget {
   const ParentHomeScreen({super.key});
-
   @override
   State<ParentHomeScreen> createState() => _ParentHomeScreenState();
 }
@@ -22,7 +21,6 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
-
   @override
   void initState() {
     super.initState();
@@ -66,7 +64,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error: ${e.toString()}'),
+            content: Text(S.of(context).error(e.toString())),
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -86,16 +84,14 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
           children: [
             Icon(Icons.warning_rounded, color: Colors.red, size: 28),
             const SizedBox(width: 12),
-            const Text('Confirmer la suppression'),
+            Text(S.of(context).confirmDeletion),
           ],
         ),
-        content: Text(
-          'Voulez-vous vraiment supprimer le cas de ${caseItem.childFullName} ?',
-        ),
+        content: Text(S.of(context).confirmDeleteCase(caseItem.childFullName)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Annuler'),
+            child: Text(S.of(context).cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -106,20 +102,19 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text('Supprimer'),
+            child: Text(S.of(context).delete),
           ),
         ],
       ),
     );
-
     if (confirm == true) {
       try {
         await ApiService.deleteCase(caseItem.id);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Text('Cas supprimé avec succès'),
-              backgroundColor: Colors.green,
+              content: Text(S.of(context).caseDeletedSuccessfully),
+              backgroundColor: AppConstants.green,
               behavior: SnackBarBehavior.floating,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -132,7 +127,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Erreur: ${e.toString()}'),
+              content: Text(S.of(context).error(e.toString())),
               backgroundColor: Colors.red,
               behavior: SnackBarBehavior.floating,
               shape: RoundedRectangleBorder(
@@ -154,7 +149,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
       case 'waiting_for_reply':
         return AppConstants.primaryViolet;
       case 'completed':
-        return Colors.green;
+        return AppConstants.green;
       case 'diagnosis_ready':
         return Colors.teal;
       default:
@@ -230,7 +225,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                               ),
                             ),
                             Text(
-                              'Gérez vos consultations',
+                              S.of(context).manageConsultations,
                               style: TextStyle(
                                 fontSize: 13,
                                 color: isDark
@@ -303,8 +298,6 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                     ],
                   ),
                 ),
-
-                // Bouton Nouveau Cas (identique)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: FadeTransition(
@@ -641,7 +634,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                           _loadCases();
                         },
                         icon: const Icon(Icons.edit_rounded, size: 18),
-                        label: const Text('Modifier'),
+                        label: Text(S.of(context).edit),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: AppConstants.primaryViolet,
                           side: BorderSide(
@@ -659,7 +652,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                       child: OutlinedButton.icon(
                         onPressed: () => _deleteCase(caseItem),
                         icon: const Icon(Icons.delete_rounded, size: 18),
-                        label: const Text('Supprimer'),
+                        label: Text(S.of(context).delete),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.red,
                           side: BorderSide(color: Colors.red.withOpacity(0.5)),

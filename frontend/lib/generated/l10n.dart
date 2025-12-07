@@ -749,19 +749,14 @@ class S {
     );
   }
 
-  /// `No cases yet. Start a new case!`
+  /// `No cases yet`
   String get noCasesYet {
-    return Intl.message(
-      'No cases yet. Start a new case!',
-      name: 'noCasesYet',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('No cases yet', name: 'noCasesYet', desc: '', args: []);
   }
 
-  /// `Age: {age}`
+  /// `{age} years old`
   String age(Object age) {
-    return Intl.message('Age: $age', name: 'age', desc: '', args: [age]);
+    return Intl.message('$age years old', name: 'age', desc: '', args: [age]);
   }
 
   /// `Waiting for Doctor`
@@ -1207,6 +1202,71 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Manage your consultations`
+  String get manageConsultations {
+    return Intl.message(
+      'Manage your consultations',
+      name: 'manageConsultations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Deletion`
+  String get confirmDeletion {
+    return Intl.message(
+      'Confirm Deletion',
+      name: 'confirmDeletion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you really want to delete {childName}'s case?`
+  String confirmDeleteCase(Object childName) {
+    return Intl.message(
+      'Do you really want to delete $childName\'s case?',
+      name: 'confirmDeleteCase',
+      desc: '',
+      args: [childName],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
+  }
+
+  /// `Case deleted successfully`
+  String get caseDeletedSuccessfully {
+    return Intl.message(
+      'Case deleted successfully',
+      name: 'caseDeletedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error: {error}`
+  String error(Object error) {
+    return Intl.message(
+      'Error: $error',
+      name: 'error',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message('Edit', name: 'edit', desc: '', args: []);
   }
 }
 

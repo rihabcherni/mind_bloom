@@ -7,6 +7,7 @@ class AppConstants {
 
   static const Color white = Colors.white;
   static const Color black = Colors.black;
+  static const Color green = Colors.green;
   static const Color darkBackground = Color(0xFF1A1A2E);
   static const Color lightBackground = Color(0xFFF8F9FA);
 
