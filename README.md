@@ -1,4 +1,4 @@
-# 🧠 Mind Bloom - ADHD Diagnostic & Care Mobile App
+# 🧠 Mind Bloom - ADHD (Attention Deficit Hyperactivity Disorder) Diagnostic & Care Mobile App
 
 <div align="center">
 
@@ -8,7 +8,7 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.9-02569B?logo=flutter)](https://flutter.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-18.x-339933?logo=node.js)](https://nodejs.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-6.0-47A248?logo=mongodb)](https://www.mongodb.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-8.2-47A248?logo=mongodb)](https://www.mongodb.com/)
 
 </div>
 
@@ -17,6 +17,7 @@
 ## 🎯 About
 
 **Mind Bloom** is a comprehensive mobile application designed to facilitate ADHD diagnosis and monitoring in children. The platform connects parents with medical professionals through an intelligent screening system, providing personalized assessments and ongoing care.
+
 
 ### Key Objectives
 
@@ -119,62 +120,6 @@
 
 ---
 
-## 🛠 Tech Stack
-
-### Frontend - Flutter
-
-```yaml
-Framework: Flutter 3.24+
-Language: Dart 3.0+
-State Management: Provider
-UI Components: Material Design 3
-Animations: Custom animations with AnimationController
-Internationalization: flutter_intl
-```
-
-**Key Dependencies:**
-- `provider` - State management
-- `http` - API communication
-- `image_picker` - Video/image selection
-- `shared_preferences` - Local storage
-- `flutter_secure_storage` - Secure token storage
-- `intl` - Internationalization
-
-### Backend - Node.js + Express
-
-```javascript
-Runtime: Node.js 18.x
-Framework: Express.js 4.x
-Authentication: JWT (jsonwebtoken)
-File Upload: Multer
-Validation: express-validator
-```
-
-**Key Dependencies:**
-- `express` - Web framework
-- `mongoose` - MongoDB ODM
-- `jsonwebtoken` - JWT authentication
-- `bcryptjs` - Password hashing
-- `multer` - File upload handling
-- `cors` - Cross-origin resource sharing
-- `dotenv` - Environment configuration
-
-### Database - MongoDB
-
-```
-Database: MongoDB 6.0+
-ODM: Mongoose 8.x
-Cloud Service: MongoDB Atlas (optional)
-```
-
-**Collections:**
-- `users` - User accounts (doctors/parents)
-- `cases` - ADHD assessment cases
-- `notifications` - User notifications
-- `videos` - Video metadata
-
----
-
 ### Project Structure
 
 ```
@@ -253,9 +198,6 @@ mongod --dbpath /path/to/data/db
 # Development mode with auto-reload
 npm run dev
 
-# Production mode
-npm start
-```
 
 Server will run on `http://localhost:5000`
 
@@ -292,229 +234,328 @@ flutter run -d <device_id>
 # Run in release mode
 flutter run --release
 ```
-
-### Building for Production
-
-**Android APK:**
-```bash
-flutter build apk --release
-```
-
-**Android App Bundle:**
-```bash
-flutter build appbundle --release
-```
-
-**iOS:**
-```bash
-flutter build ios --release
-```
-
----
-
-## 📚 API Documentation
-
-### Base URL
-```
-http://localhost:5000/api
-```
-
-### Authentication Endpoints
-
-#### Register User
-```http
-POST /auth/register
-Content-Type: application/json
-
-{
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john@example.com",
-  "password": "SecurePass123!",
-  "userType": "parent",
-  "dateOfBirth": "1990-01-01",
-  "sex": "male",
-  "relationToChild": "father"  // for parents
-  // OR
-  "medicalLicenseNumber": "ML12345"  // for doctors
-}
-```
-
-#### Login
-```http
-POST /auth/login
-Content-Type: application/json
-
-{
-  "email": "john@example.com",
-  "password": "SecurePass123!"
-}
-
-Response:
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "id": "507f1f77bcf86cd799439011",
-    "firstName": "John",
-    "lastName": "Doe",
-    "userType": "parent"
-  }
-}
-```
-
-### Case Management Endpoints
-
-#### Create Case
-```http
-POST /cases
-Authorization: Bearer {token}
-Content-Type: application/json
-
-{
-  "childFirstName": "Emma",
-  "childLastName": "Doe",
-  "childAge": 8,
-  "childSex": "female",
-  "scholarYear": "3rd Grade",
-  "screeningAnswers": [
-    {
-      "question": "Does your child have trouble focusing?",
-      "answer": "Yes"
-    }
-  ],
-  "gravityScore": "medium"
-}
-```
-
-#### Upload Video
-```http
-POST /cases/:caseId/video
-Authorization: Bearer {token}
-Content-Type: multipart/form-data
-
-video: <file>
-```
-
-#### Get Doctor Cases
-```http
-GET /cases/doctor
-Authorization: Bearer {token}
-
-Response:
-[
-  {
-    "id": "507f1f77bcf86cd799439011",
-    "childFullName": "Emma Doe",
-    "childAge": 8,
-    "gravityScore": "medium",
-    "status": "waiting_for_doctor",
-    "createdAt": "2024-01-15T10:30:00Z"
-  }
-]
-```
-
-#### Submit Diagnosis
-```http
-POST /cases/:caseId/diagnosis
-Authorization: Bearer {token}
-Content-Type: application/json
-
-{
-  "summary": "Based on the assessment...",
-  "advice": "Recommend behavioral therapy...",
-  "recommendation": "Schedule follow-up in 3 months"
-}
-```
-
-### Notification Endpoints
-
-#### Get Notifications
-```http
-GET /notifications?unreadOnly=true
-Authorization: Bearer {token}
-
-Response:
-[
-  {
-    "id": "507f1f77bcf86cd799439011",
-    "type": "diagnosis_ready",
-    "title": "Diagnosis Ready",
-    "message": "Dr. Smith has completed the diagnosis",
-    "isRead": false,
-    "createdAt": "2024-01-15T10:30:00Z"
-  }
-]
-```
-
----
-
-## 👥 Contributing
-
-We welcome contributions! Please follow these steps:
-
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Commit your changes**
-   ```bash
-   git commit -m 'Add some amazing feature'
-   ```
-4. **Push to the branch**
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-5. **Open a Pull Request**
-
-### Coding Standards
-
-- Follow Flutter/Dart style guide
-- Use meaningful variable names
-- Comment complex logic
-- Write unit tests for new features
-- Update documentation
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ---
 
 ## 👨‍💻 Authors
 
-- **IEEE ENSIT** - *Initial work* - [YourGitHub](https://github.com/yourusername)
-
----
-
-## 🙏 Acknowledgments
-
-- Flutter team for the amazing framework
-- MongoDB team for the database
-- All contributors and testers
-- Medical professionals who provided insights
-
+- **IEEE ENSIT** 
 ---
 
 ## 🔮 Future Enhancements
 
 - [ ] AI-powered video analysis
-- [ ] Multilingual chatbot
-- [ ] Telemedicine integration
-- [ ] Progress tracking graphs
 - [ ] Parent community forum
-- [ ] Export to EMR systems
-- [ ] Wearable device integration
-- [ ] Offline mode support
 
 ---
 
 <div align="center">
-
-**Made with ❤️ for children and families**
-
-[⬆ Back to Top](#-mind-bloom---adhd-diagnostic--care-platform)
-
+    **Made with ❤️ for children and families**
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**Mind Bloom** is a Flutter mobile application designed to help parents and doctors collaborate in the early identification of ADHD-related behaviors in children.
+
+Parents complete a guided chatbot questionnaire and upload a short behavior video. Doctors receive the case, review all materials, request additional tests, and send back a diagnosis with recommendations. A final PDF report is also provided.
+
+This repository includes:
+
+
+---
+
+## ✨ Key Features
+
+### 👨‍👩‍👧 Parent Features
+
+* Create account & log in
+* Start a new ADHD screening case
+* Chatbot-guided questions (severity scoring included)
+* Upload child observation video
+* Submit case to doctor
+* Receive additional test requests
+* Receive final diagnosis + PDF report
+
+### 🩺 Doctor Features
+
+* Login as doctor
+* Dashboard showing cases sorted by severity (High / Medium / Low)
+* View complete case details
+* Watch uploaded videos
+* Request additional tests
+* Write diagnosis + recommendations
+* Send final conclusion to parent
+
+---
+
+## 📁 Suggested Project Structure
+
+```
+mind-bloom/
+├─ frontend-flutter/
+│  ├─ lib/
+│  ├─ assets/
+│  │  ├─ screenshots/
+│  │  │  ├─ welcome.png
+│  │  │  ├─ create_account.png
+│  │  │  ├─ parent_home.png
+│  │  │  ├─ chatbot_screening.png
+│  │  │  └─ doctor_dashboard.png
+│  └─ pubspec.yaml
+├─ backend-node/
+│  ├─ src/
+│  ├─ routes/
+│  ├─ controllers/
+│  ├─ models/
+│  └─ package.json
+└─ README.md
+```
+
+---
+
+## 📸 Screenshots (add your images here)
+
+Place screenshots in `frontend-flutter/assets/screenshots/` then reference them:
+
+```
+![Welcome Screen](frontend-flutter/assets/screenshots/welcome.png)
+![Create Account](frontend-flutter/assets/screenshots/create_account.png)
+![Parent Home](frontend-flutter/assets/screenshots/parent_home.png)
+![Chatbot Screening](frontend-flutter/assets/screenshots/chatbot_screening.png)
+![Doctor Dashboard](frontend-flutter/assets/screenshots/doctor_dashboard.png)
+```
+
+---
+
+## 🚀 Tech Stack
+
+* **Flutter (Dart)** — Mobile frontend
+* **Node.js + Express** — Backend REST API
+* **MongoDB** — Database (Atlas or local)
+* **File Storage** — Local uploads or AWS S3
+* **Auth** — JWT
+* **PDF Generation** — pdfkit / puppeteer / html-pdf
+
+---
+
+## 🛠️ Installation & Setup
+
+### Backend Setup (Node.js)
+
+1. Navigate to backend folder:
+
+```bash
+cd backend-node
+```
+
+2. Copy `.env.example` → `.env` and configure:
+
+```
+PORT=4000
+MONGO_URI=mongodb://localhost:27017/mindbloom
+JWT_SECRET=your_secret_key
+UPLOADS_DIR=./uploads
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+4. Start server:
+
+```bash
+npm run dev
+```
+
+---
+
+### Frontend Setup (Flutter)
+
+1. Navigate to Flutter folder:
+
+```bash
+cd frontend-flutter
+```
+
+2. Install dependencies:
+
+```bash
+flutter pub get
+```
+
+3. Run app:
+
+```bash
+flutter run
+```
+
+Make sure to update your API base URL in `lib/config.dart`.
+
+---
+
+## 🔌 REST API Overview
+
+### **Authentication**
+
+* `POST /api/auth/register` — Parent or Doctor
+* `POST /api/auth/login` — Returns JWT
+
+### **Parent Endpoints**
+
+* `POST /api/cases` — Create ADHD case
+* `GET /api/cases` — List parent cases
+* `GET /api/cases/:id` — View case
+
+### **Doctor Endpoints**
+
+* `GET /api/doctor/cases` — View all cases (sorted by severity)
+* `GET /api/doctor/cases/:id` — Case details
+* `POST /api/doctor/cases/:id/conclusion` — Send diagnosis
+* `POST /api/doctor/cases/:id/request-test` — Ask for additional test
+
+### **File Upload**
+
+* `POST /api/uploads/video` — Upload video
+
+---
+
+## 🗄️ Database Models
+
+### **User Schema**
+
+```js
+{
+  firstName,
+  lastName,
+  email,
+  passwordHash,
+  role: 'parent' | 'doctor',
+  doctorProfile: { licenseNumber },
+  parentProfile: { relationToChild }
+}
+```
+
+### **Case Schema**
+
+```js
+{
+  parentId,
+  child: {
+    firstName, lastName, sex, age, scholarYear
+  },
+  answers: [{ questionId, answer }],
+  severityScore,
+  videoUrl,
+  status: 'new'|'additional_test'|'waiting'|'completed',
+  doctorNotes: [],
+  createdAt,
+  updatedAt
+}
+```
+
+---
+
+## 🔐 Security
+
+* JWT authentication
+* Password hashing (bcrypt)
+* Input validation on all routes
+* HTTPS recommended in production
+* Video upload size limits
+
+---
+
+## 📄 PDF Report Generation
+
+Doctors can generate a full ADHD evaluation report.
+
+Recommended endpoint:
+
+```
+GET /api/cases/:id/report
+```
+
+This returns a downloadable PDF.
+
+---
+
+## 🧪 Testing
+
+* Backend: Jest + Supertest
+* Flutter: Widget tests
+
+---
+
+## 📦 Deployment
+
+* Backend → Render / Railway / VPS
+* Database → MongoDB Atlas
+* Videos → AWS S3
+* Flutter → Play Store / App Store
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome. Please follow coding standards and include tests.
+
+---
+
+## 📬 Contact
+
+**Rihab Cherni** — [rihabcherni235@gmail.com](mailto:rihabcherni235@gmail.com)
+
+---
+
+*README generated automatically — edit as needed.*
