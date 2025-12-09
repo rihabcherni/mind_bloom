@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/widgets/background_circles.dart';
 import 'package:frontend/widgets/chatbot_fab.dart';
+import 'package:frontend/widgets/video_player_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../constants/app_constants.dart';
 import '../models/case_model.dart';
@@ -77,7 +78,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error loading case: ${e.toString()}'),
+            content: Text(S.of(context).error_api_case(e.toString())),
             backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -93,11 +94,12 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
     try {
       final response = await ApiService.getReportUrl(widget.caseId);
       final url = response['reportUrl'];
+      print(url);
 
       if (await canLaunchUrl(Uri.parse(url))) {
         await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
       } else {
-        throw Exception('Could not launch URL');
+        throw Exception('Could not launch URL: ' + url);
       }
     } catch (e) {
       if (mounted) {
@@ -152,23 +154,23 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
       floatingActionButton: const ChatbotFAB(),
-
       body: Stack(
         children: [
           const BackgroundCircles(),
           SafeArea(
             child: Column(
               children: [
-                // Header
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                     children: [
                       Container(
                         decoration: BoxDecoration(
+                          color: isDark
+                              ? const Color(0xFF252545)
+                              : AppConstants.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -193,7 +195,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                         child: Text(
                           S.of(context).caseDetails_title,
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: isDark
                                 ? AppConstants.white
@@ -204,6 +206,9 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                       if (_case != null)
                         Container(
                           decoration: BoxDecoration(
+                            color: isDark
+                                ? const Color(0xFF252545)
+                                : AppConstants.white,
                             borderRadius: BorderRadius.circular(12),
                             boxShadow: [
                               BoxShadow(
@@ -226,6 +231,9 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                       const SizedBox(width: 8),
                       Container(
                         decoration: BoxDecoration(
+                          color: isDark
+                              ? const Color(0xFF252545)
+                              : AppConstants.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -239,7 +247,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                           icon: Icon(
                             Icons.settings_rounded,
                             color: isDark
-                                ? Colors.white
+                                ? AppConstants.white
                                 : AppConstants.darkViolet,
                           ),
                           onPressed: () {
@@ -266,7 +274,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                               CircularProgressIndicator(
                                 color: AppConstants.primaryViolet,
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 8),
                               Text(
                                 S.of(context).loading,
                                 style: TextStyle(
@@ -284,7 +292,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                padding: const EdgeInsets.all(24),
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                   color: Colors.red.withOpacity(0.1),
                                   borderRadius: BorderRadius.circular(24),
@@ -295,18 +303,18 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                                   color: Colors.red,
                                 ),
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 8),
                               Text(
                                 S.of(context).error_loading_case,
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: isDark
                                       ? Colors.white
                                       : AppConstants.darkViolet,
                                 ),
                               ),
-                              const SizedBox(height: 24),
+                              const SizedBox(height: 12),
                               ElevatedButton.icon(
                                 onPressed: _loadCaseDetails,
                                 icon: const Icon(Icons.refresh_rounded),
@@ -315,8 +323,8 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                                   backgroundColor: AppConstants.primaryViolet,
                                   foregroundColor: AppConstants.white,
                                   padding: const EdgeInsets.symmetric(
-                                    horizontal: 32,
-                                    vertical: 16,
+                                    horizontal: 20,
+                                    vertical: 10,
                                   ),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16),
@@ -331,7 +339,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                           color: AppConstants.primaryViolet,
                           child: SingleChildScrollView(
                             physics: const AlwaysScrollableScrollPhysics(),
-                            padding: const EdgeInsets.all(24),
+                            padding: const EdgeInsets.all(12),
                             child: FadeTransition(
                               opacity: _fadeAnimation,
                               child: SlideTransition(
@@ -340,20 +348,72 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _buildStatusHeader(isDark),
-                                    const SizedBox(height: 24),
+                                    const SizedBox(height: 12),
                                     _buildChildInfoSection(isDark),
-                                    const SizedBox(height: 20),
+                                    const SizedBox(height: 10),
                                     _buildScreeningSection(isDark),
+
+                                    const SizedBox(height: 16),
+                                    _buildVideoSection(
+                                      title: S.of(context).video,
+                                      icon: Icons.videocam_rounded,
+                                      color: const Color(0xFF2196F3),
+                                      isDark: isDark,
+                                      children: [
+                                        if (_case!.videoUrl != null &&
+                                            _case!.videoUrl!.isNotEmpty)
+                                          VideoPlayerWidget(
+                                            videoUrl: _case!.videoUrl!,
+                                          )
+                                        else
+                                          Container(
+                                            padding: const EdgeInsets.all(16),
+                                            decoration: BoxDecoration(
+                                              color: Colors.orange.withOpacity(
+                                                0.1,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              border: Border.all(
+                                                color: Colors.orange
+                                                    .withOpacity(0.3),
+                                              ),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.info_rounded,
+                                                  color: Colors.orange,
+                                                  size: 20,
+                                                ),
+                                                const SizedBox(width: 12),
+                                                Expanded(
+                                                  child: Text(
+                                                    S
+                                                        .of(context)
+                                                        .no_video_uploaded,
+                                                    style: TextStyle(
+                                                      color: Colors.orange,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                      ],
+                                    ),
                                     if (_case!.additionalTestRequest !=
                                         null) ...[
-                                      const SizedBox(height: 20),
+                                      const SizedBox(height: 10),
                                       _buildAdditionalTestSection(isDark),
                                     ],
                                     if (_case!.diagnosis != null) ...[
-                                      const SizedBox(height: 20),
+                                      const SizedBox(height: 10),
                                       _buildDiagnosisSection(isDark),
                                     ],
-                                    const SizedBox(height: 24),
+                                    const SizedBox(height: 12),
                                   ],
                                 ),
                               ),
@@ -373,7 +433,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
     final statusColor = _getStatusColor(_case!.status);
 
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [statusColor.withOpacity(0.2), statusColor.withOpacity(0.1)],
@@ -393,7 +453,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: statusColor,
               borderRadius: BorderRadius.circular(16),
@@ -428,7 +488,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                 Text(
                   _case!.statusDisplay,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: statusColor,
                   ),
@@ -450,7 +510,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
         _buildInfoRow(S.of(context).child_name, _case!.childFullName, isDark),
         _buildInfoRow(
           S.of(context).child_age,
-          '${_case!.childAge} ans',
+          S.of(context).child_age_years(_case!.childAge),
           isDark,
         ),
         _buildInfoRow(
@@ -466,30 +526,50 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
   }
 
   Widget _buildScreeningSection(bool isDark) {
+    String _localizedQuestion(BuildContext context, int index) {
+      switch (index) {
+        case 0:
+          return S.of(context).question_1;
+        case 1:
+          return S.of(context).question_2;
+        case 2:
+          return S.of(context).question_3;
+        case 3:
+          return S.of(context).question_4;
+        case 4:
+          return S.of(context).question_5;
+        case 5:
+          return S.of(context).question_6;
+        default:
+          return "";
+      }
+    }
+
     return _buildModernSection(
       S.of(context).screening_results_title,
       Icons.assessment_rounded,
       isDark,
       [
         _buildSeverityBadge(),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
         Text(
           S.of(context).screening_questionnaire_answers,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 15,
+            fontSize: 13,
             color: isDark ? AppConstants.white : AppConstants.darkViolet,
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 6),
         ..._case!.screeningAnswers.asMap().entries.map((entry) {
+          final index = entry.key;
           return _buildQuestionAnswer(
-            entry.key + 1,
-            entry.value.question,
+            index + 1,
+            _localizedQuestion(context, index),
             entry.value.answer,
             isDark,
           );
-        }).toList(),
+        }),
       ],
     );
   }
@@ -505,9 +585,9 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
           _case!.additionalTestRequest!.testType,
           isDark,
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
         Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.blue.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
@@ -542,7 +622,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
           ),
         ),
         if (_case!.status == 'additional_test_required') ...[
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
           SizedBox(
             width: double.infinity,
             height: 50,
@@ -588,7 +668,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                       Text(
                         S.of(context).additional_test_submit,
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 13,
                           fontWeight: FontWeight.bold,
                           color: AppConstants.white,
                         ),
@@ -620,7 +700,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
           '${_case!.diagnosis!.completedAt.day}/${_case!.diagnosis!.completedAt.month}/${_case!.diagnosis!.completedAt.year}',
           isDark,
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
         _buildDiagnosisBlock(
           S.of(context).diagnosis_summary,
           _case!.diagnosis!.summary,
@@ -628,7 +708,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
           Colors.blue,
           isDark,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 6),
         _buildDiagnosisBlock(
           S.of(context).diagnosis_advice,
           _case!.diagnosis!.advice,
@@ -636,7 +716,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
           Colors.orange,
           isDark,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 6),
         _buildDiagnosisBlock(
           S.of(context).diagnosis_recommendation,
           _case!.diagnosis!.recommendation,
@@ -644,7 +724,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
           AppConstants.green,
           isDark,
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
         SizedBox(
           width: double.infinity,
           height: 50,
@@ -687,7 +767,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
                     Text(
                       S.of(context).download_report,
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 13,
                         fontWeight: FontWeight.bold,
                         color: AppConstants.white,
                       ),
@@ -709,7 +789,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
     List<Widget> children,
   ) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
@@ -746,14 +826,14 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: isDark ? AppConstants.white : AppConstants.darkViolet,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           ...children,
         ],
       ),
@@ -762,7 +842,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
 
   Widget _buildInfoRow(String label, String value, bool isDark) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.only(bottom: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -811,7 +891,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: [color, color.withOpacity(0.8)]),
         borderRadius: BorderRadius.circular(20),
@@ -829,7 +909,15 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
           Icon(icon, color: AppConstants.white, size: 20),
           const SizedBox(width: 8),
           Text(
-            'GRAVITÉ ${_case!.gravityScore.toUpperCase()}',
+            S
+                .of(context)
+                .gravity(
+                  _case!.gravityScore.toLowerCase() == "low"
+                      ? S.of(context).low
+                      : _case!.gravityScore.toLowerCase() == "medium"
+                      ? S.of(context).medium
+                      : S.of(context).high,
+                ),
             style: const TextStyle(
               color: AppConstants.white,
               fontWeight: FontWeight.bold,
@@ -849,14 +937,14 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
   ) {
     final normalized = answer.trim().toLowerCase();
 
-    const yesWords = {'yes', 'oui', 'نعم', 'ايه'};
+    const yesWords = {'yes', 'oui', 'نعم', 'ايه', 'إيه'};
 
     final isYes = yesWords.contains(normalized);
     final color = isYes ? AppConstants.green : Colors.red;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [color.withOpacity(0.1), color.withOpacity(0.05)],
@@ -873,7 +961,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
               fontWeight: FontWeight.w600,
               fontSize: 13,
               height: 1.4,
-              color: isDark ? Colors.white : AppConstants.darkViolet,
+              color: isYes ? AppConstants.green : Colors.red,
             ),
           ),
           const SizedBox(height: 10),
@@ -916,7 +1004,7 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
     bool isDark,
   ) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [color.withOpacity(0.1), color.withOpacity(0.05)],
@@ -950,6 +1038,59 @@ class _CaseDetailsScreenState extends State<CaseDetailsScreen>
               color: isDark ? Colors.white70 : Colors.grey[700],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildVideoSection({
+    required String title,
+    required IconData icon,
+    required Color color,
+    required bool isDark,
+    required List<Widget> children,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: color.withOpacity(0.3), width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: color.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [color, color.withOpacity(0.7)],
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(icon, color: Colors.white, size: 24),
+              ),
+              const SizedBox(width: 12),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? Colors.white : const Color(0xFF1A1A2E),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          ...children,
         ],
       ),
     );

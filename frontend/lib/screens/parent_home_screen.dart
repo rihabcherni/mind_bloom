@@ -183,6 +183,10 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
+                          color: isDark
+                              ? const Color(0xFF252545)
+                              : AppConstants.white,
+
                           gradient: const LinearGradient(
                             colors: [
                               AppConstants.primaryViolet,
@@ -239,6 +243,10 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                       ),
                       Container(
                         decoration: BoxDecoration(
+                          color: isDark
+                              ? const Color(0xFF252545)
+                              : AppConstants.white,
+
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -268,6 +276,10 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                       const SizedBox(width: 8),
                       Container(
                         decoration: BoxDecoration(
+                          color: isDark
+                              ? const Color(0xFF252545)
+                              : AppConstants.white,
+
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -616,11 +628,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                   ),
                 ],
               ),
-
-              // Boutons Edit/Delete
               if (canModify) ...[
-                const SizedBox(height: 16),
-                const Divider(),
                 const SizedBox(height: 12),
                 Row(
                   children: [

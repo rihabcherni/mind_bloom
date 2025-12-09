@@ -5,6 +5,7 @@ import '../constants/app_constants.dart';
 import '../models/user_model.dart';
 import '../models/case_model.dart';
 import '../models/notification_model.dart';
+import 'package:http_parser/http_parser.dart';
 
 class ApiService {
   static String? _token;
@@ -85,25 +86,43 @@ class ApiService {
   }
 
   static Future<CaseModel> uploadVideo(String caseId, File videoFile) async {
-    final request = http.MultipartRequest(
-      'POST',
-      Uri.parse('${AppConstants.baseUrl}/cases/$caseId/video'),
-    );
+    try {
+      print('Uploading video: ${videoFile.path}');
+      print('File size: ${await videoFile.length()} bytes');
 
-    request.headers['Authorization'] = 'Bearer $_token';
-    request.files.add(
-      await http.MultipartFile.fromPath('video', videoFile.path),
-    );
-
-    final streamedResponse = await request.send();
-    final response = await http.Response.fromStream(streamedResponse);
-
-    if (response.statusCode == 200) {
-      return CaseModel.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception(
-        jsonDecode(response.body)['message'] ?? 'Failed to upload video',
+      final request = http.MultipartRequest(
+        'POST',
+        Uri.parse('${AppConstants.baseUrl}/cases/$caseId/video'),
       );
+
+      request.headers['Authorization'] = 'Bearer $_token';
+
+      // Explicitly set content type with http_parser MediaType
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'video',
+          videoFile.path,
+          contentType: MediaType('video', 'mp4'),
+        ),
+      );
+
+      print('Sending request...');
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        return CaseModel.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception(
+          jsonDecode(response.body)['message'] ?? 'Failed to upload video',
+        );
+      }
+    } catch (e) {
+      print('Upload error: $e');
+      rethrow;
     }
   }
 
@@ -194,29 +213,38 @@ class ApiService {
     List<ScreeningAnswer> answers,
     File? videoFile,
   ) async {
-    final request = http.MultipartRequest(
-      'PUT',
-      Uri.parse('${AppConstants.baseUrl}/cases/$caseId/test-response'),
-    );
-
-    request.headers['Authorization'] = 'Bearer $_token';
-    request.fields['answers'] = jsonEncode(
-      answers.map((a) => a.toJson()).toList(),
-    );
-
-    if (videoFile != null) {
-      request.files.add(
-        await http.MultipartFile.fromPath('video', videoFile.path),
+    try {
+      final request = http.MultipartRequest(
+        'PUT',
+        Uri.parse('${AppConstants.baseUrl}/cases/$caseId/test-response'),
       );
-    }
 
-    final streamedResponse = await request.send();
-    final response = await http.Response.fromStream(streamedResponse);
+      request.headers['Authorization'] = 'Bearer $_token';
+      request.fields['answers'] = jsonEncode(
+        answers.map((a) => a.toJson()).toList(),
+      );
 
-    if (response.statusCode == 200) {
-      return CaseModel.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to submit test response');
+      if (videoFile != null) {
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            'video',
+            videoFile.path,
+            contentType: MediaType('video', 'mp4'),
+          ),
+        );
+      }
+
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200) {
+        return CaseModel.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception('Failed to submit test response');
+      }
+    } catch (e) {
+      print('Submit test response error: $e');
+      rethrow;
     }
   }
 

@@ -28,6 +28,7 @@ const downloadReport = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 const getReportUrl = async (req, res) => {
   try {
     const caseItem = await Case.findById(req.params.caseId)
@@ -50,15 +51,22 @@ const getReportUrl = async (req, res) => {
 
     const pdfPath = await PDFService.generateDiagnosisReport(caseItem);
 
-    res.json({ 
-      reportUrl: `${req.protocol}://${req.get('host')}${pdfPath}`,
+    const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+    const reportUrl = `${baseUrl}${pdfPath}`;
+
+    console.log('Generated report URL:', reportUrl);
+
+    res.json({
+      reportUrl: reportUrl,
       filename: `diagnosis_${caseItem.childFirstName}_${caseItem.childLastName}.pdf`
     });
 
   } catch (error) {
+    console.error('Error getting report URL:', error);
     res.status(500).json({ message: error.message });
   }
 };
+
 module.exports = {
   downloadReport,
   getReportUrl

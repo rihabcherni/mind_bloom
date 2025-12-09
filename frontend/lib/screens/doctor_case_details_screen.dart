@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/settings_screen.dart';
+import 'package:frontend/generated/l10n.dart';
 import 'package:frontend/widgets/background_circles.dart';
 import 'package:frontend/widgets/chatbot_fab.dart';
+import 'package:frontend/widgets/header.dart';
+import 'package:frontend/widgets/video_player_widget.dart';
 import '../constants/app_constants.dart';
 import '../models/case_model.dart';
 import '../services/api_service.dart';
@@ -54,7 +56,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
     } catch (e) {
       setState(() => _isLoading = false);
       if (mounted) {
-        _showSnackBar('Erreur: ${e.toString()}', isError: true);
+        _showSnackBar(S.of(context).error(e.toString()), isError: true);
       }
     }
   }
@@ -95,8 +97,8 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
               ),
             ),
             const SizedBox(width: 12),
-            const Text(
-              'Soumettre le diagnostic',
+            Text(
+              S.of(context).submit_diagnosis,
               style: TextStyle(fontSize: 18),
             ),
           ],
@@ -107,7 +109,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
             children: [
               _buildDialogTextField(
                 controller: summaryController,
-                label: 'Résumé',
+                label: S.of(context).summary,
                 icon: Icons.description_rounded,
                 maxLines: 3,
                 isDark: isDark,
@@ -115,7 +117,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
               const SizedBox(height: 16),
               _buildDialogTextField(
                 controller: adviceController,
-                label: 'Conseils',
+                label: S.of(context).advice,
                 icon: Icons.lightbulb_rounded,
                 maxLines: 3,
                 isDark: isDark,
@@ -123,7 +125,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
               const SizedBox(height: 16),
               _buildDialogTextField(
                 controller: recommendationController,
-                label: 'Recommandations',
+                label: S.of(context).recommendations,
                 icon: Icons.recommend_rounded,
                 maxLines: 3,
                 isDark: isDark,
@@ -134,7 +136,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Annuler'),
+            child: Text(S.of(context).cancel),
           ),
           ElevatedButton.icon(
             onPressed: () async {
@@ -146,7 +148,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
               );
             },
             icon: const Icon(Icons.send_rounded),
-            label: const Text('Soumettre'),
+            label: Text(S.of(context).submit),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppConstants.green,
               foregroundColor: AppConstants.white,
@@ -184,8 +186,11 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
               ),
             ),
             const SizedBox(width: 12),
-            const Expanded(
-              child: Text('Demander un test', style: TextStyle(fontSize: 18)),
+            Expanded(
+              child: Text(
+                S.of(context).request_test,
+                style: TextStyle(fontSize: 18),
+              ),
             ),
           ],
         ),
@@ -194,15 +199,15 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
           children: [
             _buildDialogTextField(
               controller: testTypeController,
-              label: 'Type de test',
+              label: S.of(context).test_type,
               icon: Icons.science_rounded,
-              hint: 'ex: Test de concentration',
+              hint: S.of(context).test_type_hint,
               isDark: isDark,
             ),
             const SizedBox(height: 16),
             _buildDialogTextField(
               controller: instructionsController,
-              label: 'Instructions',
+              label: S.of(context).instructions,
               icon: Icons.notes_rounded,
               maxLines: 4,
               isDark: isDark,
@@ -212,7 +217,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Annuler'),
+            child: Text(S.of(context).cancel),
           ),
           ElevatedButton.icon(
             onPressed: () async {
@@ -223,7 +228,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
               );
             },
             icon: const Icon(Icons.send_rounded),
-            label: const Text('Envoyer'),
+            label: Text(S.of(context).submit),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue,
               foregroundColor: AppConstants.white,
@@ -278,12 +283,12 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
         recommendation,
       );
       if (mounted) {
-        _showSnackBar('Diagnostic soumis avec succès !');
+        _showSnackBar(S.of(context).diagnosis_submitted);
         _loadCaseDetails();
       }
     } catch (e) {
       if (mounted) {
-        _showSnackBar('Erreur: ${e.toString()}', isError: true);
+        _showSnackBar(S.of(context).error(e.toString()), isError: true);
       }
     }
   }
@@ -296,12 +301,12 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
         instructions,
       );
       if (mounted) {
-        _showSnackBar('Demande de test envoyée avec succès !');
+        _showSnackBar(S.of(context).send_test);
         _loadCaseDetails();
       }
     } catch (e) {
       if (mounted) {
-        _showSnackBar('Erreur: ${e.toString()}', isError: true);
+        _showSnackBar(S.of(context).error(e.toString()), isError: true);
       }
     }
   }
@@ -331,75 +336,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
           SafeArea(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: isDark
-                                ? Colors.white
-                                : AppConstants.darkViolet,
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          'Détails du cas',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: isDark
-                                ? Colors.white
-                                : AppConstants.darkViolet,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.settings_rounded,
-                            color: isDark
-                                ? Colors.white
-                                : AppConstants.darkViolet,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const SettingsScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                HeaderWidget(title: S.of(context).doctor_case_details),
                 Expanded(
                   child: _isLoading
                       ? Center(
@@ -419,31 +356,33 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                                 _buildSeverityBadge(isDark),
                                 const SizedBox(height: 20),
                                 _buildModernSection(
-                                  title: 'Profil de l\'enfant',
+                                  title: S.of(context).child_profile,
                                   icon: Icons.child_care_rounded,
                                   color: AppConstants.primaryViolet,
                                   isDark: isDark,
                                   children: [
                                     _buildInfoRow(
-                                      'Nom',
+                                      S.of(context).child_name,
                                       _case!.childFullName,
                                       Icons.person_rounded,
                                       isDark,
                                     ),
                                     _buildInfoRow(
-                                      'Âge',
-                                      '${_case!.childAge} ans',
+                                      S.of(context).child_age,
+                                      S
+                                          .of(context)
+                                          .child_age_years(_case!.childAge),
                                       Icons.cake_rounded,
                                       isDark,
                                     ),
                                     _buildInfoRow(
-                                      'Sexe',
+                                      S.of(context).sexe,
                                       _case!.childSex,
                                       Icons.wc_rounded,
                                       isDark,
                                     ),
                                     _buildInfoRow(
-                                      'Niveau',
+                                      S.of(context).level,
                                       _case!.scholarYear,
                                       Icons.school_rounded,
                                       isDark,
@@ -452,7 +391,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                                 ),
                                 const SizedBox(height: 16),
                                 _buildModernSection(
-                                  title: 'Questionnaire TDAH',
+                                  title: S.of(context).tdah_questionnaire,
                                   icon: Icons.quiz_rounded,
                                   color: AppConstants.lightViolet,
                                   isDark: isDark,
@@ -471,34 +410,16 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                                 ),
 
                                 const SizedBox(height: 16),
-                                _buildModernSection(
-                                  title: 'Vidéo',
+                                _buildVideoSection(
+                                  title: S.of(context).video,
                                   icon: Icons.videocam_rounded,
                                   color: const Color(0xFF2196F3),
                                   isDark: isDark,
                                   children: [
-                                    if (_case!.videoUrl != null)
-                                      ElevatedButton.icon(
-                                        onPressed: () {},
-                                        icon: const Icon(
-                                          Icons.play_arrow_rounded,
-                                        ),
-                                        label: const Text('Lire la vidéo'),
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: const Color(
-                                            0xFF2196F3,
-                                          ),
-                                          foregroundColor: AppConstants.white,
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 24,
-                                            vertical: 12,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              12,
-                                            ),
-                                          ),
-                                        ),
+                                    if (_case!.videoUrl != null &&
+                                        _case!.videoUrl!.isNotEmpty)
+                                      VideoPlayerWidget(
+                                        videoUrl: _case!.videoUrl!,
                                       )
                                     else
                                       Container(
@@ -522,9 +443,9 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                                               size: 20,
                                             ),
                                             const SizedBox(width: 12),
-                                            const Expanded(
+                                            Expanded(
                                               child: Text(
-                                                'Aucune vidéo téléchargée',
+                                                S.of(context).no_video_uploaded,
                                                 style: TextStyle(
                                                   color: Colors.orange,
                                                   fontWeight: FontWeight.w600,
@@ -539,7 +460,9 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                                 if (_case!.additionalTestResponse != null) ...[
                                   const SizedBox(height: 16),
                                   _buildModernSection(
-                                    title: 'Réponse au test supplémentaire',
+                                    title: S
+                                        .of(context)
+                                        .additional_test_response,
                                     icon: Icons.assignment_turned_in_rounded,
                                     color: Colors.purple,
                                     isDark: isDark,
@@ -620,8 +543,8 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Gravité du cas',
+                Text(
+                  S.of(context).severity,
                   style: TextStyle(color: Colors.white70, fontSize: 13),
                 ),
                 const SizedBox(height: 4),
@@ -746,15 +669,20 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
     String answer,
     bool isDark,
   ) {
-    final isYes = answer == 'Oui' || answer == 'Yes';
+    final isYes =
+        answer == 'Oui' ||
+        answer == 'Yes' ||
+        answer == 'نعم' ||
+        answer == 'ايه' ||
+        answer == 'إيه';
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: (isYes ? Colors.red : AppConstants.green).withOpacity(0.1),
+        color: (isYes ? AppConstants.green : Colors.red).withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: (isYes ? Colors.red : AppConstants.green).withOpacity(0.3),
+          color: (isYes ? AppConstants.green : Colors.red).withOpacity(0.3),
         ),
       ),
       child: Column(
@@ -772,9 +700,9 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
           Row(
             children: [
               Icon(
-                isYes ? Icons.close_rounded : Icons.check_rounded,
+                isYes ? Icons.check_rounded : Icons.close_rounded,
                 size: 16,
-                color: isYes ? Colors.red : AppConstants.green,
+                color: isYes ? AppConstants.green : Colors.red,
               ),
               const SizedBox(width: 6),
               Text(
@@ -782,7 +710,7 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: isYes ? Colors.red : AppConstants.green,
+                  color: isYes ? AppConstants.green : Colors.red,
                 ),
               ),
             ],
@@ -828,8 +756,8 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
           child: ElevatedButton.icon(
             onPressed: _showDiagnosisDialog,
             icon: const Icon(Icons.medical_services_rounded),
-            label: const Text(
-              'Conclure le diagnostic',
+            label: Text(
+              S.of(context).diagnosis_concluded,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             style: ElevatedButton.styleFrom(
@@ -850,8 +778,8 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
           child: OutlinedButton.icon(
             onPressed: _showRequestTestDialog,
             icon: const Icon(Icons.assignment_rounded),
-            label: const Text(
-              'Demander un test',
+            label: Text(
+              S.of(context).request_test_button,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             style: OutlinedButton.styleFrom(
@@ -898,9 +826,9 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
             ),
           ),
           const SizedBox(width: 16),
-          const Expanded(
+          Expanded(
             child: Text(
-              'Diagnostic soumis avec succès',
+              S.of(context).diagnosis_submitted,
               style: TextStyle(
                 color: AppConstants.white,
                 fontSize: 16,
@@ -932,13 +860,66 @@ class _DoctorCaseDetailsScreenState extends State<DoctorCaseDetailsScreen>
           ),
           const SizedBox(height: 24),
           Text(
-            'Cas introuvable',
+            S.of(context).case_not_found,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: isDark ? AppConstants.white : AppConstants.darkViolet,
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildVideoSection({
+    required String title,
+    required IconData icon,
+    required Color color,
+    required bool isDark,
+    required List<Widget> children,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: color.withOpacity(0.3), width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: color.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [color, color.withOpacity(0.7)],
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(icon, color: Colors.white, size: 24),
+              ),
+              const SizedBox(width: 12),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? Colors.white : const Color(0xFF1A1A2E),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          ...children,
         ],
       ),
     );

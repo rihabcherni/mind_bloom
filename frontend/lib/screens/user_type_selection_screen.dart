@@ -74,33 +74,41 @@ class _UserTypeSelectionScreenState extends State<UserTypeSelectionScreen>
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.all(24),
-                            decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [
-                                  AppConstants.primaryViolet,
-                                  AppConstants.lightViolet,
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              borderRadius: BorderRadius.circular(28),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppConstants.primaryViolet.withOpacity(
-                                    0.4,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: Container(
+                                  padding: const EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                      colors: [
+                                        AppConstants.primaryViolet,
+                                        AppConstants.white,
+                                        AppConstants.lightViolet,
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    ),
+                                    borderRadius: BorderRadius.circular(24),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppConstants.primaryViolet
+                                            .withOpacity(0.4),
+                                        blurRadius: 20,
+                                        offset: const Offset(0, 10),
+                                      ),
+                                    ],
                                   ),
-                                  blurRadius: 25,
-                                  offset: const Offset(0, 12),
+                                  child: Image.asset(
+                                    'assets/images/logo-trans2.png',
+                                    width: 80,
+                                    height: 80,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.psychology_rounded,
-                              size: 50,
-                              color: AppConstants.white,
-                            ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 15),
                           Text(

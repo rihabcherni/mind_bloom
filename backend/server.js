@@ -34,7 +34,7 @@ app.use('/reports', express.static(path.join(__dirname, 'reports')));
 
 // Swagger Documentation
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-console.log("📘 Swagger Docs available at: http://localhost:5000/api/docs");
+console.log("📘 Swagger Docs available at: http://localhost:5000/api/docs or http://192.168.1.19:5000/api/docs/");
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
@@ -57,8 +57,7 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
 });

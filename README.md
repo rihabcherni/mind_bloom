@@ -205,14 +205,6 @@ flutter run
 * JWT authentication
 * Bcrypt password hashing
 * Input validation
-* HTTPS recommended in production
-* Upload size limits
-
----
-
-## Authors
-
-* **IEEE ENSIT**
 
 ---
 

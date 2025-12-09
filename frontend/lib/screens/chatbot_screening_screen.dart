@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/widgets/background_circles.dart';
 import 'package:frontend/widgets/chatbot_fab.dart';
+import 'package:frontend/widgets/header.dart';
 import 'package:image_picker/image_picker.dart';
 import '../constants/app_constants.dart';
 import '../models/case_model.dart';
@@ -33,7 +33,6 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
   @override
   void initState() {
     super.initState();
-    // Initialize questions list as empty - will be populated in didChangeDependencies
     _questions = [];
 
     _animationController = AnimationController(
@@ -49,8 +48,6 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    // Initialize questions only once when context is available
     if (!_questionsInitialized) {
       _questions = [
         {'question': S.of(context).question_1, 'answer': null},
@@ -128,7 +125,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
     } catch (e) {
       if (mounted) {
         _showSnackBar(
-          'Erreur lors de la sélection: ${e.toString()}',
+          S.of(context).error_selection(e.toString()),
           isError: true,
         );
       }
@@ -151,7 +148,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
     } catch (e) {
       if (mounted) {
         _showSnackBar(
-          'Erreur lors de l\'enregistrement: ${e.toString()}',
+          S.of(context).error_recording(e.toString()),
           isError: true,
         );
       }
@@ -160,10 +157,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
 
   Future<void> _submitCase() async {
     if (_videoFile == null) {
-      _showSnackBar(
-        'Veuillez télécharger une vidéo avant de soumettre',
-        isError: true,
-      );
+      _showSnackBar(S.of(context).select_video_error, isError: true);
       return;
     }
 
@@ -180,12 +174,12 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
       await ApiService.uploadVideo(newCase.id, _videoFile!);
 
       if (mounted) {
-        _showSnackBar('Cas soumis avec succès !');
+        _showSnackBar(S.of(context).case_submitted);
         Navigator.of(context).popUntil((route) => route.isFirst);
       }
     } catch (e) {
       if (mounted) {
-        _showSnackBar('Erreur: ${e.toString()}', isError: true);
+        _showSnackBar(S.of(context).error(e.toString()), isError: true);
       }
     } finally {
       if (mounted) {
@@ -223,74 +217,11 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
           SafeArea(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: isDark
-                                ? AppConstants.white
-                                : AppConstants.darkViolet,
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          'Dépistage TDAH',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: isDark
-                                ? AppConstants.white
-                                : AppConstants.darkViolet,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.settings_rounded,
-                            color: isDark
-                                ? AppConstants.white
-                                : AppConstants.darkViolet,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const SettingsScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                HeaderWidget(
+                  title: S.of(context).screening_title,
+                  onBackPressed: () => Navigator.pop(context),
+                  showSettingsIcon: true,
+                  showBackIcon: true,
                 ),
                 Expanded(
                   child: _showVideoUpload
@@ -335,7 +266,12 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Question ${_currentQuestionIndex + 1}/${_questions.length}',
+                      S
+                          .of(context)
+                          .question_number(
+                            _currentQuestionIndex + 1,
+                            _questions.length,
+                          ),
                       style: const TextStyle(
                         color: AppConstants.white,
                         fontSize: 15,
@@ -428,8 +364,8 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
         boxShadow: [
           BoxShadow(
             color: isYes
-                ? Colors.red.withOpacity(0.3)
-                : AppConstants.green.withOpacity(0.3),
+                ? AppConstants.green.withOpacity(0.3)
+                : Colors.red.withOpacity(0.3),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -438,7 +374,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
       child: ElevatedButton(
         onPressed: () => _handleAnswer(text),
         style: ElevatedButton.styleFrom(
-          backgroundColor: isYes ? Colors.red : AppConstants.green,
+          backgroundColor: isYes ? AppConstants.green : Colors.red,
           foregroundColor: AppConstants.white,
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
           shape: RoundedRectangleBorder(
@@ -525,7 +461,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
         decoration: BoxDecoration(
           border: Border.all(
-            color: isYes ? Colors.red : AppConstants.green,
+            color: isYes ? AppConstants.green : Colors.red,
             width: 2,
           ),
           borderRadius: const BorderRadius.only(
@@ -536,7 +472,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
           ),
           boxShadow: [
             BoxShadow(
-              color: (isYes ? Colors.red : AppConstants.green).withOpacity(0.2),
+              color: (isYes ? AppConstants.green : Colors.red).withOpacity(0.2),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -545,7 +481,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
         child: Text(
           text,
           style: TextStyle(
-            color: isYes ? Colors.red : AppConstants.green,
+            color: isYes ? AppConstants.green : Colors.red,
             fontWeight: FontWeight.bold,
             fontSize: 15,
           ),
@@ -623,8 +559,8 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                       ),
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'Vidéo sélectionnée !',
+                    Text(
+                      S.of(context).video_selected,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -651,7 +587,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
               children: [
                 Expanded(
                   child: _buildVideoButton(
-                    'Galerie',
+                    S.of(context).gallery,
                     Icons.video_library_rounded,
                     _pickVideo,
                     isDark,
@@ -661,7 +597,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                 const SizedBox(width: 12),
                 Expanded(
                   child: _buildVideoButton(
-                    'Enregistrer',
+                    S.of(context).record,
                     Icons.videocam_rounded,
                     _recordVideo,
                     isDark,
@@ -705,7 +641,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                   child: Container(
                     alignment: Alignment.center,
                     child: _isSubmitting
-                        ? const Row(
+                        ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
@@ -718,7 +654,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                               ),
                               SizedBox(width: 12),
                               Text(
-                                'Envoi en cours...',
+                                S.of(context).sending,
                                 style: TextStyle(
                                   color: AppConstants.white,
                                   fontSize: 16,
@@ -727,11 +663,11 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                               ),
                             ],
                           )
-                        : const Row(
+                        : Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Soumettre au médecin',
+                                S.of(context).submit_video,
                                 style: TextStyle(
                                   color: AppConstants.white,
                                   fontSize: 16,
@@ -776,7 +712,7 @@ class _ChatbotScreeningScreenState extends State<ChatbotScreeningScreen>
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      'Votre cas sera examiné par un médecin qui fournira un diagnostic.',
+                      S.of(context).case_review_info,
                       style: TextStyle(
                         fontSize: 13,
                         color: isDark ? Colors.white70 : Colors.grey[800],

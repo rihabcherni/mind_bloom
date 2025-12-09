@@ -20,25 +20,43 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(age) => "${age} سنة";
+  static String m0(age) => "العمر: ${age}";
 
-  static String m1(age) => "${age} سنة";
+  static String m1(count) => "منذ ${count} يوم";
 
-  static String m2(childName) => "هل ترغب فعلاً في حذف حالة ${childName}؟";
+  static String m2(count) => "منذ ${count} ساعة";
 
-  static String m3(error) => "خطأ: ${error}";
+  static String m3(count) => "منذ ${count} دقيقة";
 
-  static String m4(error) => "خطأ في الحالة: ${error}";
+  static String m4(age) => "${age} سنوات";
 
-  static String m5(error) => "خطأ في التقرير: ${error}";
+  static String m5(childName) => "هل ترغب فعلاً في حذف حالة ${childName}؟";
 
-  static String m6(childName) =>
+  static String m6(error) => "خطأ: ${error}";
+
+  static String m7(error) => "خطأ: ${error}";
+
+  static String m8(error) => "خطأ في الحالة: ${error}";
+
+  static String m9(error) => "خطأ في التقرير: ${error}";
+
+  static String m10(errorMessage) => "خطأ أثناء التسجيل: ${errorMessage}";
+
+  static String m11(errorMessage) => "خطأ أثناء الاختيار: ${errorMessage}";
+
+  static String m12(level) => "درجة الخطورة ${level}";
+
+  static String m13(childName) =>
       "مرحبا! باش نسألك شوية أسئلة على تصرّف ${childName}. جاوب بصراحة باش نعاونك باش نعطيوا تقييم أفضل.";
 
-  static String m7(childName) =>
+  static String m14(current, total) => "السؤال ${current}/${total}";
+
+  static String m15(count) => "${count} غير مقروءة";
+
+  static String m16(childName) =>
       "مزيان! تاو، يرجى تحميل فيديو قصير (5 دقايق كحد أقصى) لـ ${childName} وهو يعمل نشاط مثل الواجبات، اللعب، أو الرسم. هذا باش يساعد الطبيب باش يفهم التصرف أفضل.";
 
-  static String m8(name) => "مرحبا، ${name}";
+  static String m17(name) => "مرحبا، ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -50,6 +68,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "additional_test_instructions": MessageLookupByLibrary.simpleMessage(
       "تعليمات:",
+    ),
+    "additional_test_response": MessageLookupByLibrary.simpleMessage(
+      "إجابات الاختبار الإضافي",
     ),
     "additional_test_submit": MessageLookupByLibrary.simpleMessage(
       "سجّل الإجابة",
@@ -135,76 +156,136 @@ class MessageLookup extends MessageLookupByLibrary {
     "adjustPreferences": MessageLookupByLibrary.simpleMessage(
       "بدّل الاختيارات متاعك",
     ),
+    "advice": MessageLookupByLibrary.simpleMessage("نصائح"),
     "age": m0,
+    "ageRange": MessageLookupByLibrary.simpleMessage(
+      "يجب أن يكون العمر بين 3 و18 سنة",
+    ),
+    "agoDays": m1,
+    "agoHours": m2,
+    "agoMinutes": m3,
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
       "هل لديك حساب بالفعل؟",
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("مايند بلوم"),
     "appearance": MessageLookupByLibrary.simpleMessage("المظهر"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+    "behavior_info": MessageLookupByLibrary.simpleMessage(
+      "بعد ذلك، ستجيب على سلسلة من الأسئلة حول سلوك طفلك.",
+    ),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "caseDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم حذف الحالة بنجاح",
     ),
     "caseDetails_title": MessageLookupByLibrary.simpleMessage("تفاصيل الحالة"),
+    "caseUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم تعديل الحالة بنجاح",
+    ),
+    "case_not_found": MessageLookupByLibrary.simpleMessage("الحالة غير موجودة"),
     "case_review_info": MessageLookupByLibrary.simpleMessage(
-      "القضية متاعك باش يشوفها طبيب ويعطيك تشخيص.",
+      "حالتك باش يراجعها طبيب ويعطيك تشخيص.",
+    ),
+    "case_submitted": MessageLookupByLibrary.simpleMessage(
+      "تم إرسال الحالة بنجاح!",
+    ),
+    "casesSortedBySeverity": MessageLookupByLibrary.simpleMessage(
+      "الحالات مرتبة حسب الخطورة",
     ),
     "child_age": MessageLookupByLibrary.simpleMessage("العمر"),
-    "child_age_years": m1,
+    "child_age_years": m4,
     "child_class": MessageLookupByLibrary.simpleMessage("القسم"),
     "child_gender": MessageLookupByLibrary.simpleMessage("الجنس"),
     "child_gender_female": MessageLookupByLibrary.simpleMessage("أنثى"),
     "child_gender_male": MessageLookupByLibrary.simpleMessage("ذكر"),
-    "child_info_title": MessageLookupByLibrary.simpleMessage(
-      "معلومات عن الطفل",
+    "child_info_description": MessageLookupByLibrary.simpleMessage(
+      "يرجى تقديم معلومات دقيقة لمساعدتنا على فهم طفلك بشكل أفضل.",
     ),
+    "child_info_header": MessageLookupByLibrary.simpleMessage("حدثنا عن طفلك"),
+    "child_info_title": MessageLookupByLibrary.simpleMessage("معلومات الطفل"),
     "child_name": MessageLookupByLibrary.simpleMessage("الاسم"),
+    "child_profile": MessageLookupByLibrary.simpleMessage("ملف الطفل"),
     "chooseAccountType": MessageLookupByLibrary.simpleMessage(
       "اختر نوع الحساب الذي تريد إنشاؤه",
     ),
     "chooseProfile": MessageLookupByLibrary.simpleMessage("اختار الملف الشخصي"),
-    "confirmDeleteCase": m2,
+    "confirmDeleteCase": m5,
     "confirmDeletion": MessageLookupByLibrary.simpleMessage("تأكيد الحذف"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("عاود كلمة السر"),
+    "continue_screening": MessageLookupByLibrary.simpleMessage("متابعة الفحص"),
     "createAccount": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "darkMode": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
+    "dashboard": MessageLookupByLibrary.simpleMessage("لوحة التحكم"),
     "dateOfBirth": MessageLookupByLibrary.simpleMessage("تاريخ الولادة"),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "diagnosis_advice": MessageLookupByLibrary.simpleMessage("نصيحة"),
+    "diagnosis_concluded": MessageLookupByLibrary.simpleMessage(
+      "إنهاء التشخيص",
+    ),
     "diagnosis_date": MessageLookupByLibrary.simpleMessage("التاريخ"),
     "diagnosis_doctor": MessageLookupByLibrary.simpleMessage("الطبيب"),
     "diagnosis_recommendation": MessageLookupByLibrary.simpleMessage("توصية"),
+    "diagnosis_submitted": MessageLookupByLibrary.simpleMessage(
+      "تم إرسال التشخيص بنجاح",
+    ),
     "diagnosis_summary": MessageLookupByLibrary.simpleMessage("ملخص"),
     "diagnosis_title": MessageLookupByLibrary.simpleMessage("التشخيص"),
     "disabled": MessageLookupByLibrary.simpleMessage("موش مفعّل"),
     "doctor": MessageLookupByLibrary.simpleMessage("دكتور"),
     "doctorRegistration": MessageLookupByLibrary.simpleMessage("تسجيل كدكتور"),
     "doctorSubtitle": MessageLookupByLibrary.simpleMessage("مهني صحي"),
+    "doctor_case_details": MessageLookupByLibrary.simpleMessage(
+      "تفاصيل الحالة",
+    ),
     "download_report": MessageLookupByLibrary.simpleMessage("تحميل التقرير"),
     "download_report_error": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ في التحميل",
     ),
     "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
+    "editCase": MessageLookupByLibrary.simpleMessage("تعديل الحالة"),
     "email": MessageLookupByLibrary.simpleMessage("الإيميل"),
     "enabled": MessageLookupByLibrary.simpleMessage("مفعّل"),
     "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
+    "enterAge": MessageLookupByLibrary.simpleMessage("أدخل العمر"),
     "enterEmail": MessageLookupByLibrary.simpleMessage("حط الإيميل متاعك"),
-    "error": m3,
-    "error_api_case": m4,
-    "error_api_report": m5,
+    "enterFirstName": MessageLookupByLibrary.simpleMessage("أدخل الاسم الأول"),
+    "enterLastName": MessageLookupByLibrary.simpleMessage("أدخل اللقب"),
+    "enterSchoolYear": MessageLookupByLibrary.simpleMessage(
+      "مثال: CP، CE1، الصف السادس",
+    ),
+    "error": m6,
+    "errorMessage": m7,
+    "error_api_case": m8,
+    "error_api_report": m9,
     "error_loading_case": MessageLookupByLibrary.simpleMessage(
       "صارت غلطة في التحميل",
     ),
+    "error_recording": m10,
+    "error_selection": m11,
     "father": MessageLookupByLibrary.simpleMessage("أب"),
     "female": MessageLookupByLibrary.simpleMessage("أنثى"),
     "firstName": MessageLookupByLibrary.simpleMessage("الاسم"),
+    "firstNameTooShort": MessageLookupByLibrary.simpleMessage(
+      "يجب أن يحتوي الاسم الأول على حرفين على الأقل",
+    ),
     "french": MessageLookupByLibrary.simpleMessage("الفرنسية"),
+    "gallery": MessageLookupByLibrary.simpleMessage("معرض"),
     "goToHomeScreen": MessageLookupByLibrary.simpleMessage("ابدأ"),
-    "greeting": m6,
+    "gravity": m12,
+    "greeting": m13,
+    "high": MessageLookupByLibrary.simpleMessage("عالية"),
+    "highPriority": MessageLookupByLibrary.simpleMessage("أولوية عالية"),
+    "instructions": MessageLookupByLibrary.simpleMessage("تعليمات"),
     "invalidEmail": MessageLookupByLibrary.simpleMessage("الإيميل غلط"),
+    "invalidNumber": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال رقم صحيح",
+    ),
+    "justNow": MessageLookupByLibrary.simpleMessage("الآن"),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "lastName": MessageLookupByLibrary.simpleMessage("اللقب"),
+    "lastNameTooShort": MessageLookupByLibrary.simpleMessage(
+      "يجب أن يحتوي اللقب على حرفين على الأقل",
+    ),
+    "level": MessageLookupByLibrary.simpleMessage("المستوى"),
     "loading": MessageLookupByLibrary.simpleMessage("جار التحميل..."),
     "login": MessageLookupByLibrary.simpleMessage("دخول"),
     "loginButton": MessageLookupByLibrary.simpleMessage("سجّل الدخول"),
@@ -232,17 +313,37 @@ class MessageLookup extends MessageLookupByLibrary {
     "loginWelcomeDescription": MessageLookupByLibrary.simpleMessage(
       "سجّل الدخول باش تكمل",
     ),
+    "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+    "low": MessageLookupByLibrary.simpleMessage("منخفضة"),
     "male": MessageLookupByLibrary.simpleMessage("ذكر"),
     "manageConsultations": MessageLookupByLibrary.simpleMessage(
       "إدارة الاستشارات متاعك",
     ),
+    "markAllAsRead": MessageLookupByLibrary.simpleMessage(
+      "وضع كل الإشعارات كمقروءة",
+    ),
     "medicalLicenseNumber": MessageLookupByLibrary.simpleMessage(
       "رقم الرخصة الطبية",
     ),
+    "medium": MessageLookupByLibrary.simpleMessage("متوسطة"),
     "mother": MessageLookupByLibrary.simpleMessage("أم"),
     "myPreviousCases": MessageLookupByLibrary.simpleMessage("الحالات السابقة"),
+    "newCasesWillAppearHere": MessageLookupByLibrary.simpleMessage(
+      "ستظهر الحالات الجديدة هنا",
+    ),
     "no": MessageLookupByLibrary.simpleMessage("لا"),
+    "noCasesAvailable": MessageLookupByLibrary.simpleMessage(
+      "لا توجد حالات متاحة",
+    ),
     "noCasesYet": MessageLookupByLibrary.simpleMessage("ما فماش حالات توّة"),
+    "noNotifications": MessageLookupByLibrary.simpleMessage("لا توجد إشعارات"),
+    "noUnreadNotifications": MessageLookupByLibrary.simpleMessage(
+      "لا توجد إشعارات غير مقروءة",
+    ),
+    "no_video_uploaded": MessageLookupByLibrary.simpleMessage(
+      "لم يتم تحميل أي فيديو",
+    ),
+    "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
     "other": MessageLookupByLibrary.simpleMessage("آخر"),
     "parent": MessageLookupByLibrary.simpleMessage("وليّ"),
     "parentRegistration": MessageLookupByLibrary.simpleMessage("تسجيل كولي"),
@@ -251,7 +352,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage(
       "كلمات السر ما تطابقوش",
     ),
+    "pending": MessageLookupByLibrary.simpleMessage("في الانتظار"),
     "personalize": MessageLookupByLibrary.simpleMessage("خصّص"),
+    "pleaseEnterAge": MessageLookupByLibrary.simpleMessage("يرجى إدخال العمر"),
+    "pleaseEnterFirstName": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال الاسم الأول",
+    ),
+    "pleaseEnterLastName": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال اللقب",
+    ),
+    "pleaseEnterSchoolYear": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال السنة الدراسية",
+    ),
     "pleaseSelectDateOfBirth": MessageLookupByLibrary.simpleMessage(
       "اختار تاريخ الولادة",
     ),
@@ -273,13 +385,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "question_6": MessageLookupByLibrary.simpleMessage(
       "هل التصرف موجود في أكثر من مكان (الدار والمدرسة)؟",
     ),
+    "question_number": m14,
+    "read_video": MessageLookupByLibrary.simpleMessage("تشغيل الفيديو"),
+    "recommendations": MessageLookupByLibrary.simpleMessage("توصيات"),
+    "record": MessageLookupByLibrary.simpleMessage("تسجيل"),
     "register": MessageLookupByLibrary.simpleMessage("عمل حساب"),
     "registrationFailed": MessageLookupByLibrary.simpleMessage("فشل التسجيل"),
     "relationWithChild": MessageLookupByLibrary.simpleMessage("العلاقة بالطفل"),
+    "request_test": MessageLookupByLibrary.simpleMessage("طلب اختبار"),
+    "request_test_button": MessageLookupByLibrary.simpleMessage("طلب اختبار"),
     "requiredField": MessageLookupByLibrary.simpleMessage(
       "الخانة هذي لازم تتعمر",
     ),
     "retry": MessageLookupByLibrary.simpleMessage("عاود"),
+    "scholarYear": MessageLookupByLibrary.simpleMessage("السنة الدراسية"),
     "screening_questionnaire_answers": MessageLookupByLibrary.simpleMessage(
       "إجابات الاستبيان:",
     ),
@@ -291,34 +410,61 @@ class MessageLookup extends MessageLookupByLibrary {
     "select_video_error": MessageLookupByLibrary.simpleMessage(
       "يرجى تحميل فيديو قبل الإرسال",
     ),
+    "send_test": MessageLookupByLibrary.simpleMessage(
+      " طلب التست تبعث بنجاح !",
+    ),
     "sending": MessageLookupByLibrary.simpleMessage("جار الإرسال..."),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "severity": MessageLookupByLibrary.simpleMessage("خطورة الحالة"),
     "sexe": MessageLookupByLibrary.simpleMessage("الجنس"),
+    "showUnreadOnly": MessageLookupByLibrary.simpleMessage("غير المقروءة فقط"),
     "startNewCase": MessageLookupByLibrary.simpleMessage("حالة جديدة"),
     "statusAdditionalTestRequired": MessageLookupByLibrary.simpleMessage(
-      "يلزم تحاليل إضافية",
+      "يتطلب اختبار إضافي",
     ),
-    "statusCompleted": MessageLookupByLibrary.simpleMessage("تكملت"),
+    "statusCompleted": MessageLookupByLibrary.simpleMessage("مكتمل"),
     "statusDiagnosisReady": MessageLookupByLibrary.simpleMessage(
       "التشخيص جاهز",
     ),
     "statusWaitingForDoctor": MessageLookupByLibrary.simpleMessage(
-      "تستنى في الدكتور",
+      "في انتظار الطبيب",
     ),
     "statusWaitingForReply": MessageLookupByLibrary.simpleMessage(
-      "تستنى في الرد",
+      "في انتظار الرد",
     ),
     "status_title": MessageLookupByLibrary.simpleMessage("حالة الحالة"),
+    "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
+    "submit_diagnosis": MessageLookupByLibrary.simpleMessage("إرسال التشخيص"),
     "submit_video": MessageLookupByLibrary.simpleMessage("أرسل للطبيب"),
+    "summary": MessageLookupByLibrary.simpleMessage("ملخص"),
+    "tdah_questionnaire": MessageLookupByLibrary.simpleMessage("استبيان ADHD"),
     "teacher": MessageLookupByLibrary.simpleMessage("أستاذ"),
-    "video_instructions": m7,
+    "test_type": MessageLookupByLibrary.simpleMessage("نوع الاختبار"),
+    "test_type_hint": MessageLookupByLibrary.simpleMessage(
+      "مثال: اختبار التركيز",
+    ),
+    "totalCases": MessageLookupByLibrary.simpleMessage("إجمالي الحالات"),
+    "unreadCount": m15,
+    "updateButton": MessageLookupByLibrary.simpleMessage("حفظ"),
+    "updateChildInfo": MessageLookupByLibrary.simpleMessage(
+      "تحديث معلومات الطفل",
+    ),
+    "updateChildInfoSubtitle": MessageLookupByLibrary.simpleMessage(
+      "قم بتحديث معلومات الطفل",
+    ),
+    "video": MessageLookupByLibrary.simpleMessage("الفيديو"),
+    "video_instructions": m16,
     "video_selected": MessageLookupByLibrary.simpleMessage(
       "تم اختيار الفيديو!",
     ),
-    "welcomeParent": m8,
+    "welcomeParent": m17,
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
       "باش نفهموك على ولادك خير",
     ),
+    "years": MessageLookupByLibrary.simpleMessage("سنة"),
     "yes": MessageLookupByLibrary.simpleMessage("إيه"),
+    "youAreUpToDate": MessageLookupByLibrary.simpleMessage(
+      "أنت على اطلاع كامل!",
+    ),
   };
 }

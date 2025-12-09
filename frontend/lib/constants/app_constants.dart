@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppConstants {
-  // static const String baseUrl = 'http://10.0.2.2:5000/api'; // Android emulator
-  static const String baseUrl = 'http://localhost:5000/api'; // iOS simulator
-  // static const String baseUrl = 'https://your-production-url.com/api'; // Production
+  // static const String baseUrl = 'http://localhost:5000/api';
+  static const String baseUrl = 'http://192.168.1.19:5000/api';
+  static const String serverUrl = 'http://192.168.1.19:5000';
 
   static const Color white = Colors.white;
   static const Color black = Colors.black;

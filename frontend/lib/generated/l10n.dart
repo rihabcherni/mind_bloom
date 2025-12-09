@@ -859,16 +859,6 @@ class S {
     );
   }
 
-  /// `Name`
-  String get child_name {
-    return Intl.message('Name', name: 'child_name', desc: '', args: []);
-  }
-
-  /// `Age`
-  String get child_age {
-    return Intl.message('Age', name: 'child_age', desc: '', args: []);
-  }
-
   /// `{age} years`
   String child_age_years(Object age) {
     return Intl.message(
@@ -1144,6 +1134,11 @@ class S {
     return Intl.message('No', name: 'no', desc: '', args: []);
   }
 
+  /// `Record`
+  String get record {
+    return Intl.message('Record', name: 'record', desc: '', args: []);
+  }
+
   /// `Does your child have trouble focusing on tasks?`
   String get question_1 {
     return Intl.message(
@@ -1201,6 +1196,51 @@ class S {
       name: 'question_6',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Gallery`
+  String get gallery {
+    return Intl.message('Gallery', name: 'gallery', desc: '', args: []);
+  }
+
+  /// `Case submitted successfully!`
+  String get case_submitted {
+    return Intl.message(
+      'Case submitted successfully!',
+      name: 'case_submitted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error during recording: {errorMessage}`
+  String error_recording(Object errorMessage) {
+    return Intl.message(
+      'Error during recording: $errorMessage',
+      name: 'error_recording',
+      desc: '',
+      args: [errorMessage],
+    );
+  }
+
+  /// `Error during selection: {errorMessage}`
+  String error_selection(Object errorMessage) {
+    return Intl.message(
+      'Error during selection: $errorMessage',
+      name: 'error_selection',
+      desc: '',
+      args: [errorMessage],
+    );
+  }
+
+  /// `Question {current}/{total}`
+  String question_number(Object current, Object total) {
+    return Intl.message(
+      'Question $current/$total',
+      name: 'question_number',
+      desc: '',
+      args: [current, total],
     );
   }
 
@@ -1354,6 +1394,611 @@ class S {
     return Intl.message(
       'Smart ADHD Assistant',
       name: 'adhdChatbotTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SEVERITY {level}`
+  String gravity(Object level) {
+    return Intl.message(
+      'SEVERITY $level',
+      name: 'gravity',
+      desc: '',
+      args: [level],
+    );
+  }
+
+  /// `Low`
+  String get low {
+    return Intl.message('Low', name: 'low', desc: '', args: []);
+  }
+
+  /// `Medium`
+  String get medium {
+    return Intl.message('Medium', name: 'medium', desc: '', args: []);
+  }
+
+  /// `High`
+  String get high {
+    return Intl.message('High', name: 'high', desc: '', args: []);
+  }
+
+  /// `Case Details`
+  String get doctor_case_details {
+    return Intl.message(
+      'Case Details',
+      name: 'doctor_case_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit Diagnosis`
+  String get submit_diagnosis {
+    return Intl.message(
+      'Submit Diagnosis',
+      name: 'submit_diagnosis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Summary`
+  String get summary {
+    return Intl.message('Summary', name: 'summary', desc: '', args: []);
+  }
+
+  /// `Advice`
+  String get advice {
+    return Intl.message('Advice', name: 'advice', desc: '', args: []);
+  }
+
+  /// `Recommendations`
+  String get recommendations {
+    return Intl.message(
+      'Recommendations',
+      name: 'recommendations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message('Submit', name: 'submit', desc: '', args: []);
+  }
+
+  /// `Request Test`
+  String get request_test {
+    return Intl.message(
+      'Request Test',
+      name: 'request_test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Test Type`
+  String get test_type {
+    return Intl.message('Test Type', name: 'test_type', desc: '', args: []);
+  }
+
+  /// `e.g.: Concentration Test`
+  String get test_type_hint {
+    return Intl.message(
+      'e.g.: Concentration Test',
+      name: 'test_type_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Instructions`
+  String get instructions {
+    return Intl.message(
+      'Instructions',
+      name: 'instructions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Play Video`
+  String get read_video {
+    return Intl.message('Play Video', name: 'read_video', desc: '', args: []);
+  }
+
+  /// `Video`
+  String get video {
+    return Intl.message('Video', name: 'video', desc: '', args: []);
+  }
+
+  /// `No video uploaded`
+  String get no_video_uploaded {
+    return Intl.message(
+      'No video uploaded',
+      name: 'no_video_uploaded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Additional Test Response`
+  String get additional_test_response {
+    return Intl.message(
+      'Additional Test Response',
+      name: 'additional_test_response',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Child Profile`
+  String get child_profile {
+    return Intl.message(
+      'Child Profile',
+      name: 'child_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get child_name {
+    return Intl.message('Name', name: 'child_name', desc: '', args: []);
+  }
+
+  /// `Age`
+  String get child_age {
+    return Intl.message('Age', name: 'child_age', desc: '', args: []);
+  }
+
+  /// `Level`
+  String get level {
+    return Intl.message('Level', name: 'level', desc: '', args: []);
+  }
+
+  /// `ADHD Questionnaire`
+  String get tdah_questionnaire {
+    return Intl.message(
+      'ADHD Questionnaire',
+      name: 'tdah_questionnaire',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Case Severity`
+  String get severity {
+    return Intl.message('Case Severity', name: 'severity', desc: '', args: []);
+  }
+
+  /// `Conclude Diagnosis`
+  String get diagnosis_concluded {
+    return Intl.message(
+      'Conclude Diagnosis',
+      name: 'diagnosis_concluded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request Test`
+  String get request_test_button {
+    return Intl.message(
+      'Request Test',
+      name: 'request_test_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Diagnosis Submitted Successfully`
+  String get diagnosis_submitted {
+    return Intl.message(
+      'Diagnosis Submitted Successfully',
+      name: 'diagnosis_submitted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Case Not Found`
+  String get case_not_found {
+    return Intl.message(
+      'Case Not Found',
+      name: 'case_not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Test request sent successfully!`
+  String get send_test {
+    return Intl.message(
+      'Test request sent successfully!',
+      name: 'send_test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dashboard`
+  String get dashboard {
+    return Intl.message('Dashboard', name: 'dashboard', desc: '', args: []);
+  }
+
+  /// `Total Cases`
+  String get totalCases {
+    return Intl.message('Total Cases', name: 'totalCases', desc: '', args: []);
+  }
+
+  /// `High Priority`
+  String get highPriority {
+    return Intl.message(
+      'High Priority',
+      name: 'highPriority',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get pending {
+    return Intl.message('Pending', name: 'pending', desc: '', args: []);
+  }
+
+  /// `Cases Sorted by Severity`
+  String get casesSortedBySeverity {
+    return Intl.message(
+      'Cases Sorted by Severity',
+      name: 'casesSortedBySeverity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Cases Available`
+  String get noCasesAvailable {
+    return Intl.message(
+      'No Cases Available',
+      name: 'noCasesAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Cases Will Appear Here`
+  String get newCasesWillAppearHere {
+    return Intl.message(
+      'New Cases Will Appear Here',
+      name: 'newCasesWillAppearHere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error: {error}`
+  String errorMessage(Object error) {
+    return Intl.message(
+      'Error: $error',
+      name: 'errorMessage',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message('Logout', name: 'logout', desc: '', args: []);
+  }
+
+  /// `Edit Case`
+  String get editCase {
+    return Intl.message('Edit Case', name: 'editCase', desc: '', args: []);
+  }
+
+  /// `Update Child Information`
+  String get updateChildInfo {
+    return Intl.message(
+      'Update Child Information',
+      name: 'updateChildInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update the child's information`
+  String get updateChildInfoSubtitle {
+    return Intl.message(
+      'Update the child\'s information',
+      name: 'updateChildInfoSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the first name`
+  String get enterFirstName {
+    return Intl.message(
+      'Enter the first name',
+      name: 'enterFirstName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the first name`
+  String get pleaseEnterFirstName {
+    return Intl.message(
+      'Please enter the first name',
+      name: 'pleaseEnterFirstName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First name must be at least 2 characters`
+  String get firstNameTooShort {
+    return Intl.message(
+      'First name must be at least 2 characters',
+      name: 'firstNameTooShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the last name`
+  String get enterLastName {
+    return Intl.message(
+      'Enter the last name',
+      name: 'enterLastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the last name`
+  String get pleaseEnterLastName {
+    return Intl.message(
+      'Please enter the last name',
+      name: 'pleaseEnterLastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last name must be at least 2 characters`
+  String get lastNameTooShort {
+    return Intl.message(
+      'Last name must be at least 2 characters',
+      name: 'lastNameTooShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the age`
+  String get enterAge {
+    return Intl.message('Enter the age', name: 'enterAge', desc: '', args: []);
+  }
+
+  /// `years`
+  String get years {
+    return Intl.message('years', name: 'years', desc: '', args: []);
+  }
+
+  /// `Please enter the age`
+  String get pleaseEnterAge {
+    return Intl.message(
+      'Please enter the age',
+      name: 'pleaseEnterAge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid number`
+  String get invalidNumber {
+    return Intl.message(
+      'Please enter a valid number',
+      name: 'invalidNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age must be between 3 and 18`
+  String get ageRange {
+    return Intl.message(
+      'Age must be between 3 and 18',
+      name: 'ageRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `School Year`
+  String get scholarYear {
+    return Intl.message('School Year', name: 'scholarYear', desc: '', args: []);
+  }
+
+  /// `e.g., CP, CE1, 6th grade`
+  String get enterSchoolYear {
+    return Intl.message(
+      'e.g., CP, CE1, 6th grade',
+      name: 'enterSchoolYear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the school year`
+  String get pleaseEnterSchoolYear {
+    return Intl.message(
+      'Please enter the school year',
+      name: 'pleaseEnterSchoolYear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get updateButton {
+    return Intl.message('Save', name: 'updateButton', desc: '', args: []);
+  }
+
+  /// `Case updated successfully`
+  String get caseUpdatedSuccessfully {
+    return Intl.message(
+      'Case updated successfully',
+      name: 'caseUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count} unread`
+  String unreadCount(Object count) {
+    return Intl.message(
+      '$count unread',
+      name: 'unreadCount',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Unread only`
+  String get showUnreadOnly {
+    return Intl.message(
+      'Unread only',
+      name: 'showUnreadOnly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mark all as read`
+  String get markAllAsRead {
+    return Intl.message(
+      'Mark all as read',
+      name: 'markAllAsRead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No notifications`
+  String get noNotifications {
+    return Intl.message(
+      'No notifications',
+      name: 'noNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No unread notifications`
+  String get noUnreadNotifications {
+    return Intl.message(
+      'No unread notifications',
+      name: 'noUnreadNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are up to date!`
+  String get youAreUpToDate {
+    return Intl.message(
+      'You are up to date!',
+      name: 'youAreUpToDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count}d ago`
+  String agoDays(Object count) {
+    return Intl.message(
+      '${count}d ago',
+      name: 'agoDays',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count}h ago`
+  String agoHours(Object count) {
+    return Intl.message(
+      '${count}h ago',
+      name: 'agoHours',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count}min ago`
+  String agoMinutes(Object count) {
+    return Intl.message(
+      '${count}min ago',
+      name: 'agoMinutes',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Just now`
+  String get justNow {
+    return Intl.message('Just now', name: 'justNow', desc: '', args: []);
+  }
+
+  /// `Tell us about your child`
+  String get child_info_header {
+    return Intl.message(
+      'Tell us about your child',
+      name: 'child_info_header',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please provide accurate information to help us better understand your child.`
+  String get child_info_description {
+    return Intl.message(
+      'Please provide accurate information to help us better understand your child.',
+      name: 'child_info_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next, you will answer a series of questions about your child's behavior.`
+  String get behavior_info {
+    return Intl.message(
+      'Next, you will answer a series of questions about your child\'s behavior.',
+      name: 'behavior_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue Screening`
+  String get continue_screening {
+    return Intl.message(
+      'Continue Screening',
+      name: 'continue_screening',
       desc: '',
       args: [],
     );

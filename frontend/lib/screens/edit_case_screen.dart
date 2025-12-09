@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/settings_screen.dart';
+import 'package:frontend/generated/l10n.dart';
 import 'package:frontend/widgets/background_circles.dart';
+import 'package:frontend/widgets/header.dart';
 import '../constants/app_constants.dart';
 import '../models/case_model.dart';
 import '../services/api_service.dart';
@@ -93,7 +94,7 @@ class _EditCaseScreenState extends State<EditCaseScreen>
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Text('Cas modifié avec succès'),
+              content: Text(S.of(context).caseUpdatedSuccessfully),
               backgroundColor: AppConstants.green,
               behavior: SnackBarBehavior.floating,
               shape: RoundedRectangleBorder(
@@ -108,7 +109,7 @@ class _EditCaseScreenState extends State<EditCaseScreen>
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Erreur: ${e.toString()}'),
+              content: Text(S.of(context).error(e.toString())),
               backgroundColor: Colors.red,
               behavior: SnackBarBehavior.floating,
               shape: RoundedRectangleBorder(
@@ -124,7 +125,6 @@ class _EditCaseScreenState extends State<EditCaseScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -132,78 +132,7 @@ class _EditCaseScreenState extends State<EditCaseScreen>
           SafeArea(
             child: Column(
               children: [
-                // Header
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: isDark
-                                ? Colors.white
-                                : AppConstants.darkViolet,
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Text(
-                          'Modifier le Cas',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: isDark
-                                ? AppConstants.white
-                                : AppConstants.darkViolet,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.settings_rounded,
-                            color: isDark
-                                ? Colors.white
-                                : AppConstants.darkViolet,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const SettingsScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Content
+                HeaderWidget(title: S.of(context).editCase),
                 Expanded(
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.all(24),
@@ -216,155 +145,94 @@ class _EditCaseScreenState extends State<EditCaseScreen>
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Icon Header
-                              Center(
-                                child: Container(
-                                  padding: const EdgeInsets.all(24),
-                                  decoration: BoxDecoration(
-                                    gradient: const LinearGradient(
-                                      colors: [
-                                        AppConstants.primaryViolet,
-                                        AppConstants.lightViolet,
-                                      ],
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                    ),
-                                    borderRadius: BorderRadius.circular(28),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppConstants.primaryViolet
-                                            .withOpacity(0.4),
-                                        blurRadius: 25,
-                                        offset: const Offset(0, 12),
-                                      ),
-                                    ],
-                                  ),
-                                  child: const Icon(
-                                    Icons.edit_rounded,
-                                    size: 50,
-                                    color: AppConstants.white,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 24),
-
-                              // Title
                               Text(
-                                'Modifier les informations',
+                                S.of(context).updateChildInfo,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: isDark
                                       ? AppConstants.white
-                                      : AppConstants.darkViolet,
+                                      : AppConstants.primaryViolet,
                                   letterSpacing: -0.5,
                                 ),
                               ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Mettez à jour les informations de l\'enfant',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: isDark
-                                      ? Colors.white60
-                                      : Colors.grey[600],
-                                  height: 1.5,
-                                ),
-                              ),
-                              const SizedBox(height: 32),
-
-                              // First Name
+                              const SizedBox(height: 10),
                               _buildModernTextField(
                                 controller: _firstNameController,
-                                label: 'Prénom',
-                                hint: 'Entrez le prénom',
+                                label: S.of(context).firstName,
+                                hint: S.of(context).enterFirstName,
                                 icon: Icons.person_rounded,
                                 isDark: isDark,
                                 textCapitalization: TextCapitalization.words,
                                 validator: (value) {
                                   if (value == null || value.trim().isEmpty) {
-                                    return 'Veuillez entrer le prénom';
+                                    return S.of(context).pleaseEnterFirstName;
                                   }
                                   if (value.trim().length < 2) {
-                                    return 'Le nom doit contenir au moins 2 caractères';
+                                    return S.of(context).firstNameTooShort;
                                   }
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 16),
-
-                              // Last Name
                               _buildModernTextField(
                                 controller: _lastNameController,
-                                label: 'Nom',
-                                hint: 'Entrez le nom',
+                                label: S.of(context).lastName,
+                                hint: S.of(context).enterLastName,
                                 icon: Icons.person_outline_rounded,
                                 isDark: isDark,
                                 textCapitalization: TextCapitalization.words,
                                 validator: (value) {
                                   if (value == null || value.trim().isEmpty) {
-                                    return 'Veuillez entrer le nom';
+                                    return S.of(context).pleaseEnterLastName;
                                   }
                                   if (value.trim().length < 2) {
-                                    return 'Le nom doit contenir au moins 2 caractères';
+                                    return S.of(context).lastNameTooShort;
                                   }
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 16),
-
-                              // Sex Dropdown
                               _buildModernDropdown(isDark),
-                              const SizedBox(height: 16),
-
-                              // Age
                               _buildModernTextField(
                                 controller: _ageController,
-                                label: 'Âge',
-                                hint: 'Entrez l\'âge',
+                                label: S.of(context).age(''),
+                                hint: S.of(context).enterAge,
                                 icon: Icons.cake_rounded,
                                 isDark: isDark,
                                 keyboardType: TextInputType.number,
-                                suffixText: 'ans',
+                                suffixText: S.of(context).years,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Veuillez entrer l\'âge';
+                                    return S.of(context).pleaseEnterAge;
                                   }
                                   final age = int.tryParse(value);
                                   if (age == null) {
-                                    return 'Veuillez entrer un nombre valide';
+                                    return S.of(context).invalidNumber;
                                   }
                                   if (age < 3 || age > 18) {
-                                    return 'L\'âge doit être entre 3 et 18 ans';
+                                    return S.of(context).ageRange;
                                   }
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 16),
-
-                              // Scholar Year
                               _buildModernTextField(
                                 controller: _scholarYearController,
-                                label: 'Année Scolaire',
-                                hint: 'ex: CP, CE1, 6ème',
+                                label: S.of(context).scholarYear,
+                                hint: S.of(context).enterSchoolYear,
                                 icon: Icons.school_rounded,
                                 isDark: isDark,
                                 textCapitalization: TextCapitalization.words,
                                 validator: (value) {
                                   if (value == null || value.trim().isEmpty) {
-                                    return 'Veuillez entrer l\'année scolaire';
+                                    return S.of(context).pleaseEnterSchoolYear;
                                   }
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 32),
-
-                              // Update Button
+                              const SizedBox(height: 10),
                               SizedBox(
                                 width: double.infinity,
-                                height: 56,
+                                height: 40,
                                 child: ElevatedButton(
                                   onPressed: _isLoading ? null : _handleUpdate,
                                   style: ElevatedButton.styleFrom(
@@ -415,13 +283,13 @@ class _EditCaseScreenState extends State<EditCaseScreen>
                                                 const Icon(
                                                   Icons.save_rounded,
                                                   color: AppConstants.white,
-                                                  size: 24,
+                                                  size: 20,
                                                 ),
                                                 const SizedBox(width: 12),
-                                                const Text(
-                                                  'Enregistrer',
+                                                Text(
+                                                  S.of(context).updateButton,
                                                   style: TextStyle(
-                                                    fontSize: 17,
+                                                    fontSize: 15,
                                                     fontWeight: FontWeight.bold,
                                                     color: AppConstants.white,
                                                     letterSpacing: 0.5,
@@ -568,7 +436,7 @@ class _EditCaseScreenState extends State<EditCaseScreen>
         Padding(
           padding: const EdgeInsets.only(left: 4, bottom: 8),
           child: Text(
-            'Sexe',
+            S.of(context).sexe,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -643,9 +511,15 @@ class _EditCaseScreenState extends State<EditCaseScreen>
                 vertical: 16,
               ),
             ),
-            items: const [
-              DropdownMenuItem(value: 'male', child: Text('Garçon')),
-              DropdownMenuItem(value: 'female', child: Text('Fille')),
+            items: [
+              DropdownMenuItem(
+                value: 'male',
+                child: Text(S.of(context).child_gender_male),
+              ),
+              DropdownMenuItem(
+                value: 'female',
+                child: Text(S.of(context).child_gender_female),
+              ),
             ],
             onChanged: (value) {
               setState(() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/generated/l10n.dart';
 import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/widgets/background_circles.dart';
 import 'package:frontend/widgets/chatbot_fab.dart';
@@ -53,7 +54,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
     } catch (e) {
       setState(() => _isLoading = false);
       if (mounted) {
-        _showSnackBar('Erreur: ${e.toString()}', isError: true);
+        _showSnackBar(S.of(context).error(e.toString()), isError: true);
       }
     }
   }
@@ -170,8 +171,8 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  'Tableau de bord',
+                                Text(
+                                  S.of(context).dashboard,
                                   style: TextStyle(
                                     color: AppConstants.white,
                                     fontSize: 24,
@@ -234,7 +235,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                         children: [
                           Expanded(
                             child: _buildStatCard(
-                              'Cas totaux',
+                              S.of(context).totalCases,
                               _cases.length.toString(),
                               Icons.folder_rounded,
                               AppConstants.white,
@@ -243,7 +244,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                           const SizedBox(width: 12),
                           Expanded(
                             child: _buildStatCard(
-                              'Haute priorité',
+                              S.of(context).highPriority,
                               highPriority.toString(),
                               Icons.priority_high_rounded,
                               AppConstants.white,
@@ -252,7 +253,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                           const SizedBox(width: 12),
                           Expanded(
                             child: _buildStatCard(
-                              'En attente',
+                              S.of(context).pending,
                               pending.toString(),
                               Icons.pending_rounded,
                               AppConstants.white,
@@ -281,7 +282,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        'Cas triés par gravité',
+                        S.of(context).casesSortedBySeverity,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -387,7 +388,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
           ),
           const SizedBox(height: 24),
           Text(
-            'Aucun cas disponible',
+            S.of(context).noCasesAvailable,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -396,7 +397,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
           ),
           const SizedBox(height: 8),
           Text(
-            'Les nouveaux cas apparaîtront ici',
+            S.of(context).newCasesWillAppearHere,
             style: TextStyle(
               fontSize: 15,
               color: isDark ? Colors.white60 : Colors.grey[600],
@@ -498,7 +499,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen>
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              '${caseItem.childAge} ans',
+                              S.of(context).child_age_years(caseItem.childAge),
                               style: TextStyle(
                                 fontSize: 13,
                                 color: isDark

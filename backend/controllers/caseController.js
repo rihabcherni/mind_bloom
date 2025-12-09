@@ -53,8 +53,6 @@ const uploadVideo = async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ message: 'Aucune vidéo uploadée' });
     }
-
-    // Supprimer l'ancienne vidéo si elle existe
     if (caseItem.videoUrl) {
       const oldVideoPath = path.join(__dirname, '..', caseItem.videoUrl);
       if (fs.existsSync(oldVideoPath)) {
@@ -66,13 +64,31 @@ const uploadVideo = async (req, res) => {
     caseItem.videoUploadDate = Date.now();
     await caseItem.save();
 
-    res.json({
-      message: 'Vidéo uploadée avec succès',
+    const responseCase = {
+      _id: caseItem._id,
+      id: caseItem._id.toString(), // Add this for Flutter
+      childFirstName: caseItem.childFirstName,
+      childLastName: caseItem.childLastName,
+      childSex: caseItem.childSex,
+      childAge: caseItem.childAge,
+      scholarYear: caseItem.scholarYear,
+      parentId: caseItem.parentId,
+      screeningAnswers: caseItem.screeningAnswers,
+      gravityScore: caseItem.gravityScore,
+      status: caseItem.status,
       videoUrl: caseItem.videoUrl,
-      case: caseItem
-    });
+      videoUploadDate: caseItem.videoUploadDate,
+      createdAt: caseItem.createdAt,
+      updatedAt: caseItem.updatedAt
+    };
+    res.json(responseCase);
+    // res.json({
+    //   message: 'Vidéo uploadée avec succès',
+    //   videoUrl: caseItem.videoUrl,
+    //   case: caseItem
+    // });
   } catch (error) {
-    // Supprimer le fichier en cas d'erreur
+    console.error('Upload video error:', error);
     if (req.file) {
       const filePath = path.join(__dirname, '../uploads/videos', req.file.filename);
       if (fs.existsSync(filePath)) {

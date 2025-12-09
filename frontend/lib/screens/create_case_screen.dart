@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/settings_screen.dart';
+import 'package:frontend/generated/l10n.dart';
 import 'package:frontend/widgets/background_circles.dart';
 import 'package:frontend/widgets/chatbot_fab.dart';
+import 'package:frontend/widgets/header.dart';
 import '../constants/app_constants.dart';
 
 class CreateCaseScreen extends StatefulWidget {
@@ -77,88 +78,16 @@ class _CreateCaseScreenState extends State<CreateCaseScreen>
 
     return Scaffold(
       floatingActionButton: const ChatbotFAB(),
-
       body: Stack(
         children: [
           const BackgroundCircles(),
           SafeArea(
             child: Column(
               children: [
-                // Header
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: isDark
-                                ? Colors.white
-                                : AppConstants.darkViolet,
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Text(
-                          'Informations de l\'Enfant',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: isDark
-                                ? AppConstants.white
-                                : AppConstants.darkViolet,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.settings_rounded,
-                            color: isDark
-                                ? Colors.white
-                                : AppConstants.darkViolet,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const SettingsScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Content
+                HeaderWidget(title: S.of(context).child_info_title),
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(20),
                     child: FadeTransition(
                       opacity: _fadeAnimation,
                       child: SlideTransition(
@@ -168,152 +97,104 @@ class _CreateCaseScreenState extends State<CreateCaseScreen>
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Icon Header
-                              Center(
-                                child: Container(
-                                  padding: const EdgeInsets.all(24),
-                                  decoration: BoxDecoration(
-                                    gradient: const LinearGradient(
-                                      colors: [
-                                        AppConstants.primaryViolet,
-                                        AppConstants.lightViolet,
-                                      ],
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                    ),
-                                    borderRadius: BorderRadius.circular(28),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppConstants.primaryViolet
-                                            .withOpacity(0.4),
-                                        blurRadius: 25,
-                                        offset: const Offset(0, 12),
-                                      ),
-                                    ],
-                                  ),
-                                  child: const Icon(
-                                    Icons.child_care_rounded,
-                                    size: 50,
-                                    color: AppConstants.white,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 24),
                               Text(
-                                'Parlez-nous de votre enfant',
+                                S.of(context).child_info_header,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: isDark
                                       ? AppConstants.white
-                                      : AppConstants.darkViolet,
+                                      : AppConstants.primaryViolet,
                                   letterSpacing: -0.5,
                                 ),
                               ),
-                              const SizedBox(height: 8),
                               Text(
-                                'Veuillez fournir des informations précises pour nous aider à mieux comprendre votre enfant.',
+                                S.of(context).child_info_description,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 11,
                                   color: isDark
                                       ? Colors.white60
                                       : Colors.grey[600],
                                   height: 1.5,
                                 ),
                               ),
-                              const SizedBox(height: 32),
-
-                              // First Name
+                              const SizedBox(height: 5),
                               _buildModernTextField(
                                 controller: _firstNameController,
-                                label: 'Prénom',
-                                hint: 'Entrez le prénom',
+                                label: S.of(context).firstName,
+                                hint: S.of(context).enterFirstName,
                                 icon: Icons.person_rounded,
                                 isDark: isDark,
                                 textCapitalization: TextCapitalization.words,
                                 validator: (value) {
                                   if (value == null || value.trim().isEmpty) {
-                                    return 'Veuillez entrer le prénom';
+                                    return S.of(context).pleaseEnterFirstName;
                                   }
                                   if (value.trim().length < 2) {
-                                    return 'Le nom doit contenir au moins 2 caractères';
+                                    return S.of(context).firstNameTooShort;
                                   }
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 16),
-
-                              // Last Name
                               _buildModernTextField(
                                 controller: _lastNameController,
-                                label: 'Nom',
-                                hint: 'Entrez le nom',
+                                label: S.of(context).lastName,
+                                hint: S.of(context).enterLastName,
                                 icon: Icons.person_outline_rounded,
                                 isDark: isDark,
                                 textCapitalization: TextCapitalization.words,
                                 validator: (value) {
                                   if (value == null || value.trim().isEmpty) {
-                                    return 'Veuillez entrer le nom';
+                                    return S.of(context).pleaseEnterLastName;
                                   }
                                   if (value.trim().length < 2) {
-                                    return 'Le nom doit contenir au moins 2 caractères';
+                                    return S.of(context).lastNameTooShort;
                                   }
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 16),
-
-                              // Sex Dropdown
                               _buildModernDropdown(isDark),
-                              const SizedBox(height: 16),
-
-                              // Age
                               _buildModernTextField(
                                 controller: _ageController,
-                                label: 'Âge',
-                                hint: 'Entrez l\'âge',
+                                label: S.of(context).age(''),
+                                hint: S.of(context).enterAge,
                                 icon: Icons.cake_rounded,
                                 isDark: isDark,
                                 keyboardType: TextInputType.number,
-                                suffixText: 'ans',
+                                suffixText: S.of(context).years,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Veuillez entrer l\'âge';
+                                    return S.of(context).pleaseEnterAge;
                                   }
                                   final age = int.tryParse(value);
                                   if (age == null) {
-                                    return 'Veuillez entrer un nombre valide';
+                                    return S.of(context).invalidNumber;
                                   }
                                   if (age < 3 || age > 18) {
-                                    return 'L\'âge doit être entre 3 et 18 ans';
+                                    return S.of(context).ageRange;
                                   }
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 16),
-
-                              // Scholar Year
                               _buildModernTextField(
                                 controller: _scholarYearController,
-                                label: 'Année Scolaire',
-                                hint: 'ex: CP, CE1, 6ème',
+                                label: S.of(context).scholarYear,
+                                hint: S.of(context).enterSchoolYear,
                                 icon: Icons.school_rounded,
                                 isDark: isDark,
                                 textCapitalization: TextCapitalization.words,
                                 validator: (value) {
                                   if (value == null || value.trim().isEmpty) {
-                                    return 'Veuillez entrer l\'année scolaire';
+                                    return S.of(context).pleaseEnterSchoolYear;
                                   }
                                   return null;
                                 },
                               ),
-                              const SizedBox(height: 32),
-
-                              // Info Box
+                              const SizedBox(height: 5),
                               Container(
-                                padding: const EdgeInsets.all(16),
+                                padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
@@ -348,7 +229,7 @@ class _CreateCaseScreenState extends State<CreateCaseScreen>
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: Text(
-                                        'Ensuite, vous répondrez à une série de questions sur le comportement de votre enfant.',
+                                        S.of(context).behavior_info,
                                         style: TextStyle(
                                           fontSize: 13,
                                           height: 1.4,
@@ -361,12 +242,10 @@ class _CreateCaseScreenState extends State<CreateCaseScreen>
                                   ],
                                 ),
                               ),
-                              const SizedBox(height: 32),
-
-                              // Continue Button
+                              const SizedBox(height: 10),
                               SizedBox(
                                 width: double.infinity,
-                                height: 56,
+                                height: 40,
                                 child: ElevatedButton(
                                   onPressed: _handleContinue,
                                   style: ElevatedButton.styleFrom(
@@ -403,10 +282,10 @@ class _CreateCaseScreenState extends State<CreateCaseScreen>
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          const Text(
-                                            'Continuer le Dépistage',
+                                          Text(
+                                            S.of(context).continue_screening,
                                             style: TextStyle(
-                                              fontSize: 17,
+                                              fontSize: 12,
                                               fontWeight: FontWeight.bold,
                                               color: AppConstants.white,
                                               letterSpacing: 0.5,
@@ -454,11 +333,11 @@ class _CreateCaseScreenState extends State<CreateCaseScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 4, bottom: 8),
+          padding: const EdgeInsets.only(left: 8, bottom: 2),
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.w600,
               color: isDark ? Colors.white : AppConstants.darkViolet,
             ),
@@ -559,9 +438,9 @@ class _CreateCaseScreenState extends State<CreateCaseScreen>
         Padding(
           padding: const EdgeInsets.only(left: 4, bottom: 8),
           child: Text(
-            'Sexe',
+            S.of(context).sexe,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.w600,
               color: isDark ? Colors.white : AppConstants.darkViolet,
             ),
@@ -634,9 +513,15 @@ class _CreateCaseScreenState extends State<CreateCaseScreen>
                 vertical: 16,
               ),
             ),
-            items: const [
-              DropdownMenuItem(value: 'male', child: Text('Garçon')),
-              DropdownMenuItem(value: 'female', child: Text('Fille')),
+            items: [
+              DropdownMenuItem(
+                value: 'male',
+                child: Text(S.of(context).child_gender_male),
+              ),
+              DropdownMenuItem(
+                value: 'female',
+                child: Text(S.of(context).child_gender_female),
+              ),
             ],
             onChanged: (value) {
               setState(() {

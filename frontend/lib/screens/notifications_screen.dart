@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/generated/l10n.dart';
 import 'package:frontend/screens/settings_screen.dart';
 import 'package:frontend/widgets/background_circles.dart';
 import 'package:frontend/widgets/chatbot_fab.dart';
+import 'package:frontend/widgets/header.dart';
 import '../constants/app_constants.dart';
 import '../models/notification_model.dart';
 import '../services/api_service.dart';
@@ -52,7 +54,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>
     } catch (e) {
       setState(() => _isLoading = false);
       if (mounted) {
-        _showSnackBar('Erreur: ${e.toString()}', isError: true);
+        _showSnackBar(S.of(context).error(e.toString()), isError: true);
       }
     }
   }
@@ -63,7 +65,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>
       _loadNotifications();
     } catch (e) {
       if (mounted) {
-        _showSnackBar('Erreur: ${e.toString()}', isError: true);
+        _showSnackBar(S.of(context).error(e.toString()), isError: true);
       }
     }
   }
@@ -72,10 +74,10 @@ class _NotificationsScreenState extends State<NotificationsScreen>
     try {
       await ApiService.markAllNotificationsAsRead();
       _loadNotifications();
-      _showSnackBar('Toutes les notifications sont marquées comme lues');
+      _showSnackBar(S.of(context).markAllAsRead);
     } catch (e) {
       if (mounted) {
-        _showSnackBar('Erreur: ${e.toString()}', isError: true);
+        _showSnackBar(S.of(context).error(e.toString()), isError: true);
       }
     }
   }
@@ -133,94 +135,32 @@ class _NotificationsScreenState extends State<NotificationsScreen>
           SafeArea(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: isDark
-                                ? Colors.white
-                                : AppConstants.darkViolet,
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                HeaderWidget(title: S.of(context).notifications),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (unreadCount > 0)
                             Text(
-                              'Notifications',
+                              S.of(context).unreadCount(unreadCount),
                               style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
                                 color: isDark
-                                    ? Colors.white
-                                    : AppConstants.darkViolet,
+                                    ? Colors.white60
+                                    : Colors.grey[600],
                               ),
                             ),
-                            if (unreadCount > 0)
-                              Text(
-                                '$unreadCount non lue${unreadCount > 1 ? 's' : ''}',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  color: isDark
-                                      ? Colors.white60
-                                      : Colors.grey[600],
-                                ),
-                              ),
-                          ],
-                        ),
+                        ],
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.settings_rounded,
-                            color: isDark
-                                ? Colors.white
-                                : AppConstants.darkViolet,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const SettingsScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Container(
-                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
@@ -250,7 +190,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            'Non lues uniquement',
+                            S.of(context).showUnreadOnly,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
@@ -286,7 +226,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>
                       child: TextButton.icon(
                         onPressed: _markAllAsRead,
                         icon: const Icon(Icons.done_all_rounded, size: 18),
-                        label: const Text('Tout marquer comme lu'),
+                        label: Text(S.of(context).markAllAsRead),
                         style: TextButton.styleFrom(
                           foregroundColor: AppConstants.primaryViolet,
                           padding: const EdgeInsets.symmetric(vertical: 12),
@@ -352,8 +292,8 @@ class _NotificationsScreenState extends State<NotificationsScreen>
           const SizedBox(height: 24),
           Text(
             _showUnreadOnly
-                ? 'Aucune notification non lue'
-                : 'Aucune notification',
+                ? S.of(context).noUnreadNotifications
+                : S.of(context).noNotifications,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -362,7 +302,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>
           ),
           const SizedBox(height: 8),
           Text(
-            'Vous êtes à jour !',
+            S.of(context).youAreUpToDate,
             style: TextStyle(
               fontSize: 15,
               color: isDark ? Colors.white60 : Colors.grey[600],
@@ -543,13 +483,13 @@ class _NotificationsScreenState extends State<NotificationsScreen>
     if (difference.inDays > 7) {
       return '${date.day}/${date.month}/${date.year}';
     } else if (difference.inDays > 0) {
-      return 'Il y a ${difference.inDays}j';
+      return S.of(context).agoDays(difference.inDays);
     } else if (difference.inHours > 0) {
-      return 'Il y a ${difference.inHours}h';
+      return S.of(context).agoHours(difference.inHours);
     } else if (difference.inMinutes > 0) {
-      return 'Il y a ${difference.inMinutes}min';
+      return S.of(context).agoMinutes(difference.inMinutes);
     } else {
-      return 'À l\'instant';
+      return S.of(context).justNow;
     }
   }
 }
