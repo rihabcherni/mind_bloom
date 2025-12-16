@@ -53,14 +53,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m13(childName) =>
       "Bonjour ! Je vais vous poser quelques questions sur le comportement de ${childName}. Répondez honnêtement pour nous aider à fournir la meilleure évaluation.";
 
-  static String m14(current, total) => "Question ${current}/${total}";
+  static String m14(count) => "${count} objets trouvés";
 
-  static String m15(count) => "${count} non lue{count > 1 ? \'s\' : \'\'}";
+  static String m15(current, total) => "Question ${current}/${total}";
 
-  static String m16(childName) =>
+  static String m16(count) => "${count} non lue{count > 1 ? \'s\' : \'\'}";
+
+  static String m17(childName) =>
       "Parfait ! Maintenant, veuillez télécharger une courte vidéo (max 5 minutes) de ${childName} faisant une activité comme les devoirs, jouer ou dessiner. Cela aidera le médecin à mieux comprendre le comportement.";
 
-  static String m17(name) => "Bienvenue, ${name}";
+  static String m18(name) => "Bienvenue, ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -179,11 +181,35 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("Mind Bloom"),
     "appearance": MessageLookupByLibrary.simpleMessage("Apparence"),
+    "apple": MessageLookupByLibrary.simpleMessage("pomme"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabe"),
+    "ball": MessageLookupByLibrary.simpleMessage("Ballon"),
     "behavior_info": MessageLookupByLibrary.simpleMessage(
       "Ensuite, vous répondrez à une série de questions sur le comportement de votre enfant.",
     ),
+    "benefitDetails": MessageLookupByLibrary.simpleMessage(
+      "Attention aux détails",
+    ),
+    "benefitFocus": MessageLookupByLibrary.simpleMessage("Focus"),
+    "benefitInhibitory": MessageLookupByLibrary.simpleMessage(
+      "Contrôle inhibiteur",
+    ),
+    "benefitPatience": MessageLookupByLibrary.simpleMessage("Patience"),
+    "benefitPersistence": MessageLookupByLibrary.simpleMessage("Persévérance"),
+    "benefitSelective": MessageLookupByLibrary.simpleMessage(
+      "Attention sélective",
+    ),
+    "benefitSustained": MessageLookupByLibrary.simpleMessage(
+      "Attention soutenue",
+    ),
+    "bike": MessageLookupByLibrary.simpleMessage("vélo"),
+    "bluePencil": MessageLookupByLibrary.simpleMessage("Crayon bleu"),
+    "book": MessageLookupByLibrary.simpleMessage("Livre"),
+    "bravo": MessageLookupByLibrary.simpleMessage("Bravo !"),
+    "cake": MessageLookupByLibrary.simpleMessage("gâteau"),
+    "camera": MessageLookupByLibrary.simpleMessage("caméra"),
     "cancel": MessageLookupByLibrary.simpleMessage("Annuler"),
+    "car": MessageLookupByLibrary.simpleMessage("voiture"),
     "caseDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Cas supprimé avec succès",
     ),
@@ -201,6 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "casesSortedBySeverity": MessageLookupByLibrary.simpleMessage(
       "Cas triés par gravité",
     ),
+    "cat": MessageLookupByLibrary.simpleMessage("chat"),
     "child_age": MessageLookupByLibrary.simpleMessage("Âge"),
     "child_age_years": m4,
     "child_class": MessageLookupByLibrary.simpleMessage("Classe"),
@@ -236,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "continue_screening": MessageLookupByLibrary.simpleMessage(
       "Continuer le Dépistage",
     ),
+    "correct": MessageLookupByLibrary.simpleMessage("Correct"),
     "createAccount": MessageLookupByLibrary.simpleMessage("Créer un compte"),
     "darkMode": MessageLookupByLibrary.simpleMessage("Mode sombre"),
     "dashboard": MessageLookupByLibrary.simpleMessage("Tableau de bord"),
@@ -255,6 +283,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "diagnosis_summary": MessageLookupByLibrary.simpleMessage("Résumé"),
     "diagnosis_title": MessageLookupByLibrary.simpleMessage("Diagnostic"),
+    "difficultyEasy": MessageLookupByLibrary.simpleMessage("Facile"),
+    "difficultyMedium": MessageLookupByLibrary.simpleMessage("Moyen"),
     "disabled": MessageLookupByLibrary.simpleMessage("Désactivé"),
     "doctor": MessageLookupByLibrary.simpleMessage("Médecin"),
     "doctorRegistration": MessageLookupByLibrary.simpleMessage(
@@ -266,12 +296,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "doctor_case_details": MessageLookupByLibrary.simpleMessage(
       "Détails du cas",
     ),
+    "dog": MessageLookupByLibrary.simpleMessage("chien"),
     "download_report": MessageLookupByLibrary.simpleMessage(
       "Télécharger le rapport",
     ),
     "download_report_error": MessageLookupByLibrary.simpleMessage(
       "Erreur lors du téléchargement du rapport",
     ),
+    "duration10min": MessageLookupByLibrary.simpleMessage("10 min"),
+    "duration30sec": MessageLookupByLibrary.simpleMessage("30 sec"),
+    "duration5min": MessageLookupByLibrary.simpleMessage("5 min"),
     "edit": MessageLookupByLibrary.simpleMessage("Modifier"),
     "editCase": MessageLookupByLibrary.simpleMessage("Modifier le Cas"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -295,22 +329,51 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "error_recording": m10,
     "error_selection": m11,
+    "errors": MessageLookupByLibrary.simpleMessage("Erreurs"),
     "father": MessageLookupByLibrary.simpleMessage("Père"),
     "female": MessageLookupByLibrary.simpleMessage("Femme"),
+    "find": MessageLookupByLibrary.simpleMessage("Trouve :"),
+    "findDifferentShape": MessageLookupByLibrary.simpleMessage(
+      "Trouvez la forme différente !",
+    ),
+    "findObject": MessageLookupByLibrary.simpleMessage("Trouve l\'Objet"),
+    "findObjectDesc": MessageLookupByLibrary.simpleMessage(
+      "Entraîne ta concentration",
+    ),
+    "findTheDifferent": MessageLookupByLibrary.simpleMessage(
+      "Trouvez l’intrus",
+    ),
+    "findTheDifferentDesc": MessageLookupByLibrary.simpleMessage(
+      "Améliorez votre concentration !",
+    ),
     "firstName": MessageLookupByLibrary.simpleMessage("Prénom"),
     "firstNameTooShort": MessageLookupByLibrary.simpleMessage(
       "Le prénom doit contenir au moins 2 caractères",
     ),
+    "flower": MessageLookupByLibrary.simpleMessage("fleur"),
     "french": MessageLookupByLibrary.simpleMessage("Français"),
     "gallery": MessageLookupByLibrary.simpleMessage("Galerie"),
+    "gameDescription": MessageLookupByLibrary.simpleMessage(
+      "Jeu de reconnaissance visuelle",
+    ),
+    "gameOver": MessageLookupByLibrary.simpleMessage("Fin du jeu !"),
+    "game_title": MessageLookupByLibrary.simpleMessage("Jeux d’Entraînement"),
+    "gamesTitle": MessageLookupByLibrary.simpleMessage("Jeux TDAH"),
+    "gift": MessageLookupByLibrary.simpleMessage("cadeau"),
     "goToHomeScreen": MessageLookupByLibrary.simpleMessage(
       "Aller à l\'accueil",
     ),
     "gravity": m12,
     "greeting": m13,
+    "hat": MessageLookupByLibrary.simpleMessage("Chapeau"),
+    "heart": MessageLookupByLibrary.simpleMessage("cœur"),
     "high": MessageLookupByLibrary.simpleMessage("Élevée"),
     "highPriority": MessageLookupByLibrary.simpleMessage("Haute priorité"),
-    "instructions": MessageLookupByLibrary.simpleMessage("Instructions"),
+    "home": MessageLookupByLibrary.simpleMessage("maison"),
+    "howToPlay": MessageLookupByLibrary.simpleMessage("Comment jouer ?"),
+    "instructions": MessageLookupByLibrary.simpleMessage(
+      "Appuyez si c’est un CŒUR ❤️, un CHIEN 🐕 ou BLEU 💙",
+    ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage("Email invalide"),
     "invalidNumber": MessageLookupByLibrary.simpleMessage(
       "Veuillez entrer un nombre valide",
@@ -321,6 +384,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "lastNameTooShort": MessageLookupByLibrary.simpleMessage(
       "Le nom doit contenir au moins 2 caractères",
     ),
+    "legoRed": MessageLookupByLibrary.simpleMessage("Lego rouge"),
     "level": MessageLookupByLibrary.simpleMessage("Niveau"),
     "loading": MessageLookupByLibrary.simpleMessage("Chargement..."),
     "login": MessageLookupByLibrary.simpleMessage("Se connecter"),
@@ -364,7 +428,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Numéro de licence médicale",
     ),
     "medium": MessageLookupByLibrary.simpleMessage("Moyenne"),
+    "menu": MessageLookupByLibrary.simpleMessage("Menu"),
+    "minute1": MessageLookupByLibrary.simpleMessage("1 min"),
+    "moon": MessageLookupByLibrary.simpleMessage("lune"),
     "mother": MessageLookupByLibrary.simpleMessage("Mère"),
+    "music": MessageLookupByLibrary.simpleMessage("musique"),
     "myPreviousCases": MessageLookupByLibrary.simpleMessage(
       "Mes consultations précédentes",
     ),
@@ -388,6 +456,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Aucune vidéo téléchargée",
     ),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+    "objectsFound": m14,
     "other": MessageLookupByLibrary.simpleMessage("Autre"),
     "parent": MessageLookupByLibrary.simpleMessage("Parent"),
     "parentRegistration": MessageLookupByLibrary.simpleMessage(
@@ -402,6 +471,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "pending": MessageLookupByLibrary.simpleMessage("En attente"),
     "personalize": MessageLookupByLibrary.simpleMessage("Personnalisez"),
+    "phone": MessageLookupByLibrary.simpleMessage("téléphone"),
+    "plane": MessageLookupByLibrary.simpleMessage("avion"),
+    "playButton": MessageLookupByLibrary.simpleMessage("Jouer"),
+    "playTime": MessageLookupByLibrary.simpleMessage("⏱️ Temps de jeu"),
     "pleaseEnterAge": MessageLookupByLibrary.simpleMessage(
       "Veuillez entrer l\'âge",
     ),
@@ -417,6 +490,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseSelectDateOfBirth": MessageLookupByLibrary.simpleMessage(
       "Veuillez sélectionner votre date de naissance",
     ),
+    "points": MessageLookupByLibrary.simpleMessage("+10 points"),
     "question_1": MessageLookupByLibrary.simpleMessage(
       "Votre enfant a-t-il du mal à se concentrer sur les tâches ?",
     ),
@@ -435,7 +509,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "question_6": MessageLookupByLibrary.simpleMessage(
       "Le comportement est-il présent dans plus d\'un environnement (maison et école) ?",
     ),
-    "question_number": m14,
+    "question_number": m15,
+    "quit": MessageLookupByLibrary.simpleMessage("Quitter"),
     "read_video": MessageLookupByLibrary.simpleMessage("Lire la vidéo"),
     "recommendations": MessageLookupByLibrary.simpleMessage("Recommandations"),
     "record": MessageLookupByLibrary.simpleMessage("Enregistrer"),
@@ -446,6 +521,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "relationWithChild": MessageLookupByLibrary.simpleMessage(
       "Relation avec l\'enfant",
     ),
+    "remoteControl": MessageLookupByLibrary.simpleMessage("Télécommande"),
+    "replay": MessageLookupByLibrary.simpleMessage("Rejouer"),
     "request_test": MessageLookupByLibrary.simpleMessage("Demander un test"),
     "request_test_button": MessageLookupByLibrary.simpleMessage(
       "Demander un test",
@@ -453,8 +530,31 @@ class MessageLookup extends MessageLookupByLibrary {
     "requiredField": MessageLookupByLibrary.simpleMessage(
       "Ce champ est requis",
     ),
+    "results": MessageLookupByLibrary.simpleMessage("Résultats"),
     "retry": MessageLookupByLibrary.simpleMessage("Réessayer"),
+    "rocket": MessageLookupByLibrary.simpleMessage("fusée"),
+    "round": MessageLookupByLibrary.simpleMessage("Manche"),
+    "ruleBlue": MessageLookupByLibrary.simpleMessage("C’est bleu"),
+    "ruleClickFast": MessageLookupByLibrary.simpleMessage(
+      "Cliquez dessus rapidement !",
+    ),
+    "ruleDifferenceTypes": MessageLookupByLibrary.simpleMessage(
+      "La différence peut être la forme, la couleur ou la taille !",
+    ),
+    "ruleDog": MessageLookupByLibrary.simpleMessage("C’est un chien"),
+    "ruleFindDifferent": MessageLookupByLibrary.simpleMessage(
+      "Trouvez celle qui est DIFFÉRENTE",
+    ),
+    "ruleHeart": MessageLookupByLibrary.simpleMessage("C’est un cœur"),
+    "ruleObserve": MessageLookupByLibrary.simpleMessage(
+      "Observez attentivement les 4 formes",
+    ),
+    "ruleTimeLimit": MessageLookupByLibrary.simpleMessage(
+      "Vous avez 5 secondes par manche",
+    ),
+    "rules": MessageLookupByLibrary.simpleMessage("📋 Règles"),
     "scholarYear": MessageLookupByLibrary.simpleMessage("Année Scolaire"),
+    "score": MessageLookupByLibrary.simpleMessage("Score"),
     "screening_questionnaire_answers": MessageLookupByLibrary.simpleMessage(
       "Réponses au Questionnaire:",
     ),
@@ -462,6 +562,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Résultats du Dépistage",
     ),
     "screening_title": MessageLookupByLibrary.simpleMessage("Dépistage TDAH"),
+    "seconds": MessageLookupByLibrary.simpleMessage("s"),
     "selectDate": MessageLookupByLibrary.simpleMessage("Sélectionner la date"),
     "select_video_error": MessageLookupByLibrary.simpleMessage(
       "Veuillez télécharger une vidéo avant de soumettre",
@@ -476,6 +577,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "showUnreadOnly": MessageLookupByLibrary.simpleMessage(
       "Non lues uniquement",
     ),
+    "sock": MessageLookupByLibrary.simpleMessage("Chaussette"),
+    "spoon": MessageLookupByLibrary.simpleMessage("Cuillère"),
+    "spotDifference": MessageLookupByLibrary.simpleMessage(
+      "Trouve les Différences",
+    ),
+    "spotDifferenceDesc": MessageLookupByLibrary.simpleMessage(
+      "Améliore ton attention visuelle",
+    ),
+    "star": MessageLookupByLibrary.simpleMessage("Étoile"),
+    "start": MessageLookupByLibrary.simpleMessage("Démarrer"),
     "startNewCase": MessageLookupByLibrary.simpleMessage("Nouveau cas"),
     "statusAdditionalTestRequired": MessageLookupByLibrary.simpleMessage(
       "Test supplémentaire requis",
@@ -491,6 +602,27 @@ class MessageLookup extends MessageLookupByLibrary {
       "En attente de réponse",
     ),
     "status_title": MessageLookupByLibrary.simpleMessage("Statut du Cas"),
+    "step1Subtitle": MessageLookupByLibrary.simpleMessage(
+      "En haut de l\'écran",
+    ),
+    "step1Title": MessageLookupByLibrary.simpleMessage(
+      "1- Lis le nom de l\'objet",
+    ),
+    "step2Subtitle": MessageLookupByLibrary.simpleMessage(
+      "Affichés sur l\'écran",
+    ),
+    "step2Title": MessageLookupByLibrary.simpleMessage(
+      "2- Regarde les 6 objets",
+    ),
+    "step3Subtitle": MessageLookupByLibrary.simpleMessage("Appuie dessus !"),
+    "step3Title": MessageLookupByLibrary.simpleMessage(
+      "3- Trouve le bon objet",
+    ),
+    "step4Subtitle": MessageLookupByLibrary.simpleMessage(
+      "+10 points par bonne réponse",
+    ),
+    "step4Title": MessageLookupByLibrary.simpleMessage("4- Gagne des points"),
+    "stuffedAnimal": MessageLookupByLibrary.simpleMessage("Peluche"),
     "submit": MessageLookupByLibrary.simpleMessage("Soumettre"),
     "submit_diagnosis": MessageLookupByLibrary.simpleMessage(
       "Soumettre le diagnostic",
@@ -499,6 +631,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Soumettre au médecin",
     ),
     "summary": MessageLookupByLibrary.simpleMessage("Résumé"),
+    "sun": MessageLookupByLibrary.simpleMessage("soleil"),
+    "tapOnlyWhen": MessageLookupByLibrary.simpleMessage(
+      "Tape Seulement Quand...",
+    ),
+    "tapOnlyWhenDesc": MessageLookupByLibrary.simpleMessage(
+      "Développe ton contrôle inhibiteur",
+    ),
+    "tapOnlyWhenDescr": MessageLookupByLibrary.simpleMessage(
+      "Appuyez uniquement lorsque la forme affichée respecte les règles.",
+    ),
     "tdah_questionnaire": MessageLookupByLibrary.simpleMessage(
       "Questionnaire TDAH",
     ),
@@ -507,8 +649,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "test_type_hint": MessageLookupByLibrary.simpleMessage(
       "ex: Test de concentration",
     ),
+    "time": MessageLookupByLibrary.simpleMessage("Temps"),
+    "total": MessageLookupByLibrary.simpleMessage("Total"),
     "totalCases": MessageLookupByLibrary.simpleMessage("Cas totaux"),
-    "unreadCount": m15,
+    "toy": MessageLookupByLibrary.simpleMessage("Jouet"),
+    "trainingGames": MessageLookupByLibrary.simpleMessage(
+      "Jeux d’Entraînement",
+    ),
+    "trainingGamesSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Améliore ton attention et ta concentration",
+    ),
+    "tree": MessageLookupByLibrary.simpleMessage("arbre"),
+    "tryAgain": MessageLookupByLibrary.simpleMessage("Essaie encore !"),
+    "umbrella": MessageLookupByLibrary.simpleMessage("parapluie"),
+    "unreadCount": m16,
     "updateButton": MessageLookupByLibrary.simpleMessage("Enregistrer"),
     "updateChildInfo": MessageLookupByLibrary.simpleMessage(
       "Modifier les informations de l\'enfant",
@@ -517,11 +671,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Mettez à jour les informations de l\'enfant",
     ),
     "video": MessageLookupByLibrary.simpleMessage("Vidéo"),
-    "video_instructions": m16,
+    "video_instructions": m17,
     "video_selected": MessageLookupByLibrary.simpleMessage(
       "Vidéo sélectionnée !",
     ),
-    "welcomeParent": m17,
+    "warningDontTap": MessageLookupByLibrary.simpleMessage(
+      "⚠️ N’appuyez PAS dans les autres cas !",
+    ),
+    "welcomeParent": m18,
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
       "Aider à mieux comprendre votre enfant",
     ),

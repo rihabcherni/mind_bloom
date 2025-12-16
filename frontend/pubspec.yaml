@@ -24,6 +24,7 @@ dependencies:
   url_launcher: ^6.3.2
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.4
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
@@ -35,4 +36,6 @@ flutter:
   assets:
     - assets/images/
 
- 
+flutter_icons:
+  android: true
+  image_path: assets/images/logo-trans2.png

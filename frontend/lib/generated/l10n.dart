@@ -1494,10 +1494,10 @@ class S {
     );
   }
 
-  /// `Instructions`
+  /// `Tap if it's a HEART ❤️, a DOG 🐕 or BLUE 💙`
   String get instructions {
     return Intl.message(
-      'Instructions',
+      'Tap if it\'s a HEART ❤️, a DOG 🐕 or BLUE 💙',
       name: 'instructions',
       desc: '',
       args: [],
@@ -2002,6 +2002,676 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Training Games`
+  String get game_title {
+    return Intl.message(
+      'Training Games',
+      name: 'game_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ADHD Games`
+  String get gamesTitle {
+    return Intl.message('ADHD Games', name: 'gamesTitle', desc: '', args: []);
+  }
+
+  /// `Training Games`
+  String get trainingGames {
+    return Intl.message(
+      'Training Games',
+      name: 'trainingGames',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Improve your attention and focus`
+  String get trainingGamesSubtitle {
+    return Intl.message(
+      'Improve your attention and focus',
+      name: 'trainingGamesSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap Only When...`
+  String get tapOnlyWhen {
+    return Intl.message(
+      'Tap Only When...',
+      name: 'tapOnlyWhen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Develop your inhibitory control`
+  String get tapOnlyWhenDesc {
+    return Intl.message(
+      'Develop your inhibitory control',
+      name: 'tapOnlyWhenDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Spot the Differences`
+  String get spotDifference {
+    return Intl.message(
+      'Spot the Differences',
+      name: 'spotDifference',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Boost your visual attention`
+  String get spotDifferenceDesc {
+    return Intl.message(
+      'Boost your visual attention',
+      name: 'spotDifferenceDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find the Object`
+  String get findObject {
+    return Intl.message(
+      'Find the Object',
+      name: 'findObject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Train your concentration`
+  String get findObjectDesc {
+    return Intl.message(
+      'Train your concentration',
+      name: 'findObjectDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inhibitory control`
+  String get benefitInhibitory {
+    return Intl.message(
+      'Inhibitory control',
+      name: 'benefitInhibitory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selective attention`
+  String get benefitSelective {
+    return Intl.message(
+      'Selective attention',
+      name: 'benefitSelective',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Attention to details`
+  String get benefitDetails {
+    return Intl.message(
+      'Attention to details',
+      name: 'benefitDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Patience`
+  String get benefitPatience {
+    return Intl.message(
+      'Patience',
+      name: 'benefitPatience',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Focus`
+  String get benefitFocus {
+    return Intl.message('Focus', name: 'benefitFocus', desc: '', args: []);
+  }
+
+  /// `Sustained attention`
+  String get benefitSustained {
+    return Intl.message(
+      'Sustained attention',
+      name: 'benefitSustained',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Persistence`
+  String get benefitPersistence {
+    return Intl.message(
+      'Persistence',
+      name: 'benefitPersistence',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Easy`
+  String get difficultyEasy {
+    return Intl.message('Easy', name: 'difficultyEasy', desc: '', args: []);
+  }
+
+  /// `Medium`
+  String get difficultyMedium {
+    return Intl.message('Medium', name: 'difficultyMedium', desc: '', args: []);
+  }
+
+  /// `5 min`
+  String get duration5min {
+    return Intl.message('5 min', name: 'duration5min', desc: '', args: []);
+  }
+
+  /// `10 min`
+  String get duration10min {
+    return Intl.message('10 min', name: 'duration10min', desc: '', args: []);
+  }
+
+  /// `30 sec`
+  String get duration30sec {
+    return Intl.message('30 sec', name: 'duration30sec', desc: '', args: []);
+  }
+
+  /// `Visual recognition game`
+  String get gameDescription {
+    return Intl.message(
+      'Visual recognition game',
+      name: 'gameDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How to play?`
+  String get howToPlay {
+    return Intl.message('How to play?', name: 'howToPlay', desc: '', args: []);
+  }
+
+  /// `1- Read the object name`
+  String get step1Title {
+    return Intl.message(
+      '1- Read the object name',
+      name: 'step1Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At the top of the screen`
+  String get step1Subtitle {
+    return Intl.message(
+      'At the top of the screen',
+      name: 'step1Subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2- Look at the 6 objects`
+  String get step2Title {
+    return Intl.message(
+      '2- Look at the 6 objects',
+      name: 'step2Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Displayed on the screen`
+  String get step2Subtitle {
+    return Intl.message(
+      'Displayed on the screen',
+      name: 'step2Subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3- Find the correct object`
+  String get step3Title {
+    return Intl.message(
+      '3- Find the correct object',
+      name: 'step3Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap on it!`
+  String get step3Subtitle {
+    return Intl.message(
+      'Tap on it!',
+      name: 'step3Subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4- Earn points`
+  String get step4Title {
+    return Intl.message(
+      '4- Earn points',
+      name: 'step4Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `+10 points per correct answer`
+  String get step4Subtitle {
+    return Intl.message(
+      '+10 points per correct answer',
+      name: 'step4Subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `⏱️ Game Time`
+  String get playTime {
+    return Intl.message('⏱️ Game Time', name: 'playTime', desc: '', args: []);
+  }
+
+  /// `Play`
+  String get playButton {
+    return Intl.message('Play', name: 'playButton', desc: '', args: []);
+  }
+
+  /// `Score`
+  String get score {
+    return Intl.message('Score', name: 'score', desc: '', args: []);
+  }
+
+  /// `{count} objects found`
+  String objectsFound(Object count) {
+    return Intl.message(
+      '$count objects found',
+      name: 'objectsFound',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Game Over!`
+  String get gameOver {
+    return Intl.message('Game Over!', name: 'gameOver', desc: '', args: []);
+  }
+
+  /// `Bravo!`
+  String get bravo {
+    return Intl.message('Bravo!', name: 'bravo', desc: '', args: []);
+  }
+
+  /// `Try again!`
+  String get tryAgain {
+    return Intl.message('Try again!', name: 'tryAgain', desc: '', args: []);
+  }
+
+  /// `+10 points`
+  String get points {
+    return Intl.message('+10 points', name: 'points', desc: '', args: []);
+  }
+
+  /// `Find:`
+  String get find {
+    return Intl.message('Find:', name: 'find', desc: '', args: []);
+  }
+
+  /// `Quit`
+  String get quit {
+    return Intl.message('Quit', name: 'quit', desc: '', args: []);
+  }
+
+  /// `Red Lego`
+  String get legoRed {
+    return Intl.message('Red Lego', name: 'legoRed', desc: '', args: []);
+  }
+
+  /// `Blue Pencil`
+  String get bluePencil {
+    return Intl.message('Blue Pencil', name: 'bluePencil', desc: '', args: []);
+  }
+
+  /// `Sock`
+  String get sock {
+    return Intl.message('Sock', name: 'sock', desc: '', args: []);
+  }
+
+  /// `Book`
+  String get book {
+    return Intl.message('Book', name: 'book', desc: '', args: []);
+  }
+
+  /// `Toy`
+  String get toy {
+    return Intl.message('Toy', name: 'toy', desc: '', args: []);
+  }
+
+  /// `Remote Control`
+  String get remoteControl {
+    return Intl.message(
+      'Remote Control',
+      name: 'remoteControl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stuffed Animal`
+  String get stuffedAnimal {
+    return Intl.message(
+      'Stuffed Animal',
+      name: 'stuffedAnimal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ball`
+  String get ball {
+    return Intl.message('Ball', name: 'ball', desc: '', args: []);
+  }
+
+  /// `Spoon`
+  String get spoon {
+    return Intl.message('Spoon', name: 'spoon', desc: '', args: []);
+  }
+
+  /// `Hat`
+  String get hat {
+    return Intl.message('Hat', name: 'hat', desc: '', args: []);
+  }
+
+  /// `apple`
+  String get apple {
+    return Intl.message('apple', name: 'apple', desc: '', args: []);
+  }
+
+  /// `car`
+  String get car {
+    return Intl.message('car', name: 'car', desc: '', args: []);
+  }
+
+  /// `flower`
+  String get flower {
+    return Intl.message('flower', name: 'flower', desc: '', args: []);
+  }
+
+  /// `Star`
+  String get star {
+    return Intl.message('Star', name: 'star', desc: '', args: []);
+  }
+
+  /// `Heart`
+  String get heart {
+    return Intl.message('Heart', name: 'heart', desc: '', args: []);
+  }
+
+  /// `sun`
+  String get sun {
+    return Intl.message('sun', name: 'sun', desc: '', args: []);
+  }
+
+  /// `Replay`
+  String get replay {
+    return Intl.message('Replay', name: 'replay', desc: '', args: []);
+  }
+
+  /// `Menu`
+  String get menu {
+    return Intl.message('Menu', name: 'menu', desc: '', args: []);
+  }
+
+  /// `dog`
+  String get dog {
+    return Intl.message('dog', name: 'dog', desc: '', args: []);
+  }
+
+  /// `cat`
+  String get cat {
+    return Intl.message('cat', name: 'cat', desc: '', args: []);
+  }
+
+  /// `plane`
+  String get plane {
+    return Intl.message('plane', name: 'plane', desc: '', args: []);
+  }
+
+  /// `home`
+  String get home {
+    return Intl.message('home', name: 'home', desc: '', args: []);
+  }
+
+  /// `tree`
+  String get tree {
+    return Intl.message('tree', name: 'tree', desc: '', args: []);
+  }
+
+  /// `moon`
+  String get moon {
+    return Intl.message('moon', name: 'moon', desc: '', args: []);
+  }
+
+  /// `music`
+  String get music {
+    return Intl.message('music', name: 'music', desc: '', args: []);
+  }
+
+  /// `cake`
+  String get cake {
+    return Intl.message('cake', name: 'cake', desc: '', args: []);
+  }
+
+  /// `bike`
+  String get bike {
+    return Intl.message('bike', name: 'bike', desc: '', args: []);
+  }
+
+  /// `rocket`
+  String get rocket {
+    return Intl.message('rocket', name: 'rocket', desc: '', args: []);
+  }
+
+  /// `umbrella`
+  String get umbrella {
+    return Intl.message('umbrella', name: 'umbrella', desc: '', args: []);
+  }
+
+  /// `phone`
+  String get phone {
+    return Intl.message('phone', name: 'phone', desc: '', args: []);
+  }
+
+  /// `camera`
+  String get camera {
+    return Intl.message('camera', name: 'camera', desc: '', args: []);
+  }
+
+  /// `gift`
+  String get gift {
+    return Intl.message('gift', name: 'gift', desc: '', args: []);
+  }
+
+  /// `Tap only when the displayed shape matches the rules.`
+  String get tapOnlyWhenDescr {
+    return Intl.message(
+      'Tap only when the displayed shape matches the rules.',
+      name: 'tapOnlyWhenDescr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `📋 Rules`
+  String get rules {
+    return Intl.message('📋 Rules', name: 'rules', desc: '', args: []);
+  }
+
+  /// `It is a heart`
+  String get ruleHeart {
+    return Intl.message('It is a heart', name: 'ruleHeart', desc: '', args: []);
+  }
+
+  /// `It is a dog`
+  String get ruleDog {
+    return Intl.message('It is a dog', name: 'ruleDog', desc: '', args: []);
+  }
+
+  /// `It is blue`
+  String get ruleBlue {
+    return Intl.message('It is blue', name: 'ruleBlue', desc: '', args: []);
+  }
+
+  /// `⚠️ Do NOT tap in other cases!`
+  String get warningDontTap {
+    return Intl.message(
+      '⚠️ Do NOT tap in other cases!',
+      name: 'warningDontTap',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start`
+  String get start {
+    return Intl.message('Start', name: 'start', desc: '', args: []);
+  }
+
+  /// `Round`
+  String get round {
+    return Intl.message('Round', name: 'round', desc: '', args: []);
+  }
+
+  /// `Errors`
+  String get errors {
+    return Intl.message('Errors', name: 'errors', desc: '', args: []);
+  }
+
+  /// `Results`
+  String get results {
+    return Intl.message('Results', name: 'results', desc: '', args: []);
+  }
+
+  /// `Correct`
+  String get correct {
+    return Intl.message('Correct', name: 'correct', desc: '', args: []);
+  }
+
+  /// `Total`
+  String get total {
+    return Intl.message('Total', name: 'total', desc: '', args: []);
+  }
+
+  /// `Find the Odd One Out`
+  String get findTheDifferent {
+    return Intl.message(
+      'Find the Odd One Out',
+      name: 'findTheDifferent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Improve your concentration!`
+  String get findTheDifferentDesc {
+    return Intl.message(
+      'Improve your concentration!',
+      name: 'findTheDifferentDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Observe the 4 shapes carefully`
+  String get ruleObserve {
+    return Intl.message(
+      'Observe the 4 shapes carefully',
+      name: 'ruleObserve',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find the one that is DIFFERENT`
+  String get ruleFindDifferent {
+    return Intl.message(
+      'Find the one that is DIFFERENT',
+      name: 'ruleFindDifferent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Click on it quickly!`
+  String get ruleClickFast {
+    return Intl.message(
+      'Click on it quickly!',
+      name: 'ruleClickFast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have 5 seconds per round`
+  String get ruleTimeLimit {
+    return Intl.message(
+      'You have 5 seconds per round',
+      name: 'ruleTimeLimit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The difference can be the shape, color or size!`
+  String get ruleDifferenceTypes {
+    return Intl.message(
+      'The difference can be the shape, color or size!',
+      name: 'ruleDifferenceTypes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find the different shape!`
+  String get findDifferentShape {
+    return Intl.message(
+      'Find the different shape!',
+      name: 'findDifferentShape',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get time {
+    return Intl.message('Time', name: 'time', desc: '', args: []);
+  }
+
+  /// `s`
+  String get seconds {
+    return Intl.message('s', name: 'seconds', desc: '', args: []);
+  }
+
+  /// `1 min`
+  String get minute1 {
+    return Intl.message('1 min', name: 'minute1', desc: '', args: []);
   }
 }
 

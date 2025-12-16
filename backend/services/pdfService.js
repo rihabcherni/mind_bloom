@@ -1,9 +1,8 @@
-const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const path = require('path');
+const PdfPrinter = require('pdfmake');
 
 class PDFService {
-
    static async generateDiagnosisReport(caseData) {
       return new Promise((resolve, reject) => {
          try {
@@ -11,129 +10,89 @@ class PDFService {
             if (!fs.existsSync(reportsDir)) {
                fs.mkdirSync(reportsDir, { recursive: true });
             }
+
             const filename = `diagnosis_${caseData._id}_${Date.now()}.pdf`;
             const filepath = path.join(reportsDir, filename);
-            const doc = new PDFDocument({ margin: 50 });
-            const stream = fs.createWriteStream(filepath);
 
-            doc.pipe(stream);
-            doc.fontSize(24)
-               .fillColor('#7B2CBF')
-               .text('Mind Bloom', { align: 'center' });
+            // Define fonts
+            const fonts = {
+               Amiri: {
+                  normal: path.join(__dirname, '../fonts/Amiri-Regular.ttf'),
+                  bold: path.join(__dirname, '../fonts/Amiri-Bold.ttf'),
+                  italics: path.join(__dirname, '../fonts/Amiri-Regular.ttf'),
+                  bolditalics: path.join(__dirname, '../fonts/Amiri-Bold.ttf')
+               }
+            };
 
-            doc.fontSize(18)
-               .fillColor('#000000')
-               .text('ADHD Screening Report', { align: 'center' });
+            const printer = new PdfPrinter(fonts);
 
-            doc.moveDown();
-            doc.fontSize(10)
-               .text(`Report Date: ${new Date().toLocaleDateString()}`, { align: 'right' });
+            // PDF content in English
+            const docDefinition = {
+               content: [
+                  { text: 'Mind Bloom', fontSize: 24, bold: true, color: '#7B2CBF', alignment: 'center' },
+                  { text: 'ADHD Screening Report', fontSize: 14, alignment: 'center', margin: [0, 0, 0, 0] },
+                  { text: `Report Date: ${new Date().toLocaleDateString()}`, alignment: 'left', fontSize: 10 },
 
-            doc.moveDown(2);
-            doc.moveTo(50, doc.y)
-               .lineTo(550, doc.y)
-               .stroke();
+                  { canvas: [{ type: 'line', x1: 0, y1: 5, x2: 515, y2: 5, lineWidth: 1 }] },
 
-            doc.moveDown();
-            doc.fontSize(14)
-               .fillColor('#7B2CBF')
-               .text('Child Information');
+                  { text: 'Child Information', fontSize: 14, bold: true, color: '#7B2CBF', margin: [0, 5, 0, 2] },
+                  {
+                     ul: [
+                        `Name: ${caseData.childFirstName} ${caseData.childLastName}`,
+                        `Age: ${caseData.childAge}`,
+                        `Gender: ${caseData.childSex}`,
+                        `Grade: ${caseData.scholarYear}`
+                     ], fontSize: 11
+                  },
 
-            doc.fontSize(11)
-               .fillColor('#000000')
-               .text(`Name: ${caseData.childFirstName} ${caseData.childLastName}`)
-               .text(`Age: ${caseData.childAge}`)
-               .text(`Sex: ${caseData.childSex}`)
-               .text(`Grade: ${caseData.scholarYear}`)
-               .moveDown();
-            doc.fontSize(14)
-               .fillColor('#7B2CBF')
-               .text('Parent Information');
+                  { text: 'Parent Information', fontSize: 14, bold: true, color: '#7B2CBF', margin: [0, 5, 0, 2] },
+                  {
+                     ul: [
+                        `Name: ${caseData.parentId.firstName} ${caseData.parentId.lastName}`,
+                        `Relationship to child: ${caseData.parentId.relationToChild}`,
+                        `Email: ${caseData.parentId.email}`
+                     ], fontSize: 11
+                  },
 
-            doc.fontSize(11)
-               .fillColor('#000000')
-               .text(`Name: ${caseData.parentId.firstName} ${caseData.parentId.lastName}`)
-               .text(`Relationship: ${caseData.parentId.relationToChild}`)
-               .text(`Email: ${caseData.parentId.email}`)
-               .moveDown();
-            doc.fontSize(14)
-               .fillColor('#7B2CBF')
-               .text('Screening Results');
+                  { text: 'Screening Results', fontSize: 14, bold: true, color: '#7B2CBF', margin: [0, 5, 0, 2] },
+                  { text: `Severity Score: ${caseData.gravityScore.toUpperCase()}`, fontSize: 11, margin: [0, 0, 0, 2] },
+                  { text: 'Questionnaire Responses:', fontSize: 12, bold: true, color: '#7B2CBF' },
 
-            doc.fontSize(11)
-               .fillColor('#000000')
-               .text(`Severity Score: ${caseData.gravityScore.toUpperCase()}`)
-               .moveDown();
-            doc.fontSize(12)
-               .fillColor('#7B2CBF')
-               .text('Questionnaire Responses:');
+                  ...caseData.screeningAnswers.map((qa, index) => ({
+                     text: `${index + 1}. ${qa.question}\t   Answer: ${qa.answer}`,
+                     fontSize: 10,
+                     margin: [0, 1, 0, 1]
+                  }))
+               ],
+               defaultStyle: { font: 'Amiri' }
+            };
 
-            doc.fontSize(10)
-               .fillColor('#000000');
-
-            caseData.screeningAnswers.forEach((qa, index) => {
-               doc.text(`${index + 1}. ${qa.question}`, { continued: false });
-               doc.text(`   Answer: ${qa.answer}`, { indent: 20 });
-               doc.moveDown(0.5);
-            });
-
-            doc.moveDown();
             if (caseData.diagnosis) {
-               doc.addPage();
-
-               doc.fontSize(16)
-                  .fillColor('#7B2CBF')
-                  .text('Medical Diagnosis');
-
-               doc.moveDown();
-
-               doc.fontSize(11)
-                  .fillColor('#000000')
-                  .text(`Doctor: ${caseData.diagnosis.doctorName}`)
-                  .text(`Date: ${new Date(caseData.diagnosis.completedAt).toLocaleDateString()}`)
-                  .moveDown();
-
-               doc.fontSize(12)
-                  .fillColor('#7B2CBF')
-                  .text('Summary:');
-
-               doc.fontSize(10)
-                  .fillColor('#000000')
-                  .text(caseData.diagnosis.summary, { align: 'justify' })
-                  .moveDown();
-
-               doc.fontSize(12)
-                  .fillColor('#7B2CBF')
-                  .text('Advice:');
-
-               doc.fontSize(10)
-                  .fillColor('#000000')
-                  .text(caseData.diagnosis.advice, { align: 'justify' })
-                  .moveDown();
-
-               doc.fontSize(12)
-                  .fillColor('#7B2CBF')
-                  .text('Recommendation:');
-
-               doc.fontSize(10)
-                  .fillColor('#000000')
-                  .text(caseData.diagnosis.recommendation, { align: 'justify' });
+               docDefinition.content.push({ text: 'Medical Diagnosis', fontSize: 16, bold: true, color: '#7B2CBF', margin: [0, 5, 0, 2] });
+               docDefinition.content.push({ text: `Doctor: ${caseData.diagnosis.doctorName}`, fontSize: 11 });
+               docDefinition.content.push({ text: `Date: ${new Date(caseData.diagnosis.completedAt).toLocaleDateString()}`, fontSize: 11, margin: [0, 0, 0, 2] });
+               docDefinition.content.push({ text: 'Summary:', fontSize: 12, bold: true, color: '#7B2CBF', margin: [0, 5, 0, 2] });
+               docDefinition.content.push({ text: caseData.diagnosis.summary, fontSize: 10, margin: [0, 0, 0, 5] });
+               docDefinition.content.push({ text: 'Advice:', fontSize: 12, bold: true, color: '#7B2CBF', margin: [0, 5, 0, 2] });
+               docDefinition.content.push({ text: caseData.diagnosis.advice, fontSize: 10, margin: [0, 0, 0, 5] });
+               docDefinition.content.push({ text: 'Recommendations:', fontSize: 12, bold: true, color: '#7B2CBF', margin: [0, 5, 0, 2] });
+               docDefinition.content.push({ text: caseData.diagnosis.recommendation, fontSize: 10, margin: [0, 0, 0, 2] });
             }
-            doc.fontSize(8)
-               .fillColor('#666666')
-               .text(
-                  'This report is confidential and intended only for the named recipient.',
-                  50,
-                  doc.page.height - 50,
-                  { align: 'center' }
-               );
-            doc.end();
+            docDefinition.footer = function (currentPage, pageCount) {
+               return {
+                  text: 'This report is confidential and intended only for the named recipient.',
+                  alignment: 'center',
+                  fontSize: 8,
+                  margin: [0, 0, 0, 5]
+               };
+            };
+            const pdfDoc = printer.createPdfKitDocument(docDefinition);
+            pdfDoc.pipe(fs.createWriteStream(filepath));
+            pdfDoc.end();
 
-            stream.on('finish', () => {
-               resolve(`/reports/${filename}`);
-            });
-
-            stream.on('error', reject);
+            pdfDoc.on('end', () => resolve(`/reports/${filename}`));
+            pdfDoc.on('error', reject);
+            pdfDoc.on('finish', () => resolve(`/reports/${filename}`));
 
          } catch (error) {
             reject(error);

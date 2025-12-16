@@ -380,10 +380,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 32),
-
-                // Titre Section (identique)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: FadeTransition(
@@ -429,10 +426,7 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 16),
-
-                // Liste des cas
                 Expanded(
                   child: _isLoading
                       ? Center(
@@ -500,6 +494,50 @@ class _ParentHomeScreenState extends State<ParentHomeScreen>
                             ),
                           ),
                         ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 70.0,
+                    right: 70.0,
+                    bottom: 5.0,
+                    top: 5.0,
+                  ),
+                  child: GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, '/games'),
+                    child: Container(
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            AppConstants.primaryViolet,
+                            AppConstants.darkBackground,
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.games, color: Colors.white, size: 25),
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  S.of(context).game_title,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

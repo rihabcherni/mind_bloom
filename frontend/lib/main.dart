@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:frontend/providers/settings_provider.dart';
 import 'package:frontend/screens/ADHD_chatbot_screen.dart';
 import 'package:frontend/screens/about_screen.dart';
+import 'package:frontend/screens/games/find_difference_game.dart';
+import 'package:frontend/screens/games/find_object_game.dart';
+import 'package:frontend/screens/games/games_menu_screen.dart';
+import 'package:frontend/screens/games/spot_difference_game.dart';
+import 'package:frontend/screens/games/tap_only_when_game.dart';
 import 'package:frontend/screens/loading_screen.dart';
 import 'package:provider/provider.dart';
 import 'constants/app_constants.dart';
@@ -138,6 +143,28 @@ class MyApp extends StatelessWidget {
                 return MaterialPageRoute(
                   builder: (_) => const ADHDChatbotScreen(),
                 );
+
+              case '/games':
+                return MaterialPageRoute(
+                  builder: (_) => const GamesMenuScreen(),
+                );
+              case '/game/tap-only-when':
+                return MaterialPageRoute(
+                  builder: (_) => const TapOnlyWhenGame(),
+                );
+              case '/game/spot-difference':
+                return MaterialPageRoute(
+                  builder: (_) => const SpotDifferenceGame(),
+                );
+              case '/game/find-difference':
+                return MaterialPageRoute(
+                  builder: (_) => const FindTheDifferentGame(),
+                );
+              case '/game/find-object':
+                return MaterialPageRoute(
+                  builder: (_) => const FindObjectGame(),
+                );
+
               default:
                 return null;
             }
