@@ -22,7 +22,6 @@
 
 It connects parents with healthcare professionals, enabling:
 
-* 🤖 **AI-based preliminary screening** - Intelligent chatbot conducts guided assessments
 * 🎥 **Behavioral analysis** through video submissions - Observe real-world child behavior
 * 🩺 **Medical assessments** by certified doctors - Professional evaluation and diagnosis
 * 💬 **Real-time communication** - Instant notifications and updates
