@@ -49,16 +49,22 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m13(childName) =>
       "مرحبا! باش نسألك شوية أسئلة على تصرّف ${childName}. جاوب بصراحة باش نعاونك باش نعطيوا تقييم أفضل.";
 
-  static String m14(count) => "تم إيجاد ${count} أغراض";
+  static String m14(imageNumber) => "الصورة ${imageNumber} غير متوفرة";
 
-  static String m15(current, total) => "السؤال ${current}/${total}";
+  static String m15(level) => "المستوى ${level} اكتمل!";
 
-  static String m16(count) => "${count} غير مقروءة";
+  static String m16(level) => "المستوى ${level} متاح";
 
-  static String m17(childName) =>
+  static String m17(count) => "تم إيجاد ${count} أغراض";
+
+  static String m18(current, total) => "السؤال ${current}/${total}";
+
+  static String m19(count) => "${count} غير مقروءة";
+
+  static String m20(childName) =>
       "مزيان! تاو، يرجى تحميل فيديو قصير (5 دقايق كحد أقصى) لـ ${childName} وهو يعمل نشاط مثل الواجبات، اللعب، أو الرسم. هذا باش يساعد الطبيب باش يفهم التصرف أفضل.";
 
-  static String m18(name) => "مرحبا، ${name}";
+  static String m21(name) => "مرحبا، ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -166,6 +172,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "agoDays": m1,
     "agoHours": m2,
     "agoMinutes": m3,
+    "allDifferencesFound": MessageLookupByLibrary.simpleMessage(
+      "تم إيجاد كل الفروقات!",
+    ),
+    "allLevelsCompleted": MessageLookupByLibrary.simpleMessage(
+      "تم إكمال جميع المستويات!",
+    ),
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
       "هل لديك حساب بالفعل؟",
     ),
@@ -233,9 +245,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "اختر نوع الحساب الذي تريد إنشاؤه",
     ),
     "chooseProfile": MessageLookupByLibrary.simpleMessage("اختار الملف الشخصي"),
+    "clickDifferences": MessageLookupByLibrary.simpleMessage(
+      "اضغط على الفروقات بين الصورتين!",
+    ),
     "confirmDeleteCase": m5,
     "confirmDeletion": MessageLookupByLibrary.simpleMessage("تأكيد الحذف"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("عاود كلمة السر"),
+    "congratulations": MessageLookupByLibrary.simpleMessage("مبروك!"),
     "continue_screening": MessageLookupByLibrary.simpleMessage("متابعة الفحص"),
     "correct": MessageLookupByLibrary.simpleMessage("صحيح"),
     "createAccount": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
@@ -255,6 +271,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "diagnosis_summary": MessageLookupByLibrary.simpleMessage("ملخص"),
     "diagnosis_title": MessageLookupByLibrary.simpleMessage("التشخيص"),
+    "differenceFound": MessageLookupByLibrary.simpleMessage(
+      "✓ تم إيجاد الفرق!",
+    ),
     "difficultyEasy": MessageLookupByLibrary.simpleMessage("ساهل"),
     "difficultyMedium": MessageLookupByLibrary.simpleMessage("متوسط"),
     "disabled": MessageLookupByLibrary.simpleMessage("موش مفعّل"),
@@ -274,6 +293,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "duration5min": MessageLookupByLibrary.simpleMessage("5 دقايق"),
     "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
     "editCase": MessageLookupByLibrary.simpleMessage("تعديل الحالة"),
+    "elapsedTime": MessageLookupByLibrary.simpleMessage("الوقت المستغرق"),
     "email": MessageLookupByLibrary.simpleMessage("الإيميل"),
     "enabled": MessageLookupByLibrary.simpleMessage("مفعّل"),
     "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
@@ -313,6 +333,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "يجب أن يحتوي الاسم الأول على حرفين على الأقل",
     ),
     "flower": MessageLookupByLibrary.simpleMessage("وردة"),
+    "found": MessageLookupByLibrary.simpleMessage("تم إيجاد"),
     "french": MessageLookupByLibrary.simpleMessage("الفرنسية"),
     "gallery": MessageLookupByLibrary.simpleMessage("معرض"),
     "gameDescription": MessageLookupByLibrary.simpleMessage(
@@ -331,8 +352,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "highPriority": MessageLookupByLibrary.simpleMessage("أولوية عالية"),
     "home": MessageLookupByLibrary.simpleMessage("دار"),
     "howToPlay": MessageLookupByLibrary.simpleMessage("كيفاش تلعب؟"),
-    "instructions": MessageLookupByLibrary.simpleMessage(
-      "إضغط كان كان قلب ❤️، ولا كلب 🐕، ولا أزرق 💙",
+    "imageNotAvailable": m14,
+    "instructions": MessageLookupByLibrary.simpleMessage("تعليمات"),
+    "instructionsGame": MessageLookupByLibrary.simpleMessage(
+      "إضغط كان كي تشوف قلب ❤️، كلب 🐕، ولا لون أزرق 💙",
     ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage("الإيميل غلط"),
     "invalidNumber": MessageLookupByLibrary.simpleMessage(
@@ -346,6 +369,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "legoRed": MessageLookupByLibrary.simpleMessage("ليغو أحمر"),
     "level": MessageLookupByLibrary.simpleMessage("المستوى"),
+    "levelCompleted": m15,
     "loading": MessageLookupByLibrary.simpleMessage("جار التحميل..."),
     "login": MessageLookupByLibrary.simpleMessage("دخول"),
     "loginButton": MessageLookupByLibrary.simpleMessage("سجّل الدخول"),
@@ -395,6 +419,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "newCasesWillAppearHere": MessageLookupByLibrary.simpleMessage(
       "ستظهر الحالات الجديدة هنا",
     ),
+    "nextLevel": MessageLookupByLibrary.simpleMessage("المستوى التالي"),
+    "nextLevelAvailable": m16,
     "no": MessageLookupByLibrary.simpleMessage("لا"),
     "noCasesAvailable": MessageLookupByLibrary.simpleMessage(
       "لا توجد حالات متاحة",
@@ -408,7 +434,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "لم يتم تحميل أي فيديو",
     ),
     "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
-    "objectsFound": m14,
+    "objectsFound": m17,
     "other": MessageLookupByLibrary.simpleMessage("آخر"),
     "parent": MessageLookupByLibrary.simpleMessage("وليّ"),
     "parentRegistration": MessageLookupByLibrary.simpleMessage("تسجيل كولي"),
@@ -455,7 +481,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "question_6": MessageLookupByLibrary.simpleMessage(
       "هل التصرف موجود في أكثر من مكان (الدار والمدرسة)؟",
     ),
-    "question_number": m15,
+    "question_number": m18,
     "quit": MessageLookupByLibrary.simpleMessage("الخروج"),
     "read_video": MessageLookupByLibrary.simpleMessage("تشغيل الفيديو"),
     "recommendations": MessageLookupByLibrary.simpleMessage("توصيات"),
@@ -470,6 +496,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "requiredField": MessageLookupByLibrary.simpleMessage(
       "الخانة هذي لازم تتعمر",
     ),
+    "restart": MessageLookupByLibrary.simpleMessage("إعادة البداية"),
     "results": MessageLookupByLibrary.simpleMessage("النتائج"),
     "retry": MessageLookupByLibrary.simpleMessage("عاود"),
     "rocket": MessageLookupByLibrary.simpleMessage("صاروخ"),
@@ -570,6 +597,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "time": MessageLookupByLibrary.simpleMessage("الوقت"),
     "total": MessageLookupByLibrary.simpleMessage("المجموع"),
     "totalCases": MessageLookupByLibrary.simpleMessage("إجمالي الحالات"),
+    "totalTime": MessageLookupByLibrary.simpleMessage("الوقت الكلي"),
     "toy": MessageLookupByLibrary.simpleMessage("لعبة"),
     "trainingGames": MessageLookupByLibrary.simpleMessage("ألعاب التدريب"),
     "trainingGamesSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -577,8 +605,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tree": MessageLookupByLibrary.simpleMessage("شجرة"),
     "tryAgain": MessageLookupByLibrary.simpleMessage("حاول مرة أخرى!"),
+    "tryAgainSpot": MessageLookupByLibrary.simpleMessage("✗ حاول مرة أخرى!"),
     "umbrella": MessageLookupByLibrary.simpleMessage("مظلة"),
-    "unreadCount": m16,
+    "unreadCount": m19,
     "updateButton": MessageLookupByLibrary.simpleMessage("حفظ"),
     "updateChildInfo": MessageLookupByLibrary.simpleMessage(
       "تحديث معلومات الطفل",
@@ -587,14 +616,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "قم بتحديث معلومات الطفل",
     ),
     "video": MessageLookupByLibrary.simpleMessage("الفيديو"),
-    "video_instructions": m17,
+    "video_instructions": m20,
     "video_selected": MessageLookupByLibrary.simpleMessage(
       "تم اختيار الفيديو!",
     ),
+    "vs": MessageLookupByLibrary.simpleMessage("مقابل"),
     "warningDontTap": MessageLookupByLibrary.simpleMessage(
       "⚠️ ما تضغطش في الحالات الأخرى!",
     ),
-    "welcomeParent": m18,
+    "welcomeParent": m21,
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
       "باش نفهموك على ولادك خير",
     ),

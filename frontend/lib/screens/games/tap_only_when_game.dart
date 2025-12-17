@@ -389,7 +389,7 @@ class _TapOnlyWhenGameState extends State<TapOnlyWhenGame> {
         Container(
           padding: const EdgeInsets.all(16),
           child: Text(
-            S.of(context).instructions,
+            S.of(context).instructionsGame,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),

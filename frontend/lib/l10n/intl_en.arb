@@ -217,7 +217,6 @@
   "child_profile": "Child Profile",
   "child_name": "Name",
   "child_age": "Age",
-  "level": "Level",
   "tdah_questionnaire": "ADHD Questionnaire",
   "severity": "Case Severity",
   "diagnosis_concluded": "Conclude Diagnosis",
@@ -369,7 +368,6 @@
 "camera": "camera",
 "gift": "gift",
 
-
   "tapOnlyWhenDescr": "Tap only when the displayed shape matches the rules.",
   "rules": "📋 Rules",
   "ruleHeart": "It is a heart",
@@ -383,7 +381,7 @@
   "results": "Results",
   "correct": "Correct",
   "total": "Total",
-  "instructions": "Tap if it's a HEART ❤️, a DOG 🐕 or BLUE 💙",
+  "instructionsGame": "Tap if it's a HEART ❤️, a DOG 🐕 or BLUE 💙",
   "findTheDifferent": "Find the Odd One Out",
   "findTheDifferentDesc": "Improve your concentration!",
   "howToPlay": "How to play?",
@@ -395,5 +393,22 @@
   "findDifferentShape": "Find the different shape!",
   "time": "Time",
   "seconds": "s",
-  "minute1": "1 min"
+  "minute1": "1 min",
+
+  "differenceFound": "✓ Difference found!",
+  "tryAgainSpot": "✗ Try again!",
+  "congratulations": "Congratulations!",
+  "levelCompleted": "Level {level} completed!",
+  "allLevelsCompleted": "All levels completed!",
+  "allDifferencesFound": "All differences found!",
+  "totalTime": "Total time",
+  "elapsedTime": "Elapsed time",
+  "nextLevelAvailable": "Level {level} available",
+  "restart": "Restart",
+  "nextLevel": "Next level",
+  "found": "Found",
+  "level": "Level",
+  "vs": "VS",
+  "clickDifferences": "Click on the differences between the two images!",
+  "imageNotAvailable": "Image {imageNumber} not available"
 }

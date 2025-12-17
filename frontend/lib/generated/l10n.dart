@@ -1494,10 +1494,10 @@ class S {
     );
   }
 
-  /// `Tap if it's a HEART ❤️, a DOG 🐕 or BLUE 💙`
+  /// `Instructions`
   String get instructions {
     return Intl.message(
-      'Tap if it\'s a HEART ❤️, a DOG 🐕 or BLUE 💙',
+      'Instructions',
       name: 'instructions',
       desc: '',
       args: [],
@@ -1552,11 +1552,6 @@ class S {
   /// `Age`
   String get child_age {
     return Intl.message('Age', name: 'child_age', desc: '', args: []);
-  }
-
-  /// `Level`
-  String get level {
-    return Intl.message('Level', name: 'level', desc: '', args: []);
   }
 
   /// `ADHD Questionnaire`
@@ -2579,6 +2574,16 @@ class S {
     return Intl.message('Total', name: 'total', desc: '', args: []);
   }
 
+  /// `Tap if it's a HEART ❤️, a DOG 🐕 or BLUE 💙`
+  String get instructionsGame {
+    return Intl.message(
+      'Tap if it\'s a HEART ❤️, a DOG 🐕 or BLUE 💙',
+      name: 'instructionsGame',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Find the Odd One Out`
   String get findTheDifferent {
     return Intl.message(
@@ -2672,6 +2677,136 @@ class S {
   /// `1 min`
   String get minute1 {
     return Intl.message('1 min', name: 'minute1', desc: '', args: []);
+  }
+
+  /// `✓ Difference found!`
+  String get differenceFound {
+    return Intl.message(
+      '✓ Difference found!',
+      name: 'differenceFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `✗ Try again!`
+  String get tryAgainSpot {
+    return Intl.message(
+      '✗ Try again!',
+      name: 'tryAgainSpot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Congratulations!`
+  String get congratulations {
+    return Intl.message(
+      'Congratulations!',
+      name: 'congratulations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level {level} completed!`
+  String levelCompleted(Object level) {
+    return Intl.message(
+      'Level $level completed!',
+      name: 'levelCompleted',
+      desc: '',
+      args: [level],
+    );
+  }
+
+  /// `All levels completed!`
+  String get allLevelsCompleted {
+    return Intl.message(
+      'All levels completed!',
+      name: 'allLevelsCompleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All differences found!`
+  String get allDifferencesFound {
+    return Intl.message(
+      'All differences found!',
+      name: 'allDifferencesFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total time`
+  String get totalTime {
+    return Intl.message('Total time', name: 'totalTime', desc: '', args: []);
+  }
+
+  /// `Elapsed time`
+  String get elapsedTime {
+    return Intl.message(
+      'Elapsed time',
+      name: 'elapsedTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level {level} available`
+  String nextLevelAvailable(Object level) {
+    return Intl.message(
+      'Level $level available',
+      name: 'nextLevelAvailable',
+      desc: '',
+      args: [level],
+    );
+  }
+
+  /// `Restart`
+  String get restart {
+    return Intl.message('Restart', name: 'restart', desc: '', args: []);
+  }
+
+  /// `Next level`
+  String get nextLevel {
+    return Intl.message('Next level', name: 'nextLevel', desc: '', args: []);
+  }
+
+  /// `Found`
+  String get found {
+    return Intl.message('Found', name: 'found', desc: '', args: []);
+  }
+
+  /// `Level`
+  String get level {
+    return Intl.message('Level', name: 'level', desc: '', args: []);
+  }
+
+  /// `VS`
+  String get vs {
+    return Intl.message('VS', name: 'vs', desc: '', args: []);
+  }
+
+  /// `Click on the differences between the two images!`
+  String get clickDifferences {
+    return Intl.message(
+      'Click on the differences between the two images!',
+      name: 'clickDifferences',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image {imageNumber} not available`
+  String imageNotAvailable(Object imageNumber) {
+    return Intl.message(
+      'Image $imageNumber not available',
+      name: 'imageNotAvailable',
+      desc: '',
+      args: [imageNumber],
+    );
   }
 }
 

@@ -128,8 +128,8 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
   void _showSuccessFeedback() {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('✓ Différence trouvée !'),
+      SnackBar(
+        content: Text(S.of(context).differenceFound),
         duration: Duration(milliseconds: 800),
         backgroundColor: Colors.green,
       ),
@@ -139,8 +139,8 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
   void _showErrorFeedback() {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('✗ Essaye encore !'),
+      SnackBar(
+        content: Text(S.of(context).tryAgainSpot),
         duration: Duration(milliseconds: 500),
         backgroundColor: Colors.red,
       ),
@@ -163,7 +163,11 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
               size: 32,
             ),
             const SizedBox(width: 12),
-            Text(isLastLevel ? 'Félicitations !' : 'Niveau $_level complété !'),
+            Text(
+              isLastLevel
+                  ? S.of(context).congratulations
+                  : S.of(context).levelCompleted(_level),
+            ),
           ],
         ),
         content: Column(
@@ -171,8 +175,8 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
           children: [
             Text(
               isLastLevel
-                  ? 'Tous les niveaux terminés !'
-                  : 'Toutes les différences trouvées !',
+                  ? S.of(context).allLevelsCompleted
+                  : S.of(context).allDifferencesFound,
               style: const TextStyle(fontSize: 18),
               textAlign: TextAlign.center,
             ),
@@ -200,7 +204,11 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Text(isLastLevel ? 'Temps total' : 'Temps écoulé'),
+                  Text(
+                    isLastLevel
+                        ? S.of(context).totalTime
+                        : S.of(context).elapsedTime,
+                  ),
                 ],
               ),
             ),
@@ -218,7 +226,7 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
                     const Icon(Icons.arrow_forward, color: Colors.blue),
                     const SizedBox(width: 8),
                     Text(
-                      'Niveau ${_level + 1} disponible',
+                      S.of(context).nextLevelAvailable(_level + 1),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
@@ -236,7 +244,7 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
               Navigator.pop(context);
               Navigator.pop(context);
             },
-            child: const Text('Quitter'),
+            child: Text(S.of(context).quit),
           ),
           if (isLastLevel)
             ElevatedButton(
@@ -247,8 +255,8 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppConstants.primaryViolet,
               ),
-              child: const Text(
-                'Recommencer',
+              child: Text(
+                S.of(context).restart,
                 style: TextStyle(color: AppConstants.white),
               ),
             )
@@ -262,7 +270,7 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
                 backgroundColor: AppConstants.primaryViolet,
               ),
               child: Text(
-                'Niveau suivant',
+                S.of(context).nextLevel,
                 style: TextStyle(color: AppConstants.white),
               ),
             ),
@@ -330,19 +338,19 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               _buildInfoCard(
-                                'Trouvées',
+                                S.of(context).found,
                                 '$_differencesFound/$_totalDifferences',
                                 Icons.check_circle,
                                 Colors.green,
                               ),
                               _buildInfoCard(
-                                'Temps',
+                                S.of(context).time,
                                 _elapsedTime,
                                 Icons.timer,
                                 Colors.blue,
                               ),
                               _buildInfoCard(
-                                'Niveau',
+                                S.of(context).level,
                                 '$_level/$_maxLevel',
                                 Icons.star,
                                 Colors.amber,
@@ -361,8 +369,8 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
                                 _imageKey1,
                               ),
                               const SizedBox(height: 2),
-                              const Text(
-                                'VS',
+                              Text(
+                                S.of(context).vs,
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -399,7 +407,7 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
                                     const SizedBox(width: 8),
                                     Expanded(
                                       child: Text(
-                                        'Clique sur les différences entre les deux images !',
+                                        S.of(context).clickDifferences,
                                         style: TextStyle(
                                           color: isDark
                                               ? Colors.white70
@@ -490,7 +498,7 @@ class _SpotDifferenceGameState extends State<SpotDifferenceGame> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Image $imageNumber\nnon disponible',
+                          S.of(context).imageNotAvailable(imageNumber),
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.grey[400]),
                         ),
