@@ -151,8 +151,26 @@ After completing the questionnaire, parents upload a behavioral observation vide
 
 
 ### Games
+<div align="center">
+  <img src="screenshots/game/game1.jpg" width="200" alt="game 1"/>
+  <img src="screenshots/game/game2.jpg" width="200" alt="game 2"/>
+  <img src="screenshots/game/game3.jpg" width="200" alt="game 3"/>
+  <img src="screenshots/game/game4.jpg" width="200" alt="game 5"/>
+  <img src="screenshots/game/game6.jpg" width="200" alt="game 6"/>
+  <img src="screenshots/game/game7.jpg" width="200" alt="game 7"/>
+  <img src="screenshots/game/game8.jpg" width="200" alt="game 8"/>
+  <img src="screenshots/game/game9.jpg" width="200" alt="game 8"/>
+  <img src="screenshots/game/game10.jpg" width="200" alt="game 8"/>
+  <img src="screenshots/game/game11.jpg" width="200" alt="game 8"/>
+  <img src="screenshots/game/game12.jpg" width="200" alt="game 8"/>
+  <img src="screenshots/game/game13.jpg" width="200" alt="game 8"/>
+  <img src="screenshots/game/game14.jpg" width="200" alt="game 8"/>
+  <img src="screenshots/game/game15.jpg" width="200" alt="game 8"/>
+  <img src="screenshots/game/game16.jpg" width="200" alt="game 8"/>
+</div>
 
 ### 🩺 Doctor Experience
+Doctors access a specialized dashboard where cases are automatically prioritized and color-coded by severity: High (🔴), Medium (🟠), and Low (🟢). Each case provides complete access to child profiles, parent information, chatbot screening responses, and behavioral videos. Doctors can either request additional customized tests with specific instructions or provide a final diagnosis. The diagnostic interface allows doctors to write detailed conclusions, medical notes, and recommendations, which are automatically formatted into professional PDF reports and delivered to parents with instant notifications.
 
 <div align="center">
   <img src="screenshots/doctor/dashboard.jpg" width="200" alt="Doctor Dashboard"/>
@@ -166,8 +184,6 @@ After completing the questionnaire, parents upload a behavioral observation vide
   <img src="screenshots/doctor/cas-7.jpg" width="200" alt="Case Details"/>
   <img src="screenshots//doctor/notification.jpg" width="200" alt="Notification"/>
 </div>
-
-Doctors access a specialized dashboard where cases are automatically prioritized and color-coded by severity: High (🔴), Medium (🟠), and Low (🟢). Each case provides complete access to child profiles, parent information, chatbot screening responses, and behavioral videos. Doctors can either request additional customized tests with specific instructions or provide a final diagnosis. The diagnostic interface allows doctors to write detailed conclusions, medical notes, and recommendations, which are automatically formatted into professional PDF reports and delivered to parents with instant notifications.
 
 ### ⚙️ Additional Features
 
