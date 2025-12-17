@@ -129,12 +129,6 @@ Parents access a personalized dashboard displaying all their submitted cases wit
   <img src="screenshots/child_info.jpg" width="200" alt="Child Information"/>
 </div>
 
-  #### Chatbot Screening
-<div align="center">
-  <img src="screenshots/chatbot_screening.jpg" width="200" alt="Chatbot Screening"/>
-</div>
-
-
 <div align="center">
   <img src="screenshots/video_upload.jpg" width="200" alt="Video Upload"/>
   <img src="screenshots/case_submitted.jpg" width="200" alt="Case Submitted"/>
@@ -143,14 +137,34 @@ Parents access a personalized dashboard displaying all their submitted cases wit
 
 After completing the questionnaire, parents upload a behavioral observation video of their child. The system generates a comprehensive case summary including child information, chatbot answers, and video for submission to doctors. Parents can track all their cases, receive notifications when doctors request additional tests or provide diagnoses, and download final diagnostic reports in PDF format.
 
+  #### Chatbot Screening
+<div align="center">
+  <img src="screenshots/chatbot/chatbot0.jpg" width="200" alt="Chatbot Screening"/>
+  <img src="screenshots/chatbot/chatbot1.jpg" width="200" alt="Chatbot Screening 1"/>
+  <img src="screenshots/chatbot/chatbot2.jpg" width="200" alt="Chatbot Screening 2"/>
+  <img src="screenshots/chatbot/chatbot3.jpg" width="200" alt="Chatbot Screening 3"/>
+  <img src="screenshots/chatbot/chatbot4.jpg" width="200" alt="Chatbot Screening 5"/>
+  <img src="screenshots/chatbot/chatbot6.jpg" width="200" alt="Chatbot Screening 6"/>
+  <img src="screenshots/chatbot/chatbot7.jpg" width="200" alt="Chatbot Screening 7"/>
+  <img src="screenshots/chatbot/chatbot8.jpg" width="200" alt="Chatbot Screening 8"/>
+</div>
+
+
 ### Games
 
 ### 🩺 Doctor Experience
 
 <div align="center">
-  <img src="screenshots/doctor_home.jpg" width="200" alt="Doctor Dashboard"/>
-  <img src="screenshots/case_details.jpg" width="200" alt="Case Details"/>
-  <img src="screenshots/diagnosis_form.jpg" width="200" alt="Diagnosis Form"/>
+  <img src="screenshots/doctor/dashboard.jpg" width="200" alt="Doctor Dashboard"/>
+  <img src="screenshots/doctor/cas-0.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/doctor/cas-1.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/doctor/cas-2.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/doctor/cas-3.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/doctor/cas-4.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/doctor/cas-5.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/doctor/cas-6.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/doctor/cas-7.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots//doctor/notification.jpg" width="200" alt="Notification"/>
 </div>
 
 Doctors access a specialized dashboard where cases are automatically prioritized and color-coded by severity: High (🔴), Medium (🟠), and Low (🟢). Each case provides complete access to child profiles, parent information, chatbot screening responses, and behavioral videos. Doctors can either request additional customized tests with specific instructions or provide a final diagnosis. The diagnostic interface allows doctors to write detailed conclusions, medical notes, and recommendations, which are automatically formatted into professional PDF reports and delivered to parents with instant notifications.
