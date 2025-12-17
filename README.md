@@ -128,13 +128,14 @@ Parents access a personalized dashboard displaying all their submitted cases wit
 <div align="center">
   <img src="screenshots/parent/parent_home.jpg" width="200" alt="Parent Home"/>
   <img src="screenshots/parent/add-kids.jpg" width="200" alt="Child Information"/>
+  <img src="screenshots/parent/add-kids1.jpg" width="200" alt="Child Information"/>
   <img src="screenshots/parent/details-case.jpg" width="200" alt="Child Information"/>
+  <img src="screenshots/parent/details-case1.jpg" width="200" alt="Child Information"/>
   <img src="screenshots/parent/details-case2.jpg" width="200" alt="Child Information"/>
   <img src="screenshots/parent/details-case3.jpg" width="200" alt="Child Information"/>
   <img src="screenshots/parent/details-case4.jpg" width="200" alt="Child Information"/>
   <img src="screenshots/parent/details-case5.jpg" width="200" alt="Child Information"/>
   <img src="screenshots/parent/modifier-case.jpg" width="200" alt="Child Information"/>
-  <img src="screenshots/parent/modifie-case.jpg" width="200" alt="Child Information"/>
 </div>
 
 <div align="center">
@@ -213,8 +214,6 @@ The application includes a comprehensive notification system that alerts users i
 ---
 
 ## 📁 Project Structure
-
-
 mind-bloom/
 ├── frontend/                 # Flutter mobile app
 │   ├── lib/
