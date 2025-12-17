@@ -81,10 +81,8 @@ Mind Bloom includes four specially designed therapeutic games to help children w
 * 🔒 **JWT authentication with secure tokens** - Industry-standard security protocols
 * 🔑 **Password hashing with Bcrypt** - Encrypted credential storage
 * ✅ **Server-side input validation** - Comprehensive data validation and sanitization
-* 🛡️ **CORS protection configured** - Secure cross-origin resource sharing
 * 🌓 **Dark/Light mode support** - Reduces eye strain and improves accessibility
 * 🔔 **Real-time notifications** - Instant updates on case status changes
-* ☁️ **Cloud storage for videos** - Reliable video upload and streaming
 * 🎨 **Modern UI/UX** (violet & white theme) - Professional, calming design aesthetic
 * ✨ **Smooth animations** - Polished transitions and interactions
 * 📱 **Responsive across all devices** - Optimized for phones and tablets
