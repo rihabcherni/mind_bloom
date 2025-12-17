@@ -103,10 +103,10 @@ It connects parents with healthcare professionals, enabling:
 ### Getting Started
 
 <div align="center">
-  <img src="screenshots/splash_screen.jpg" width="250" alt="Splash Screen"/>
-  <img src="screenshots/about1.jpg" width="250" alt="About Screen"/>
-  <img src="screenshots/about2.jpg" width="250" alt="About2 Screen"/>
-  <img src="screenshots/about3.jpg" width="250" alt="About3 Screen"/>
+  <img src="screenshots/splash_screen.jpg" width="200" alt="Splash Screen"/>
+  <img src="screenshots/about1.jpg" width="200" alt="About Screen"/>
+  <img src="screenshots/about2.jpg" width="200" alt="About2 Screen"/>
+  <img src="screenshots/about3.jpg" width="200" alt="About3 Screen"/>
 </div>
 The app begins with an animated splash screen featuring the Mind Bloom logo, transitioning to educational carousel screens that introduce ADHD information and app features. 
 
@@ -115,29 +115,29 @@ The app begins with an animated splash screen featuring the Mind Bloom logo, tra
 
 ### 🔐 Authentication Flow
 <div align="center">
-  <img src="screenshots/welcome_screen.jpg" width="250" alt="Welcome Screen"/>
-  <img src="screenshots/login_screen.jpg" width="250" alt="Login Screen"/>
-  <img src="screenshots/login_v_screen.jpg" width="250" alt="Login Screen"/>  
-  <img src="screenshots/role_screen.jpg" width="250" alt="Login Screen"/>  
-  <img src="screenshots/register_doctor.jpg" width="250" alt="Login Screen"/>
-  <img src="screenshots/register_parent.jpg" width="250" alt="Login Screen"/>
+  <img src="screenshots/welcome_screen.jpg" width="200" alt="Welcome Screen"/>
+  <img src="screenshots/login_screen.jpg" width="200" alt="Login Screen"/>
+  <img src="screenshots/login_v_screen.jpg" width="200" alt="Login Screen"/>  
+  <img src="screenshots/role_screen.jpg" width="200" alt="Login Screen"/>  
+  <img src="screenshots/register_doctor.jpg" width="200" alt="Login Screen"/>
+  <img src="screenshots/register_parent.jpg" width="200" alt="Login Screen"/>
 </div>
 Users then reach the welcome screen where they can choose to login or create a new account. The login interface automatically detects user type (Parent or Doctor) based on credentials, while the registration flow allows profile selection with customized forms for each user type. All authentication is secured with JWT tokens and encrypted password storage.
 
 ### 👨‍👩‍👧 Parent Experience
 
 <div align="center">
-  <img src="screenshots/parent_home.jpg" width="250" alt="Parent Home"/>
-  <img src="screenshots/child_info.jpg" width="250" alt="Child Information"/>
-  <img src="screenshots/chatbot_screening.jpg" width="250" alt="Chatbot Screening"/>
+  <img src="screenshots/parent_home.jpg" width="200" alt="Parent Home"/>
+  <img src="screenshots/child_info.jpg" width="200" alt="Child Information"/>
+  <img src="screenshots/chatbot_screening.jpg" width="200" alt="Chatbot Screening"/>
 </div>
 
 Parents access a personalized dashboard displaying all their submitted cases with real-time status tracking. To initiate a new assessment, they enter their child's information including name, age, gender, and school grade. The AI-powered chatbot then conducts an interactive screening session with guided ADHD-related questions, automatically calculating a severity score based on responses to determine case priority.
 
 <div align="center">
-  <img src="screenshots/video_upload.jpg" width="250" alt="Video Upload"/>
-  <img src="screenshots/case_submitted.jpg" width="250" alt="Case Submitted"/>
-  <img src="screenshots/parent_cases.jpg" width="250" alt="My Cases"/>
+  <img src="screenshots/video_upload.jpg" width="200" alt="Video Upload"/>
+  <img src="screenshots/case_submitted.jpg" width="200" alt="Case Submitted"/>
+  <img src="screenshots/parent_cases.jpg" width="200" alt="My Cases"/>
 </div>
 
 After completing the questionnaire, parents upload a behavioral observation video of their child. The system generates a comprehensive case summary including child information, chatbot answers, and video for submission to doctors. Parents can track all their cases, receive notifications when doctors request additional tests or provide diagnoses, and download final diagnostic reports in PDF format.
@@ -145,9 +145,9 @@ After completing the questionnaire, parents upload a behavioral observation vide
 ### 🩺 Doctor Experience
 
 <div align="center">
-  <img src="screenshots/doctor_home.jpg" width="250" alt="Doctor Dashboard"/>
-  <img src="screenshots/case_details.jpg" width="250" alt="Case Details"/>
-  <img src="screenshots/diagnosis_form.jpg" width="250" alt="Diagnosis Form"/>
+  <img src="screenshots/doctor_home.jpg" width="200" alt="Doctor Dashboard"/>
+  <img src="screenshots/case_details.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/diagnosis_form.jpg" width="200" alt="Diagnosis Form"/>
 </div>
 
 Doctors access a specialized dashboard where cases are automatically prioritized and color-coded by severity: High (🔴), Medium (🟠), and Low (🟢). Each case provides complete access to child profiles, parent information, chatbot screening responses, and behavioral videos. Doctors can either request additional customized tests with specific instructions or provide a final diagnosis. The diagnostic interface allows doctors to write detailed conclusions, medical notes, and recommendations, which are automatically formatted into professional PDF reports and delivered to parents with instant notifications.
@@ -155,13 +155,13 @@ Doctors access a specialized dashboard where cases are automatically prioritized
 ### ⚙️ Additional Features
 
 <div align="center">
-  <img src="screenshots/notifications.jpg" width="250" alt="Notifications"/>
-  <img src="screenshots/settings.jpg" width="250" alt="Settings"/>
+  <img src="screenshots/notifications.jpg" width="200" alt="Notifications"/>
+  <img src="screenshots/settings.jpg" width="200" alt="Settings"/>
 ### ⚙️ Additional Features
 
 <div align="center">
-  <img src="screenshots/notifications.jpg" width="250" alt="Notifications"/>
-  <img src="screenshots/settings.jpg" width="250" alt="Settings"/>
+  <img src="screenshots/notifications.jpg" width="200" alt="Notifications"/>
+  <img src="screenshots/settings.jpg" width="200" alt="Settings"/>
 </div>
 
 The application includes a comprehensive notification system that alerts users in real-time about case updates, doctor responses, and test requests. Settings allow users to customize their experience with dark/light mode toggle, language selection (English, French, Arabic).
