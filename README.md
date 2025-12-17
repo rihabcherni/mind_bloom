@@ -127,17 +127,25 @@ Parents access a personalized dashboard displaying all their submitted cases wit
 
 <div align="center">
   <img src="screenshots/parent/parent_home.jpg" width="200" alt="Parent Home"/>
-  <img src="screenshots/child_info.jpg" width="200" alt="Child Information"/>
+  <img src="screenshots/parent/add-kids.jpg" width="200" alt="Child Information"/>
+  <img src="screenshots/parent/details-case.jpg" width="200" alt="Child Information"/>
+  <img src="screenshots/parent/details-case2.jpg" width="200" alt="Child Information"/>
+  <img src="screenshots/parent/details-case3.jpg" width="200" alt="Child Information"/>
+  <img src="screenshots/parent/details-case4.jpg" width="200" alt="Child Information"/>
+  <img src="screenshots/parent/details-case5.jpg" width="200" alt="Child Information"/>
+  <img src="screenshots/parent/modifier-case.jpg" width="200" alt="Child Information"/>
+  <img src="screenshots/parent/modifie-case.jpg" width="200" alt="Child Information"/>
 </div>
 
 <div align="center">
-  <img src="screenshots/q00.jpg" width="200" alt="Case Details"/>
-  <img src="screenshots/q0.jpg" width="200" alt="Case Details"/>
-  <img src="screenshots/q1.jpg" width="200" alt="Case Details"/>
-  <img src="screenshots/q2.jpg" width="200" alt="Case Details"/>
-  <img src="screenshots/q3.jpg" width="200" alt="Case Details"/>
-  <img src="screenshots/q4.jpg" width="200" alt="Case Details"/>
-  <img src="screenshots/q5.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/parent/questionnaire/q000.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/parent/questionnaire/q00.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/parent/questionnaire/q0.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/parent/questionnaire/q1.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/parent/questionnaire/q2.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/parent/questionnaire/q3.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/parent/questionnaire/q4.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/parent/questionnaire/q5.jpg" width="200" alt="Case Details"/>
 </div>
 
 After completing the questionnaire, parents upload a behavioral observation video of their child. The system generates a comprehensive case summary including child information, chatbot answers, and video for submission to doctors. Parents can track all their cases, receive notifications when doctors request additional tests or provide diagnoses, and download final diagnostic reports in PDF format.
