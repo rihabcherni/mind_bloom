@@ -359,15 +359,8 @@ Mind Bloom includes four scientifically-designed games to help children with ADH
 ### ⚙️ Additional Features
 
 <div align="center">
-  <img src="screenshots/notifications.jpg" width="200" alt="Notification Center"/>
   <img src="screenshots/settings.jpg" width="200" alt="Settings Menu"/>
 </div>
-
-**Notification Center:**
-* 🔔 **Real-time Alerts** - Instant push notifications for important updates
-* 📱 **In-app Notifications** - Comprehensive notification history
-* ✉️ **Email Notifications** - Optional email alerts for critical events
-* 🔕 **Notification Preferences** - Customize which alerts you receive
 
 **Settings & Customization:**
 
@@ -496,13 +489,7 @@ cd mind-bloom/backend
 npm install
 ```
 
-3. **Configure environment variables:**
-
-```bash
-cp .env.example .env
-```
-
-4. **Edit the `.env` file with your configuration:**
+3. **Edit the `.env` file with your configuration:**
 
 ```env
 # Server Configuration
@@ -518,32 +505,9 @@ JWT_EXPIRE=7d
 
 # Groq AI API (for chatbot)
 GROQ_API_KEY=your_groq_api_key_here
-
-# File Upload
-MAX_FILE_SIZE=104857600  # 100MB in bytes
-UPLOAD_PATH=./uploads
-
-# Email Configuration (optional)
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASSWORD=your_app_password
-
-# Frontend URL (for CORS)
-FRONTEND_URL=http://localhost:3000
 ```
 
-5. **Start MongoDB:**
-
-```bash
-# On macOS/Linux
-sudo systemctl start mongod
-
-# On Windows
-net start MongoDB
-```
-
-6. **Run the backend server:**
+4. **Run the backend server:**
 
 ```bash
 # Development mode with auto-reload
@@ -569,35 +533,13 @@ cd mind-bloom/frontend
 flutter pub get
 ```
 
-3. **Configure API endpoint:**
-
-Edit `lib/constants/app_constants.dart`:
-
-```dart
-class AppConstants {
-  // API Configuration
-  static const String baseUrl = 'http://localhost:5000/api';
-  
-  // For Android Emulator, use: http://10.0.2.2:5000/api
-  // For iOS Simulator, use: http://localhost:5000/api
-  // For Physical Device, use your computer's local IP: http://192.168.1.X:5000/api
-  
-  // App Configuration
-  static const String appName = 'Mind Bloom';
-  static const String appVersion = '1.0.0';
-  
-  // Groq API (if using client-side calls)
-  static const String groqApiKey = 'your_groq_api_key';
-}
-```
-
-4. **Check available devices:**
+3. **Check available devices:**
 
 ```bash
 flutter devices
 ```
 
-5. **Run the application:**
+4. **Run the application:**
 
 ```bash
 # Run on default device
@@ -609,65 +551,6 @@ flutter run -d <device_id>
 # Run in release mode for better performance
 flutter run --release
 ```
-
-### Additional Setup Steps
-
-**For Android Development:**
-
-1. Install Android Studio
-2. Configure Android SDK (API level 21 or higher)
-3. Enable USB debugging on your device
-4. Accept Android licenses: `flutter doctor --android-licenses`
-
-**For iOS Development (macOS only):**
-
-1. Install Xcode from App Store
-2. Install Xcode Command Line Tools: `xcode-select --install`
-3. Open iOS Simulator: `open -a Simulator`
-4. Install CocoaPods: `sudo gem install cocoapods`
-
-**Database Initialization:**
-
-The application will automatically create the database and collections on first run. To seed with test data:
-
-```bash
-cd backend
-npm run seed  # If seed script is available
-```
-
-### Troubleshooting
-
-**MongoDB Connection Issues:**
-```bash
-# Check if MongoDB is running
-sudo systemctl status mongod
-
-# View MongoDB logs
-tail -f /var/log/mongodb/mongod.log
-```
-
-**Flutter Build Issues:**
-```bash
-# Clean build cache
-flutter clean
-
-# Reinstall dependencies
-flutter pub get
-
-# Check Flutter installation
-flutter doctor -v
-```
-
-**Port Already in Use:**
-```bash
-# Find process using port 5000
-lsof -i :5000  # macOS/Linux
-netstat -ano | findstr :5000  # Windows
-
-# Kill the process
-kill -9 <PID>
-```
-
 ---
 
 ## 🌍 Multi-language Support
