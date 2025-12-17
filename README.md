@@ -289,7 +289,7 @@ Mind Bloom includes four games to help children with ADHD develop crucial cognit
    * Track test completion status
 
 2. **Provide Diagnosis:**
-   * **Diagnostic Conclusion** - ADHD type classification (Predominantly Inattentive, Predominantly Hyperactive-Impulsive, Combined Type)
+   * **Diagnostic Conclusion** - ADHD type classification
    * **Severity Assessment** - Mild, Moderate, or Severe
    * **Medical Notes** - Detailed clinical observations
    * **Recommendations** - Treatment options, therapy suggestions, medication if appropriate
