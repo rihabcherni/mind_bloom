@@ -1,4 +1,4 @@
-<p align="center">
+<p align="center"> 
   <span style="font-size:30px;">🧠 Mind Bloom</span><br>
   <span style="font-size:12px;">ADHD (Attention Deficit Hyperactivity Disorder) Diagnostic & Care App</span>
 </p>
@@ -103,36 +103,37 @@ It connects parents with healthcare professionals, enabling:
 ### Getting Started
 
 <div align="center">
-  <img src="screenshots/splash_screen.jpg" width="200" alt="Splash Screen"/>
-  <img src="screenshots/about1.jpg" width="200" alt="About Screen"/>
-  <img src="screenshots/about2.jpg" width="200" alt="About2 Screen"/>
-  <img src="screenshots/about3.jpg" width="200" alt="About3 Screen"/>
+  <img src="screenshots/welcome/splash_screen.jpg" width="200" alt="Splash Screen"/>
+  <img src="screenshots/welcome/about1.jpg" width="200" alt="About Screen"/>
+  <img src="screenshots/welcome/about2.jpg" width="200" alt="About2 Screen"/>
+  <img src="screenshots/welcome/about3.jpg" width="200" alt="About3 Screen"/>
 </div>
-The app begins with an animated splash screen featuring the Mind Bloom logo, transitioning to educational carousel screens that introduce ADHD information and app features. 
-
- An educational section provides valuable information about ADHD, helping parents better understand the condition and available support resources.
-
+The app begins with an animated splash screen featuring the Mind Bloom logo, transitioning to educational carousel screens that introduce ADHD information and app features. An educational section provides valuable information about ADHD, helping parents better understand the condition and available support resources.
 
 ### 🔐 Authentication Flow
 <div align="center">
-  <img src="screenshots/welcome_screen.jpg" width="200" alt="Welcome Screen"/>
-  <img src="screenshots/login_screen.jpg" width="200" alt="Login Screen"/>
-  <img src="screenshots/login_v_screen.jpg" width="200" alt="Login Screen"/>  
-  <img src="screenshots/role_screen.jpg" width="200" alt="Login Screen"/>  
-  <img src="screenshots/register_doctor.jpg" width="200" alt="Login Screen"/>
-  <img src="screenshots/register_parent.jpg" width="200" alt="Login Screen"/>
+  <img src="screenshots/auth/welcome_screen.jpg" width="200" alt="Welcome Screen"/>
+  <img src="screenshots/auth/login_screen.jpg" width="200" alt="Login Screen"/>
+  <img src="screenshots/auth/login_v_screen.jpg" width="200" alt="Login Screen"/>  
+  <img src="screenshots/auth/role_screen.jpg" width="200" alt="Login Screen"/>  
+  <img src="screenshots/auth/register_doctor.jpg" width="200" alt="Login Screen"/>
+  <img src="screenshots/auth/register_parent.jpg" width="200" alt="Login Screen"/>
 </div>
 Users then reach the welcome screen where they can choose to login or create a new account. The login interface automatically detects user type (Parent or Doctor) based on credentials, while the registration flow allows profile selection with customized forms for each user type. All authentication is secured with JWT tokens and encrypted password storage.
 
 ### 👨‍👩‍👧 Parent Experience
+Parents access a personalized dashboard displaying all their submitted cases with real-time status tracking. To initiate a new assessment, they enter their child's information including name, age, gender, and school grade. The AI-powered chatbot then conducts an interactive screening session with guided ADHD-related questions, automatically calculating a severity score based on responses to determine case priority.
 
 <div align="center">
   <img src="screenshots/parent_home.jpg" width="200" alt="Parent Home"/>
   <img src="screenshots/child_info.jpg" width="200" alt="Child Information"/>
+</div>
+
+  #### Chatbot Screening
+<div align="center">
   <img src="screenshots/chatbot_screening.jpg" width="200" alt="Chatbot Screening"/>
 </div>
 
-Parents access a personalized dashboard displaying all their submitted cases with real-time status tracking. To initiate a new assessment, they enter their child's information including name, age, gender, and school grade. The AI-powered chatbot then conducts an interactive screening session with guided ADHD-related questions, automatically calculating a severity score based on responses to determine case priority.
 
 <div align="center">
   <img src="screenshots/video_upload.jpg" width="200" alt="Video Upload"/>
@@ -141,6 +142,8 @@ Parents access a personalized dashboard displaying all their submitted cases wit
 </div>
 
 After completing the questionnaire, parents upload a behavioral observation video of their child. The system generates a comprehensive case summary including child information, chatbot answers, and video for submission to doctors. Parents can track all their cases, receive notifications when doctors request additional tests or provide diagnoses, and download final diagnostic reports in PDF format.
+
+### Games
 
 ### 🩺 Doctor Experience
 
@@ -157,11 +160,6 @@ Doctors access a specialized dashboard where cases are automatically prioritized
 <div align="center">
   <img src="screenshots/notifications.jpg" width="200" alt="Notifications"/>
   <img src="screenshots/settings.jpg" width="200" alt="Settings"/>
-### ⚙️ Additional Features
-
-<div align="center">
-  <img src="screenshots/notifications.jpg" width="200" alt="Notifications"/>
-  <img src="screenshots/settings.jpg" width="200" alt="Settings"/>
 </div>
 
 The application includes a comprehensive notification system that alerts users in real-time about case updates, doctor responses, and test requests. Settings allow users to customize their experience with dark/light mode toggle, language selection (English, French, Arabic).
@@ -173,7 +171,7 @@ The application includes a comprehensive notification system that alerts users i
 
 ## 📁 Project Structure
 
-```
+
 mind-bloom/
 ├── frontend/                 # Flutter mobile app
 │   ├── lib/
@@ -203,7 +201,7 @@ mind-bloom/
 │
 ├── screenshots/             # Application screenshots
 └── README.md                # Documentation
-```
+
 
 ---
 
@@ -218,48 +216,54 @@ mind-bloom/
 
 ### Backend Setup
 
-```bash
+
+bash
 git clone https://github.com/yourusername/mind-bloom.git
 cd mind-bloom/backend
 npm install
 cp .env.example .env
-```
 
-Edit `.env`:
 
-```env
+Edit .env:
+
+
+env
 PORT=5000
 MONGODB_URI=mongodb://localhost:27017/mindbloom
 JWT_SECRET=your_super_secret_jwt_key
 NODE_ENV=development
 GROQ_API_KEY=your_groq_api_key_here
-```
+
 
 Run server:
 
-```bash
+
+bash
 npm run dev
-```
+
 
 ### Frontend Setup
 
-```bash
+
+bash
 cd mind-bloom/frontend
 flutter pub get
-```
 
-Configure API endpoint in `lib/constants/app_constants.dart`:
 
-```dart
+Configure API endpoint in lib/constants/app_constants.dart:
+
+
+dart
 static const String baseUrl = 'http://localhost:5000/api';
-```
+
 
 Run app:
 
-```bash
+
+bash
 flutter devices
 flutter run
-```
+
 
 ---
 
