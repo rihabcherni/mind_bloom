@@ -68,12 +68,9 @@ It connects parents with healthcare professionals, enabling:
 
 Mind Bloom includes four specially designed therapeutic games to help children with ADHD improve their attention span, focus, and cognitive skills:
 
+**Game Features:**
 * 🧩 **Memory Match Game** - Enhances visual memory and pattern recognition
 * 🎯 **Focus Challenge** - Improves sustained attention and reaction time
-* 🔢 **Number Sequence** - Develops working memory and sequential processing
-* 🎨 **Color Sort** - Strengthens categorization and decision-making skills
-
-**Game Features:**
 * 📈 **Progress tracking** - Monitor improvement over time
 * 🏆 **Motivating reward system** - Earn achievements and badges
 * 🎮 **Age-appropriate difficulty levels** - Adaptive challenges for different skill levels
