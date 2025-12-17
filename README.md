@@ -209,12 +209,13 @@ All authentication is secured with industry-standard encryption and validation t
 **Ongoing Case Management:**
 
 * **Receive Notifications** - Alerts for doctor responses, test requests, and diagnoses
-* **Respond to Additional Test Requests** - Upload requested information or videos
 * **View Diagnosis** - Access final medical evaluation with recommendations
 * **Download PDF Reports** - Save comprehensive diagnostic documents for medical records
 * **Edit Cases** - Update information before doctor review
 
 #### 🤖 Chatbot Screening
+
+Intelligent chatbot powered by Groq API, conducts a comprehensive ADHD through natural conversation.
 
 <div align="center">
   <img src="screenshots/chatbot/chatbot0.jpg" width="200" alt="Chatbot Welcome"/>
@@ -227,27 +228,10 @@ All authentication is secured with industry-standard encryption and validation t
   <img src="screenshots/chatbot/chatbot8.jpg" width="200" alt="Chatbot Summary"/>
 </div>
 
-**AI-Powered Screening Process:**
-
-The intelligent chatbot, powered by Groq API, conducts a comprehensive ADHD screening through natural conversation. The chatbot features:
-
-* **Conversational Interface** - Friendly, easy-to-understand questions
-* **Guided Assessment** - Structured questionnaire following clinical ADHD criteria
-* **Multi-turn Dialogue** - Follow-up questions based on previous answers
-* **Progress Indicators** - Visual feedback on assessment completion
-* **Smart Scoring** - Automatic calculation of severity based on DSM-5 criteria
-* **Summary Generation** - Complete report of responses for doctor review
-
-**Question Categories:**
-* Attention and concentration difficulties
-* Hyperactivity and restlessness
-* Impulsivity and decision-making
-* Social and emotional regulation
-* Academic and learning challenges
-* Daily routine and organization
 
 ### 🎮 Concentration Games
 
+Mind Bloom includes four games to help children with ADHD develop crucial cognitive skills:
 <div align="center">
   <img src="screenshots/game/game1.jpg" width="200" alt="Game Menu"/>
   <img src="screenshots/game/game2.jpg" width="200" alt="Memory Game"/>
@@ -265,30 +249,6 @@ The intelligent chatbot, powered by Groq API, conducts a comprehensive ADHD scre
   <img src="screenshots/game/game15.jpg" width="200" alt="Gameplay 2"/>
   <img src="screenshots/game/game16.jpg" width="200" alt="Victory Screen"/>
 </div>
-
-**Therapeutic Gaming Features:**
-
-Mind Bloom includes four scientifically-designed games to help children with ADHD develop crucial cognitive skills:
-
-1. **Memory Match Game:**
-   * Improves visual memory and pattern recognition
-   * Increases difficulty with more cards
-   * Timed challenges for sustained attention
-
-2. **Focus Challenge:**
-   * Tests reaction time and sustained attention
-   * Multiple difficulty levels
-   * Visual and audio feedback
-
-3. **Number Sequence:**
-   * Enhances working memory
-   * Sequential processing practice
-   * Progressive difficulty scaling
-
-4. **Color Sort:**
-   * Develops categorization skills
-   * Improves decision-making speed
-   * Pattern recognition training
 
 **Game Benefits:**
 * 📈 **Progress Tracking** - Monitor skill improvement over time
@@ -366,33 +326,11 @@ Mind Bloom includes four scientifically-designed games to help children with ADH
 
 * **Appearance:**
   * 🌓 **Dark/Light Mode Toggle** - Reduce eye strain with dark theme
-  * 🎨 **Theme Customization** - Adjust interface colors
-  * 📏 **Font Size** - Accessibility options for text scaling
 
 * **Language Selection:**
   * 🇬🇧 **English** - Full interface translation
   * 🇫🇷 **French** - Complete French localization
   * 🇹🇳 **Arabic** - Right-to-left Arabic support
-
-* **Profile Management:**
-  * ✏️ **Edit Profile** - Update personal information
-  * 📧 **Change Email** - Modify contact details
-  * 🔐 **Change Password** - Secure password updates
-  * 🖼️ **Profile Picture** - Upload custom avatar
-
-* **Privacy & Security:**
-  * 🔒 **Two-Factor Authentication** - Enhanced account security
-  * 📊 **Data Export** - Download your data
-  * 🗑️ **Account Deletion** - Complete data removal option
-
-**Educational Resources:**
-
-* 📚 **ADHD Information Library** - Comprehensive guides about ADHD
-* 🎓 **Parenting Tips** - Strategies for managing ADHD behaviors
-* 💊 **Treatment Options** - Information about medications and therapies
-* 🏫 **School Support** - How to work with teachers and schools
-* 👨‍👩‍👧‍👦 **Family Strategies** - Creating supportive home environments
-* 🔗 **External Resources** - Links to reputable ADHD organizations
 
 ---
 
