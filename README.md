@@ -100,13 +100,21 @@ It connects parents with healthcare professionals, enabling:
 
 ## 📱 Application Screens & Functionality
 
-### 🔐 Authentication Flow
+### Getting Started
 
 <div align="center">
   <img src="screenshots/splash_screen.jpg" width="250" alt="Splash Screen"/>
   <img src="screenshots/about1.jpg" width="250" alt="About Screen"/>
   <img src="screenshots/about2.jpg" width="250" alt="About2 Screen"/>
   <img src="screenshots/about3.jpg" width="250" alt="About3 Screen"/>
+</div>
+The app begins with an animated splash screen featuring the Mind Bloom logo, transitioning to educational carousel screens that introduce ADHD information and app features. 
+
+ An educational section provides valuable information about ADHD, helping parents better understand the condition and available support resources.
+
+
+### 🔐 Authentication Flow
+<div align="center">
   <img src="screenshots/welcome_screen.jpg" width="250" alt="Welcome Screen"/>
   <img src="screenshots/login_screen.jpg" width="250" alt="Login Screen"/>
   <img src="screenshots/login_v_screen.jpg" width="250" alt="Login Screen"/>  
@@ -114,8 +122,7 @@ It connects parents with healthcare professionals, enabling:
   <img src="screenshots/register_doctor.jpg" width="250" alt="Login Screen"/>
   <img src="screenshots/register_parent.jpg" width="250" alt="Login Screen"/>
 </div>
-
-The app begins with an animated splash screen featuring the Mind Bloom logo, transitioning to educational carousel screens that introduce ADHD information and app features. Users then reach the welcome screen where they can choose to login or create a new account. The login interface automatically detects user type (Parent or Doctor) based on credentials, while the registration flow allows profile selection with customized forms for each user type. All authentication is secured with JWT tokens and encrypted password storage.
+Users then reach the welcome screen where they can choose to login or create a new account. The login interface automatically detects user type (Parent or Doctor) based on credentials, while the registration flow allows profile selection with customized forms for each user type. All authentication is secured with JWT tokens and encrypted password storage.
 
 ### 👨‍👩‍👧 Parent Experience
 
@@ -150,10 +157,17 @@ Doctors access a specialized dashboard where cases are automatically prioritized
 <div align="center">
   <img src="screenshots/notifications.jpg" width="250" alt="Notifications"/>
   <img src="screenshots/settings.jpg" width="250" alt="Settings"/>
-  <img src="screenshots/about_adhd.jpg" width="250" alt="About ADHD"/>
+### ⚙️ Additional Features
+
+<div align="center">
+  <img src="screenshots/notifications.jpg" width="250" alt="Notifications"/>
+  <img src="screenshots/settings.jpg" width="250" alt="Settings"/>
 </div>
 
-The application includes a comprehensive notification system that alerts users in real-time about case updates, doctor responses, and test requests. Settings allow users to customize their experience with dark/light mode toggle, language selection (English, French, Arabic), and profile management. An educational section provides valuable information about ADHD, helping parents better understand the condition and available support resources.
+The application includes a comprehensive notification system that alerts users in real-time about case updates, doctor responses, and test requests. Settings allow users to customize their experience with dark/light mode toggle, language selection (English, French, Arabic).
+</div>
+
+The application includes a comprehensive notification system that alerts users in real-time about case updates, doctor responses, and test requests. Settings allow users to customize their experience with dark/light mode toggle, language selection (English, French, Arabic) and profile management. An educational section provides valuable information about ADHD, helping parents better understand the condition and available support resources.
 
 ---
 
