@@ -149,7 +149,6 @@ An educational section provides valuable information about ADHD symptoms, diagno
    * JWT token-based authentication
    * Encrypted password storage with Bcrypt
    * Session management
-   * Secure password reset functionality
 
 All authentication is secured with industry-standard encryption and validation to protect sensitive medical information.
 
@@ -183,7 +182,7 @@ All authentication is secured with industry-standard encryption and validation t
    * School grade level
    * Medical history notes
 
-2. **AI Chatbot Screening** - Interactive questionnaire covering:
+2. **Screening** - Interactive questionnaire covering:
    * Attention and focus patterns
    * Hyperactivity indicators
    * Impulsivity behaviors
@@ -196,7 +195,7 @@ All authentication is secured with industry-standard encryption and validation t
    * **Medium (🟠)** - Moderate symptoms needing professional evaluation
    * **Low (🟢)** - Mild symptoms for routine assessment
 
-4. **Video Upload** - Record and submit behavioral observation videos (supports multiple formats, up to 100MB)
+4. **Video Upload** - Record and submit behavioral observation videos (supports multiple formats)
 
 5. **Case Submission** - Send complete assessment package to doctors for review
 
