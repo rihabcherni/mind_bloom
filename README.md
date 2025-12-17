@@ -115,6 +115,7 @@ The app begins with an animated splash screen featuring the Mind Bloom logo, tra
   <img src="screenshots/auth/welcome_screen.jpg" width="200" alt="Welcome Screen"/>
   <img src="screenshots/auth/login_screen.jpg" width="200" alt="Login Screen"/>
   <img src="screenshots/auth/login_v_screen.jpg" width="200" alt="Login Screen"/>  
+  <img src="screenshots/auth/login.jpg" width="200" alt="Login Screen"/>  
   <img src="screenshots/auth/role_screen.jpg" width="200" alt="Login Screen"/>  
   <img src="screenshots/auth/register_doctor.jpg" width="200" alt="Login Screen"/>
   <img src="screenshots/auth/register_parent.jpg" width="200" alt="Login Screen"/>
@@ -125,14 +126,18 @@ Users then reach the welcome screen where they can choose to login or create a n
 Parents access a personalized dashboard displaying all their submitted cases with real-time status tracking. To initiate a new assessment, they enter their child's information including name, age, gender, and school grade. The AI-powered chatbot then conducts an interactive screening session with guided ADHD-related questions, automatically calculating a severity score based on responses to determine case priority.
 
 <div align="center">
-  <img src="screenshots/parent_home.jpg" width="200" alt="Parent Home"/>
+  <img src="screenshots/parent/parent_home.jpg" width="200" alt="Parent Home"/>
   <img src="screenshots/child_info.jpg" width="200" alt="Child Information"/>
 </div>
 
 <div align="center">
-  <img src="screenshots/video_upload.jpg" width="200" alt="Video Upload"/>
-  <img src="screenshots/case_submitted.jpg" width="200" alt="Case Submitted"/>
-  <img src="screenshots/parent_cases.jpg" width="200" alt="My Cases"/>
+  <img src="screenshots/q00.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/q0.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/q1.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/q2.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/q3.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/q4.jpg" width="200" alt="Case Details"/>
+  <img src="screenshots/q5.jpg" width="200" alt="Case Details"/>
 </div>
 
 After completing the questionnaire, parents upload a behavioral observation video of their child. The system generates a comprehensive case summary including child information, chatbot answers, and video for submission to doctors. Parents can track all their cases, receive notifications when doctors request additional tests or provide diagnoses, and download final diagnostic reports in PDF format.
