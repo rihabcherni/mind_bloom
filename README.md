@@ -1,10 +1,13 @@
-# 🧠 Mind Bloom – ADHD (Attention Deficit Hyperactivity Disorder) Diagnostic & Care App
+<p align="center">
+  <span style="font-size:30px;">🧠 Mind Bloom</span><br>
+  <span style="font-size:12px;">ADHD (Attention Deficit Hyperactivity Disorder) Diagnostic & Care App</span>
+</p>
 
 <div align="center">
-
-<img src="frontend/assets/images/logo.jpg" width="250" alt="Mind Bloom Logo"/>
-
-**Helping You Understand Your Child Better**
+  <img src="frontend/assets/images/logo.jpg" width="200" alt="Mind Bloom Logo"/>
+  <br>
+  <strong>Helping You Understand Your Child Better</strong>
+  <br><br>
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.35-02569B?logo=flutter)](https://flutter.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?logo=node.js)](https://nodejs.org/)
@@ -14,184 +17,230 @@
 
 ---
 
-## About the App
+## About the Application
 
-**Mind Bloom** is a mobile application designed to support early detection, diagnosis, and monitoring of ADHD in children.
-The platform connects parents with medical professionals, enabling:
+**Mind Bloom** is a mobile application designed to facilitate early detection, diagnosis, and monitoring of ADHD in children.
 
-* AI-based preliminary screening
-* Behavioral video analysis
-* Doctor-reviewed assessments
-* Real-time communication
-* PDF diagnosis reports
-* Ongoing monitoring and follow-up
+It connects parents with healthcare professionals, enabling:
+
+* 🤖 **AI-based preliminary screening**
+* 🎥 **Behavioral analysis** through video submissions
+* 🩺 **Medical assessments** by certified doctors
+* 💬 **Real-time communication**
+* 📄 **Diagnostic reports** in PDF format
+* 📊 **Continuous monitoring** and follow-up
 
 ### Objectives
 
-* 🧠 **Early Detection** through guided questionnaires
-* 🎥 **Behavioral Observation** via video submissions
-* 🩺 **Professional Diagnosis** by certified doctors
-* 📊 **Case Tracking & Reports**
-* 🌍 **Multi-language Support** (EN / FR / AR)
+* 🧠 **Early detection** via guided questionnaires
+* 🎥 **Behavioral observation** through video
+* 🩺 **Professional diagnosis** by certified doctors
+* 📊 **Case tracking** and report generation
+* 🌍 **Multi-language support** (EN / FR / AR)
+* 🎮 **Educational games** for concentration improvement
+* 🌓 **Dark/Light mode** for visual comfort
 
 ---
 
-## Key Features
+## ✨ Key Features
 
-### 👨‍👩‍👧 **For Parents**
+### 👨‍👩‍👧 For Parents
 
-* Create account & manage child profile
-* AI-guided chatbot screening
-* Severity scoring system
-* Upload observation videos
-* Submit cases to doctors
-* Receive additional test requests
-* Receive final diagnosis & downloadable PDF report
-* Notification system
-* Multi-language interface
+* ✅ Account creation and child profile management
+* 🤖 AI-powered chatbot with guided screening
+* 📊 Automatic severity scoring
+* 🎥 Upload behavioral observation videos
+* 📤 Submit cases to doctors
+* 🔔 Receive additional test requests
+* 📋 Receive final diagnosis with downloadable PDF
+* 💬 ADHD assistant chatbot via Groq API
+* 🌍 Multi-language interface (EN / FR / AR)
 
-### 🩺 **For Doctors**
+### 🩺 For Doctors
 
-* Login and access personalized dashboard
-* Cases automatically sorted by severity (High / Medium / Low)
-* Access full case details
-* Watch submitted videos
-* Request additional tests
-* Write diagnosis & recommendations
-* Send final conclusions to parents
+* 🔐 Secure login and personalized dashboard
+* 📊 Cases automatically sorted by severity (High 🔴 / Medium 🟠 / Low 🟢)
+* 📁 Access full case details
+* 🎥 Watch submitted videos
+* 📝 Request customized additional tests
+* ✍️ Write diagnoses and recommendations
+* 📤 Send final conclusions to parents
 
-### **Technical Features**
+### 🎮 Concentration Games (4 Games)
 
-* Secure authentication (JWT)
-* Dark/Light theme support
-* Real-time notifications
-* Cloud storage for videos
-* Modern UI/UX (Violet theme)
-* Smooth animations
-* Responsive across all devices
+* 🧩 Designed to improve attention and focus
+* 🎯 Adapted for children with ADHD
+* 📈 Progress tracking
+* 🏆 Motivating reward system
+
+### 🛠️ Technical Features
+
+* 🔒 JWT authentication with secure tokens
+* 🔑 Password hashing with Bcrypt
+* ✅ Server-side input validation
+* 🛡️ CORS protection configured
+* 🌓 Dark/Light mode support
+* 🔔 Real-time notifications
+* ☁️ Cloud storage for videos
+* 🎨 Modern UI/UX (violet & white theme)
+* ✨ Smooth animations
+* 📱 Responsive across all devices
 
 ---
 
-## 📸 Screenshots
+## 🎨 Application Design
+
+### Color Theme
+
+* **Primary:** Violet (#7B2CBF)
+* **Secondary:** White (#FFFFFF)
+* **Text:** Dark Violet / Black
+
+---
+
+## 📱 Application Screens & Functionality
 
 ### 🔐 Authentication Flow
 
 <div align="center">
-  <img src="screenshots/splash_screen.png" width="250"/>
-  <img src="screenshots/welcome_screen.png" width="250"/>
-  <img src="screenshots/login_screen.png" width="250"/>
+  <img src="screenshots/splash_screen.jpg" width="250" alt="Splash Screen"/>
+  <img src="screenshots/about1.jpg" width="250" alt="About Screen"/>
+  <img src="screenshots/about2.jpg" width="250" alt="About2 Screen"/>
+  <img src="screenshots/about3.jpg" width="250" alt="About3 Screen"/>
+  <img src="screenshots/welcome_screen.jpg" width="250" alt="Welcome Screen"/>
+  <img src="screenshots/login_screen.jpg" width="250" alt="Login Screen"/>
+  <img src="screenshots/login_v_screen.jpg" width="250" alt="Login Screen"/>  
+  <img src="screenshots/role_screen.jpg" width="250" alt="Login Screen"/>  
+  <img src="screenshots/register_doctor.jpg" width="250" alt="Login Screen"/>
+  <img src="screenshots/register_parent.jpg" width="250" alt="Login Screen"/>
 </div>
+
+The app begins with an animated splash screen featuring the Mind Bloom logo, transitioning to educational carousel screens that introduce ADHD information and app features. Users then reach the welcome screen where they can choose to login or create a new account. The login interface automatically detects user type (Parent or Doctor) based on credentials, while the registration flow allows profile selection with customized forms for each user type. All authentication is secured with JWT tokens and encrypted password storage.
 
 ### 👨‍👩‍👧 Parent Experience
 
 <div align="center">
-  <img src="screenshots/parent_home.png" width="250"/>
-  <img src="screenshots/child_info.png" width="250"/>
-  <img src="screenshots/chatbot_screening.png" width="250"/>
+  <img src="screenshots/parent_home.jpg" width="250" alt="Parent Home"/>
+  <img src="screenshots/child_info.jpg" width="250" alt="Child Information"/>
+  <img src="screenshots/chatbot_screening.jpg" width="250" alt="Chatbot Screening"/>
 </div>
 
+Parents access a personalized dashboard displaying all their submitted cases with real-time status tracking. To initiate a new assessment, they enter their child's information including name, age, gender, and school grade. The AI-powered chatbot then conducts an interactive screening session with guided ADHD-related questions, automatically calculating a severity score based on responses to determine case priority.
+
 <div align="center">
-  <img src="screenshots/video_upload.png" width="250"/>
-  <img src="screenshots/case_submitted.png" width="250"/>
-  <img src="screenshots/parent_cases.png" width="250"/>
+  <img src="screenshots/video_upload.jpg" width="250" alt="Video Upload"/>
+  <img src="screenshots/case_submitted.jpg" width="250" alt="Case Submitted"/>
+  <img src="screenshots/parent_cases.jpg" width="250" alt="My Cases"/>
 </div>
+
+After completing the questionnaire, parents upload a behavioral observation video of their child. The system generates a comprehensive case summary including child information, chatbot answers, and video for submission to doctors. Parents can track all their cases, receive notifications when doctors request additional tests or provide diagnoses, and download final diagnostic reports in PDF format.
 
 ### 🩺 Doctor Experience
 
 <div align="center">
-  <img src="screenshots/doctor_home.png" width="250"/>
-  <img src="screenshots/case_details.png" width="250"/>
-  <img src="screenshots/diagnosis_form.png" width="250"/>
+  <img src="screenshots/doctor_home.jpg" width="250" alt="Doctor Dashboard"/>
+  <img src="screenshots/case_details.jpg" width="250" alt="Case Details"/>
+  <img src="screenshots/diagnosis_form.jpg" width="250" alt="Diagnosis Form"/>
 </div>
+
+Doctors access a specialized dashboard where cases are automatically prioritized and color-coded by severity: High (🔴), Medium (🟠), and Low (🟢). Each case provides complete access to child profiles, parent information, chatbot screening responses, and behavioral videos. Doctors can either request additional customized tests with specific instructions or provide a final diagnosis. The diagnostic interface allows doctors to write detailed conclusions, medical notes, and recommendations, which are automatically formatted into professional PDF reports and delivered to parents with instant notifications.
 
 ### ⚙️ Additional Features
 
 <div align="center">
-  <img src="screenshots/notifications.png" width="250"/>
-  <img src="screenshots/settings.png" width="250"/>
-  <img src="screenshots/about_adhd.png" width="250"/>
+  <img src="screenshots/notifications.jpg" width="250" alt="Notifications"/>
+  <img src="screenshots/settings.jpg" width="250" alt="Settings"/>
+  <img src="screenshots/about_adhd.jpg" width="250" alt="About ADHD"/>
 </div>
+
+The application includes a comprehensive notification system that alerts users in real-time about case updates, doctor responses, and test requests. Settings allow users to customize their experience with dark/light mode toggle, language selection (English, French, Arabic), and profile management. An educational section provides valuable information about ADHD, helping parents better understand the condition and available support resources.
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 mind-bloom/
 ├── frontend/                 # Flutter mobile app
 │   ├── lib/
-│   │   ├── constants/       
-│   │   ├── models/          
-│   │   ├── providers/       
-│   │   ├── screens/         
-│   │   ├── services/        
-│   │   ├── widgets/         
-│   │   └── main.dart        
-│   ├── assets/images/       
-│   └── pubspec.yaml         
+│   │   ├── constants/       # Constants and configuration
+│   │   ├── models/          # Data models
+│   │   ├── providers/       # State management
+│   │   ├── screens/         # Application screens
+│   │   ├── services/        # API services
+│   │   ├── widgets/         # Reusable components
+│   │   ├── games/           # 4 concentration games
+│   │   ├── i18n/            # Translation files
+│   │   └── main.dart        # Entry point
+│   ├── assets/
+│   │   ├── images/          # Images and logo
+│   │   └── translations/    # Language files
+│   └── pubspec.yaml
 │
 ├── backend/                 # Node.js API
-│   ├── models/              
-│   ├── routes/              
-│   ├── controllers/         
-│   ├── middleware/          
-│   ├── config/              
-│   ├── uploads/             
-│   └── server.js           
+│   ├── models/              # MongoDB models
+│   ├── routes/              # API routes
+│   ├── controllers/         # Business logic
+│   ├── middleware/          # Auth & validation
+│   ├── config/              # Configuration
+│   ├── services/            # Services (Groq API)
+│   ├── uploads/             # Video storage
+│   └── server.js            # Express server
 │
-├── screenshots/             
-└── README.md                
+├── screenshots/             # Application screenshots
+└── README.md                # Documentation
 ```
 
 ---
 
-## Backend Setup (Node.js)
+## 🚀 Installation
+
+### Prerequisites
+
+- Node.js 22.x or higher
+- Flutter 3.35 or higher
+- MongoDB 8.2 or higher
+- Groq API account (for AI chatbot)
+
+### Backend Setup
 
 ```bash
 git clone https://github.com/yourusername/mind-bloom.git
 cd mind-bloom/backend
 npm install
-```
-
-### Configure environment variables
-
-```bash
 cp .env.example .env
 ```
 
 Edit `.env`:
 
-```
+```env
 PORT=5000
 MONGODB_URI=mongodb://localhost:27017/mindbloom
 JWT_SECRET=your_super_secret_jwt_key
 NODE_ENV=development
+GROQ_API_KEY=your_groq_api_key_here
 ```
 
-### Run server
+Run server:
 
 ```bash
 npm run dev
 ```
 
----
-
-## Frontend Setup (Flutter)
+### Frontend Setup
 
 ```bash
 cd mind-bloom/frontend
 flutter pub get
 ```
 
-### Configure API endpoint
-
-Edit: `lib/constants/app_constants.dart`
+Configure API endpoint in `lib/constants/app_constants.dart`:
 
 ```dart
 static const String baseUrl = 'http://localhost:5000/api';
 ```
 
-### Run app
+Run app:
 
 ```bash
 flutter devices
@@ -200,14 +249,18 @@ flutter run
 
 ---
 
-## Security
+## 🌍 Multi-language Support
 
-* JWT authentication
-* Bcrypt password hashing
-* Input validation
+The application supports 3 languages:
+
+* 🇬🇧 **English**
+* 🇫🇷 **French**
+* 🇹🇳 **Tunisian Arabic**
 
 ---
 
 <div align="center">
   <strong>Made with ❤️ for children and families</strong>
+  <br>
+  <sub>Mind Bloom © 2025 - All rights reserved</sub>
 </div>
