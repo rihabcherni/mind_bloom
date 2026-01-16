@@ -507,19 +507,11 @@ Users can change the application language anytime through Settings → Language 
 
 ---
 
-## 🙏 Acknowledgments
-
-* **Groq AI** - For powerful AI chatbot capabilities
-* **Flutter Team** - For the excellent cross-platform framework
-* **MongoDB** - For reliable database solutions
-* **Medical Consultants** - For ADHD assessment guidance
-
----
-
 <div align="center">
   <strong>Made with ❤️ for children and families</strong>
   <br>
   <sub>Mind Bloom © 2025 - All rights reserved</sub>
   <br><br>
   <em>"Empowering families through early detection and expert care"</em>
+
 </div>
